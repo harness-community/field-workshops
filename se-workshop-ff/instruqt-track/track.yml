@@ -1,0 +1,31 @@
+slug: se-workshop-ff
+id: pvohnugavjq4
+title: Harness Feature Flags Workshop
+description: |2-
+
+  ![FF-Logo](https://developer.harness.io/img/icon_ff.svg)
+
+  **This track demonstrates how to control releases with Harness Feature Flags:**
+    - Lab 1 - Introduction & Problem Statement
+    - Lab 2 - Controlled Releases
+    - Lab 3 - Targeted Releases
+    - Lab 4 - Governance & Efficiency
+icon: https://developer.harness.io/img/icon_ff.svg
+tags:
+- python
+- vscode
+- ff
+owner: harness
+developers:
+- nicolas.acton@harness.io
+- joseph.titra@harness.io
+show_timer: true
+idle_timeout: 1800
+timelimit: 5400
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "12219472902250405683"

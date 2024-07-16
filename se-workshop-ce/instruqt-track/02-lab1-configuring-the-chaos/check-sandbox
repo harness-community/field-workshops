@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+
+import os
+from pyharnessworkshop import harness, utils
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+USER_NAMESPACE = utils.instruqt.get_agent_variable("HARNESS_USER_NAME")
+
+print("    DEBUG: Getting Chaos Infrastructures")
+chaos_infra = harness.chaos.make_api_call(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, "list_infra")
+
+infra_name_to_find = "lab-hce"
+expected_infra_namespace = USER_NAMESPACE
+expected_infra_scope = "namespace"
+expected_installation_type = "MANIFEST"
+infra_id = None
+
+for infra in chaos_infra["data"]["listInfrasV2"]["infras"]:
+    print(f"Infrastructure name: {infra['name']}")
+    if infra["name"] == infra_name_to_find:
+        infra_id = infra["infraID"]
+
+        # Validate infraNamespace
+        if infra["infraNamespace"] != expected_infra_namespace:
+            print(f"Incorrect infraNamespace: expected: {expected_infra_namespace}, found: {infra['infraNamespace']}")
+            utils.instruqt.raise_lab_failure_message(f"Incorrect infraNamespace: expected: {expected_infra_namespace}, found: {infra['infraNamespace']}")
+        else:
+            print(f"infraNamespace is correct: {infra['infraNamespace']}")
+
+        # Validate infraScope
+        if infra["infraScope"] != expected_infra_scope:
+            print(f"Incorrect infraScope: expected: {expected_infra_scope}, found: {infra['infraScope']}")
+            utils.instruqt.raise_lab_failure_message(f"Incorrect infraScope: expected: {expected_infra_scope}, found: {infra['infraScope']}")
+        else:
+            print(f"infraScope is correct: {infra['infraScope']}")
+
+        # Validate installationType
+        if infra["installationType"] != expected_installation_type:
+            print(f"Incorrect installationType: expected: {expected_installation_type}, found: {infra['installationType']}")
+            utils.instruqt.raise_lab_failure_message(f"Incorrect installationType: expected: {expected_installation_type}, found: {infra['installationType']}")
+        else:
+            print(f"installationType is correct: {infra['installationType']}")
+
+        break
+
+if not infra_id:
+    print(f"Expected infrastructure not found. This lab requires that you name the infrastructure: {infra_name_to_find}")
+    utils.instruqt.raise_lab_failure_message(f"Expected infrastructure not found. This lab requires that you name the infrastructure: {infra_name_to_find}")

@@ -1,0 +1,14 @@
+[Unit]
+Description=Code Server
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=harness
+ExecStart=/usr/bin/code-server --host 0.0.0.0 --port EXAMPLEPORT --cert --auth none EXAMPLEDIRECTORY
+
+[Install]
+WantedBy=multi-user.target

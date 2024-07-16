@@ -1,0 +1,28 @@
+slug: se-workshop-iacm
+id: gh5rvy013twy
+title: Harness IaCM Workshop
+description: |2-
+
+  ![harness_black-logo.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
+
+  **This track demonstrates how to:**
+    - Lab 1 - Creating a Workspace
+    - Lab 2 - Create a Harness IaCM Pipeline
+    - Lab 3 - Drift Detection w/Harness IaCM
+    - Lab 4 - Governance w/OPA
+    - Lab 5 - Cost Estimation and State
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/iacm.png
+tags: []
+owner: harness
+developers:
+- joseph.titra@harness.io
+show_timer: true
+idle_timeout: 3600
+timelimit: 10800
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "24214186559713934"

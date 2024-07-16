@@ -1,0 +1,25 @@
+slug: se-workshop-shell
+id: zl6yx54s7wrs
+title: Harness SE Workshop Shell
+description: |2-
+
+  ![harness_black-logo.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
+
+  **This track demonstrates how to:**
+    - Lab 1 - TBD
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/harness.png
+tags: []
+owner: harness
+developers:
+- joseph.titra@harness.io
+show_timer: true
+idle_timeout: 1800
+timelimit: 5400
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+  hideStopButton: false
+checksum: "15790514457950876364"

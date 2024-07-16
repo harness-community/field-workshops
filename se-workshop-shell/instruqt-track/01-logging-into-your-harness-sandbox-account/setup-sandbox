@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+
+######################## ADD ANY WORKSHOP SPECIFIC SETUP AT THE VERY BOTTOM ########################
+# CUSTOM_CREDENTIALS = [
+#     {
+#         "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/Amazon_Web_Services_Logo.svg",
+#         "name": "AWS",
+#         "auth": {
+#             "AWS_ACCESS_KEY_ID": f"{AWS_ACCESS_KEY_ID}",
+#             "AWS_SECRET_ACCESS_KEY": f"{AWS_SECRET_ACCESS_KEY}"
+#         }
+#     },
+#     {
+#         "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/grafana_logo.svg",
+#         "name": "Grafana",
+#         "auth": {
+#             "Username": f"{GRAFANA_USER}"
+#             "Password": f"{GRAFANA_PW}"
+#         }
+#     }
+# ]
+#################################### DO NOT MODIFY THIS SCRIPT ####################################
+import os
+from pyharnessworkshop import utils
+
+# REQUIRED VARIABLES LIST
+OUTPUT_HTML = "/opt/harness/misc/credential_tab.html"
+USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
+USER_PWD = os.getenv("SE_WORKSHOP_USER_PWD")
+GRAFANA_PW = os.getenv("SE_WORKSHOP_GRAFANA_PW")
+DEFAULT_CREDENTIALS = [
+    {
+        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png",
+        "name": "Harness",
+        "auth": {
+            "Username": f"{USER_EMAIL}",
+            "Password": f"{USER_PWD}"
+        }
+    }
+]
+
+if 'CUSTOM_CREDENTIALS' in globals():
+    combined_creds = DEFAULT_CREDENTIALS + CUSTOM_CREDENTIALS
+else:
+    combined_creds = DEFAULT_CREDENTIALS
+
+# Render HTML
+generated_html = utils.misc.generate_credentials_html(combined_creds)
+
+# Check if the HTML was generated successfully
+if generated_html:
+    with open(OUTPUT_HTML, "w") as file:
+        file.write(generated_html)
+    print(f"HTML file '{OUTPUT_HTML}' generated successfully.")
+else:
+    print("Failed to generate HTML file.")
+
+# Serve it on port 800
+service_content = """\
+[Unit]
+Description=Lab Credentials
+After=network.target
+
+[Service]
+Type=simple
+User=harness
+WorkingDirectory=/opt/harness/misc/
+ExecStart=/usr/bin/python3 -m http.server 8000
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+"""
+utils.misc.create_systemd_service(service_content, "lab_credentials")
+
+################################## END OF DO NOT MODIFY SECTION ##################################
+
+############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
+#
+#

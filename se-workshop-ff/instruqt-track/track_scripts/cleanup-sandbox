@@ -1,0 +1,46 @@
+#!/bin/bash
+
+####################### ADD ANY WORKSHOP SPECIFIC CLEANUP AT THE VERY BOTTOM #######################
+
+################################## START OF DO NOT MODIFY SECTION ##################################
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID=${SE_WORKSHOP_ACCOUNT_ID}
+HARNESS_ORG_ID=${SE_WORKSHOP_ORG_ID}
+HARNESS_PAT=${SE_WORKSHOP_PAT}
+HARNESS_PROJECT=$(agent variable get HARNESS_PRJ_ID)
+HARNESS_PROJECT_CREATED=$(agent variable get HARNESS_PRJ_CREATED)
+USER_EMAIL=$(agent variable get HARNESS_USER)
+USER_EMAIL_CLEAN=$(echo $USER_EMAIL | sed 's/@/%40/g')
+KEYCLOAK_ENDPOINT="${SE_WORKSHOP_KEYCLOAK_ENDPOINT}"
+KEYCLOAK_REALM="${SE_WORKSHOP_KEYCLOAK_REALM}"
+KEYCLOAK_ADMIN_USER="${SE_WORKSHOP_KEYCLOAK_ADMIN_USER}"
+KEYCLOAK_ADMIN_PWD="${SE_WORKSHOP_KEYCLOAK_ADMIN_PWD}"
+SKIP_KEYCLOAK=$(agent variable get KEYCLOAK_CONFIG)
+CLEANUP=true
+
+# Source Instruqt Functions
+source /opt/harness/scripts/instruqt_functions.sh
+
+if [ "$SKIP_KEYCLOAK" = true ]; then
+    echo "Skipping Keycloak Setup"
+else
+    # Generate Keycloak Bearer Token
+    generate_keycloak_token $KEYCLOAK_ENDPOINT $KEYCLOAK_ADMIN_USER $KEYCLOAK_ADMIN_PWD
+    # Delete the workshop user from our Keycloak Realm
+    delete_keycloak_user $KEYCLOAK_ENDPOINT $KEYCLOAK_REALM $KEYCLOAK_TOKEN $USER_EMAIL_CLEAN
+fi
+
+if [ "$HARNESS_PROJECT_CREATED" = true ]; then
+    echo "Cleaning up Project: ${HARNESS_PROJECT}"
+    # Delete the Users Sandbox Project in Harness
+    delete_harness_project $HARNESS_PAT $HARNESS_ACCOUNT_ID $HARNESS_ORG_ID $HARNESS_PROJECT
+    # Delete the workshop user from Harness Project
+    delete_harness_user $HARNESS_PAT $HARNESS_ACCOUNT_ID $USER_EMAIL_CLEAN
+else
+    echo "Harness Project does not appear to have been created. Skipping..."
+fi
+################################## END OF DO NOT MODIFY SECTION ##################################
+
+############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
+#
+#

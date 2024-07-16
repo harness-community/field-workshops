@@ -1,0 +1,29 @@
+slug: se-workshop-ce
+id: olmwzmuhq1yz
+title: Harness Chaos Engineering Workshop
+description: |2-
+
+  ![harness_black-logo.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
+
+  **This track demonstrates how to:**
+    - Lab 1 - Configure Your Chaos Infrastructure
+    - Lab 2 - Create Resilience Probes
+    - Lab 3 - Create a Chaos Experiment
+    - Lab 4 - Execute and Analyze Experiment Results
+    - Lab 5 - Controlling the Chaos with ChaosGuard
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/ce.png
+tags: []
+owner: harness
+developers:
+- joseph.titra@harness.io
+show_timer: true
+idle_timeout: 1800
+timelimit: 5400
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+  hideStopButton: false
+checksum: "5353004523937366975"

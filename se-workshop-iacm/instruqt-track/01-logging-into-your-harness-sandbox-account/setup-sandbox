@@ -1,0 +1,115 @@
+#!/bin/bash
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID=${SE_WORKSHOP_ACCOUNT_ID}
+HARNESS_ORG_ID=${SE_WORKSHOP_ORG_ID}
+HARNESS_PAT=${SE_WORKSHOP_PAT}
+HARNESS_PROJECT=$(agent variable get HARNESS_PRJ_ID)
+USER_EMAIL=$(agent variable get HARNESS_USER)
+USER_PWD="${SE_WORKSHOP_USER_PWD}"
+AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID
+AWS_SECRET_KEY=$AWS_SECRET_ACCESS_KEY
+
+# Get assets for workshop
+curl --silent --request GET \
+    --location "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/misc/aws_credentials.html" \
+    --output /opt/harness/misc/aws_credentials.html
+
+# Update Lab Credentials HTML file
+sed -i "s/EXAMPLEHARNESSUSERNAME/${USER_EMAIL}/g; s/EXAMPLEHARNESSPASSWORD/${USER_PWD}/g" /opt/harness/misc/aws_credentials.html
+sed -i "s#EXAMPLEAWSACCESSKEYID#${AWS_ACCESS_KEY_ID}#g; s#EXAMPLEAWSSECRETACCESSKEY#${AWS_SECRET_ACCESS_KEY}#g" /opt/harness/misc/aws_credentials.html
+
+# Serve it on port 8000
+cat <<EOF > /etc/systemd/system/lab_credentials.service
+[Unit]
+Description=Lab Credentials
+After=network.target
+
+[Service]
+Type=simple
+User=harness
+WorkingDirectory=/opt/harness/misc/
+ExecStart=/usr/bin/python3 -m http.server 8000
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload        # Reload systemd to read new service
+systemctl enable lab_credentials   # Enable service to start on boot
+systemctl start lab_credentials    # Start the service
+
+# Create secret to use with connector
+echo "Creating Project Secret for AWS_SECRET_ACCESS_KEY..."
+secret_result_raw=$(curl -i -X POST \
+  "https://app.harness.io/v1/orgs/${HARNESS_ORG_ID}/projects/${HARNESS_PROJECT}/secrets" \
+  -H 'Content-Type: application/yaml' \
+  -H "Harness-Account: ${HARNESS_ACCOUNT_ID}" \
+  -H "x-api-key: ${HARNESS_PAT}" \
+  -d 'secret:
+    name: aws-secret
+    identifier: awssecret
+    org: '$HARNESS_ORG_ID'
+    project: '$HARNESS_PROJECT'
+    description: "Automatically created for this lab"
+    spec:
+      type: SecretText
+      secret_manager_identifier: harnessSecretManager
+      value_type: Inline
+      value: '$AWS_SECRET_KEY'
+')
+
+# Extract JSON part and use jq to parse it
+secret_result_json=$(echo "$secret_result_raw" | awk '/^{/,0')
+secret_result=$(echo "$secret_result_json" | jq -r ".secret.project")
+
+if [ $secret_result == $HARNESS_PROJECT ]; then
+    echo "Project Secret for AWS_SECRET_ACCESS_KEY created successfully!"
+else
+    echo "Something went wrong secret creation."
+    fail-message "Something went wrong secret creation."
+    exit 1
+fi
+
+# Create connector for use in the workshop when creating a workspace
+echo "Creating Connector for new AWS Environment..."
+connector_result_raw=$(curl -i -X POST \
+  "https://app.harness.io/gateway/ng/api/connectors/?accountIdentifier=${HARNESS_ACCOUNT_ID}&orgIdentifier=${HARNESS_ORG_ID}&projectIdentifier=${HARNESS_PROJECT}" \
+  -H 'Content-Type: text/yaml' \
+  -H "Harness-Account: ${HARNESS_ACCOUNT_ID}" \
+  -H "x-api-key: ${HARNESS_PAT}" \
+  -d 'connector:
+    name: instruqt-workshop-connector
+    identifier: instruqtworkshopconnector
+    description: "Automatically created for this lab"
+    accountIdentifier: '$HARNESS_ACCOUNT_ID'
+    orgIdentifier: '$HARNESS_ORG_ID'
+    projectIdentifier: '$HARNESS_PROJECT'
+    type: Aws
+    spec:
+      connectorType: AwsConnector
+      credential:
+        type: ManualConfig
+        spec:
+          accessKey: '$AWS_ACCESS_KEY'
+          secretKeyRef: awssecret
+        region: us-east-1
+      executeOnDelegate: false
+      proxy: false
+')
+
+# Extract JSON part and use jq to parse it
+connector_result_json=$(echo "$connector_result_raw" | awk '/^{/,0')
+connector_result=$(echo "$connector_result_json" | jq -r ".status")
+
+if [ $connector_result == "SUCCESS" ]; then
+  echo "Connector for new AWS Environment created successfully!"
+else
+  echo "Something went wrong connector creation."
+  fail-message "Something went wrong connector creation."
+  exit 1
+fi
+
+agent variable set HARNESS_AWS_ACCESS_KEY_ID $AWS_ACCESS_KEY_ID
+agent variable set HARNESS_AWS_SECRET_ACCESS_KEY $AWS_SECRET_ACCESS_KEY

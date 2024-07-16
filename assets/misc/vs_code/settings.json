@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.hcl": "terraform"
+    },
+    "window.autoDetectColorScheme": true,
+    "workbench.colorTheme": "Default Dark Modern"
+}
