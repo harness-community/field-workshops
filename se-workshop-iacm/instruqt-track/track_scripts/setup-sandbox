@@ -89,7 +89,7 @@ aws configure set default.region us-east-1
 # Clone IACM Workshop Repo
 echo "Cloning iacm-workshop repo..."
 mkdir -p /opt/workshop/terraform
-git clone https://github.com/harness-community/iacm-workshop.git
+git clone https://github.com/harness-community/se-iacm-workshop.git
 #└── iacm-workshop
 #    └── aws
 #        └── v1

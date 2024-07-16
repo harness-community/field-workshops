@@ -25,7 +25,7 @@ In this lab you will learn how to utilize Harness IaCM to estimate costs and tra
 
 ## Additional Resources
 This workshop leverages the Terraform code found here:
-- [iacm-workshop](https://github.com/harness-community/iacm-workshop)
+- [iacm-workshop](https://github.com/harness-community/se-iacm-workshop)
 
 For more information on Harness IaCM and its capabilities, please visit the following resources:
 - [Harness Developer Hub](https://developer.harness.io/docs/infrastructure-as-code-management)

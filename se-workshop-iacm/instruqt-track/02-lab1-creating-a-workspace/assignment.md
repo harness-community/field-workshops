@@ -61,7 +61,7 @@ And then click ```+New Workspace``` <br>
 > -- Version: ```1.5.6``` <br>
 > - **Repository** <br>
 > -- Connector: ```demo-github``` <br>
-> -- Repository: ```harness-community/iacm-workshop``` <br>
+> -- Repository: ```harness-community/se-iacm-workshop``` <br>
 > -- Git Fetch Type: ```Latest from Branch``` <br>
 > -- Branch: ```main``` <br>
 > -- File Path: ```aws/v1``` <br>
