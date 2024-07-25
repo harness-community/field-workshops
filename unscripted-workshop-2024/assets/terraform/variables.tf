@@ -28,7 +28,7 @@ variable "github_repo_to_clone" {
   default = "nikpapag/harness-cie-workshop"
 }
 
-// Workspace
+// Connector
 variable "delegate_selector" {
   type    = string
   default = "instruqt-workshop-delegate"
