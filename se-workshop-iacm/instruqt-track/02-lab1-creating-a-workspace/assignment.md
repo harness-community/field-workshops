@@ -19,7 +19,7 @@ tabs:
 - title: Lab Credentials
   type: service
   hostname: sandbox
-  path: /aws_credentials.html
+  path: /credential_tab.html
   port: 8000
 difficulty: basic
 timelimit: 1600
@@ -51,20 +51,25 @@ Click on **Workspaces** in the left Nav <br>
 And then click ```+New Workspace``` <br>
 ![New_Workspace.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/New_Workspace.png)
 
+> **Enable Chaos**
+> - **Overview**
+>   - Name: ```lab-hce```
+> - **Configure**
+
 
 > **New Workspace**
 > - Name: ```demo-workspace``` <br>
 > - Cloud Cost Estimation: ```ON``` <br>
 > - **Provisioner** <br>
-> -- Connector: ```instruqt-workshop-connector``` <br>
-> -- Type: ```Terraform``` <br>
-> -- Version: ```1.5.6``` <br>
+>   - Connector: ```instruqt-workshop-connector``` <br>
+>   - Type: ```Terraform``` <br>
+>   - Version: ```1.5.6``` <br>
 > - **Repository** <br>
-> -- Connector: ```demo-github``` <br>
-> -- Repository: ```harness-community/se-iacm-workshop``` <br>
-> -- Git Fetch Type: ```Latest from Branch``` <br>
-> -- Branch: ```main``` <br>
-> -- File Path: ```aws/v1``` <br>
+>   - Connector: ```demo-github``` <br>
+>   - Repository: ```harness-community/se-iacm-workshop``` <br>
+>   - Git Fetch Type: ```Latest from Branch``` <br>
+>   - Branch: ```main``` <br>
+>   - File Path: ```aws/v1``` <br>
 
 Click **Save**
 

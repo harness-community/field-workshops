@@ -7,12 +7,17 @@ teaser: Let's log into Harness using your student credentials!
 notes:
 - type: text
   contents: |
-    Welcome to the Harness.io Infrastructure as Code Management (IaCM) workshop!<br><br>
+    Welcome to the Harness Infrastructure as Code Management (IaCM) workshop!<br><br>
     **Please wait while we setup your Harness Sandbox environment**
 tabs:
 - title: Workshop SSO Login
   type: browser
   hostname: harness
+- title: Lab Credentials
+  type: service
+  hostname: sandbox
+  path: /credential_tab.html
+  port: 8000
 difficulty: basic
 timelimit: 1600
 ---
@@ -30,21 +35,21 @@ Login to your **Harness Sandbox** account using the details provided below.👇
 
 ---
 ### Harness Sandbox Account details:
+*All credentials for this lab can always be found on the: <br>
+ `Lab Credentials` tab* <br>
 
 |   |   |
 |---|---|
-|__User__| [[ Instruqt-Var key="HARNESS_USER" hostname="sandbox" ]] |
-|__Password__| [[ Instruqt-Var key="HARNESS_PWD" hostname="sandbox" ]] |
+|__User__| ```[[ Instruqt-Var key="HARNESS_USER" hostname="sandbox" ]]``` |
+|__Password__| ```[[ Instruqt-Var key="HARNESS_PWD" hostname="sandbox" ]]``` |
+
+
 
 ---
 
-> 📝 *Login using the credentials above:*
-> ![se_workshop_keycloak.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/se_workshop_keycloak.png)
-
-### This lab is based on the New UI!
-> *Please click ```Try it out``` on the banner at the top of the screen*
-> ![new_nav_banner.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/new_nav_banner.png)
-
+> 📝 *Click Single sign-on* <br>
+> *Login using the credentials above:* <br>
+> ![sso_login.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sso_login.png)
 
 ===============
 

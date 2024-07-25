@@ -18,7 +18,7 @@ tabs:
 - title: Lab Credentials
   type: service
   hostname: sandbox
-  path: /aws_credentials.html
+  path: /credential_tab.html
   port: 8000
 difficulty: basic
 timelimit: 1600

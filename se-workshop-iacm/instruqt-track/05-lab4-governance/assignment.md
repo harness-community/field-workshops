@@ -18,7 +18,7 @@ tabs:
 - title: Lab Credentials
   type: service
   hostname: sandbox
-  path: /aws_credentials.html
+  path: /credential_tab.html
   port: 8000
 difficulty: basic
 timelimit: 1600
@@ -68,12 +68,12 @@ And then click ```+New Policy Set``` <br>
 
 > **Policy Set**
 > - **Overview** <br>
-> -- Name: ```Prevent Non Standard EC2 Instance Sizes``` <br>
-> -- Entity Type: ```Workspace``` <br>
-> -- Evaluation: ```On Save``` <br>
+>   - Name: ```Prevent Non Standard EC2 Instance Sizes``` <br>
+>   - Entity Type: ```Workspace``` <br>
+>   - Evaluation: ```On Save``` <br>
 > - **Policy evaluation criteria** <br>
-> -- Policy to Evaluate: ```Restrict AWS EC2 Instance Size``` <br>
-> -- Policy Action: ```Error and exit``` <br>
+>   - Policy to Evaluate: ```Restrict AWS EC2 Instance Size``` <br>
+>   - Policy Action: ```Error and exit``` <br>
 Click **Finish** to save your **Policy Set** <br>
 
 > ![Policy_Toggle.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/Policy_Toggle.png)<br>

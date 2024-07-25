@@ -1,7 +1,7 @@
 version: "3"
 virtualbrowsers:
 - name: harness
-  url: https://tinyurl.com/harness-seworkshop
+  url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
 virtualmachines:
 - name: sandbox
   image: instruqt/k3s-v1-29-0
