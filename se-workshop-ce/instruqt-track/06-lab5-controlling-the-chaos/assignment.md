@@ -12,6 +12,10 @@ tabs:
 - title: Harness Platform
   type: browser
   hostname: harness
+- title: Temp Tab
+  type: website
+  url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
+  new_window: true
 - title: Lab Credentials
   type: service
   hostname: sandbox
@@ -84,15 +88,28 @@ And then click ```+New Rule``` <br>
 >   - Name: ```block-pod-delete-during-business-hours```
 >   - User group(s): *Reference Image Below*
 >   - Time window: *Not required to update*
->     - Timezone: ```America/New_York```
->     - Start Time: ```today at 7am```
->     - End Time: ```12h``` from start time
+>     - Timezone: ```UTC```
+>     - Start Time: ```Current Date/Time```
+>     - End Time: ```30m``` from start time
 >     - Recurrence: ```Does not repeat```
 > - **Add Conditions**
 >   - Select `block-cartservice-pod-delete` condition
 > ![ce_chaosguard_select_group.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_select_group.png) <br>
 
 Then click **Done >** <br>
+
+> # Instruqt Platform Bug
+> ## If you receive an error **422**
+> ![ce_chaosguard_error_422.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_error_422.png) <br>
+> ## This is due to a bug with the *Instruqt Platform*
+> ### Switch to the ```Temp Tab``` tab to continue
+> *Login with your credentials found on the: <br>
+>  `Lab Credentials` tab* <br>
+> Select your `Project` then navigate back to the `Chaos` module and click `ChaosGuard` in the left nav <br>
+> Recreate the `Rule` as listed above
+> ### Switch to the ```Harness Platform``` tab to continue
+> # End of Instruqt Platform Bug
+
 
 Now click on the `toggle` to enable the rule.
 ![ce_chaosguard_rule_disabled.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_rule_disabled.png) <br>
