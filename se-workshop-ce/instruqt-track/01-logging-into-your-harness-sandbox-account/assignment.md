@@ -44,7 +44,6 @@ Login to your **Harness Sandbox** account using the details provided below.👇
 |__Password__| ```[[ Instruqt-Var key="HARNESS_PWD" hostname="sandbox" ]]``` |
 
 
-
 ---
 
 > 📝 *Click Single sign-on* <br>
