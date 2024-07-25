@@ -35,13 +35,14 @@ Login to your **Harness Sandbox** account using the details provided below.👇
 
 ---
 ### Harness Sandbox Account details:
+*All credentials for this lab can always be found on the: <br>
+ `Lab Credentials` tab* <br>
 
 |   |   |
 |---|---|
 |__User__| ```[[ Instruqt-Var key="HARNESS_USER" hostname="sandbox" ]]``` |
 |__Password__| ```[[ Instruqt-Var key="HARNESS_PWD" hostname="sandbox" ]]``` |
 
-*All credentials for this lab can always be found on the `Lab Credentials` tab* <br>
 
 ---
 
