@@ -276,7 +276,7 @@ template:
   spec:
     type: Run
     spec:
-      connectorRef: account.bootcampdockerhub
+      connectorRef: org.workshopdocker
       image: node:20-alpine
       shell: Sh
       command: |-
