@@ -55,7 +55,7 @@ if generated_html:
 else:
     print("Failed to generate HTML file.")
 
-# Serve it on port 800
+# Serve it on port 8000
 service_content = """\
 [Unit]
 Description=Lab Credentials

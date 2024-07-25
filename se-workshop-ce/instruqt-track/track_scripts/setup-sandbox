@@ -11,7 +11,7 @@ subprocess.run(["apt-get install -y -qq -o=Dpkg::Use-Pty=0 python3-pip > /dev/nu
 subprocess.run([
     "pip",
     "install",
-    "git+https://github.com/harness/pyharnessworkshop.git#egg=pyharnessworkshop"],
+    "git+https://github.com/jtitra/pyharnessworkshop.git#egg=pyharnessworkshop"],
     stdout=subprocess.DEVNULL,
     check=True)
 from pyharnessworkshop import harness, keycloak, utils  # noqa: E402
