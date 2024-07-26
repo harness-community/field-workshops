@@ -3,5 +3,8 @@
         "*.hcl": "terraform"
     },
     "window.autoDetectColorScheme": true,
-    "workbench.colorTheme": "Default Dark Modern"
+    "workbench.colorTheme": "Default Dark Modern",
+    "git.autofetch": true,
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.startupPrompt": "never"
 }
