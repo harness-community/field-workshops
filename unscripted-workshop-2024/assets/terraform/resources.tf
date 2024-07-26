@@ -177,12 +177,12 @@ resource "harness_platform_template" "owasp_template" {
   identifier    = "owasp"
   org_id        = var.org_id
   project_id    = var.project_id
-  name          = "owasp"
+  name          = "OWASP"
   version       = "v0.1"
   is_stable     = true
   template_yaml = <<-EOT
 template:
-  name: "owasp"
+  name: "OWASP"
   identifier: "owasp"
   versionLabel: "v0.1"
   type: Step
@@ -211,13 +211,13 @@ resource "harness_platform_template" "fortify_template" {
   identifier    = "fortify"
   org_id        = var.org_id
   project_id    = var.project_id
-  name          = "Fortify Scan - DAST"
+  name          = "Fortify"
   version       = "v0.1"
   is_stable     = true
   template_yaml = <<-EOT
   
 template:
-  name: "Fortify Scan - DAST"
+  name: "Fortify"
   identifier: "fortify"
   versionLabel: "v0.1"
   type: Step
