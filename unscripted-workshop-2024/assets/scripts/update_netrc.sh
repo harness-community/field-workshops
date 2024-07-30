@@ -18,6 +18,15 @@ if [ ! -f "$netrc_file" ]; then
   exit 1
 fi
 
+# Define the PAT regex pattern
+pat_regex='^pat\.DEFAULT_ACCOUNT\.[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$'
+
+# Check if the provided PAT matches the expected format
+if [[ ! $new_pat =~ $pat_regex ]]; then
+  echo "Error: The provided PAT does not match the expected format."
+  exit 1
+fi
+
 # Update the .netrc file with the new PAT
 awk -v machine="$machine" -v login="$login" -v new_pat="$new_pat" '
 BEGIN { machine_found=0; login_found=0; updated=0; }
@@ -35,10 +44,17 @@ BEGIN { machine_found=0; login_found=0; updated=0; }
 }
 { print; }
 END {
-  if (updated) {
-    print "Updated .netrc with new PAT.";
+  if (updated == 1) {
+    exit 0
   } else {
-    print "No matching machine and login found in .netrc.";
+    exit 1
   }
 }
 ' "$netrc_file" > "${netrc_file}.tmp" && mv "${netrc_file}.tmp" "$netrc_file"
+
+# Check if the update was successful and print the appropriate message
+if [ $? -eq 0 ]; then
+  echo "Updated .netrc with new PAT."
+else
+  echo "No matching machine and login found in .netrc."
+fi
