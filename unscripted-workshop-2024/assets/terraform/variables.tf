@@ -25,13 +25,11 @@ variable "new_repo_id" {
 
 variable "github_repo_to_clone" {
   type    = string
-  default = "nikpapag/harness-cie-workshop"
 }
 
 // Connector
 variable "delegate_selector" {
   type    = string
-  default = "instruqt-workshop-delegate"
 }
 
 variable "namespace" {

@@ -215,9 +215,8 @@ resource "harness_platform_template" "fortify_template" {
   version       = "v0.1"
   is_stable     = true
   template_yaml = <<-EOT
-  
 template:
-  name: "Fortify"
+  name: "Fortify Scan"
   identifier: "fortify"
   versionLabel: "v0.1"
   type: Step
@@ -264,7 +263,6 @@ resource "harness_platform_template" "compile_template" {
   version       = "v0.1"
   is_stable     = true
   template_yaml = <<-EOT
-  
 template:
   name: "Compile Application"
   identifier: "Compile_Application"
