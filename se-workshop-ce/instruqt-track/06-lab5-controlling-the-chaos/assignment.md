@@ -3,7 +3,8 @@ slug: lab5-controlling-the-chaos
 id: ymjy7djb6hma
 type: challenge
 title: Lab 5 - Controlling the Chaos with ChaosGuard
-teaser: Using ChaosGuard to enforce controls around who, what, when, and where chaos experiments are allowed
+teaser: Using ChaosGuard to enforce controls around who, what, when, and where chaos
+  experiments are allowed
 notes:
 - type: text
   contents: |

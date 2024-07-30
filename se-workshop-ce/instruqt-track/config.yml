@@ -4,7 +4,7 @@ virtualbrowsers:
   url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
 virtualmachines:
 - name: sandbox
-  image: instruqt/k3s-v1-29-0
+  image: enhanced-victor-269615/harness-se-workshop-v0-0-6
   shell: /bin/bash
   machine_type: n2-standard-4
   allow_external_ingress:
