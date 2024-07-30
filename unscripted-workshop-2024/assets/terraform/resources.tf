@@ -55,7 +55,7 @@ resource "harness_platform_infrastructure" "proj_infra" {
   name            = "k8s"
   org_id          = var.org_id
   project_id      = var.project_id
-  env_id          = "prod"
+  env_id          = harness_platform_environment.proj_environment.identifier
   type            = "KubernetesDirect"
   deployment_type = "Kubernetes"
   yaml            = <<-EOT
@@ -115,7 +115,7 @@ service:
           primaryArtifactRef: <+input>
           sources:
             - spec:
-                connectorRef: "dockerhub"
+                connectorRef: org.workshopdocker
                 imagePath: seworkshop/harness-workshop
                 tag: backend-latest
                 digest: ""
@@ -134,9 +134,8 @@ resource "harness_platform_monitored_service" "proj_monitored_service" {
     name            = "backend"
     type            = "Application"
     description     = "description"
-    service_ref     = "backend"
-    environment_ref = "prod"
-    enabled         = true
+    service_ref     = harness_platform_service.proj_service.identifier
+    environment_ref = harness_platform_environment.proj_environment.identifier
     health_sources {
       name       = "prometheus metrics verify step"
       identifier = "prometheus_metrics"
@@ -173,6 +172,7 @@ resource "harness_platform_monitored_service" "proj_monitored_service" {
 }
 
 // OWASP template
+/*
 resource "harness_platform_template" "owasp_template" {
   identifier    = "owasp"
   org_id        = var.org_id
@@ -205,6 +205,7 @@ template:
         file: automation/sto_test/scan_tools/owasp/001
   EOT
 }
+*/
 
 // Fortify template
 resource "harness_platform_template" "fortify_template" {
@@ -285,14 +286,14 @@ template:
         mkdir -p ./src/environments
         echo "export const environment = {
           production: true,
-          defaultApiUrl: "'"http://<+variable.username>.backend.cie-bootcamp.co.uk"'",
+          defaultApiUrl: "'"https://sandbox-8080-<+variable.sandbox_id>.env.play.instruqt.com"'",
           defaultSDKKey: "'"<+variable.sdk>"'"
         };" > ./src/environments/environment.prod.ts
 
 
         echo "export const environment = {
           production: true,
-          defaultApiUrl: "'"http://<+variable.username>.backend.cie-bootcamp.co.uk"'",
+          defaultApiUrl: "'"https://sandbox-8080-<+variable.sandbox_id>.env.play.instruqt.com"'",
           defaultSDKKey: "'"<+variable.sdk>"'"
         };" > ./src/environments/environment.ts
 
@@ -310,6 +311,18 @@ resource "harness_platform_variables" "user_variable" {
   spec {
     value_type  = "FIXED"
     fixed_value = var.project_id
+  }
+}
+
+resource "harness_platform_variables" "instruqt_variable" {
+  identifier = "sandbox_id"
+  name       = "sandbox_id"
+  org_id     = var.org_id
+  project_id = var.project_id
+  type       = "String"
+  spec {
+    value_type  = "FIXED"
+    fixed_value = var.instruqt_sandbox_id
   }
 }
 

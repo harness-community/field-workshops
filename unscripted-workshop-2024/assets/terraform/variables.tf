@@ -36,3 +36,8 @@ variable "namespace" {
   type    = string
   default = "default"
 }
+
+// Harness Variables
+variable "instruqt_sandbox_id" {
+  type    = string
+}
