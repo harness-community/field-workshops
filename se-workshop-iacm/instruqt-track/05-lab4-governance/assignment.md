@@ -67,14 +67,15 @@ In the top right of this screen click **Policy Sets** <br>
 And then click ```+New Policy Set``` <br>
 
 > **Policy Set**
-> - **Overview** <br>
->   - Name: ```Prevent Non Standard EC2 Instance Sizes``` <br>
->   - Entity Type: ```Workspace``` <br>
->   - Evaluation: ```On Save``` <br>
-> - **Policy evaluation criteria** <br>
->   - Policy to Evaluate: ```Restrict AWS EC2 Instance Size``` <br>
->   - Policy Action: ```Error and exit``` <br>
-Click **Finish** to save your **Policy Set** <br>
+> - **Overview**
+>   - Name: ```Prevent Non Standard EC2 Instance Sizes```
+>   - Entity Type: ```Workspace```
+>   - Evaluation: ```On Save```
+> - **Policy evaluation criteria**
+>   - Policy to Evaluate: ```Restrict AWS EC2 Instance Size```
+>   - Policy Action: ```Error and exit```
+
+Click **Finish** to save your **Policy Set**
 
 > ![Policy_Toggle.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/Policy_Toggle.png)<br>
 Be sure to click the toggle under **ENFORCED** to enable your **Policy Set**
@@ -86,7 +87,7 @@ Head back over to your workspace. <br>
 Click the pencil icon next to ```instance_type``` and try to change the value to ```t2.large``` and then click the green check mark to save it.
 <br><br>
 That is `Policy as Code` in action! Isn't it beautiful? <br>
-Harness has wrapped the *entire platform* with `OPA` so this is just the tip of the iceberg! <br>
+Harness has wrapped the ***entire platform*** with `OPA` so this is just the tip of the iceberg! <br>
 
 ===============
 

@@ -37,8 +37,8 @@ And then click ```+Create Pipeline``` <br>
 ![Create_Pipeline.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/Create_Pipeline.png)
 
 > **Create new Pipeline**
-> - Name: ```IaCM Provision``` <br>
-> - Store: ```Inline``` <br>
+> - Name: ```IaCM Provision```
+> - Store: ```Inline```
 
 <br><br>
 Click ```+Add Stage``` <br>

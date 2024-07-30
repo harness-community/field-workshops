@@ -51,38 +51,31 @@ Click on **Workspaces** in the left Nav <br>
 And then click ```+New Workspace``` <br>
 ![New_Workspace.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/New_Workspace.png)
 
-> **Enable Chaos**
-> - **Overview**
->   - Name: ```lab-hce```
-> - **Configure**
-
-
 > **New Workspace**
-> - Name: ```demo-workspace``` <br>
-> - Cloud Cost Estimation: ```ON``` <br>
-> - **Provisioner** <br>
->   - Connector: ```instruqt-workshop-connector``` <br>
->   - Type: ```Terraform``` <br>
->   - Version: ```1.5.6``` <br>
-> - **Repository** <br>
->   - Connector: ```demo-github``` <br>
->   - Repository: ```harness-community/se-iacm-workshop``` <br>
->   - Git Fetch Type: ```Latest from Branch``` <br>
->   - Branch: ```main``` <br>
->   - File Path: ```aws/v1``` <br>
+> - Name: ```demo-workspace```
+> - Cloud Cost Estimation: ```ON```
+> - **Provisioner**
+>   - Connector: ```instruqt-workshop-connector```
+>   - Type: ```Terraform```
+>   - Version: ```1.5.6```
+> - **Repository**
+>   - Connector: ```workshop-github```
+>   - Repository: ```harness-community/se-iacm-workshop```
+>   - Git Fetch Type: ```Latest from Branch```
+>   - Branch: ```main```
+>   - File Path: ```aws/v1```
 
 Click **Save**
 
 ### Configure Workspace
 Click on the **Variables** tab <br>
+And then click on **Terraform Variables** <br>
+![iacm_workspace_variables.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
+Click ```+New Terraform Variable``` <br>
 
-> Add two ```Terraform Variables``` <br>
->
 > | Key           | Value     |
 > |---------------|-----------|
 > | **instance_type** | `t2.micro` |
-> | **extra**         | `test`     |
-
 
 *You could also reference a variable file from another location or another repository entirely. By default, it looks for the ```variables.tf``` that is defined in Workspaces > Repo > File Path.*
 

@@ -1,5 +1,5 @@
-slug: se-workshop-iacm-v2
-id: ju6rwyxwxmoa
+slug: se-workshop-iacm
+id: gh5rvy013twy
 title: Harness IaCM Workshop
 description: |2-
 
@@ -25,5 +25,6 @@ lab_config:
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
+  lab_v2: false
   hideStopButton: false
-checksum: "7176520477110223780"
+checksum: "7175935623742633284"

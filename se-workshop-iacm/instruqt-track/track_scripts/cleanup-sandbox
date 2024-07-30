@@ -21,9 +21,9 @@ KEYCLOAK_ADMIN_USER = os.getenv("SE_WORKSHOP_KEYCLOAK_ADMIN_USER")
 KEYCLOAK_ADMIN_PWD = os.getenv("SE_WORKSHOP_KEYCLOAK_ADMIN_PWD")
 
 # Generate Keycloak Bearer Token
-KEYCLOAK_TOKEN = keycloak.auth.generate_keycloak_token(KEYCLOAK_ENDPOINT, KEYCLOAK_ADMIN_USER, KEYCLOAK_ADMIN_PWD, cleanup=True)
+keycloak_token = keycloak.auth.generate_keycloak_token(KEYCLOAK_ENDPOINT, KEYCLOAK_ADMIN_USER, KEYCLOAK_ADMIN_PWD, cleanup=True)
 # Create workshop user in Keycloak Realm
-keycloak.user.delete_keycloak_user(KEYCLOAK_ENDPOINT, KEYCLOAK_REALM, KEYCLOAK_TOKEN, USER_EMAIL_CLEAN, cleanup=True)
+keycloak.user.delete_keycloak_user(KEYCLOAK_ENDPOINT, KEYCLOAK_REALM, keycloak_token, USER_EMAIL_CLEAN, cleanup=True)
 
 print(f"HARNESS_PROJECT_CREATED: {HARNESS_PROJECT_CREATED}")
 if HARNESS_PROJECT_CREATED:

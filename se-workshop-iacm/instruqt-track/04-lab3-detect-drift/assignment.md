@@ -36,33 +36,33 @@ h2.cyan { color: cyan; }
 ## Now it's time to introduce some drift
 
 ### List out our instances
-```
+```bash,run
 aws ec2 describe-instances \
   --query "Reservations[*].Instances[*].[InstanceId,State.Name,InstanceType,Tags[?Key=='name'].Value | [0]]" \
   | jq
 ```
 
 ### Target one of them for some manual changes
-```
+```bash
 TARGETED_INSTANCE="<replaceWithInstanceId>"
 ```
 
 ### Stop one of the EC2 instances we just provisioned
-```
+```bash,run
 aws ec2 stop-instances \
   --instance-ids $TARGETED_INSTANCE \
   | jq
 ```
 
 ### Change that EC2 instance to ```t3.micro```
-```
+```bash,run
 aws ec2 modify-instance-attribute \
   --instance-id $TARGETED_INSTANCE \
   --instance-type "{\"Value\": \"t3.micro\"}"
 ```
 
 ### Run the ```describe-instances``` command again to confirm the change
-```
+```bash,run
 aws ec2 describe-instances \
   --query "Reservations[*].Instances[*].[InstanceId,State.Name,InstanceType,Tags[?Key=='name'].Value | [0]]" \
   | jq
@@ -76,8 +76,8 @@ And then click ```+Create Pipeline``` <br>
 ![Create_Pipeline.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/Create_Pipeline.png)
 
 > **Create new Pipeline**
-> - Name: ```IaCM Drift``` <br>
-> - Store: ```Inline``` <br>
+> - Name: ```IaCM Drift```
+> - Store: ```Inline```
 
 <br><br>
 Click ```+Add Stage``` <br>
