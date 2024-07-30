@@ -13,6 +13,9 @@ tabs:
 - title: Workshop SSO Login
   type: browser
   hostname: harness
+- title: Shell
+  type: terminal
+  hostname: sandbox
 - title: Lab Credentials
   type: service
   hostname: sandbox
