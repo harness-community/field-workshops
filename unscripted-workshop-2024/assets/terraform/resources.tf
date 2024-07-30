@@ -22,7 +22,7 @@ resource "harness_platform_connector_kubernetes" "k8s" {
   name        = "k8s-prod"
   org_id      = var.org_id
   project_id  = var.project_id
-  description = "Connector to target k8s cluster"
+  description = "Connector to Instruqt workshop K8s cluster"
 
   inherit_from_delegate {
     delegate_selectors = [var.delegate_selector]
@@ -117,7 +117,7 @@ service:
             - spec:
                 connectorRef: org.workshopdocker
                 imagePath: seworkshop/harness-workshop
-                tag: backend-latest
+                tag: backend-v2
                 digest: ""
               identifier: backend
               type: DockerRegistry
@@ -286,14 +286,14 @@ template:
         mkdir -p ./src/environments
         echo "export const environment = {
           production: true,
-          defaultApiUrl: "'"http://web-backend-<+variable.username>-svc.default.svc.cluster.local"'",
+          defaultApiUrl: "'"http://web-backend-svc.default.svc.cluster.local"'",
           defaultSDKKey: "'"<+variable.sdk>"'"
         };" > ./src/environments/environment.prod.ts
 
 
         echo "export const environment = {
           production: true,
-          defaultApiUrl: "'"http://web-backend-<+variable.username>-svc.default.svc.cluster.local"'",
+          defaultApiUrl: "'"http://web-backend-svc.default.svc.cluster.local"'",
           defaultSDKKey: "'"<+variable.sdk>"'"
         };" > ./src/environments/environment.ts
 
