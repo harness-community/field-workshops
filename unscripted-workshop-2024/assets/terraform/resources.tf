@@ -286,14 +286,14 @@ template:
         mkdir -p ./src/environments
         echo "export const environment = {
           production: true,
-          defaultApiUrl: "'"https://sandbox-8081-<+variable.sandbox_id>.env.play.instruqt.com"'",
+          defaultApiUrl: "'"https://backend.sandbox.<+variable.sandbox_id>.instruqt.io"'",
           defaultSDKKey: "'"<+variable.sdk>"'"
         };" > ./src/environments/environment.prod.ts
 
 
         echo "export const environment = {
           production: true,
-          defaultApiUrl: "'"https://sandbox-8081-<+variable.sandbox_id>.env.play.instruqt.com"'",
+          defaultApiUrl: "'"https://backend.sandbox.<+variable.sandbox_id>.instruqt.io"'",
           defaultSDKKey: "'"<+variable.sdk>"'"
         };" > ./src/environments/environment.ts
 
