@@ -117,7 +117,7 @@ service:
             - spec:
                 connectorRef: org.workshopdocker
                 imagePath: seworkshop/harness-workshop
-                tag: backend-v2
+                tag: backend-v3
                 digest: ""
               identifier: backend
               type: DockerRegistry
@@ -286,14 +286,14 @@ template:
         mkdir -p ./src/environments
         echo "export const environment = {
           production: true,
-          defaultApiUrl: "'"http://web-backend-svc.default.svc.cluster.local"'",
+          defaultApiUrl: "'"http://web-backend-svc.default.svc.cluster.local:8081"'",
           defaultSDKKey: "'"<+variable.sdk>"'"
         };" > ./src/environments/environment.prod.ts
 
 
         echo "export const environment = {
           production: true,
-          defaultApiUrl: "'"http://web-backend-svc.default.svc.cluster.local"'",
+          defaultApiUrl: "'"http://web-backend-svc.default.svc.cluster.local:8081"'",
           defaultSDKKey: "'"<+variable.sdk>"'"
         };" > ./src/environments/environment.ts
 
