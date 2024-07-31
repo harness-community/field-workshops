@@ -137,8 +137,8 @@ resource "harness_platform_monitored_service" "proj_monitored_service" {
     service_ref     = harness_platform_service.proj_service.identifier
     environment_ref = harness_platform_environment.proj_environment.identifier
     health_sources {
-      name       = "prometheus metrics verify step"
-      identifier = "prometheus_metrics"
+      name       = "Prometheus"
+      identifier = "prometheus"
       type       = "Prometheus"
       spec = jsonencode({
         connectorRef = "prometheus"
@@ -161,7 +161,7 @@ resource "harness_platform_monitored_service" "proj_monitored_service" {
                 serviceInstanceFieldName = "pod"
               }
             }
-            query         = "avg(container_cpu_system_seconds_total { namespace=\"${var.namespace}\" , container=\"backend-${var.project_id}\"})"
+            query         = "avg(container_cpu_system_seconds_total { namespace=\"${var.namespace}\" , container=\"backend\"})"
             groupName     = "Infrastructure"
             isManualQuery = true
           }
