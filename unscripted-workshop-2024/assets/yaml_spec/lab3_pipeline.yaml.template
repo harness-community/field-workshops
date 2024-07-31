@@ -1,0 +1,87 @@
+pipeline:
+  name: {{ pipeline_name }}
+  identifier: {{ pipeline_id }}
+  projectIdentifier: {{ project_id }}
+  orgIdentifier: {{ org_id }}
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        repoName: harnessrepo
+        build: <+input>
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: RunTests
+                  name: Run Tests With Intelligence
+                  identifier: Run_Tests_With_Intelligence
+                  spec:
+                    language: Python
+                    buildTool: Pytest
+                    runOnlySelectedTests: true
+                    preCommand: pip install pytest & cd ./python-tests
+                    enableTestSplitting: false
+              - step:
+                  name: Compile
+                  identifier: Compile
+                  template:
+                    templateRef: Compile_Application
+                    versionLabel: v0.1
+              - step:
+                  name: Fortify Scan
+                  identifier: Fortify_Scan
+                  template:
+                    templateRef: fortify
+                    versionLabel: v0.1
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: Push to Dockerhub
+                  identifier: Push_to_Dockerhub
+                  spec:
+                    connectorRef: org.workshopdocker
+                    repo: seworkshop/harness-workshop
+                    tags:
+                      - <+variable.username>-<+pipeline.sequenceId>
+                    dockerfile: /harness/frontend-app/harness-webapp/Dockerfile
+                    context: /harness/frontend-app/harness-webapp
+              - parallel:
+                  - step:
+                      type: Owasp
+                      name: OWASP
+                      identifier: OWASP
+                      spec:
+                        mode: orchestration
+                        config: default
+                        target:
+                          type: repository
+                          detection: auto
+                        advanced:
+                          log:
+                            level: info
+                  - step:
+                      type: OsvScanner
+                      name: OSV
+                      identifier: OSV
+                      spec:
+                        mode: orchestration
+                        config: default
+                        target:
+                          type: repository
+                          detection: auto
+                        advanced:
+                          log:
+                            level: info
