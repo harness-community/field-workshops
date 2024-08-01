@@ -42,12 +42,6 @@ pipeline:
                     templateRef: Compile_Application
                     versionLabel: v0.1
               - step:
-                  name: Fortify Scan
-                  identifier: Fortify_Scan
-                  template:
-                    templateRef: fortify
-                    versionLabel: v0.1
-              - step:
                   type: BuildAndPushDockerRegistry
                   name: Push to Dockerhub
                   identifier: Push_to_Dockerhub
@@ -58,33 +52,6 @@ pipeline:
                       - <+variable.username>-<+pipeline.sequenceId>
                     dockerfile: /harness/frontend-app/harness-webapp/Dockerfile
                     context: /harness/frontend-app/harness-webapp
-              - parallel:
-                  - step:
-                      type: Owasp
-                      name: OWASP
-                      identifier: OWASP
-                      spec:
-                        mode: orchestration
-                        config: default
-                        target:
-                          type: repository
-                          detection: auto
-                        advanced:
-                          log:
-                            level: info
-                  - step:
-                      type: OsvScanner
-                      name: OSV
-                      identifier: OSV
-                      spec:
-                        mode: orchestration
-                        config: default
-                        target:
-                          type: repository
-                          detection: auto
-                        advanced:
-                          log:
-                            level: info
     - stage:
         name: Frontend - Deployment
         identifier: Frontend_Deployment
@@ -103,10 +70,10 @@ pipeline:
                       primaryArtifactRef: <+input>
                       sources: <+input>
           environment:
-            environmentRef: prod
+            environmentRef: dev
             deployToAll: false
             infrastructureDefinitions:
-              - identifier: k8s
+              - identifier: k8s_dev
           execution:
             steps:
               - step:
@@ -125,6 +92,80 @@ pipeline:
                   timeout: 10m
                   spec:
                     pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+    - stage:
+        name: Backend - Deployment
+        identifier: Backend_Deployment
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: backend
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            useFromStage:
+              stage: Frontend_Deployment
+          execution:
+            steps:
+              - stepGroup:
+                  name: Canary Deployment
+                  identifier: canaryDeployment
+                  steps:
+                    - step:
+                        name: Canary Deployment
+                        identifier: canaryDeployment
+                        type: K8sCanaryDeploy
+                        timeout: 10m
+                        spec:
+                          instanceSelection:
+                            type: Count
+                            spec:
+                              count: 1
+                          skipDryRun: false
+                    - step:
+                        name: Canary Delete
+                        identifier: canaryDelete
+                        type: K8sCanaryDelete
+                        timeout: 10m
+                        spec: {}
+              - stepGroup:
+                  name: Primary Deployment
+                  identifier: primaryDeployment
+                  steps:
+                    - step:
+                        name: Rolling Deployment
+                        identifier: rollingDeployment
+                        type: K8sRollingDeploy
+                        timeout: 10m
+                        spec:
+                          skipDryRun: false
+            rollbackSteps:
+              - step:
+                  name: Canary Delete
+                  identifier: rollbackCanaryDelete
+                  type: K8sCanaryDelete
+                  timeout: 10m
+                  spec: {}
+              - step:
+                  name: Rolling Rollback
+                  identifier: rollingRollback
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec: {}
         tags: {}
         failureStrategies:
           - onFailure:
