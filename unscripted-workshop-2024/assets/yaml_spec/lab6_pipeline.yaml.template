@@ -89,7 +89,7 @@ pipeline:
                       name: dind
                       identifier: dind
                       spec:
-                        connectorRef: account.harnessImage
+                        connectorRef: org.workshopdocker
                         image: docker:dind
                         shell: Sh
                   - step:
@@ -109,8 +109,6 @@ pipeline:
                         image:
                           type: docker_v2
                           name: seworkshop/harness-workshop
-                          access_id: nikpharness
-                          access_token: <+secrets.getValue("account.nikpharnessdocker")>
                           tag: <+variable.username>-<+pipeline.sequenceId>
                         sbom:
                           format: spdx-json
