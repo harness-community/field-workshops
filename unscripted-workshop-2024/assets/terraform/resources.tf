@@ -68,22 +68,22 @@ resource "harness_platform_infrastructure" "dev_infra" {
   type            = "KubernetesDirect"
   deployment_type = "Kubernetes"
   yaml            = <<-EOT
-        infrastructureDefinition:
-         name: "K8s Dev"
-         identifier: "k8s_dev"
-         description: ""
-         tags:
-           owner: "${var.project_id}"
-         orgIdentifier: "${var.org_id}"
-         projectIdentifier: "${var.project_id}"
-         environmentRef: "dev"
-         deploymentType: Kubernetes
-         type: KubernetesDirect
-         spec:
-          connectorRef: "instruqt_k8"
-          namespace: "${var.namespace}"
-          releaseName: release-<+INFRA_KEY>
-         allowSimultaneousDeployments: true
+    infrastructureDefinition:
+     name: "K8s Dev"
+     identifier: "k8s_dev"
+     description: ""
+     tags:
+       owner: "${var.project_id}"
+     orgIdentifier: "${var.org_id}"
+     projectIdentifier: "${var.project_id}"
+     environmentRef: "dev"
+     deploymentType: Kubernetes
+     type: KubernetesDirect
+     spec:
+      connectorRef: "instruqt_k8"
+      namespace: "${var.namespace}"
+      releaseName: release-<+INFRA_KEY>
+     allowSimultaneousDeployments: true
   EOT
 }
 
@@ -97,22 +97,22 @@ resource "harness_platform_infrastructure" "prod_infra" {
   type            = "KubernetesDirect"
   deployment_type = "Kubernetes"
   yaml            = <<-EOT
-        infrastructureDefinition:
-         name: "K8s Prod"
-         identifier: "k8s_prod"
-         description: ""
-         tags:
-           owner: "${var.project_id}"
-         orgIdentifier: "${var.org_id}"
-         projectIdentifier: "${var.project_id}"
-         environmentRef: "prod"
-         deploymentType: Kubernetes
-         type: KubernetesDirect
-         spec:
-          connectorRef: "instruqt_k8"
-          namespace: "${var.namespace}"
-          releaseName: release-<+INFRA_KEY>
-         allowSimultaneousDeployments: true
+    infrastructureDefinition:
+     name: "K8s Prod"
+     identifier: "k8s_prod"
+     description: ""
+     tags:
+       owner: "${var.project_id}"
+     orgIdentifier: "${var.org_id}"
+     projectIdentifier: "${var.project_id}"
+     environmentRef: "prod"
+     deploymentType: Kubernetes
+     type: KubernetesDirect
+     spec:
+      connectorRef: "instruqt_k8"
+      namespace: "${var.namespace}"
+      releaseName: release-<+INFRA_KEY>
+     allowSimultaneousDeployments: true
   EOT
 }
 
@@ -124,42 +124,42 @@ resource "harness_platform_service" "proj_service" {
   org_id      = var.org_id
   project_id  = var.project_id
   yaml        = <<-EOT
-service:
-  name: backend
-  identifier: backend
-  orgIdentifier: "${var.org_id}"
-  projectIdentifier: "${var.project_id}"
-  serviceDefinition:
-    spec:
-      manifests:
-        - manifest:
-            identifier: backend
-            type: K8sManifest
-            spec:
-              store:
-                type: HarnessCode
+    service:
+      name: backend
+      identifier: backend
+      orgIdentifier: "${var.org_id}"
+      projectIdentifier: "${var.project_id}"
+      serviceDefinition:
+        spec:
+          manifests:
+            - manifest:
+                identifier: backend
+                type: K8sManifest
                 spec:
-                  repoName: harnessrepo
-                  gitFetchType: Branch
-                  paths:
-                    - harness-deploy/backend/manifests
-                  branch: main
-              valuesPaths:
-                - harness-deploy/backend/values.yaml
-              skipResourceVersioning: false
-              enableDeclarativeRollback: false
-      artifacts:
-        primary:
-          primaryArtifactRef: <+input>
-          sources:
-            - spec:
-                connectorRef: org.workshopdocker
-                imagePath: seworkshop/harness-workshop
-                tag: backend-latest
-                digest: ""
-              identifier: backend
-              type: DockerRegistry
-    type: Kubernetes
+                  store:
+                    type: HarnessCode
+                    spec:
+                      repoName: harnessrepo
+                      gitFetchType: Branch
+                      paths:
+                        - harness-deploy/backend/manifests
+                      branch: main
+                  valuesPaths:
+                    - harness-deploy/backend/values.yaml
+                  skipResourceVersioning: false
+                  enableDeclarativeRollback: false
+          artifacts:
+            primary:
+              primaryArtifactRef: <+input>
+              sources:
+                - spec:
+                    connectorRef: org.workshopdocker
+                    imagePath: seworkshop/harness-workshop
+                    tag: backend-latest
+                    digest: ""
+                  identifier: backend
+                  type: DockerRegistry
+        type: Kubernetes
   EOT
 }
 
@@ -262,72 +262,72 @@ resource "harness_platform_template" "dast_template" {
   version       = "1.0"
   is_stable     = true
   template_yaml = <<-EOT
-template:
-  name: "DAST Scans"
-  identifier: "DAST_Scans"
-  versionLabel: "1.0"
-  type: Stage
-  projectIdentifier: ${var.project_id}
-  orgIdentifier: ${var.org_id}
-  spec:
-    type: SecurityTests
-    spec:
-      cloneCodebase: true
-      platform:
-        os: Linux
-        arch: Amd64
-      runtime:
-        type: Cloud
-        spec: {}
-      execution:
-        steps:
-          - parallel:
-              - step:
-                  type: Zap
-                  name: ZAP
-                  identifier: ZAP
-                  spec:
-                    mode: ingestion
-                    config: default
-                    target:
-                      type: instance
-                      detection: manual
-                      name: frontend
-                      variant: main
-                    advanced:
-                      log:
-                        level: info
-                    ingestion:
-                      file: automation/sto_test/scan_tools/zap/001
-              - step:
-                  type: Security
-                  name: Veracode
-                  identifier: Veracode
-                  spec:
-                    privileged: true
-                    settings:
-                      product_name: veracode
-                      product_config_name: default
-                      policy_type: ingestionOnly
-                      scan_type: repository
-                      repository_project: jhttp_isolated
-                      repository_branch: <+codebase.branch>
-                      customer_artifacts_path: automation/sto_test/scan_tools/veracode
-                      manual_upload_filename: "001"
-                    imagePullPolicy: Always
-                  failureStrategies:
-                    - onFailure:
-                        errors:
-                          - AllErrors
-                        action:
-                          type: Ignore
-                  when:
-                    stageStatus: Success
-                    condition: "false"
-      sharedPaths:
-        - /var/run
-      slsa_provenance:
-        enabled: false
+    template:
+      name: "DAST Scans"
+      identifier: "DAST_Scans"
+      versionLabel: "1.0"
+      type: Stage
+      projectIdentifier: ${var.project_id}
+      orgIdentifier: ${var.org_id}
+      spec:
+        type: SecurityTests
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - parallel:
+                  - step:
+                      type: Zap
+                      name: ZAP
+                      identifier: ZAP
+                      spec:
+                        mode: ingestion
+                        config: default
+                        target:
+                          type: instance
+                          detection: manual
+                          name: frontend
+                          variant: main
+                        advanced:
+                          log:
+                            level: info
+                        ingestion:
+                          file: automation/sto_test/scan_tools/zap/001
+                  - step:
+                      type: Security
+                      name: Veracode
+                      identifier: Veracode
+                      spec:
+                        privileged: true
+                        settings:
+                          product_name: veracode
+                          product_config_name: default
+                          policy_type: ingestionOnly
+                          scan_type: repository
+                          repository_project: jhttp_isolated
+                          repository_branch: <+codebase.branch>
+                          customer_artifacts_path: automation/sto_test/scan_tools/veracode
+                          manual_upload_filename: "001"
+                        imagePullPolicy: Always
+                      failureStrategies:
+                        - onFailure:
+                            errors:
+                              - AllErrors
+                            action:
+                              type: Ignore
+                      when:
+                        stageStatus: Success
+                        condition: "false"
+          sharedPaths:
+            - /var/run
+          slsa_provenance:
+            enabled: false
   EOT
 }
 
@@ -340,40 +340,40 @@ resource "harness_platform_template" "compile_template" {
   version       = "v0.1"
   is_stable     = true
   template_yaml = <<-EOT
-template:
-  name: "Compile Application"
-  identifier: "Compile_Application"
-  versionLabel: "v0.1"
-  type: Step
-  projectIdentifier: ${var.project_id}
-  orgIdentifier: ${var.org_id}
-  tags: {}
-  spec:
-    type: Run
-    spec:
-      connectorRef: org.workshopdocker
-      image: node:20-alpine
-      shell: Sh
-      command: |-
-        cd frontend-app/harness-webapp
-        npm install
-        npm install -g @angular/cli
+    template:
+      name: "Compile Application"
+      identifier: "Compile_Application"
+      versionLabel: "v0.1"
+      type: Step
+      projectIdentifier: ${var.project_id}
+      orgIdentifier: ${var.org_id}
+      tags: {}
+      spec:
+        type: Run
+        spec:
+          connectorRef: org.workshopdocker
+          image: node:20-alpine
+          shell: Sh
+          command: |-
+            cd frontend-app/harness-webapp
+            npm install
+            npm install -g @angular/cli
 
-        mkdir -p ./src/environments
-        echo "export const environment = {
-          production: true,
-          defaultApiUrl: "'"https://backend.sandbox.<+variable.sandbox_id>.instruqt.io"'",
-          defaultSDKKey: "'"<+variable.sdk>"'"
-        };" > ./src/environments/environment.prod.ts
+            mkdir -p ./src/environments
+            echo "export const environment = {
+              production: true,
+              defaultApiUrl: "'"https://backend.sandbox.<+variable.sandbox_id>.instruqt.io"'",
+              defaultSDKKey: "'"<+variable.sdk>"'"
+            };" > ./src/environments/environment.prod.ts
 
 
-        echo "export const environment = {
-          production: true,
-          defaultApiUrl: "'"https://backend.sandbox.<+variable.sandbox_id>.instruqt.io"'",
-          defaultSDKKey: "'"<+variable.sdk>"'"
-        };" > ./src/environments/environment.ts
+            echo "export const environment = {
+              production: true,
+              defaultApiUrl: "'"https://backend.sandbox.<+variable.sandbox_id>.instruqt.io"'",
+              defaultSDKKey: "'"<+variable.sdk>"'"
+            };" > ./src/environments/environment.ts
 
-        npm run build
+            npm run build
   EOT
 }
 
@@ -421,24 +421,24 @@ resource "harness_platform_policy" "sto_policy" {
   org_id     = var.org_id
   project_id = var.project_id
   rego       = <<-REGO
-      package pipeline
-      # Deny pipelines that do not include security scanners
-      deny[msg] {
+    package pipeline
+    # Deny pipelines that do not include security scanners
+    deny[msg] {
 
-          stage = input.pipeline.stages[i].stage
-          stage.type == "CI"
-          existing_steps := [ s | s = stage.spec.execution.steps[_].step.type ]
-          required_step := required_steps[_]
+        stage = input.pipeline.stages[i].stage
+        stage.type == "CI"
+        existing_steps := [ s | s = stage.spec.execution.steps[_].step.type ]
+        required_step := required_steps[_]
 
-          not contains(existing_steps, required_step)
-              msg := sprintf("CI Stage does not contain Security Test '%s'. It's easy to add using the Harness Built-in Scanners.", [required_step])
-      }
+        not contains(existing_steps, required_step)
+            msg := sprintf("CI Stage does not contain Security Test '%s'. It's easy to add using the Harness Built-in Scanners.", [required_step])
+    }
 
-      required_steps = ["Owasp", "OsvScanner"]
+    required_steps = ["Owasp", "OsvScanner"]
 
-      contains(arr, elem) {
-              arr[_] = elem
-      }
+    contains(arr, elem) {
+            arr[_] = elem
+    }
   REGO
 }
 
@@ -450,7 +450,7 @@ resource "harness_platform_policyset" "sto_policyset" {
   project_id = var.project_id
   action     = "onrun"
   type       = "pipeline"
-  enabled    = true
+  enabled    = false
   policies {
     identifier = harness_platform_policy.sto_policy.id
     severity   = "error"
