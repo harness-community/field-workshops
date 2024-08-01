@@ -24,12 +24,12 @@ variable "new_repo_id" {
 }
 
 variable "github_repo_to_clone" {
-  type    = string
+  type = string
 }
 
 // Connector
 variable "delegate_selector" {
-  type    = string
+  type = string
 }
 
 variable "namespace" {
@@ -39,5 +39,5 @@ variable "namespace" {
 
 // Harness Variables
 variable "instruqt_sandbox_id" {
-  type    = string
+  type = string
 }
