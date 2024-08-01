@@ -117,7 +117,7 @@ service:
             - spec:
                 connectorRef: org.workshopdocker
                 imagePath: seworkshop/harness-workshop
-                tag: backend-v3
+                tag: backend-latest
                 digest: ""
               identifier: backend
               type: DockerRegistry
