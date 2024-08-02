@@ -82,45 +82,45 @@ And then click ```+Create Pipeline``` <br>
 <br><br>
 Click ```+Add Stage``` <br>
 > Choose **Infrastructure** stage type <br>
-![iacm_pipeline_stage.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)<br>
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)<br>
 Give it a name: ```IaCM```
 
 <br><br>
-> ![pipeline_infrastructure_tab.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_infrastructure_tab.png)<br>
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_infrastructure.png)<br>
 Keep the defaults on the  **Infrastructure** tab and click **Next >**
 
 <br><br>
-> ![pipeline_workspace_tab.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_workspace_tab.png)<br>
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_workspace.png)<br>
 On the **Workspace** tab set the type to ```Runtime input``` and click **Next >** <br>
-![pipeline_workspace_runtime_input.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_workspace_runtime_input.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_workspace_runtime_input.png)
 
 <br><br>
 Select **Detect Drift** operation and click **Use Operation** <br>
-![iacm_drift_step.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_step.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_step.png)
 
 <br><br>
 Your pipeline should look like this: <br>
-![IaCM_Drift.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/IaCM_Drift.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/IaCM_Drift.png)
 
 <br><br>
 
 ### Execute your new IaCM Pipeline
 > Click **Save** in the top right to save your new pipeline. <br>
-![pipeline_save.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_save.png) <br>
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_save.png) <br>
 
 > Now click **Run** and select your **Workspace** to execute the pipeline. <br>
-![pipeline_run.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
 
 <br><br><br>
 `What do you expect to happen?`
 <br><br><br>
 
 > Now that the piplne execution has completed, click on the ```Resources``` tab and see what drift has been detected.<br>
-![iacm_drift_resources.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_resources.png)<br>
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_resources.png)<br>
 From this tab click on ```Drift Changes``` and then select one of your **EC2 instances** from the list.
-![iacm_drift_changes.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_changes.png)<br>
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_changes.png)<br>
 Scroll down in this list to see the details of the drift detected and the ```Actual Value``` vs. the ```Expected Value```
-![iacm_drift_details.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_details.png)<br>
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_details.png)<br>
 
 ===============
 
