@@ -2,12 +2,13 @@
 
 # Check if the script received exactly one argument
 if [ "$#" -ne 1 ]; then
-  echo "Usage: $0 <new_personal_access_token>"
-  exit 1
+  read -p "Enter new personal access token: " token
+else
+  token=$1
 fi
 
 # Variables
-new_pat=$1
+new_pat=$token
 netrc_file="$HOME/.netrc"
 machine="DEFAULT_MACHINE"
 login="DEFAULT_USER"
