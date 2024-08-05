@@ -422,22 +422,46 @@ resource "harness_platform_policy" "sto_policy" {
   project_id = var.project_id
   rego       = <<-REGO
     package pipeline
-    # Deny pipelines that do not include security scanners
+
     deny[msg] {
-
-        stage = input.pipeline.stages[i].stage
+        stage = input.pipeline.stages[_].stage
         stage.type == "CI"
-        existing_steps := [ s | s = stage.spec.execution.steps[_].step.type ]
-        required_step := required_steps[_]
-
-        not contains(existing_steps, required_step)
-            msg := sprintf("CI Stage does not contain Security Test '%s'. It's easy to add using the Harness Built-in Scanners.", [required_step])
+        sequential_steps := get_sequential_steps(stage)
+        parallel_steps := get_parallel_steps(stage)
+        required_step := "Owasp"
+        not contains(sequential_steps, required_step)
+        not contains(parallel_steps, required_step)
+        msg := sprintf("CI stage '%s' is missing the required OWASP scan. It's easy to add using the Harness Built-in Scanners.", [stage.name])
     }
 
-    required_steps = ["Owasp", "OsvScanner"]
+    deny[msg] {
+        stage = input.pipeline.stages[_].stage
+        stage.type == "CI"
+        sequential_steps := get_sequential_steps(stage)
+        parallel_steps := get_parallel_steps(stage)
+        required_step := "OsvScanner"
+        not contains(sequential_steps, required_step)
+        not contains(parallel_steps, required_step)
+        msg := sprintf("CI stage '%s' is missing the required OSV scan. It's easy to add using the Harness Built-in Scanners.", [stage.name])
+    }
+
 
     contains(arr, elem) {
-            arr[_] = elem
+        arr[_] == elem
+    }
+
+    get_sequential_steps(stage) = steps {
+        steps := [step.type |
+            step := stage.spec.execution.steps[_].step
+        ]
+        print("Debug: sequential_steps ", steps)
+    }
+
+    get_parallel_steps(stage) = steps {
+        steps := [parallel |
+            parallel := stage.spec.execution.steps[_].parallel[_].step.type
+        ]
+        print("Debug: parallel_steps ", steps)
     }
   REGO
 }
