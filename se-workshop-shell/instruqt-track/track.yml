@@ -14,7 +14,7 @@ developers:
 - joseph.titra@harness.io
 show_timer: true
 idle_timeout: 1800
-timelimit: 5400
+timelimit: 1800
 lab_config:
   overlay: false
   width: 25
@@ -22,4 +22,4 @@ lab_config:
   feedback_recap_enabled: true
   loadingMessages: true
   hideStopButton: false
-checksum: "2400332875308960072"
+checksum: "11074077057400232022"

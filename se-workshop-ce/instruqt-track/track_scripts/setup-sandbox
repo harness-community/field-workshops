@@ -53,6 +53,14 @@ harness_project_created = "true"
 # Add the workshop user to the Harness project as an admin
 harness.platform.invite_user_to_harness_project_loop(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project, user_email)
 
+# Install delegate
+template_path = "assets/kubernetes-manifests/harness-delegate.yaml.template"
+utils.misc.fetch_template_from_url(template_path, "/opt/harness/harness-delegate.yaml.template")
+harness.platform.deploy_harness_delegate(
+        HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project,
+        "/opt/harness/harness-delegate.yaml.template", f"{harness_project}-delegate"
+)
+
 utils.instruqt.set_agent_variable("HARNESS_USER", user_email)
 utils.instruqt.set_agent_variable("HARNESS_PWD", USER_PWD)
 utils.instruqt.set_agent_variable("HARNESS_PRJ_ID", harness_project)
