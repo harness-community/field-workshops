@@ -4,3 +4,6 @@ secrets.tfvars
 .terraform*
 .tfstate*
 **/sample_files
+
+#Workshops in progress
+**/se-workshop-idp/
