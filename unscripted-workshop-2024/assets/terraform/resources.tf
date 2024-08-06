@@ -1,10 +1,11 @@
 // Define the resources to create
 // Provisions the following into Harness: 
-//    Code Repo, Connectors (K8s and Prometheus), 
-//    Infrastructure, Service, Monitored Service,
-//    Project Variables, Templates (OWASP, Fortify, Compile)
+//    Code Repo, Connectors (K8s and Prometheus), Service,
+//    Environments, Infrastructures, Monitored Services,
+//    Templates (DAST Scans, Compile), Project Variables,
+//    OPA Policies, Policy Set
 
-// Repo
+// Code Repo
 resource "harness_platform_repo" "repo" {
   identifier     = var.new_repo_id
   org_id         = var.org_id
@@ -38,82 +39,6 @@ resource "harness_platform_connector_prometheus" "prometheus" {
   description        = "Connector to Instruqt workshop Prometheus instance"
   url                = "http://prometheus-k8s.monitoring.svc.cluster.local:9090/"
   delegate_selectors = [var.delegate_selector]
-}
-
-// Dev Environment
-resource "harness_platform_environment" "dev_environment" {
-  identifier = "dev"
-  name       = "Dev"
-  org_id     = var.org_id
-  project_id = var.project_id
-  type       = "PreProduction"
-}
-
-// Prod Environment
-resource "harness_platform_environment" "prod_environment" {
-  identifier = "prod"
-  name       = "Prod"
-  org_id     = var.org_id
-  project_id = var.project_id
-  type       = "Production"
-}
-
-// Dev Infrastructure
-resource "harness_platform_infrastructure" "dev_infra" {
-  identifier      = "k8s_dev"
-  name            = "K8s Dev"
-  org_id          = var.org_id
-  project_id      = var.project_id
-  env_id          = harness_platform_environment.dev_environment.identifier
-  type            = "KubernetesDirect"
-  deployment_type = "Kubernetes"
-  yaml            = <<-EOT
-    infrastructureDefinition:
-     name: "K8s Dev"
-     identifier: "k8s_dev"
-     description: ""
-     tags:
-       owner: "${var.project_id}"
-     orgIdentifier: "${var.org_id}"
-     projectIdentifier: "${var.project_id}"
-     environmentRef: "dev"
-     deploymentType: Kubernetes
-     type: KubernetesDirect
-     spec:
-      connectorRef: "instruqt_k8"
-      namespace: "${var.namespace}"
-      releaseName: release-<+INFRA_KEY>
-     allowSimultaneousDeployments: true
-  EOT
-}
-
-// Prod Infrastructure
-resource "harness_platform_infrastructure" "prod_infra" {
-  identifier      = "k8s_prod"
-  name            = "K8s Prod"
-  org_id          = var.org_id
-  project_id      = var.project_id
-  env_id          = harness_platform_environment.prod_environment.identifier
-  type            = "KubernetesDirect"
-  deployment_type = "Kubernetes"
-  yaml            = <<-EOT
-    infrastructureDefinition:
-     name: "K8s Prod"
-     identifier: "k8s_prod"
-     description: ""
-     tags:
-       owner: "${var.project_id}"
-     orgIdentifier: "${var.org_id}"
-     projectIdentifier: "${var.project_id}"
-     environmentRef: "prod"
-     deploymentType: Kubernetes
-     type: KubernetesDirect
-     spec:
-      connectorRef: "instruqt_k8"
-      namespace: "${var.namespace}"
-      releaseName: release-<+INFRA_KEY>
-     allowSimultaneousDeployments: true
-  EOT
 }
 
 // Service
@@ -163,16 +88,60 @@ resource "harness_platform_service" "proj_service" {
   EOT
 }
 
-// Dev Monitored Service
+// Environments
+resource "harness_platform_environment" "environment" {
+  for_each = var.environments
+
+  identifier = each.value.env_identifier
+  name       = each.value.env_name
+  org_id     = var.org_id
+  project_id = var.project_id
+  type       = each.value.env_type
+}
+
+// Infrastructures
+resource "harness_platform_infrastructure" "infrastructure" {
+  for_each = var.environments
+
+  identifier      = each.value.infra_identifier
+  name            = each.value.infra_name
+  org_id          = var.org_id
+  project_id      = var.project_id
+  env_id          = harness_platform_environment.environment[each.key].identifier
+  type            = "KubernetesDirect"
+  deployment_type = "Kubernetes"
+  yaml            = <<-EOT
+    infrastructureDefinition:
+      name: "${each.value.infra_name}"
+      identifier: "${each.value.infra_identifier}"
+      description: ""
+      tags:
+        owner: "${var.project_id}"
+      orgIdentifier: "${var.org_id}"
+      projectIdentifier: "${var.project_id}"
+      environmentRef: "${harness_platform_environment.environment[each.key].identifier}"
+      deploymentType: Kubernetes
+      type: KubernetesDirect
+      spec:
+        connectorRef: "${harness_platform_connector_kubernetes.instruqt_k8.identifier}"
+        namespace: "${var.namespace}"
+        releaseName: release-<+INFRA_KEY>
+      allowSimultaneousDeployments: true
+  EOT
+}
+
+// Monitored Services
 resource "harness_platform_monitored_service" "dev_monitored_service" {
+  for_each = var.environments
+
   org_id     = var.org_id
   project_id = var.project_id
-  identifier = "backend_dev"
+  identifier = each.value.serv_identifer
   request {
-    name            = "backend"
+    name            = each.value.serv_name
     type            = "Application"
     service_ref     = harness_platform_service.proj_service.identifier
-    environment_ref = harness_platform_environment.dev_environment.identifier
+    environment_ref = harness_platform_environment.environment[each.key].identifier
     health_sources {
       name       = "Prometheus"
       identifier = "prometheus"
@@ -208,52 +177,7 @@ resource "harness_platform_monitored_service" "dev_monitored_service" {
   }
 }
 
-// Prod Monitored Service
-resource "harness_platform_monitored_service" "prod_monitored_service" {
-  org_id     = var.org_id
-  project_id = var.project_id
-  identifier = "backend_prod"
-  request {
-    name            = "backend"
-    type            = "Application"
-    service_ref     = harness_platform_service.proj_service.identifier
-    environment_ref = harness_platform_environment.prod_environment.identifier
-    health_sources {
-      name       = "Prometheus"
-      identifier = "prometheus"
-      type       = "Prometheus"
-      spec = jsonencode({
-        connectorRef = "prometheus"
-        metricDefinitions = [
-          {
-            identifier = "Prometheus_Metric",
-            metricName = "Prometheus Metric",
-            riskProfile = {
-              riskCategory = "Performance_Other"
-              thresholdTypes = [
-                "ACT_WHEN_HIGHER"
-              ]
-            }
-            analysis = {
-              liveMonitoring = {
-                enabled = true
-              }
-              deploymentVerification = {
-                enabled                  = true
-                serviceInstanceFieldName = "pod"
-              }
-            }
-            query         = "avg(container_cpu_system_seconds_total { namespace=\"${var.namespace}\" , container=\"backend\"})"
-            groupName     = "Infrastructure"
-            isManualQuery = true
-          }
-        ]
-      })
-    }
-  }
-}
-
-// DAST Template
+// DAST Scans Template
 resource "harness_platform_template" "dast_template" {
   identifier    = "DAST_Scans"
   org_id        = var.org_id
@@ -509,6 +433,138 @@ resource "harness_platform_policy" "sca_policy" {
   REGO
 }
 
+resource "harness_platform_policy" "sast_policy" {
+  identifier = "SAST_Scans"
+  name       = "SAST Scans"
+  org_id     = var.org_id
+  project_id = var.project_id
+  rego       = <<-REGO
+    package pipeline
+
+    required_scan_steps = ["Semgrep"]
+
+    deny[msg] {
+        required_step := required_scan_steps[_]
+        not missing_scan_step(required_step)
+        msg := sprintf("Future Requirement: In Q4, the CI stage will require a '%s' step. Please ensure this step is added using the Harness Built-in Scanners before that deadline.", [required_step])
+    }
+
+    deny[msg] {
+        first_step := required_scan_steps[_]
+        second_step := "BuildAndPushDockerRegistry"
+        missing_scan_step(first_step)
+        not incorrect_scan_placement(first_step, second_step)
+        msg := create_message(first_step, second_step)
+    }
+
+    deny[msg] {
+        first_step := "Compile_Application"
+        second_step := required_scan_steps[_]
+        missing_scan_step(second_step)
+        not incorrect_scan_placement(first_step, second_step)
+        msg := create_message(first_step, second_step)
+    }
+
+    contains(arr, elem) {
+        arr[_] == elem
+    }
+
+    missing_scan_step(required_step) {
+        stage = input.pipeline.stages[_].stage
+        stage.type == "CI"
+        steps := get_all_steps(stage)
+        step_types := [step | step := steps[_].step_type ]
+        contains(step_types, required_step)
+    }
+
+    incorrect_scan_placement(first_step, second_step) {
+        stage := input.pipeline.stages[_].stage
+        stage.type == "CI"
+        steps := get_all_steps(stage)
+        verify_scan_placement(steps, first_step, second_step)
+    }
+
+    get_all_steps(stage) = steps {
+        parallel_steps := [{ "step_type": step_type, "step_index": step_index, "sub_index": sub_index,  } |
+            step_type := stage.spec.execution.steps[step_index].parallel[sub_index].step.type
+        ]
+        sequential_steps := [{ "step_type": step_type, "step_index": step_index, "sub_index": 0,  } |
+            step_type := stage.spec.execution.steps[step_index].step.type
+        ]
+        template_steps := [{ "step_type": step_type, "step_index": step_index, "sub_index": 0,  } |
+            step_type := stage.spec.execution.steps[step_index].step.template.templateRef
+        ]
+        temp_steps := array.concat(parallel_steps, sequential_steps)
+        steps := array.concat(temp_steps, template_steps)
+        print("Debug: all_steps ", steps)
+    }
+
+    get_step_index(steps, step_type) = step_index {
+        some index
+        steps[index].step_type == step_type
+        step_index := steps[index].step_index
+    }
+
+    verify_scan_placement(steps, first_step, second_step) {
+        first_index := get_step_index(steps, first_step)
+        second_index := get_step_index(steps, second_step)
+        first_index < second_index
+    }
+
+    create_message(first_step_type, second_step_type) = msg {
+        msg := sprintf("'%s' must occur prior to the '%s' step.", [first_step_type, second_step_type])
+    }
+  REGO
+}
+
+resource "harness_platform_policy" "dast_policy" {
+  identifier = "DAST_Scans"
+  name       = "DAST Scans"
+  org_id     = var.org_id
+  project_id = var.project_id
+  rego       = <<-REGO
+    package pipeline
+
+    required_stages = ["DAST_Scans"]
+
+    deny[msg] {
+        required_stage := required_stages[_]
+        not missing_stage(required_stage)
+        msg := sprintf("The pipeline is missing the required '%s' stage.", [required_stage])
+    }
+
+    contains(arr, elem) {
+        arr[_] == elem
+    }
+
+    missing_stage(required_stage) {
+        stage_input := input.pipeline.stages
+        stages := get_all_stages(stage_input)
+        stage_types := [stage | stage := stages[_].stage_type ]
+        contains(stage_types, required_stage)
+    }
+
+    get_all_stages(stages) = all_stages {
+        parallel_stages := [{ "stage_type": stage_type, "stage_index": stage_index, "sub_index": sub_index,  } |
+            stage_type := stages[stage_index].parallel[sub_index].stage.type
+        ]
+        parallel_template_stages := [{ "stage_type": stage_type, "stage_index": stage_index, "sub_index": sub_index,  } |
+            stage_type := stages[stage_index].parallel[sub_index].stage.template.templateRef
+        ]
+        sequential_stages := [{ "stage_type": stage_type, "stage_index": stage_index, "sub_index": 0,  } |
+            stage_type := stages[stage_index].stage.type
+        ]
+        sequential_template_stages := [{ "stage_type": stage_type, "stage_index": stage_index, "sub_index": 0,  } |
+            stage_type := stages[stage_index].stage.template.templateRef
+        ]    
+        all_sequential_stages := array.concat(sequential_stages, sequential_template_stages)
+        all_parallel_stages := array.concat(parallel_stages, parallel_template_stages)
+        all_stages := array.concat(all_sequential_stages, all_parallel_stages)
+        print("Debug: all_stages ", all_stages)
+    }
+  REGO
+}
+
 // Policy Set
 resource "harness_platform_policyset" "sto_policyset" {
   identifier = "Security_Scan_Steps_Required"
@@ -520,6 +576,14 @@ resource "harness_platform_policyset" "sto_policyset" {
   enabled    = false
   policies {
     identifier = harness_platform_policy.sca_policy.id
+    severity   = "error"
+  }
+  policies {
+    identifier = harness_platform_policy.sast_policy.id
+    severity   = "warning"
+  }
+  policies {
+    identifier = harness_platform_policy.dast_policy.id
     severity   = "error"
   }
 }

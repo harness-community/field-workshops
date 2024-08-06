@@ -1,8 +1,8 @@
 .DS_Store
 **/.terraform
-secrets.tfvars
-.terraform*
-.tfstate*
+**.tfvars
+**.terraform*
+**.tfstate*
 **/sample_files
 
 #Workshops in progress
