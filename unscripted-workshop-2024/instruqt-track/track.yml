@@ -1,0 +1,34 @@
+slug: unscripted-workshop-2024
+id: zlg8mlxxinkg
+title: Harness {unscripted} 2024
+description: |2-
+
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
+
+  **This track demonstrates how to:**
+    - Lab 1 - Harness Code
+    - Lab 2 - Building the Application
+    - Lab 3 - Continuous Deploy - Frontend
+    - Lab 4 - Continuous Deploy - Backend
+    - Lab 5 - Integrating Security
+    - Lab 6 - Continuous Verification
+    - Lab 7 - Governance/Policy as Code
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/harness.png
+tags: []
+owner: harness
+developers:
+- joseph.titra@harness.io
+show_timer: true
+skipping_enabled: true
+idle_timeout: 1800
+timelimit: 5400
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+  lab_v2: false
+  override_challenge_layout: false
+  hideStopButton: false
+checksum: "17373355091775736713"

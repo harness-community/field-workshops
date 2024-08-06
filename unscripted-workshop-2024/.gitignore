@@ -4,4 +4,3 @@ secrets.tfvars
 .terraform*
 .tfstate*
 **/sample_files
-**/instruqt-track
