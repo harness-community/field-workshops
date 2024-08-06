@@ -415,68 +415,111 @@ resource "harness_platform_variables" "sdk_variable" {
 }
 
 // OPA Policy
-resource "harness_platform_policy" "sto_policy" {
-  identifier = "SCA_Scanners"
-  name       = "SCA Scanners"
+resource "harness_platform_policy" "sca_policy" {
+  identifier = "SCA_Scans"
+  name       = "SCA Scans"
   org_id     = var.org_id
   project_id = var.project_id
   rego       = <<-REGO
     package pipeline
 
+    required_sca_steps = ["Owasp", "OsvScanner"]
+    required_container_steps = ["AquaTrivy"]
+    required_scan_steps = array.concat(required_sca_steps, required_container_steps)
+
     deny[msg] {
-        stage = input.pipeline.stages[_].stage
-        stage.type == "CI"
-        sequential_steps := get_sequential_steps(stage)
-        parallel_steps := get_parallel_steps(stage)
-        required_step := "Owasp"
-        not contains(sequential_steps, required_step)
-        not contains(parallel_steps, required_step)
-        msg := sprintf("CI stage '%s' is missing the required OWASP scan. It's easy to add using the Harness Built-in Scanners.", [stage.name])
+        required_step := required_scan_steps[_]
+        not missing_scan_step(required_step)
+        msg := sprintf("The CI stage is missing the required '%s' step. It's easy to add using the Harness Built-in Scanners.", [required_step])
     }
 
     deny[msg] {
-        stage = input.pipeline.stages[_].stage
-        stage.type == "CI"
-        sequential_steps := get_sequential_steps(stage)
-        parallel_steps := get_parallel_steps(stage)
-        required_step := "OsvScanner"
-        not contains(sequential_steps, required_step)
-        not contains(parallel_steps, required_step)
-        msg := sprintf("CI stage '%s' is missing the required OSV scan. It's easy to add using the Harness Built-in Scanners.", [stage.name])
+        first_step := required_sca_steps[_]
+        second_step := "BuildAndPushDockerRegistry"
+        missing_scan_step(first_step)
+        not incorrect_scan_placement(first_step, second_step)
+        msg := create_message(first_step, second_step)
     }
 
+    deny[msg] {
+        first_step := "Compile_Application"
+        second_step := required_sca_steps[_]
+        missing_scan_step(second_step)
+        not incorrect_scan_placement(first_step, second_step)
+        msg := create_message(first_step, second_step)
+    }
+
+    deny[msg] {
+        first_step := "BuildAndPushDockerRegistry"
+        second_step := required_container_steps[_]
+        missing_scan_step(second_step)
+        not incorrect_scan_placement(first_step, second_step)
+        msg := create_message(first_step, second_step)
+    }
 
     contains(arr, elem) {
         arr[_] == elem
     }
 
-    get_sequential_steps(stage) = steps {
-        steps := [step.type |
-            step := stage.spec.execution.steps[_].step
-        ]
-        print("Debug: sequential_steps ", steps)
+    missing_scan_step(required_step) {
+        stage = input.pipeline.stages[_].stage
+        stage.type == "CI"
+        steps := get_all_steps(stage)
+        step_types := [step | step := steps[_].step_type ]
+        contains(step_types, required_step)
     }
 
-    get_parallel_steps(stage) = steps {
-        steps := [parallel |
-            parallel := stage.spec.execution.steps[_].parallel[_].step.type
+    incorrect_scan_placement(first_step, second_step) {
+        stage := input.pipeline.stages[_].stage
+        stage.type == "CI"
+        steps := get_all_steps(stage)
+        verify_scan_placement(steps, first_step, second_step)
+    }
+
+    get_all_steps(stage) = steps {
+        parallel_steps := [{ "step_type": step_type, "step_index": step_index, "sub_index": sub_index,  } |
+            step_type := stage.spec.execution.steps[step_index].parallel[sub_index].step.type
         ]
-        print("Debug: parallel_steps ", steps)
+        sequential_steps := [{ "step_type": step_type, "step_index": step_index, "sub_index": 0,  } |
+            step_type := stage.spec.execution.steps[step_index].step.type
+        ]
+        template_steps := [{ "step_type": step_type, "step_index": step_index, "sub_index": 0,  } |
+            step_type := stage.spec.execution.steps[step_index].step.template.templateRef
+        ]
+        temp_steps := array.concat(parallel_steps, sequential_steps)
+        steps := array.concat(temp_steps, template_steps)
+        print("Debug: all_steps ", steps)
+    }
+
+    get_step_index(steps, step_type) = step_index {
+        some index
+        steps[index].step_type == step_type
+        step_index := steps[index].step_index
+    }
+
+    verify_scan_placement(steps, first_step, second_step) {
+        first_index := get_step_index(steps, first_step)
+        second_index := get_step_index(steps, second_step)
+        first_index < second_index
+    }
+
+    create_message(first_step_type, second_step_type) = msg {
+        msg := sprintf("'%s' must occur prior to the '%s' step.", [first_step_type, second_step_type])
     }
   REGO
 }
 
 // Policy Set
 resource "harness_platform_policyset" "sto_policyset" {
-  identifier = "SCA_Scan_Step_Required"
-  name       = "SCA Scan Step Required"
+  identifier = "Security_Scan_Steps_Required"
+  name       = "Security Scan Steps Required"
   org_id     = var.org_id
   project_id = var.project_id
   action     = "onrun"
   type       = "pipeline"
   enabled    = false
   policies {
-    identifier = harness_platform_policy.sto_policy.id
+    identifier = harness_platform_policy.sca_policy.id
     severity   = "error"
   }
 }
