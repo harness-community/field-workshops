@@ -2,7 +2,7 @@
 slug: lab3-cd-frontend
 id: lwaqwglgt4k9
 type: challenge
-title: Lab 3 - Continuous Deploy - Frontend
+title: Lab 3 - Continuous Deployment - Frontend
 teaser: Deploy the frontend of your application using Harness, setting up deployment
   pipelines, managing environments, and ensuring smooth rollouts.
 notes:
@@ -43,7 +43,7 @@ timelimit: 1600
 <style type="text/css" rel="stylesheet">
 hr.cyan { background-color: cyan; color: cyan; height: 2px; margin-bottom: -10px; }
 h2.cyan { color: cyan; }
-</style><h2 class="cyan">Continuous Deploy - Frontend</h2>
+</style><h2 class="cyan">Continuous Deployment - Frontend</h2>
 <hr class="cyan">
 <br><br>
 
@@ -56,7 +56,7 @@ Click `+Add Stage` <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_stage_deploy.png)
 
 > **Deploy Stage**
-> - Stage Name: `Deploy - Frontend`
+> - Stage Name: `Frontend - Deployment`
 > - Deployment Type: `Kubernetes`
 > - Click **Set Up Stage**
 

@@ -2,7 +2,7 @@
 slug: lab4-cd-backend
 id: iotv0n2ubo46
 type: challenge
-title: Lab 4 - Continuous Deploy - Backend
+title: Lab 4 - Continuous Deployment - Backend
 teaser: Deploy the backend of your application, configuring pipelines with advanced
   deployment strategies like Canary and Blue/Green.
 notes:
@@ -40,7 +40,7 @@ timelimit: 1600
 <style type="text/css" rel="stylesheet">
 hr.cyan { background-color: cyan; color: cyan; height: 2px; margin-bottom: -10px; }
 h2.cyan { color: cyan; }
-</style><h2 class="cyan">Continuous Deploy - Backend</h2>
+</style><h2 class="cyan">Continuous Deployment - Backend</h2>
 <hr class="cyan">
 <br><br>
 
@@ -53,7 +53,7 @@ Click `+Add Stage` <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_stage_deploy.png)
 
 > **Deploy Stage**
-> - Stage Name: `Deploy - Backend`
+> - Stage Name: `Backend - Deployment`
 > - Deployment Type: `Kubernetes`
 > Click **Set Up Stage**
 

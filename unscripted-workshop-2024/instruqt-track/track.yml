@@ -8,8 +8,8 @@ description: |2-
   **This track demonstrates how to:**
     - Lab 1 - Harness Code
     - Lab 2 - Building the Application
-    - Lab 3 - Continuous Deploy - Frontend
-    - Lab 4 - Continuous Deploy - Backend
+    - Lab 3 - Continuous Deployment - Frontend
+    - Lab 4 - Continuous Deployment - Backend
     - Lab 5 - Integrating Security
     - Lab 6 - Continuous Verification
     - Lab 7 - Governance and Policy as Code
@@ -31,4 +31,4 @@ lab_config:
   lab_v2: false
   override_challenge_layout: false
   hideStopButton: false
-checksum: "4286450054491965692"
+checksum: "2571653144422064254"
