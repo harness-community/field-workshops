@@ -21,13 +21,13 @@ Deploy the frontend of your application using Harness, setting up deployment pip
 Deploy the backend of your application, configuring pipelines with advanced deployment strategies like Canary and Blue/Green.
 
 ### Lab 5: Integrating Security
-Integrate security scanners into your pipelines, using Harness to automate vulnerability scanning, compliance checks, and other security measures.
+Shift-left and integrate security scanners into your pipelines, using Harness to automate vulnerability scanning, compliance checks, and other security measures.
 
 ### Lab 6: Continuous Verification
 Implement continuous verification practices, using Harness to automate the process of post deployment validation by leveraging existing monitoring tools and validate the health and performance of your deployments in real time.
 
-### Lab 7: Governance/Policy as Code
-Explore how to enforce governance policies within Harness, defining and applying policy rules to ensure compliance and best practices across your projects.
+### Lab 7: Governance and Policy as Code
+Explore how to enforce governance via OPA policies within Harness, defining and applying policy rules to ensure compliance and best practices across your projects.
 
 ## Additional Resources
 For more information on Harness and its capabilities, please visit the following resources:
