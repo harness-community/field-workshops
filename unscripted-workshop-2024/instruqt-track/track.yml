@@ -12,7 +12,7 @@ description: |2-
     - Lab 4 - Continuous Deploy - Backend
     - Lab 5 - Integrating Security
     - Lab 6 - Continuous Verification
-    - Lab 7 - Governance/Policy as Code
+    - Lab 7 - Governance and Policy as Code
 icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/harness.png
 tags: []
 owner: harness
@@ -31,4 +31,4 @@ lab_config:
   lab_v2: false
   override_challenge_layout: false
   hideStopButton: false
-checksum: "15515888164251592604"
+checksum: "4286450054491965692"

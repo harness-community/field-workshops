@@ -2,8 +2,9 @@
 slug: lab5-devsecops
 id: tlmipjarfdty
 type: challenge
-title: Lab 5 - DevSecOps
-teaser: Integrate Security Scanners into our pipeline
+title: Lab 5 - Integrating Security
+teaser: Shift-left and integrate security scanners into your pipelines, using Harness
+  to automate vulnerability scanning, compliance checks, and other security measures.
 notes:
 - type: text
   contents: |

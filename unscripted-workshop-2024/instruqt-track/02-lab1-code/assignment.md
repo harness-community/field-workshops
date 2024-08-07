@@ -3,7 +3,7 @@ slug: lab1-code
 id: qi4ul5t9yd1e
 type: challenge
 title: Lab 1 - Harness Code
-teaser: Clone the workshop repo and commit some changes
+teaser: Your introduction to Harness Code and it's extremely powerful capabilities.
 notes:
 - type: text
   contents: |

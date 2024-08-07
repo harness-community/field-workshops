@@ -3,8 +3,8 @@ slug: lab3-cd-frontend
 id: lwaqwglgt4k9
 type: challenge
 title: Lab 3 - Continuous Deploy - Frontend
-teaser: Extend your existing pipeline to take the artifact built in the CI/Build stage
-  and deploy it to an environment
+teaser: Deploy the frontend of your application using Harness, setting up deployment
+  pipelines, managing environments, and ensuring smooth rollouts.
 notes:
 - type: text
   contents: |

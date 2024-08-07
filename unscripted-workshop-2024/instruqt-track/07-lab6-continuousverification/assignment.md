@@ -3,7 +3,9 @@ slug: lab6-continuousverification
 id: ufjp24xbfovu
 type: challenge
 title: Lab 6 - Continuous Verification
-teaser: Automate the verification of new releases
+teaser: Implement continuous verification practices, using Harness to automate the
+  process of post deployment validation by leveraging existing monitoring tools and
+  validate the health and performance of your deployments in real time.
 notes:
 - type: text
   contents: |

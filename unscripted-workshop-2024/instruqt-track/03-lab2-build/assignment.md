@@ -2,9 +2,9 @@
 slug: lab2-build
 id: ozdu1gvrnel1
 type: challenge
-title: Lab 2 - Build
-teaser: Setup a CI Pipeline, including running source code tests, building the executable,
-  building and pushing the artifact to a remote repository
+title: Lab 2 - Building the Application
+teaser: Learn how to build your application using Harness, including setting up build
+  steps, managing build artifacts, and configuring build environments.
 notes:
 - type: text
   contents: |

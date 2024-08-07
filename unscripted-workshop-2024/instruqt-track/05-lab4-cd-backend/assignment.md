@@ -3,7 +3,8 @@ slug: lab4-cd-backend
 id: iotv0n2ubo46
 type: challenge
 title: Lab 4 - Continuous Deploy - Backend
-teaser: Extend your existing pipeline to derisk production deployments
+teaser: Deploy the backend of your application, configuring pipelines with advanced
+  deployment strategies like Canary and Blue/Green.
 notes:
 - type: text
   contents: |

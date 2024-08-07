@@ -2,9 +2,9 @@
 slug: lab7-governance
 id: 4wrmfgybp1jp
 type: challenge
-title: Lab 7 - Governance and Policy
-teaser: Create and apply policies as code in order to enable governance and accelerate
-  innovation
+title: Lab 7 - Governance and Policy as Code
+teaser: Explore how to enforce governance via OPA policies within Harness, defining
+  and applying policy rules to ensure compliance and best practices across your projects.
 notes:
 - type: text
   contents: |
