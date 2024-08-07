@@ -3,3 +3,27 @@
 import sys
 
 sys.exit(0)
+
+""" START TESTING IN PROGRESS
+
+
+
+
+
+
+
+
+
+step_context = {
+    "Verify": {
+        "spec": {
+            "type": "Canary",
+            "spec": {
+                "sensitivity": "LOW",
+                "duration": "10m"
+            }
+        }
+    }
+}
+
+END TESTING IN PROGRESS"""
