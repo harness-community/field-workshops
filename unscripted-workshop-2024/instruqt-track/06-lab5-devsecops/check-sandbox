@@ -12,10 +12,7 @@ HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
 # Lab values
 default_pipeline_id = "Workshop_Build_and_Deploy"
 stage_missing_fail_message = """\
-Your pipeline is missing a stage. At this point in the Workshop your pipeline should have 4 stages.
-('Build', 'Frontend - Deployment', 'Backend - Deployment', 'DAST Scans')
-Please correct this using the instructions in the lab guide.
-If you get stuck you can always click 'Skip' and we will complete things for you!
+Your pipeline is missing a stage. At this point in the Workshop your pipeline should have 4 stages. ('Build', 'Frontend - Deployment', 'Backend - Deployment', 'DAST Scans') Please correct this using the instructions in the lab guide. If you get stuck you can always click 'Skip' and we will complete things for you!
 """
 
 # Get pipeline data
@@ -71,8 +68,10 @@ step_context = {
 }
 pipeline_misconfiguration = utils.misc.validate_steps_in_stage(pipeline_dict, stage_id, step_context)
 if pipeline_misconfiguration:
+    all_messages = ""
     for item in pipeline_misconfiguration:
         if "message" in item:
-            utils.instruqt.raise_lab_failure_message(item["message"])
+            all_messages += "ERROR: " + item["message"] + " "
+    utils.instruqt.raise_lab_failure_message(all_messages)
 else:
     print("No misconfigurations found!")
