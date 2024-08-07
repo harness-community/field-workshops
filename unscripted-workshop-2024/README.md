@@ -14,10 +14,10 @@ Your introduction to Harness Code and it's extremely powerful capabilities.
 ### Lab 2: Building the Application
 Learn how to build your application using Harness, including setting up build steps, managing build artifacts, and configuring build environments.
 
-### Lab 3: Continuous Deploy - Frontend
+### Lab 3: Continuous Deployment - Frontend
 Deploy the frontend of your application using Harness, setting up deployment pipelines, managing environments, and ensuring smooth rollouts.
 
-### Lab 4: Continuous Deploy - Backend
+### Lab 4: Continuous Deployment - Backend
 Deploy the backend of your application, configuring pipelines with advanced deployment strategies like Canary and Blue/Green.
 
 ### Lab 5: Integrating Security
