@@ -1,6 +1,6 @@
 # Harness FF Instruqt Workshop
 
-![Harness FF](https://developer.harness.io/img/icon_ff.svg)
+![Harness FF](https://developer.harness.io/img/ff.svg)
 
 ## Introduction
 

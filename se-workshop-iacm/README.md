@@ -1,6 +1,6 @@
 # Harness IaCM Instruqt Workshop
 
-![Harness IaCM](https://developer.harness.io/img/iacm_landing.svg)
+![Harness IaCM](https://developer.harness.io/img/iacm_landing.png)
 
 ## Introduction
 
