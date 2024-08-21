@@ -13,24 +13,30 @@ notes:
     <br>
     ## **Harness** streamlines and simplifies this entire process eliminating the toil and keep developers doing what they do best, writing code!
 tabs:
-- title: Harness Platform
+- id: 2y7dt1fkfxx4
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Demo App
+- id: wtyrmgosehfb
+  title: Demo App
   type: website
   url: https://sandbox-8080-${_SANDBOX_ID}.env.play.instruqt.com/
-- title: Code Editor
+- id: fuukhtvmbcsj
+  title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- title: Shell
+- id: ljmepaddw6my
+  title: Shell
   type: terminal
   hostname: sandbox
-- title: Notes
+- id: 6cvvdnz0yxgy
+  title: Notes
   type: code
   hostname: sandbox
   path: /root/notes
-- title: Lab Credentials
+- id: uefcoov97q9k
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

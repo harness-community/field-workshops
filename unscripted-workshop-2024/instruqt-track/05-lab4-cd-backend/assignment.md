@@ -11,24 +11,30 @@ notes:
     - Utilise complex deployment strategies to reduce blast radius of a release
     - Harness makes this easy with Canary and Blue/Green deployment strategies right out of the box
 tabs:
-- title: Harness Platform
+- id: s5xfcjae2yck
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Demo App
+- id: v0mvjjbmrn52
+  title: Demo App
   type: website
   url: https://sandbox-8080-${_SANDBOX_ID}.env.play.instruqt.com/
-- title: Code Editor
+- id: g6enjuouoygx
+  title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- title: Shell
+- id: b5orsmvomcou
+  title: Shell
   type: terminal
   hostname: sandbox
-- title: Notes
+- id: mxuch5tpsmxp
+  title: Notes
   type: code
   hostname: sandbox
   path: /root/notes
-- title: Lab Credentials
+- id: kt31s1ftiumn
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

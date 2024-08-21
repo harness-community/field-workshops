@@ -12,24 +12,30 @@ notes:
     - Create a policy that evaluates when editing pipelines
     - Test policy enforcement
 tabs:
-- title: Harness Platform
+- id: yy7ptb8eiw21
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Demo App
+- id: ha197sxomacu
+  title: Demo App
   type: website
   url: https://sandbox-8080-${_SANDBOX_ID}.env.play.instruqt.com/
-- title: Code Editor
+- id: cicw4ybokjzc
+  title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- title: Shell
+- id: lcv4v0bsin9n
+  title: Shell
   type: terminal
   hostname: sandbox
-- title: Notes
+- id: d7l8abmca1g4
+  title: Notes
   type: code
   hostname: sandbox
   path: /root/notes
-- title: Lab Credentials
+- id: lpk6ns2cfyaq
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

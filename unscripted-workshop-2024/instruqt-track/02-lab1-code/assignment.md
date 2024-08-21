@@ -11,21 +11,26 @@ notes:
     - Scan for hard-coded secrets before the code is committed in the repository
     - Scan for open source vulnerabilities before the code is committed in the repository
 tabs:
-- title: Harness Platform
+- id: q0cjglkj8n7y
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Code Editor
+- id: cgd56rpcdydh
+  title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- title: Shell
+- id: ckseuhmrsewy
+  title: Shell
   type: terminal
   hostname: sandbox
-- title: Notes
+- id: mqyrnx13iuju
+  title: Notes
   type: code
   hostname: sandbox
   path: /root/notes
-- title: Lab Credentials
+- id: 0k0sqwgq8b5u
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

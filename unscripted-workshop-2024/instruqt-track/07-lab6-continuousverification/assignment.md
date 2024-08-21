@@ -13,24 +13,30 @@ notes:
     - Automate release validation
     - Leveraging complex deployment strategies to reduce the blast radius
 tabs:
-- title: Harness Platform
+- id: g4qkm9cm3szr
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Demo App
+- id: obxultd64lrp
+  title: Demo App
   type: website
   url: https://sandbox-8080-${_SANDBOX_ID}.env.play.instruqt.com/
-- title: Code Editor
+- id: z4hosqksnzmt
+  title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- title: Shell
+- id: a5nvpqx4ebud
+  title: Shell
   type: terminal
   hostname: sandbox
-- title: Notes
+- id: haauivbodwvh
+  title: Notes
   type: code
   hostname: sandbox
   path: /root/notes
-- title: Lab Credentials
+- id: awafiqb0o9yr
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

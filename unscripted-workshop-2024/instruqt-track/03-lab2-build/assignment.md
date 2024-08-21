@@ -12,21 +12,26 @@ notes:
     - Build and Deploy an artifact to a remote repository using Harness CIE
     - Run unit tests during the process to verify that the build is successful using Harness CIE
 tabs:
-- title: Harness Platform
+- id: gr1z3bsmyauj
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Code Editor
+- id: 9bvnh8ysgwro
+  title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- title: Shell
+- id: pilaxvjie6nc
+  title: Shell
   type: terminal
   hostname: sandbox
-- title: Notes
+- id: h6ycwffx5pfw
+  title: Notes
   type: code
   hostname: sandbox
   path: /root/notes
-- title: Lab Credentials
+- id: 36rgbjwvikrr
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

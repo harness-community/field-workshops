@@ -11,10 +11,12 @@ notes:
     Welcome to the {unscripted} 2024 workshop <br><br>
     **Please wait while we setup your Harness Sandbox environment**
 tabs:
-- title: Workshop SSO Login
+- id: bjy336uivvod
+  title: Workshop SSO Login
   type: browser
   hostname: harness
-- title: Lab Credentials
+- id: w3lpbiyymrly
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

@@ -14,24 +14,30 @@ notes:
     - Create custom Harness variables
     - Create an Input Set
 tabs:
-- title: Harness Platform
+- id: 2ztsyx2avgho
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Demo App
+- id: krvfyjgvq8hn
+  title: Demo App
   type: website
   url: https://sandbox-8080-${_SANDBOX_ID}.env.play.instruqt.com/
-- title: Code Editor
+- id: mzbr4imlm5wy
+  title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- title: Shell
+- id: xs9valn7o1c3
+  title: Shell
   type: terminal
   hostname: sandbox
-- title: Notes
+- id: swbcmgzvx9m2
+  title: Notes
   type: code
   hostname: sandbox
   path: /root/notes
-- title: Lab Credentials
+- id: wfkbxtmoeg9q
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html
