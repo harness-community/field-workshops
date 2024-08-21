@@ -126,6 +126,9 @@ Test Intelligence helps accelerate test cycles by up to 80%. By running only rel
 > Now click **Run** to execute the pipeline. <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
 
+> The build should run using: <br>
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_lab2_execution.png)
+> - Branch Name: `main`
 
 ===============
 

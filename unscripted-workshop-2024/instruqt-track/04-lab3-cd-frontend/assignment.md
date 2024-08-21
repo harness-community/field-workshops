@@ -123,6 +123,12 @@ In the next Lab we will use the `Canary` release strategy for our backend servic
 > Now click **Run** to execute the pipeline. <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
 
+> The build should run using: <br>
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_lab3_execution.png)
+> - Branch Name: `main`
+> - Stage: **Frontend - Deployment**
+>   - Primary Artifact: `frontend`
+
 ===============
 
 Click the **Check** button to continue.

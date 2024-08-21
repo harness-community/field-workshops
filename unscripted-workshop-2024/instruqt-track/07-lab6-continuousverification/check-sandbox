@@ -44,7 +44,7 @@ step_context = {
             "type": "Canary",
             "spec": {
                 "sensitivity": "LOW",
-                "duration": "10m"
+                "duration": "5m"
             }
         }
     }

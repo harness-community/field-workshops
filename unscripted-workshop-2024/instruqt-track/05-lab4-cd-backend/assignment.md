@@ -88,6 +88,14 @@ Click `+Add Stage` <br>
 > Now click **Run** to execute the pipeline. <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
 
+> The build should run using: <br>
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_lab4_execution.png)
+> - Branch Name: `main`
+> - Stage: **Frontend - Deployment**
+>   - Primary Artifact: `frontend`
+> - Stage: **Backend - Deployment**
+>   - Primary Artifact: `backend`
+
 ===============
 
 Click the **Check** button to continue.
