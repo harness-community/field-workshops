@@ -91,7 +91,7 @@ Click `+Add Stage` <br>
 > - Name: `Run Tests With Intelligence`
 > - Language: `Python`
 > - Build Tool: `Pytest`
-> - Build Arguments: `Leave empty`
+> - Build Arguments: *Leave empty*
 > - **Additional Configuration  ⏷**
 >   - Pre-Command: `pip install pytest & cd ./python-tests`
 >   - Run only selected tests: `Enabled`
