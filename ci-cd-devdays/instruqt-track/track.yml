@@ -3,7 +3,7 @@ id: kodypyefqwks
 title: Harness CI/CD DevDays
 description: |2-
 
-  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/ci-cd-devdays/assets/images/hands_on_labs_small.png)
 
   **This track demonstrates how to:**
     - Lab 1 - Harness Code
@@ -33,4 +33,4 @@ lab_config:
   lab_v2: false
   override_challenge_layout: false
   hideStopButton: false
-checksum: "12076001890532537894"
+checksum: "16769489853708851341"

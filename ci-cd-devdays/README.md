@@ -1,6 +1,6 @@
-# Harness {unscripted} 2024 Instruqt Workshop
+# Harness CI/CD DevDays Instruqt Workshop
 
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/ci-cd-devdays/assets/images/hands_on_labs_full.png)
 
 ## Introduction
 

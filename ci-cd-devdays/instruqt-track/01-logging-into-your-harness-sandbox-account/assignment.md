@@ -7,7 +7,7 @@ teaser: Let's log into Harness using your student credentials!
 notes:
 - type: text
   contents: |
-    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/ci-cd-devdays/assets/images/cicd_devdays.png)<br><br>
+    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/ci-cd-devdays/assets/images/cicd_devdays_med.png)<br><br>
     Welcome to the CI/CD DevDays workshop <br><br>
     **Please wait while we setup your Harness Sandbox environment**
 tabs:
