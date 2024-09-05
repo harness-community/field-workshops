@@ -9,13 +9,16 @@ notes:
   contents: |
     <br>In this first lab you will learn how to create resilience probes to automate the evaluation of your experiment hypothesis. This is crucial for understanding the impact of faults injected during chaos experiments.
 tabs:
-- title: Harness Platform
+- id: rexhcvpkslzm
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Architecture
+- id: yhdz0gxtv2yl
+  title: Architecture
   type: website
   url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/harness-community/field-workshops/blob/main/se-workshop-ce/assets/misc/diagram.html
-- title: Lab Credentials
+- id: blmi1uerkhzl
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html
@@ -31,29 +34,32 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br>
 
-In the left nav, click on: ![ce_nav_probes.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_probes.png) <br>
-And then click ```+New Probe``` <br>
-![ce_new_probe.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_probe.png) <br>
-Select **Kubernetes**  <br>
-and probe **HTTP** <br>
-![ce_probe_k8s_http.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_probe_k8s_http.png) <br>
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_probes.png)
+> ### Click on **Resilience Probes** in the left Nav
+> - Click `+New Probe` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_probe.png)
+
+> **Select your probe type**
+> - Infrastructure Type: `Kubernetes`
+> - Chaos probe: `HTTP` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_probe_k8s_http.png)
 
 > **HTTP Probe**
 > - **Overview**
->   - Name: ```frontend-availability-check```
+>   - Name: <pre>`frontend-availability-check`</pre>
+>   - Click **Configure Details >**
 > - **Probe Details**
->   - URL: ```[[ Instruqt-Var key="HARNESS_BOUTIQUE_URL" hostname="sandbox" ]]```
->   - Method: ```GET```
->     - ```Compare Response Code```
->   - Criteria: ```==```
->   - Method: ```200```
+>   - URL: <pre>`[[ Instruqt-Var key="HARNESS_BOUTIQUE_URL" hostname="sandbox" ]]`</pre>
+>   - Method: `GET`
+>     - `Compare Response Code`
+>   - Criteria: `==`
+>   - Response Code: `200`
+>   - Click **Configure Properties >**
 > - **Properties**
->   - Timeout: ```10s```
->   - Interval: ```2s```
->   - Attempt: ```5```
->   - Polling Interval: ```2s```
-
-Click **Setup Probe >** <br>
+>   - Timeout: `10s`
+>   - Interval: `2s`
+>   - Attempt: `5`
+> - Click **Setup Probe >**
 
 ===============
 

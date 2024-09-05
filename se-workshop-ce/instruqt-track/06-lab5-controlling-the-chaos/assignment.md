@@ -10,14 +10,17 @@ notes:
   contents: |
     Now let's implement ChaosGuard to restrict execution of chaos experiments.
 tabs:
-- title: Harness Platform
+- id: hrygywaxdh12
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Temp Tab
+- id: xb7baesjsjfu
+  title: Temp Tab
   type: website
   url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
   new_window: true
-- title: Lab Credentials
+- id: ox7h4txqykxu
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html
@@ -33,25 +36,31 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br>
 
-In the left nav, click on: ![ce_nav_chaosguard.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_chaosguard.png) <br>
-In the upper right, click on: ![ce_chaosguard_conditions.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_conditions.png) <br>
-And then click ```+New Condition``` <br>
-![ce_new_condition.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_condition.png) <br>
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_chaosguard.png)
+> ### Click on **Chaos Guard** in the left Nav
+> - In the upper right click: `Conditions` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_conditions.png)
+> - Click `+New Condition` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_condition.png)
 
-## Create New Condition
-> - Name: ```block-cartservice-pod-delete```
-> - Chaos Infrastructure Type: ```Kubernetes```
->   - Then click **Save**
+> **Edit Condition**
+> - Name: <pre>`cartservice-pod-delete`</pre>
+> - Chaos Infrastructure Type: `Kubernetes - Dedicated Chaos Infrastructure`
+> - Click **Save**
+
+> **Create New Condition**
 > - WHAT
->   - FAULT: `pod-delete`
+>   - FAULT: <pre>`pod-delete`</pre>
 > - WHERE
->   - `*`  *Reference Image Below*
+>   - `*` \
+>       ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_select_infra.png)
 > - WHICH
 >   - NAMESPACE: `*`
->   - APP LABEL: `app=cartservice`
+>   - APP LABEL: <pre>`app=cartservice`</pre>
 > - USING
 >   - `*`
-> ![ce_chaosguard_select_infra.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_select_infra.png) <br>
+> - Click **Save** \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_save.png)
 
 Or you can switch to the `YAML` tab and paste this condition.
 ```
@@ -74,58 +83,58 @@ k8sSpec:
     operator: EQUAL_TO
     serviceAccounts:
       - "*"
+infraType: Kubernetes
 ```
 
-Click **Save** <br>
-![ce_save.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_save.png) <br>
-
-In the upper right, click on: ![ce_chaosguard_rules.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_rules.png) <br>
-And then click ```+New Rule``` <br>
-![ce_new_rule.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_rule.png) <br>
-
+> - In the upper right click: `Rules` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_rules.png)
+> - Click `+New Rule` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_rule.png)
 
 > **Rules**
 > - **Overview**
->   - Name: ```block-pod-delete-during-business-hours```
->   - User group(s): *Reference Image Below*
->   - Time window: *Not required to update*
->     - Timezone: ```UTC```
->     - Start Time: ```Current Date/Time```
->     - End Time: ```30m``` from start time
->     - Recurrence: ```Does not repeat```
+>   - Name: <pre>`block-pod-delete-during-business-hours`</pre>
+>   - User group(s): `All Project Users` \
+>       ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_select_group.png)
+>   - Time window: ***Do Not Update***
+>   - Click **Next >**
 > - **Add Conditions**
->   - Select `block-cartservice-pod-delete` condition
-> ![ce_chaosguard_select_group.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_select_group.png) <br>
+>   - Select `cartservice-pod-delete` condition
+> - Click **Done >**
+> - Click on the `toggle` to enable the rule \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_rule_enabled.png)
 
-Then click **Done >** <br>
+> [!WARNING]
+> ***Instruqt Platform Bug*** - If you receive an error **422** it is due to a bug with the *Instruqt Platform* and you will need to switch to the `Temp Tab` tab and repeat the **+New Rule** step.
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_error_422.png)
 
-> # Instruqt Platform Bug
-> ## If you receive an error **422**
-> ![ce_chaosguard_error_422.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_error_422.png) <br>
-> ## This is due to a bug with the *Instruqt Platform*
-> ### Switch to the ```Temp Tab``` tab to continue
-> *Login with your credentials found on the: <br>
->  `Lab Credentials` tab* <br>
-> Select your `Project` then navigate back to the `Chaos` module and click `ChaosGuard` in the left nav <br>
-> Recreate the `Rule` as listed above
-> ### Switch to the ```Harness Platform``` tab to continue
-> # End of Instruqt Platform Bug
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_experiments.png)
+> ### Click on **Chaos Experiments** in the left Nav
+> - Click the `play` button on the right to run your experiment \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_experiment_play_button.png)
+> You will see that the `evaluate-rules` step failed and prevented the experiment from executing. Click on this step to see additional details.
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_evaluate_rules_success.png)
+
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_chaosguard.png)
+> ### Click on **Chaos Guard** in the left Nav
+> - Click on the `toggle` to disable the rule \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_rule_disabled.png)
 
 
-Now click on the `toggle` to enable the rule.
-![ce_chaosguard_rule_disabled.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_rule_disabled.png) <br>
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_experiments.png)
+> ### Click on **Chaos Experiments** in the left Nav
+> - Click the `play` button on the right to run your experiment \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_experiment_play_button.png)
+> You will see that now the `evaluate-rules` step was successful and our experiment is executing.
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_evaluate_rules_failure.png)
 
-In the left nav, click on: ![ce_nav_experiments.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_experiments.png) <br>
-And click the play button to run the experiment. <br>
-![ce_experiment_play_button.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_experiment_play_button.png) <br>
+> [!NOTE]
+> That is `Policy as Code` in action! Isn't it beautiful?
 
-You will see that the `evaluate-rules` step failed and prevented the experiment from executing. Click on this step to see additional details.
-![ce_chaosguard_evaluate_rules.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_evaluate_rules.png) <br>
+<br><br>
 
-Head back over to ChaosGuard and disable the rule. Now you are able to execute the experiment again. <br>
-
-# Congratulations on completing this `Harness Chaos Engineering` workshop!
-That's all for now. We hope you enjoyed your hands-on experience with the Harness CE module. We are always looking to improve so please rate your experience and share any suggestions or issues you may have encountered. Thank you!
+# Congratulations on completing this **Harness Chaos Engineering**! 🏆
+> ### That's all for now. We hope you enjoyed your hands-on experience with the Harness CE module. <br> 📈 We are always looking to improve so please rate your experience and share any suggestions or issues you may have encountered. Thank you!
 
 ===============
 

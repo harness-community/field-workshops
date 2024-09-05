@@ -10,10 +10,12 @@ notes:
     Welcome to the Harness Chaos Engineering (CE) workshop!<br><br>
     **Please wait while we setup your Harness Sandbox environment**
 tabs:
-- title: Workshop SSO Login
+- id: covkexffx8th
+  title: Workshop SSO Login
   type: browser
   hostname: harness
-- title: Lab Credentials
+- id: k7mtdhtzjtrk
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html
@@ -27,21 +29,27 @@ hr.cyan { background-color: cyan; color: cyan; height: 2px; margin-bottom: -10px
 h2.cyan { color: cyan; }
 </style><h2 class="cyan">👋 Welcome to your Harness Workshop Sandbox!</h2>
 <hr class="cyan">
-<br><br>
+<br>
 
-A Sandbox Account has been provisioned for you to use for the duration of this workshop.
-We take advantage of Just-in-time provisioning for this workshop to automatically provision your user account when you first sign-in to Harness through SAML SSO.<br>
+> [!IMPORTANT]
+> Make sure you scroll to the bottom of the lab guide in each lab
+> <img src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/arrow-turn-down.svg" width="60" height="60" style="vertical-align: right; display: inline; filter: invert(80%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(90%);">
+
+<br>
+
+## A Sandbox Account has been provisioned for you to use for the duration of this workshop.
 Login to your **Harness Sandbox** account using the details provided below.👇
 
 ---
-### Harness Sandbox Account details:
-*All credentials for this lab can always be found on the: <br>
- `Lab Credentials` tab* <br>
+## Harness Sandbox Account details:
+|  |   |
+| ----- | ----- |
+| **Username**    |<pre>`[[ Instruqt-Var key="HARNESS_USER" hostname="sandbox" ]]`</pre>|
+| **Password**    |<pre>`[[ Instruqt-Var key="HARNESS_PWD" hostname="sandbox" ]]`</pre>|
 
-|   |   |
-|---|---|
-|__User__| ```[[ Instruqt-Var key="HARNESS_USER" hostname="sandbox" ]]``` |
-|__Password__| ```[[ Instruqt-Var key="HARNESS_PWD" hostname="sandbox" ]]``` |
+> [!NOTE]
+> *All credentials for this lab can always be found on the: <br>
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">`Lab Credentials` tab*
 
 
 ---

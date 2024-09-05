@@ -12,13 +12,16 @@ notes:
 
     ![Chaos Engineering](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/chaos-eng-steps.png)
 tabs:
-- title: Harness Platform
+- id: ynxtb8ngb9ed
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Architecture
+- id: 9h6asoxak7qt
+  title: Architecture
   type: website
   url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/harness-community/field-workshops/blob/main/se-workshop-ce/assets/misc/diagram.html
-- title: Lab Credentials
+- id: zzjpiaxw4hpv
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html
@@ -34,71 +37,74 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br><br>
 
-> # Switch to the ```Architecture``` tab to continue
+> # Switch to the `Architecture` tab to continue
 
-This is the demo app that we will leverage for fault injection in a later lab. Each box represents an individual microservice. <br>
+> [!NOTE]
+> This is the demo app that we will leverage for fault injection in a later lab. Each box represents an individual microservice.
+
 - *What do you think will happen if we target the `cart service` for fault injection?*
 
 <br>
 
-> # Switch to the ```Harness Platform``` tab to continue
+> # Switch to the `Harness Platform` tab to continue
+
+
+
 
 First let's select the project that's been created for this workshop <br>
 ![project_selection.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/project_selection.png)
 
 ## Now it's time to start creating some chaos!
-![ce_module.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_module.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_module.png)
 
 Select the **Chaos Engineering** module from the list <br>
 
-In the left nav, click on: ![ce_nav_environments.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_environments.png) <br>
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_environments.png)
+> ### Click on **Environments** in the left Nav
+> - Click `+New Environment` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_environment.png)
 
-And then click ```+New Environment``` <br>
-![ce_new_environment.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_environment.png) <br>
+> **New Environment**
+> - Name: <pre>`lab`</pre>
+> - Environment Type: `Inline`
+> - Click **Create**
 
+<br>
 
-> **New Environment** <br>
-> - Name: ```lab```
-> - Environment Type: ```Non-Production```
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_lab_environment.png)
+> ### Now click on the environment we just created.
+> - Select Infrastructure type: `Kubernetes`
+> - Click `+Enable Chaos` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_enable_chaos.png)
 
-Click ```Create``` <br>
+>![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_enable_new_infra.png)
+> - Select `On new infrastructures`
+> - Click **Continue >** and configure with the details below ↓
 
-Now click on the environment we just created. <br>
-![ce_lab_environment.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_lab_environment.png)
-
-<br><br>
-Click ```+Enable Chaos``` <br>
-![ce_enable_chaos.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_enable_chaos.png)
-
->![ce_enable_new_infra.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_enable_new_infra.png)
-
- - Select ```On new infrastructures``` <br>
-Then click **Continue >** <br>
-
-**Workshop Namespace:**
-```
-[[ Instruqt-Var key="HARNESS_USER_NAME" hostname="sandbox" ]]
-```
 
 > **Enable Chaos**
 > - **Overview**
->   - Name: ```lab-hce```
+>   - Name: <pre>`lab-hce`</pre>
+>   - Click **Next >**
 > - **Configure**
->   - Installation Type: ```Kubernetes```
+>   - Installation Type: `Kubernetes`
 >   - Access Type:
 >     - Click ***CHANGE***
->     - Select ```Specific namespace access``` ![ce_enable_infra_namespace.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_enable_infra_namespace.png)
->   - Installation Location (Namespace): ```[[ Instruqt-Var key="HARNESS_USER_NAME" hostname="sandbox" ]]```
->   - Service Account Name: ```hce```
+>     - Select `Specific namespace access` \
+>         ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_enable_infra_namespace.png)
+>   - Installation Location (Namespace): <pre>`[[ Instruqt-Var key="HARNESS_USER_NAME" hostname="sandbox" ]]`</pre>
+>   - Service Account Name: `hce`
+>   - Click **Next >**
 > - **Deploy the setup**
->   - You will ***skip*** `Create the namespace` and `Apply the Chaos CRDs` as this is handled for you in this workshop
->     - Click ***Download***
+>   - You will `skip` *Create the namespace* and *Apply the Chaos CRDs* as this is handled for you in this workshop
+>   - Click **Download**
+> - Click **Done**
 
-Click **Done** <br><br>
+> [!IMPORTANT]
+> The namespace ***MUST*** be `[[ Instruqt-Var key="HARNESS_USER_NAME" hostname="sandbox" ]]` which is your individual namespace for this workshop
 
-Don't worry about applying the downloaded manifest as we execute the `kubectl apply -f lab-hce-harness-chaos-enable.yml` command for you. <br>
-
-The namespace ***MUST*** be `[[ Instruqt-Var key="HARNESS_USER_NAME" hostname="sandbox" ]]` which is your individual namespace for this workshop <br>
+> [!NOTE]
+> Don't worry about applying the downloaded manifest as we execute the `kubectl apply -f lab-hce-harness-chaos-enable.yml` command for you
 
 ===============
 
