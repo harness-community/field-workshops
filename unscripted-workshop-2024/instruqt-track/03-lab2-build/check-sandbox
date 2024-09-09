@@ -47,11 +47,10 @@ pipeline_yaml = harness.platform.get_pipeline_yaml(HARNESS_PAT, HARNESS_ACCOUNT_
 pipeline_dict = utils.misc.parse_pipeline(pipeline_yaml)
 stage_id = utils.misc.get_stage_identifier_from_dict(pipeline_dict, "CI")
 step_context = {
-    "RunTests": {
+    "Test": {
         "spec": {
-            "language": "Python",
-            "buildTool": "Pytest",
-            "preCommand": "pip install pytest & cd ./python-tests"
+            "shell": "Sh",
+            "command": "cd ./python-tests\npytest"
         }
     },
     "Compile": {

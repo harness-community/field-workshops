@@ -61,11 +61,15 @@ h2.cyan { color: cyan; }
 3) Select `Verify` from the Step Library and configure with the details below ↓
 
 > **Verify**
-> - Name: `Verify`
+> - Name: <pre>`Verify`</pre>
 > - Continuous Verification Type: `Canary`
 > - Sensitivity: `Low`
->   - (This is to define how sensitive the ML algorithms are going to be on deviation from the baseline)
 > - Duration: `5mins`
+> - Click **Apply Changes** from the top right of the configuration popup
+
+> [!NOTE]
+> ***Continuous Verification Sensitivity*** <br>
+> This is to define how sensitive the ML algorithms are going to be on deviation from the baseline.
 
 ### Execute your Pipeline
 > Click **Save** in the top right to save your pipeline. <br>

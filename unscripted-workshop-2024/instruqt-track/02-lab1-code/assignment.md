@@ -66,7 +66,11 @@ Copy the values from here and store them on the `Notes` 📝 tab or locally on y
 > # Switch to the ```>_Shell``` tab to continue
 
 ### Update our credential file
-This step is optional, but will eliminate the need to enter the username and password in subsequent steps. <br>
+> [!NOTE]
+> This step is optional, but will eliminate the need to enter the username and password in subsequent steps.
+
+<br>
+
 Click `▶️ run` and then provide the token you just copied.
 ```bash,run
 ./script.sh

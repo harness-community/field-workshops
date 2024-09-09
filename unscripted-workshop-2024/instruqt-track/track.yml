@@ -26,9 +26,11 @@ lab_config:
   overlay: false
   width: 25
   position: right
+  sidebar_enabled: true
   feedback_recap_enabled: true
+  feedback_tab_enabled: false
   loadingMessages: true
   lab_v2: false
   override_challenge_layout: false
   hideStopButton: false
-checksum: "10392346029207113148"
+checksum: "5586208739299672147"

@@ -62,7 +62,7 @@ Click `+Add Stage` <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_stage_deploy.png)
 
 > **Deploy Stage**
-> - Stage Name: `Frontend - Deployment`
+> - Stage Name: <pre>`Frontend - Deployment`</pre>
 > - Deployment Type: `Kubernetes`
 > - Click **Set Up Stage**
 
@@ -73,7 +73,7 @@ Click `+Add Stage` <br>
 > - Click `+ Add Service`
 > - **New Service**
 > - ***About the Service***
->   - Name: `frontend`
+>   - Name: <pre>`frontend`</pre>
 >   - Store: `Inline`
 > - ***Service Definition***
 >   - Deployment Type: `Kubernetes`
@@ -82,21 +82,21 @@ Click `+Add Stage` <br>
 >       1) Manifest Type: `K8s Manifest`
 >       2) Manifest Source: `Code`
 >       3) Manifest Details
->         -  Manifest Identifier: `templates`
+>         -  Manifest Identifier: <pre>`templates`</pre>
 >         -  Repository Name: `harnessrepo`
->         -  Branch: `main`
->         -  File/Folder Path: `harness-deploy/frontend/manifests`
+>         -  Branch: <pre>`main`</pre>
+>         -  File/Folder Path: <pre>`harness-deploy/frontend/manifests`</pre>
 >         -  Values.yaml: `+ Add File`
->         -  `harness-deploy/frontend/values.yaml`
+>         -  <pre><code>harness-deploy/frontend/values.yaml</code></pre>
 >     - Click **Submit >**
 >   - Artifacts: `+ Add Artifact Source`
 >     - ***Artifact***
 >       1) Artifact Repository Type: `Docker Registry`
 >       2) Artifact Repository: `workshop-docker`
 >       3) Artifact Location
->         -  Artifact Source Identifier: `frontend`
->         -  Image Path: `seworkshop/harness-workshop`
->         -  Tag: `<+variable.username>-<+pipeline.sequenceId>` \
+>         -  Artifact Source Identifier: <pre>`frontend`</pre>
+>         -  Image Path: <pre>`seworkshop/harness-workshop`</pre>
+>         -  Tag: <pre><code><+variable.username>-<+pipeline.sequenceId></code></pre> \
 >               (change the field type to expression) \
 >               ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/change_input_expression.png)
 >     - Click **Submit >**
@@ -111,6 +111,9 @@ Click `+Add Stage` <br>
 > - Specify Infrastructure: `K8s Dev`
 > - Click **Continue >**
 
+> [!NOTE]
+> With Harness, a platform team can easily create and manage environments and infrastructure, then developers can use them to deploy their applications.
+
 <br>
 
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_execution.png)
@@ -119,8 +122,9 @@ Click `+Add Stage` <br>
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/deploy_rolling.png)
 > - Click **Use Strategy**
 
-The frontend is a static application so there isn't a need for `Canary` or `Blue/Green` at this time. <br>
-In the next Lab we will use the `Canary` release strategy for our backend service.
+> [!NOTE]
+> The frontend is a static application so there isn't a need for `Canary` or `Blue/Green` at this time. <br>
+> In the next Lab we will use the `Canary` release strategy for our backend service.
 
 ### Execute your Pipeline
 > Click **Save** in the top right to save your pipeline. <br>
