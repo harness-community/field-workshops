@@ -9,13 +9,16 @@ notes:
   contents: |
     TBD
 tabs:
-- title: Harness Platform
+- id: vlaj62szy0x8
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Shell
+- id: lpoeouqvcxxt
+  title: Shell
   type: terminal
   hostname: sandbox
-- title: Lab Credentials
+- id: povro89tjuyb
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

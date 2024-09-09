@@ -14,12 +14,14 @@ developers:
 - joseph.titra@harness.io
 show_timer: true
 idle_timeout: 1800
-timelimit: 1800
+timelimit: 3600
 lab_config:
   overlay: false
   width: 25
   position: right
+  sidebar_enabled: true
   feedback_recap_enabled: true
+  feedback_tab_enabled: false
   loadingMessages: true
   hideStopButton: false
-checksum: "11074077057400232022"
+checksum: "12638594132384656201"
