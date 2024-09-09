@@ -9,10 +9,12 @@ notes:
   contents: |
     In this lab you will learn how to utilize Harness IaCM to estimate costs and track state changes in your infrastructure, enabling more informed decision-making.
 tabs:
-- title: Harness Platform
+- id: h0gtljogigxs
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Lab Credentials
+- id: yiwiyfe9lek4
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

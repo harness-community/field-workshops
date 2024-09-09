@@ -9,14 +9,17 @@ notes:
   contents: |
     In this lab, participants will learn how to create and configure a workspace in Harness IaCM. This will serve as the foundation for the subsequent labs, where you will manage your infrastructure as code.
 tabs:
-- title: Harness Platform
+- id: aokmavbkl59e
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Code Editor
+- id: msrtembxeipw
+  title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- title: Lab Credentials
+- id: qyxrcpijakbm
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

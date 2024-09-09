@@ -9,13 +9,16 @@ notes:
   contents: |
     Learn how to create a pipeline in Harness IaCM. This lab will cover the basics of pipeline configuration, including how to trigger deployments and manage infrastructure changes effectively.
 tabs:
-- title: Harness Platform
+- id: gefnf2jpiirk
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Shell
+- id: ghtf4tsyiore
+  title: Shell
   type: terminal
   hostname: sandbox
-- title: Lab Credentials
+- id: qae6ifspbhmn
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

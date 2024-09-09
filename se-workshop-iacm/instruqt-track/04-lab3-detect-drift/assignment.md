@@ -9,13 +9,16 @@ notes:
   contents: |
     This lab focuses on detecting configuration drifts in your infrastructure. Participants will learn how to set up drift detection, interpret its results, and understand the impact of drift on infrastructure management.
 tabs:
-- title: Harness Platform
+- id: dqokzwmlgn8h
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Shell
+- id: yjssqfyyvols
+  title: Shell
   type: terminal
   hostname: sandbox
-- title: Lab Credentials
+- id: ydpyrcgekqtq
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html

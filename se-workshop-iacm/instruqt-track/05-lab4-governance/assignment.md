@@ -9,13 +9,16 @@ notes:
   contents: |
     Explore how to integrate Open Policy Agent (OPA) with Harness IaCM to enforce governance policies. This lab will demonstrate setting up policy-as-code frameworks to ensure compliance across your infrastructure deployments.
 tabs:
-- title: Harness Platform
+- id: j1h9yldovobp
+  title: Harness Platform
   type: browser
   hostname: harness
-- title: Shell
+- id: yqrsgogp3vdy
+  title: Shell
   type: terminal
   hostname: sandbox
-- title: Lab Credentials
+- id: gwstdtphw0op
+  title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html
