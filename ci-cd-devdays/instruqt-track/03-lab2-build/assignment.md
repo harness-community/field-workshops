@@ -58,8 +58,8 @@ Select **Unified View** from the list <br>
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_create.png)
 
 > **Create new Pipeline**
-> - Name: `Workshop Build and Deploy`
-> - Store: `Inline`
+> - Name: <pre>`Workshop Build and Deploy`</pre>
+> - Store: <pre>`Inline`</pre>
 
 > [!NOTE]
 > Inline vs. Remote - We're using inline for this lab, but you can also use a remote repository like GitHub. This is useful for teams that want to keep their _pipelines as code_ bundled up snuggly with _application code_. Cozy!
@@ -70,9 +70,9 @@ Click `+Add Stage` <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_stage_build.png)
 
 > **Build Stage**
-> - Stage Name: `Build`
-> - Clone Codebase: `Enabled`
-> - Repository Name: `harnessrepo`
+> - Stage Name: <pre>`Build`</pre>
+> - Clone Codebase: <pre>`Enabled`</pre>
+> - Repository Name: <pre>`harnessrepo`</pre>
 > - Click **Set Up Stage**
 
 <br>
@@ -91,29 +91,29 @@ Plus Harness is using the [fastest bare-metal hardware](https://www.harness.io/p
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_execution.png)
 > ### On the  **Execution** tab
 > - Select `Add Step`, then `Add Step` again \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_build_run_tests_step.png)
-> - Select `Run Tests` from the Step Library and configure with the details below ↓
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_build_test_intelligence.png)
+> - Select `Test Intelligence` from the Step Library and configure with the details below ↓
 
 
-> **Run Tests**
-> - Name: `Run Tests With Intelligence`
-> - Language: `Python`
-> - Build Tool: `Pytest`
-> - Build Arguments: *Leave empty*
-> - **Additional Configuration  ⏷**
->   - Pre-Command: `pip install pytest & cd ./python-tests`
->   - Run only selected tests: `Enabled`
+> **Test Intelligence**
+> - Name: <pre>`Test Intelligence`</pre>
+> - Command:
+>  ```
+>  cd ./python-tests
+>  pytest
+>  ```
 > - After completing configuration select **Apply Changes** from the top right of the configuration popup
 
-### What is Test Intelligence?
-Test Intelligence helps accelerate test cycles by up to 80%. By running only relevant tests, you can achieve faster builds, shorter feedback loops, and significant cost savings.
+> [!NOTE]
+> ***What is Test Intelligence?*** <br>
+> Test Intelligence helps accelerate test cycles by up to 80%. By running only relevant tests, you can achieve faster builds, shorter feedback loops, and significant cost savings.
 
 > ### Add a step to compile our application
 > - Select `Add Step`,  then `Use template`
 >   - To standardize our build, a template has been precreated
 >     - Feel free to open up the template if you'd like to see what it's doing
 > - Select the `Compile Application` template and click `Use template`
-> - Name: `Compile`
+> - Name: <pre>`Compile`</pre>
 > - Click **Apply Changes** from the top right of the configuration popup
 
 > ### Add a step to build and push our artifact
@@ -122,14 +122,14 @@ Test Intelligence helps accelerate test cycles by up to 80%. By running only rel
 > - Select `Build and Push an image to Dockerhub` from the Step Library and configure with the details below ↓
 
 > **Build and Push an image to Dockerhub**
-> - Name: `Push to Dockerhub`
-> - Docker Connector: `workshop-docker`
-> - Docker Repository: `seworkshop/harness-workshop`
+> - Name: <pre>`Push to Dockerhub`</pre>
+> - Docker Connector: <pre>`workshop-docker`</pre>
+> - Docker Repository: <pre>`seworkshop/harness-workshop`</pre>
 > - Tags: Click `+ Add`
->   - `<+variable.username>-<+pipeline.sequenceId>`
+> - <pre><code><+variable.username>-<+pipeline.sequenceId></code></pre>
 > - **Optional Configuration  ⏷** *(Required for this Lab)*
->   - Dockerfile: `/harness/frontend-app/harness-webapp/Dockerfile`
->   - Context: `/harness/frontend-app/harness-webapp`
+>   - Dockerfile: <pre>`/harness/frontend-app/harness-webapp/Dockerfile`</pre>
+>   - Context: <pre>`/harness/frontend-app/harness-webapp`</pre>
 > - After completing configuration select **Apply Changes** from the top right of the configuration popup
 
 ### Execute your new Pipeline

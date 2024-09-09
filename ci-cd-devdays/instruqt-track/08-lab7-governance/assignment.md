@@ -60,12 +60,13 @@ h2.cyan { color: cyan; }
 
 ## Create new Policy to require approval for Production releases
 > **Policy Name**
-> - Name: ```Production Approval```
-> - Store: ```Inline```
+> - Name: <pre>`Production Approval`</pre>
+> - Store: `Inline`
 
-### OPA Rego Policy
-> This policy mandates an `Approval` stage prior to production deployments. <br>
-> In this lab we are using the `HarnessApproval` but this could also use our native integrations with ServiceNow and Jira.
+> [!NOTE]
+> ***OPA Rego Policy*** <br>
+> This policy mandates an ***Approval*** stage prior to production deployments. <br>
+> In this lab we are using the `Harness Approval` but this could also use our native integrations with `ServiceNow` and `Jira`.
 
 ```
 package pipeline
@@ -103,20 +104,25 @@ contains(arr, elem) {
 ## Create new Policy Set
 > 1) In the top right of this screen click **Policy Sets** \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/opa_new_policy_set.png)
-> 2) And then click ```+New Policy Set``` <br>
+> 2) And then click `+New Policy Set` <br>
 >
 > **Policy Set**
 > - **Overview**
->   - Name: `Approval Required for Production Deployments`
+>   - Name: <pre>`Approval Required for Production Deployments`</pre>
 >   - Entity Type: `Pipeline`
 >   - Evaluation: `On Save`
+>   - Click **Continue**
 > - **Policy evaluation criteria**
+>   - Click : `+ Add Policy`
 >   - Policy to Evaluate: `Production Approval`
 >   - Policy Action: `Error and exit`
+>   - Click **Apply**
 > - Click **Finish** to save your **Policy Set**
->
+
+
+> [!WARNING]
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/opa_policy_toggle.png)
-> !! Be sure to click the `toggle` under **ENFORCED** to enable your **Policy Set** !!
+>  Be sure to click the `toggle` under **ENFORCED** to enable your **Policy Set** !!
 
 ## Let's test it out
 > Head back over to your pipeline.
@@ -131,7 +137,9 @@ contains(arr, elem) {
 
 ## Pipeline can not be saved due to the policy evaluation failures
 ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_missing_approval.png)
-Oops. That's not allowed. Let's add an approval stage so we can get back on track.
+
+> [!IMPORTANT]
+> Oops. That's not allowed. Let's add an approval stage so we can get back on track.
 
 > 1) `Before` the ***Frontend - Deployment*** stage click on the `+` icon to add a new stage \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_add_approval_stage.png)
@@ -139,14 +147,14 @@ Oops. That's not allowed. Let's add an approval stage so we can get back on trac
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_stage_approval.png)
 >
 > **About your Stage**
-> - Stage Name: `Approval`
+> - Stage Name: <pre>`Approval`</pre>
 > - Approval Type: `Harness Approval`
 > - Click **Setup Stage**
 >
 > 3) Click on the `Approval` step and configure with the details below ↓
 >
 > **Manual Approval**
-> - Name: `Harness Approval`
+> - Name: <pre>`Harness Approval`</pre>
 > - **Approvers**
 >   - User Groups: `Production Approvers` \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_approval_group.png)
@@ -161,12 +169,14 @@ Oops. That's not allowed. Let's add an approval stage so we can get back on trac
 > Now click **Run** to execute the pipeline. <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
 
-<br><br>
-That is `Policy as Code` in action! Isn't it beautiful? <br>
-Harness has wrapped the ***entire platform*** with `OPA` so this is just the tip of the iceberg! <br>
+<br>
 
-# Congratulations on completing this `Harness` workshop!
-That's all for now. We hope you enjoyed your hands-on experience with the Harness platform. We are always looking to improve so please rate your experience and share any suggestions or issues you may have encountered. Thank you!
+> [!NOTE]
+> That is `Policy as Code` in action! Isn't it beautiful? <br>
+> Harness has wrapped the ***entire platform*** with `OPA` so this is just the tip of the iceberg! <br>
+
+# Congratulations on completing this **Harness workshop**! 🏆
+### That's all for now. We hope you enjoyed your hands-on experience with the Harness platform. <br> 📈 We are always looking to improve so please rate your experience and share any suggestions or issues you may have encountered. Thank you!
 
 ===============
 

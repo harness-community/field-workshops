@@ -59,7 +59,7 @@ Click `+Add Stage` <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_stage_deploy.png)
 
 > **Deploy Stage**
-> - Stage Name: `Backend - Deployment`
+> - Stage Name: <pre>`Backend - Deployment`</pre>
 > - Deployment Type: `Kubernetes`
 > Click **Set Up Stage**
 
