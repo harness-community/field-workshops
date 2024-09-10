@@ -71,8 +71,8 @@ Click `+Add Stage` <br>
 
 > **Build Stage**
 > - Stage Name: <pre>`Build`</pre>
-> - Clone Codebase: <pre>`Enabled`</pre>
-> - Repository Name: <pre>`harnessrepo`</pre>
+> - Clone Codebase: `Enabled`
+> - Repository Name: `harnessrepo`
 > - Click **Set Up Stage**
 
 <br>

@@ -59,7 +59,7 @@ Select **Unified View** from the list <br>
 
 > **Create new Pipeline**
 > - Name: <pre>`Workshop Build and Deploy`</pre>
-> - Store: <pre>`Inline`</pre>
+> - Store: `Inline`
 
 > [!NOTE]
 > Inline vs. Remote - We're using inline for this lab, but you can also use a remote repository like GitHub. This is useful for teams that want to keep their _pipelines as code_ bundled up snuggly with _application code_. Cozy!
@@ -71,8 +71,8 @@ Click `+Add Stage` <br>
 
 > **Build Stage**
 > - Stage Name: <pre>`Build`</pre>
-> - Clone Codebase: <pre>`Enabled`</pre>
-> - Repository Name: <pre>`harnessrepo`</pre>
+> - Clone Codebase: `Enabled`
+> - Repository Name: `harnessrepo`
 > - Click **Set Up Stage**
 
 <br>
