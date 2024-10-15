@@ -66,7 +66,7 @@ Select the **Chaos Engineering** module from the list <br>
 
 > **New Environment**
 > - Name: <pre>`lab`</pre>
-> - Environment Type: `Inline`
+> - Environment Type: `Non-Production`
 > - Click **Create**
 
 <br>
@@ -74,22 +74,23 @@ Select the **Chaos Engineering** module from the list <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_lab_environment.png)
 > ### Now click on the environment we just created.
 > - Select Infrastructure type: `Kubernetes`
-> - Click `+Enable Chaos` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_enable_chaos.png)
+> - Click `+New Infrastructure` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_infrastructure.png)
 
->![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_enable_new_infra.png)
-> - Select `On new infrastructures`
-> - Click **Continue >** and configure with the details below ↓
+> [!IMPORTANT]
+> We will NOT be using a Harness Delegate for this Lab.
+> - Please Select `No` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_infrastructure_v1_or_v2.png)
+> - Click **Next >** and configure with the details below ↓
 
-
-> **Enable Chaos**
+> **New Infrastructure**
 > - **Overview**
 >   - Name: <pre>`lab-hce`</pre>
 >   - Click **Next >**
 > - **Configure**
 >   - Installation Type: `Kubernetes`
 >   - Access Type:
->     - Click ***CHANGE***
+>     - Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pencil.svg" alt="Pencil icon" width="16" height="16" style="display: inline; vertical-align: middle;">***CHANGE***
 >     - Select `Specific namespace access` \
 >         ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_enable_infra_namespace.png)
 >   - Installation Location (Namespace): <pre>`[[ Instruqt-Var key="HARNESS_USER_NAME" hostname="sandbox" ]]`</pre>
