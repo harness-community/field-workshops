@@ -26,15 +26,15 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: RunTests
-                  name: Run Tests With Intelligence
-                  identifier: Run_Tests_With_Intelligence
+                  type: Test
+                  name: Test Intelligence
+                  identifier: Test_Intelligence
                   spec:
-                    language: Python
-                    buildTool: Pytest
-                    runOnlySelectedTests: true
-                    preCommand: pip install pytest & cd ./python-tests
-                    enableTestSplitting: false
+                    shell: Sh
+                    command: |-
+                      cd ./python-tests
+                      pytest
+                    intelligenceMode: true
               - step:
                   name: Compile
                   identifier: Compile
