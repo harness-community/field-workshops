@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+
+# Standard library imports
+import os
+import requests
+from pyharnessworkshop import utils
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+HARNESS_API = "https://app.harness.io"
+
+
+policy_set = "SCA_Scan_Step_Required"
+url = f"{HARNESS_API}/pm/api/v1/policysets/{policy_set}?accountIdentifier={HARNESS_ACCOUNT_ID}&orgIdentifier={HARNESS_ORG_ID}&projectIdentifier={HARNESS_PROJECT}"
+headers = {
+    "Content-Type": "application/json",
+    "x-api-key": HARNESS_PAT
+}
+payload = {
+    "enabled": True
+}
+response = requests.patch(url, headers=headers, json=payload)
+response_code = response.status_code
+if 200 <= response_code < 300:
+    print("  INFO: Successfully created Harness Group.")
+else:
+    print(f"  ERROR: Request failed. Status Code: {response_code}")
+    print(f"  Response Content: {response.content.decode('utf-8')}")
