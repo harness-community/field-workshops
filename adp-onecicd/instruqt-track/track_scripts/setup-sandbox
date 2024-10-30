@@ -9,7 +9,7 @@ import shutil
 from pyharnessworkshop import harness, keycloak, utils
 
 ######################## ADD ANY WORKSHOP SPECIFIC SETUP AT THE VERY BOTTOM ########################
-WORKSHOP_TYPE = "devdays"
+WORKSHOP_TYPE = "onecicd"
 WORKSHOP_REPO = "harness-community/unscripted-workshop-2024"
 ################################## START OF DO NOT MODIFY SECTION ##################################
 
