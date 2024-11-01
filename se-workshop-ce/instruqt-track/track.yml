@@ -20,12 +20,12 @@ show_timer: true
 idle_timeout: 1800
 timelimit: 5400
 lab_config:
-  overlay: false
-  width: 25
-  position: right
   sidebar_enabled: true
   feedback_recap_enabled: true
   feedback_tab_enabled: false
   loadingMessages: true
   hideStopButton: false
-checksum: "5025927486836231632"
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "17342460224887659008"
+enhanced_loading: false

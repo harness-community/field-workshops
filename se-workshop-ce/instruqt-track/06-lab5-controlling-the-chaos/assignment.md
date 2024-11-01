@@ -14,11 +14,6 @@ tabs:
   title: Harness Platform
   type: browser
   hostname: harness
-- id: xb7baesjsjfu
-  title: Temp Tab
-  type: website
-  url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
-  new_window: true
 - id: ox7h4txqykxu
   title: Lab Credentials
   type: service
@@ -27,6 +22,7 @@ tabs:
   port: 8000
 difficulty: basic
 timelimit: 1600
+enhanced_loading: null
 ---
 
 <style type="text/css" rel="stylesheet">
@@ -45,8 +41,10 @@ h2.cyan { color: cyan; }
 
 > **Edit Condition**
 > - Name: <pre>`cartservice-pod-delete`</pre>
-> - Chaos Infrastructure Type: `Kubernetes - Dedicated Chaos Infrastructure`
-> - Click **Save**
+> - Type: `Kubernetes`
+> - Select Chaos Infrastructure Type: `Dedicated Chaos Infrastructure`
+> - Click **Save** \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_condition_k8s_v1.png)
 
 > **Create New Condition**
 > - WHAT
@@ -104,16 +102,12 @@ infraType: Kubernetes
 > - Click on the `toggle` to enable the rule \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_rule_enabled.png)
 
-> [!WARNING]
-> ***Instruqt Platform Bug*** - If you receive an error **422** it is due to a bug with the *Instruqt Platform* and you will need to switch to the `Temp Tab` tab and repeat the **+New Rule** step.
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_error_422.png)
-
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_experiments.png)
 > ### Click on **Chaos Experiments** in the left Nav
 > - Click the `play` button on the right to run your experiment \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_experiment_play_button.png)
 > You will see that the `evaluate-rules` step failed and prevented the experiment from executing. Click on this step to see additional details.
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_evaluate_rules_success.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_evaluate_rules_failure.png)
 
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_chaosguard.png)
 > ### Click on **Chaos Guard** in the left Nav
@@ -126,7 +120,7 @@ infraType: Kubernetes
 > - Click the `play` button on the right to run your experiment \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_experiment_play_button.png)
 > You will see that now the `evaluate-rules` step was successful and our experiment is executing.
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_evaluate_rules_failure.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_chaosguard_evaluate_rules_success.png)
 
 > [!NOTE]
 > That is `Policy as Code` in action! Isn't it beautiful?

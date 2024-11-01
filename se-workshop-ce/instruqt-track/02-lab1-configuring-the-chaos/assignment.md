@@ -28,6 +28,7 @@ tabs:
   port: 8000
 difficulty: basic
 timelimit: 1600
+enhanced_loading: null
 ---
 
 <style type="text/css" rel="stylesheet">
@@ -37,7 +38,7 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br><br>
 
-> # Switch to the `Architecture` tab to continue
+> # Switch to the [button label="Architecture" variant="success"](tab-1) tab to continue
 
 > [!NOTE]
 > This is the demo app that we will leverage for fault injection in a later lab. Each box represents an individual microservice.
@@ -46,7 +47,7 @@ h2.cyan { color: cyan; }
 
 <br>
 
-> # Switch to the `Harness Platform` tab to continue
+> # Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 
 

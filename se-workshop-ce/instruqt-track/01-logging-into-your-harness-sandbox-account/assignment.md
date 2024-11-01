@@ -22,6 +22,7 @@ tabs:
   port: 8000
 difficulty: basic
 timelimit: 1600
+enhanced_loading: null
 ---
 
 <style type="text/css" rel="stylesheet">
@@ -40,7 +41,8 @@ h2.cyan { color: cyan; }
 ## A Sandbox Account has been provisioned for you to use for the duration of this workshop.
 Login to your **Harness Sandbox** account using the details provided below.👇
 
----
+Harness Account
+===
 ## Harness Sandbox Account details:
 |  |   |
 | ----- | ----- |
@@ -49,15 +51,18 @@ Login to your **Harness Sandbox** account using the details provided below.👇
 
 > [!NOTE]
 > *All credentials for this lab can always be found on the: <br>
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">`Lab Credentials` tab*
-
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-1) tab*
 
 ---
+
+Signing In
+===
 
 > 📝 *Click Single sign-on* <br>
 > *Login using the credentials above:* <br>
 > ![sso_login.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sso_login.png)
 
-===============
+Conclusion
+===
 
 Click the **Check** button to continue.

@@ -35,6 +35,7 @@ tabs:
   port: 8000
 difficulty: basic
 timelimit: 1600
+enhanced_loading: null
 ---
 
 <style type="text/css" rel="stylesheet">
@@ -44,7 +45,7 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br>
 
-> # Switch to the ```Boutique App``` tab to continue
+> # Switch to the [button label="Boutique App" variant="success"](tab-1) tab to continue
 
 > [!NOTE]
 > This is our demo app we are targeting for fault injection during our Chaos Experiments.
@@ -52,7 +53,7 @@ h2.cyan { color: cyan; }
 ### Feel free to *browse* around, *add to cart*, *checkout* and see that everything is working as expected.
 
 
-> # Switch to the ```Grafana``` tab to continue
+> # Switch to the [button label="Grafana" variant="success"](tab-2) tab to continue
 |  |   |
 | ----- | ----- |
 | **Username**    |<pre>`admin`</pre>|
@@ -60,7 +61,7 @@ h2.cyan { color: cyan; }
 
 > [!NOTE]
 > *All credentials for this lab can always be found on the: <br>
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">`Lab Credentials` tab*
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-4) tab*
 
 
 
@@ -75,22 +76,22 @@ h2.cyan { color: cyan; }
 > [!NOTE]
 > We will use this dashboard to get a better understanding of how our chaos experiment impacts the Online Boutique.
 
-> # Switch to the ```Harness Platform``` tab to continue
+> # Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 ## Time to unleash the chaos!
 > Click **Run** to execute your experiment. <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
 
 > [!IMPORTANT]
-> This experiment execution will take a few minutes to run. While it's executing switch back to the `Grafana` tab and monitor what happens when fault injection begins.
+> This experiment execution will take a few minutes to run. While it's executing switch back to the [button label="Grafana" variant="success"](tab-2) tab and monitor what happens when fault injection begins.
 
 ## Once you see fault injection occuring
-> - Switch over to the `Boutique App` tab and see first hand how the site is impacted
+> - Switch over to the [button label="Boutique App" variant="success"](tab-1) tab and see first hand how the site is impacted
 >   - What happens now when you try to *browse* the site?
 >   - Is this the result you were expecting?
 >   - Why would this behavior be problematic?
 
-> # Switch to the ```Harness Platform``` tab to continue
+> # Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 ## Let's take a look at the results of our experiment
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_experiment_probe_frontend.png)
