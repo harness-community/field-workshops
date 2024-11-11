@@ -42,6 +42,7 @@ tabs:
   port: 8000
 difficulty: basic
 timelimit: 1600
+enhanced_loading: null
 ---
 
 <style type="text/css" rel="stylesheet">

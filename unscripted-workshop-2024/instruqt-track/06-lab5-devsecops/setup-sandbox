@@ -13,7 +13,7 @@ HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
 HARNESS_API = "https://app.harness.io"
 
 
-policy_set = "SCA_Scan_Step_Required"
+policy_set = "Security_Scan_Steps_Required"
 url = f"{HARNESS_API}/pm/api/v1/policysets/{policy_set}?accountIdentifier={HARNESS_ACCOUNT_ID}&orgIdentifier={HARNESS_ORG_ID}&projectIdentifier={HARNESS_PROJECT}"
 headers = {
     "Content-Type": "application/json",

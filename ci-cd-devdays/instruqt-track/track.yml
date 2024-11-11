@@ -23,14 +23,13 @@ skipping_enabled: true
 idle_timeout: 1800
 timelimit: 5400
 lab_config:
-  overlay: false
-  width: 25
-  position: right
   sidebar_enabled: true
   feedback_recap_enabled: true
   feedback_tab_enabled: false
   loadingMessages: true
-  lab_v2: false
   override_challenge_layout: false
   hideStopButton: false
-checksum: "13326455938762880704"
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "12658597302947577184"
+enhanced_loading: false
