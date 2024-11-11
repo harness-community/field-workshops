@@ -111,8 +111,9 @@ pipeline:
                         privileged: true
                         image:
                           type: docker_v2
-                          name: seworkshop/harness-workshop
                           tag: <+variable.username>-<+pipeline.sequenceId>
+                          name: seworkshop/seworkshop/harness-workshop
+                          domain: us-docker.pkg.dev
                         sbom:
                           format: spdx-json
     - stage:
