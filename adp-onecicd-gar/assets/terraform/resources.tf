@@ -77,17 +77,17 @@ resource "harness_platform_service" "proj_service" {
             primary:
               primaryArtifactRef: <+input>
               sources:
-            - identifier: backend
-              spec:
-                connectorRef: org.workshopgar
-                repositoryType: docker
-                project: seworkshop
-                region: us
-                repositoryName: seworkshop
-                package: harness-workshop
-                version: backend-latest
-                digest: ""
-              type: GoogleArtifactRegistry
+                - identifier: backend
+                  spec:
+                    connectorRef: org.workshopgar
+                    repositoryType: docker
+                    project: seworkshop
+                    region: us
+                    repositoryName: seworkshop
+                    package: harness-workshop
+                    version: backend-latest
+                    digest: ""
+                  type: GoogleArtifactRegistry
         type: Kubernetes
   EOT
 }
