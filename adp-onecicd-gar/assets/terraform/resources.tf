@@ -279,7 +279,7 @@ resource "harness_platform_template" "compile_template" {
       spec:
         type: Run
         spec:
-          connectorRef: account.harnessImage
+          connectorRef: org.harnessImage
           image: node:20-alpine
           shell: Sh
           command: |-
