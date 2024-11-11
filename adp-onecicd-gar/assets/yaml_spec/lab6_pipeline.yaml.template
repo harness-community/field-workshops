@@ -92,7 +92,7 @@ pipeline:
                       name: dind
                       identifier: dind
                       spec:
-                        connectorRef: org.workshopgar
+                        connectorRef: org.workshopdocker
                         image: docker:dind
                         shell: Sh
                   - step:
