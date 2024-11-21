@@ -1,0 +1,33 @@
+slug: belk-devsecops
+id: iulgipvxppoj
+title: Belk DevSecOps Workshop
+description: |2-
+
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/belk-devsecops/assets/images/belk-dark.png)
+
+  **This track demonstrates how to:**
+    - Lab 1 - Building the Application
+    - Lab 2 - Continuous Deployment - Frontend
+    - Lab 3 - Continuous Deployment - Backend
+    - Lab 4 - Integrating Security
+    - Lab 5 - Continuous Verification
+    - Lab 6 - Governance and Policy as Code
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/belk-devsecops/assets/images/belk.svg
+tags: []
+owner: harness
+developers:
+- joseph.titra@harness.io
+show_timer: true
+skipping_enabled: true
+idle_timeout: 3600
+timelimit: 14400
+lab_config:
+  sidebar_enabled: true
+  feedback_recap_enabled: true
+  feedback_tab_enabled: false
+  loadingMessages: true
+  override_challenge_layout: false
+  hideStopButton: false
+  default_layout_sidebar_size: 25
+checksum: "18233794435367035062"
+enhanced_loading: false

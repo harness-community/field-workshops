@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+
+# Standard library imports
+import os
+import requests
+from pyharnessworkshop import harness, utils
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
+USER_EMAIL_CLEAN = USER_EMAIL.replace("@", "%40")
+HARNESS_API = "https://app.harness.io"
+
+
+def create_user_group(api_key, account_id, org_id, project_id, group_name, users=None):
+    """
+    Creates a user group in the provided Harness project.
+
+    :param api_key: The API key for accessing Harness API.
+    :param account_id: The account ID in Harness.
+    :param org_id: The organization ID in Harness.
+    :param project_id: The project ID in Harness.
+    :param group_name: The name of the group to create.
+    :param users: Array of user IDs to add to the group.
+    """
+    if users is None:
+        users = []
+    url = f"{HARNESS_API}/ng/api/user-groups?accountIdentifier={account_id}&orgIdentifier={org_id}&projectIdentifier={project_id}"
+    group_identifer = group_name.replace(" ", "_").replace("-", "")
+    headers = {
+        "Content-Type": "application/json",
+        "x-api-key": api_key
+    }
+    payload = {
+        "identifier": f"{group_identifer}",
+        "name": f"{group_name}",
+        "users": users
+    }
+    response = requests.post(url, headers=headers, json=payload)
+    response_code = response.status_code
+    if 200 <= response_code < 300:
+        print("  INFO: Successfully created Harness Group.")
+    else:
+        print(f"  ERROR: Request failed. Status Code: {response_code}")
+        print(f"  Response Content: {response.content.decode('utf-8')}")
+
+
+user_id = harness.platform.get_harness_user_id(HARNESS_PAT, HARNESS_ACCOUNT_ID, USER_EMAIL_CLEAN)
+users = [f"{user_id}"]
+create_user_group(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, "Production Approvers", users)
