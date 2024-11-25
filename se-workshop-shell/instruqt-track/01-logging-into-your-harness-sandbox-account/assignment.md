@@ -6,9 +6,18 @@ title: Logging into your Harness Sandbox Account
 teaser: Let's log into Harness using your student credentials!
 notes:
 - type: text
-  contents: |
-    Welcome to the Harness SE workshop!<br><br>
-    **Please wait while we setup your Harness Sandbox environment**
+  contents: |-
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/harness.png" width="35" style="display: inline; vertical-align: middle;"> **harness**<br>
+    ***The AI-Native Software Delivery Platform™***
+
+    Today's workshop will provide you with hands-on experience with:<br>
+
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/harness.png" width="40" style="display: inline; vertical-align: middle;"> **Module Name Here**
+    - Some one sentence module description here.
+
+    <br>
+
+    **Please wait while we setup your Sandbox environment**
 tabs:
 - id: clvtrzloawyx
   title: Workshop SSO Login
@@ -28,7 +37,6 @@ difficulty: basic
 timelimit: 1600
 ---
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style type="text/css" rel="stylesheet">
 hr.cyan { background-color: cyan; color: cyan; height: 2px; margin-bottom: -10px; }
 h2.cyan { color: cyan; }
@@ -45,7 +53,8 @@ h2.cyan { color: cyan; }
 ## A Sandbox Account has been provisioned for you to use for the duration of this workshop.
 Login to your **Harness Sandbox** account using the details provided below.👇
 
----
+Harness Account
+===
 ## Harness Sandbox Account details:
 |  |   |
 | ----- | ----- |
@@ -54,18 +63,19 @@ Login to your **Harness Sandbox** account using the details provided below.👇
 
 > [!NOTE]
 > *All credentials for this lab can always be found on the: <br>
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">`Lab Credentials` tab*
-
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-1) tab*
 
 ---
 
+Signing In
+===
+
 > 📝 *Click Single sign-on* <br>
 > *Login using the credentials above:* <br>
-> ![sso_login.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sso_login.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sso_login.png)
 
-
-## Test
-
+Testing
+===
 > [!NOTE]
 > Highlights information that users should take into account, even when skimming.
 
@@ -84,8 +94,7 @@ Login to your **Harness Sandbox** account using the details provided below.👇
 > [!CAUTION]
 > Negative potential consequences of an action.
 
-## End Test
-
-===============
+Conclusion
+===
 
 Click the **Check** button to continue.
