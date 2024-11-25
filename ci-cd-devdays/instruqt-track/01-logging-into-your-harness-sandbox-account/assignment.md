@@ -58,7 +58,7 @@ Login to your **Harness Sandbox** account using the details provided below.👇
 
 > 📝 *Click Single sign-on* <br>
 > *Login using the credentials above:* <br>
-> ![sso_login.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sso_login.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sso_login.png)
 
 ===============
 
