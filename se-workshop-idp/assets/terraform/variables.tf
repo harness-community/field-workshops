@@ -13,6 +13,11 @@ variable "project_id" {
   type = string
 }
 
+variable "api_key" {
+  type      = string
+  sensitive = true
+}
+
 // Repo
 variable "new_repo_id" {
   type = string
