@@ -1,4 +1,5 @@
 slug: se-workshop-idp
+id: zm0rv9uwgvwa
 title: Harness IDP Workshop
 description: |2-
 
@@ -12,14 +13,15 @@ owner: harness
 developers:
 - joseph.titra@harness.io
 show_timer: true
-idle_timeout: 1800
-timelimit: 3600
+idle_timeout: 3600
+timelimit: 10800
 lab_config:
-  overlay: false
-  width: 25
-  position: right
   sidebar_enabled: true
   feedback_recap_enabled: true
   feedback_tab_enabled: false
   loadingMessages: true
   hideStopButton: false
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "7170869471584144991"
+enhanced_loading: false

@@ -1,6 +1,6 @@
 ---
 slug: logging-into-your-harness-sandbox-account
-id: kdlau7y1zlvg
+id: pxfxazgzoa37
 type: challenge
 title: Logging into your Harness Sandbox Account
 teaser: Let's log into Harness using your student credentials!
@@ -15,15 +15,18 @@ notes:
     <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/idp.png" width="40" style="display: inline; vertical-align: middle;"> **Internal Developer Portal**
     - Eliminate cognitive overload by letting developers manage their software effortlessly and access everything at their fingertips.
 
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/cde.png" width="40" style="display: inline; vertical-align: middle;"> **Cloud Development Environments**
+    - On-demand, pre-configured, secure remote development environments (Gitspaces™) that reduce toil in the development inner loop and make developers happy.
+
     <br>
 
     **Please wait while we setup your Sandbox environment**
 tabs:
-- id: clvtrzloawyx
+- id: beygc83hystr
   title: Workshop SSO Login
   type: browser
   hostname: harness
-- id: o9s6yjrliizb
+- id: xmgzcmpjtloy
   title: Lab Credentials
   type: service
   hostname: sandbox
@@ -31,6 +34,7 @@ tabs:
   port: 8000
 difficulty: basic
 timelimit: 1600
+enhanced_loading: null
 ---
 
 <style type="text/css" rel="stylesheet">
