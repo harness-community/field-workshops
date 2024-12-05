@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+
+# Standard library imports
+import os
+from pyharnessworkshop import harness, keycloak, utils 
+
+####################### ADD ANY WORKSHOP SPECIFIC CLEANUP AT THE VERY BOTTOM #######################
+
+################################## START OF DO NOT MODIFY SECTION ##################################
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+HARNESS_PROJECT_CREATED = utils.instruqt.get_agent_variable("HARNESS_PRJ_CREATED")
+USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
+USER_EMAIL_CLEAN = USER_EMAIL.replace("@", "%40")
+KEYCLOAK_ENDPOINT = os.getenv("SE_WORKSHOP_KEYCLOAK_ENDPOINT")
+KEYCLOAK_REALM = os.getenv("SE_WORKSHOP_KEYCLOAK_REALM")
+KEYCLOAK_ADMIN_USER = os.getenv("SE_WORKSHOP_KEYCLOAK_ADMIN_USER")
+KEYCLOAK_ADMIN_PWD = os.getenv("SE_WORKSHOP_KEYCLOAK_ADMIN_PWD")
+
+# Generate Keycloak Bearer Token
+keycloak_token = keycloak.auth.generate_keycloak_token(KEYCLOAK_ENDPOINT, KEYCLOAK_ADMIN_USER, KEYCLOAK_ADMIN_PWD, cleanup=True)
+# Create workshop user in Keycloak Realm
+keycloak.user.delete_keycloak_user(KEYCLOAK_ENDPOINT, KEYCLOAK_REALM, keycloak_token, USER_EMAIL_CLEAN, cleanup=True)
+
+print(f"HARNESS_PROJECT_CREATED: {HARNESS_PROJECT_CREATED}")
+if HARNESS_PROJECT_CREATED:
+    print(f"Cleaning up Project: {HARNESS_PROJECT}")
+    # Delete the workshop user from Harness Project
+    harness.platform.delete_harness_user(HARNESS_PAT, HARNESS_ACCOUNT_ID, USER_EMAIL_CLEAN, cleanup=True)
+    # Delete the Users Sandbox Project in Harness
+    harness.platform.delete_harness_project(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, cleanup=True)
+else:
+    print("Project does not appear to have been created. Skipping...")
+
+################################## END OF DO NOT MODIFY SECTION ##################################
+
+############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
+#
+#

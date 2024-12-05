@@ -1,0 +1,119 @@
+#!/usr/bin/env python3
+
+import os
+from pyharnessworkshop import harness, utils
+
+######################## ADD ANY WORKSHOP SPECIFIC SETUP AT THE VERY BOTTOM ########################
+AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+CUSTOM_CREDENTIALS = [
+    {
+        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/Amazon_Web_Services_Logo.svg",
+        "name": "AWS",
+        "auth": {
+            "AWS_ACCESS_KEY_ID": f"{AWS_ACCESS_KEY}",
+            "AWS_SECRET_ACCESS_KEY": f"{AWS_SECRET_KEY}"
+        }
+    }
+]
+#################################### DO NOT MODIFY THIS SCRIPT ####################################
+
+# REQUIRED VARIABLES LIST
+OUTPUT_HTML = "/opt/harness/misc/credential_tab.html"
+USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
+USER_PWD = os.getenv("SE_WORKSHOP_USER_PWD")
+DEFAULT_CREDENTIALS = [
+    {
+        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png",
+        "name": "Harness",
+        "auth": {
+            "Username": f"{USER_EMAIL}",
+            "Password": f"{USER_PWD}"
+        }
+    }
+]
+
+if 'CUSTOM_CREDENTIALS' in globals():
+    combined_creds = DEFAULT_CREDENTIALS + CUSTOM_CREDENTIALS
+else:
+    combined_creds = DEFAULT_CREDENTIALS
+
+# Render HTML
+generated_html = utils.misc.generate_credentials_html(combined_creds)
+
+# Check if the HTML was generated successfully
+if generated_html:
+    with open(OUTPUT_HTML, "w") as file:
+        file.write(generated_html)
+    print(f"HTML file '{OUTPUT_HTML}' generated successfully.")
+else:
+    print("Failed to generate HTML file.")
+
+# Serve it on port 800
+service_content = """\
+[Unit]
+Description=Lab Credentials
+After=network.target
+
+[Service]
+Type=simple
+User=harness
+WorkingDirectory=/opt/harness/misc/
+ExecStart=/usr/bin/python3 -m http.server 8000
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+"""
+utils.misc.create_systemd_service(service_content, "lab_credentials")
+
+################################## END OF DO NOT MODIFY SECTION ##################################
+
+############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
+secret_yaml = f"""\
+secret:
+  name: aws-secret
+  identifier: awssecret
+  org: {HARNESS_ORG_ID}
+  project: {HARNESS_PROJECT}
+  description: "Automatically created for this lab"
+  spec:
+    type: SecretText
+    secret_manager_identifier: harnessSecretManager
+    value_type: Inline
+    value: {AWS_SECRET_KEY}
+"""
+
+print("Creating Project Secret for AWS_SECRET_ACCESS_KEY...")
+harness.platform.create_project_secret(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, secret_yaml)
+
+connector_yaml = f"""\
+connector:
+  name: instruqt-workshop-connector
+  identifier: instruqtworkshopconnector
+  description: "Automatically created for this lab"
+  accountIdentifier: {HARNESS_ACCOUNT_ID}
+  orgIdentifier: {HARNESS_ORG_ID}
+  projectIdentifier: {HARNESS_PROJECT}
+  type: Aws
+  spec:
+    connectorType: AwsConnector
+    credential:
+      type: ManualConfig
+      spec:
+        accessKey: {AWS_ACCESS_KEY}
+        secretKeyRef: awssecret
+      region: us-east-1
+    executeOnDelegate: false
+    proxy: false
+"""
+
+print("Creating Connector for new AWS Environment...")
+harness.platform.create_project_connector(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, connector_yaml)
+
+utils.instruqt.set_agent_variable("HARNESS_AWS_ACCESS_KEY_ID", AWS_ACCESS_KEY)
+utils.instruqt.set_agent_variable("HARNESS_AWS_SECRET_ACCESS_KEY", AWS_SECRET_KEY)

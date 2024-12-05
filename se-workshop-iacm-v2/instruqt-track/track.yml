@@ -1,0 +1,33 @@
+slug: se-workshop-iacm-v2
+id: oyfnyidbl0xu
+title: Harness IaCM Workshop
+description: |2-
+
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
+
+  **This track demonstrates how to:**
+    - Lab 1 - Clone the IaC Repo
+    - Lab 2 - Creating a Workspace
+    - Lab 3 - Create a Harness IaCM Pipeline
+    - Lab 4 - Drift Detection w/Harness IaCM
+    - Lab 5 - Governance w/OPA
+    - Lab 6 - Cost Estimation and State
+    - Lab 7 - PR Triggers and Validation
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/iacm.png
+tags: []
+owner: harness
+developers:
+- joseph.titra@harness.io
+show_timer: true
+idle_timeout: 3600
+timelimit: 10800
+lab_config:
+  sidebar_enabled: true
+  feedback_recap_enabled: true
+  feedback_tab_enabled: false
+  loadingMessages: true
+  hideStopButton: false
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "7460309660698202512"
+enhanced_loading: false

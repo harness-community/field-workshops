@@ -48,7 +48,7 @@ h2.cyan { color: cyan; }
 <br><br>
 
 First let's select the project that's been created for this workshop <br>
-![project_selection.png](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/project_selection.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/project_selection.png)
 
 ## Let's take a look at our code
 ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/module_code.png)
