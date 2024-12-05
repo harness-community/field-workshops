@@ -38,15 +38,3 @@ resource "harness_platform_variables" "instruqt_variable" {
     fixed_value = var.instruqt_sandbox_id
   }
 }
-
-resource "harness_platform_variables" "sdk_variable" {
-  identifier = "sdk"
-  name       = "sdk"
-  org_id     = var.org_id
-  project_id = var.project_id
-  type       = "String"
-  spec {
-    value_type  = "FIXED"
-    fixed_value = "somekey"
-  }
-}
