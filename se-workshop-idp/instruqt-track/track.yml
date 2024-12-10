@@ -6,7 +6,12 @@ description: |2-
   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
 
   **This track demonstrates how to:**
-    - Lab 1 - TBD
+    - Lab 1 - Clone the IDP Repo
+    - Lab 2 - Add a Service Component
+    - Lab 3 - Create a Scorecard
+    - Lab 4 - Create a Self-Service Workflow
+    - Lab 5 - Add Pipeline Relationships
+    - Lab 6 - Cloud Developer Environments Beta
 icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/idp.png
 tags: []
 owner: harness
@@ -23,5 +28,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "7170869471584144991"
+checksum: "8731762329521715939"
 enhanced_loading: false

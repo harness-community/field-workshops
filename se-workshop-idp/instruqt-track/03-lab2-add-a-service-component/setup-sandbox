@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+import os
+import shutil
+from pyharnessworkshop import harness, utils
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
+
+# Add the workshop user to the TeamA group
+harness.platform.add_user_to_user_group(HARNESS_PAT, HARNESS_ACCOUNT_ID, USER_EMAIL, "TeamA")

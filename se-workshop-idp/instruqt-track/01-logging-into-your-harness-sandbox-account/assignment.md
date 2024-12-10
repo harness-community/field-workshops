@@ -74,26 +74,6 @@ Signing In
 > *Login using the credentials above:* <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sso_login.png)
 
-Testing
-===
-> [!NOTE]
-> Highlights information that users should take into account, even when skimming.
-
-> [!IMPORTANT]
-> Crucial information necessary for users to succeed.
-
-> [!WARNING]
-> Critical content demanding immediate user attention due to potential risks.
-
-### Not implemented in Instruqt
-#### Tip
-> [!TIP]
-> Optional information to help a user be more successful.
-
-#### Caution
-> [!CAUTION]
-> Negative potential consequences of an action.
-
 Conclusion
 ===
 

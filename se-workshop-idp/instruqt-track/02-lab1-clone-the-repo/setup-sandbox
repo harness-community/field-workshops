@@ -22,6 +22,10 @@ shutil.rmtree("/opt/harness/terraform")
 code_repo_url = f"https://git.harness.io/{HARNESS_ACCOUNT_ID}/{HARNESS_ORG_ID}/{HARNESS_PROJECT}/{HARNESS_CODE_REPO}.git"
 utils.instruqt.set_agent_variable("HARNESS_REPO_URL", code_repo_url)
 
+# IDP Catalog Repo Path
+idp_file_path = f"https://app.harness.io/ng/account/{HARNESS_ACCOUNT_ID}/module/code/orgs/{HARNESS_ORG_ID}/projects/{HARNESS_PROJECT}/repos/{HARNESS_CODE_REPO}/files/main/~"
+utils.instruqt.set_agent_variable("HARNESS_IDP_REPO_PATH", idp_file_path)
+
 # Simplify user experience
 utils.misc.run_command(f"git config --global user.email '{USER_EMAIL}'")
 utils.misc.run_command(f"git config --global user.name '{USER_EMAIL}'")
