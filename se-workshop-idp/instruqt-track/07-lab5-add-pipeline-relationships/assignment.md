@@ -110,7 +110,7 @@ h2.cyan { color: cyan; }
 
 ```yaml
 harness.io/pipelines: |
-      Build and Deploy: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/all/orgs/IDP/projects/Onboarding/pipelines/Onboard_New_App/pipeline-studio?storeType=INLINE
+      Build and Deploy: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/all/orgs/IDP/projects/Onboarding/pipelines/Secure_Build_and_Deploy/executions?storeType=INLINE
 ```
 
 > [!IMPORTANT]

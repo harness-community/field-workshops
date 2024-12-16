@@ -97,9 +97,83 @@ Configure your Gitspace as per the instructions provided below ↓ <br>
 > [!NOTE]
 > Please skip over the `VS Code Desktop` section below and continue with `Running Your App`
 
-VS Code Desktop on your local machine
+Testing - VS Code Desktop on your local machine
 ===
-Not currently implemented in this workshop. Please follow the instructions for using `VS Code Online` instead.
+> [!IMPORTANT]
+> Not currently implemented in this workshop. Please follow the instructions for using `VS Code Online` instead.
+
+## Prior to creating our Gitspace we must first create an SSH Keypair
+
+> ## Switch to the [button label=">_Shell" variant="success"](tab-2) tab to continue
+
+### Generate SSH Keypair
+> [!NOTE]
+> This step will allow our local VS Code IDE to connect with the remote Gitspace.
+
+<br>
+
+Click `▶️ run` to generate a new ssh keypair.
+```bash,run
+ssh-keygen -o -f ~/.ssh/harness_cde -C harness -N ""
+```
+
+<br>
+
+Click `▶️ run` to display the public key.
+```bash,run
+cat ~/.ssh/harness_cde.pub
+```
+
+> ### Highlight the public key to copy it to your clipboard
+> #### You can also find the contents on the [button label="Public Key" variant="success"](tab-3) tab
+
+> ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
+
+## Now let's create a CDE Gitspace
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/module_cde.png)
+
+Select the **Cloud Development Environments** module from the list <br>
+
+Click on **Gitspaces** in the left Nav <br>
+And then click `Get Started Now >` <br>
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_get_started_now.png) <br>
+Configure your Gitspace as per the instructions provided below ↓ <br>
+
+> [!NOTE]
+> We are using a public GitHub repo for this workshop so you can ignore the OAuth message. \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_github_configure_oauth.png)
+
+
+> **Create Gitspace**
+> - Repository Details
+>   - Git Provider: `GitHub Cloud`
+>   - Repo URL: <pre>`https://github.com/jtitra/haikus`</pre>
+>   - Repo Branch: `main`
+> - IDE: `VS Code Desktop`
+> - SSH Key:
+>   - Click the dropdown and select `Add SSH Key`
+>   - Key Name: <pre>`harness_cde`</pre>
+>   - SSH Key: ***Paste contents from [button label="Public Key" variant="success"](tab-3) tab***
+>   - Click `Add Key`
+> - Region: `us-west`
+> - Machine Type: `Standard`
+> - Click **Create Gitspace**
+
+<br>
+
+
+> [!NOTE]
+> This will set up your development environment in the cloud and will take approximately 2-3 minutes to complete. \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_gitspace_starting.png)
+> - Expand `Gitspace Activity` and `Container Logs` to see this process in real-time.
+
+## Now that your development environment is set up, you can start coding and testing your applications!
+> [!IMPORTANT]
+> - Normally you would be able to scroll to the top of the page and click on the **Open VS Code Editor** button to launch your coding environment \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_open_vs_code_editor.png)
+> - But due to a limitation with the **Instruqt** platform, you will need to manually open your VS Code editor after the Gitspace is ready
+> - Open your local VS Code editor and add the [Harness Gitspaces](https://marketplace.visualstudio.com/items?itemName=harness-inc.gitspaces) extension
+> - Login to the extension using your credentials on the <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-4) tab
 
 Running Your App
 ===

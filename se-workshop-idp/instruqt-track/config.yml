@@ -4,7 +4,7 @@ virtualbrowsers:
   url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
 virtualmachines:
 - name: sandbox
-  image: sales-209522/harness-se-workshop-v0-0-9
+  image: sales-209522/harness-se-workshop-v0-0-10
   shell: /bin/bash
   machine_type: n2-standard-8
   allow_external_ingress:
@@ -21,3 +21,4 @@ secrets:
 - name: SE_WORKSHOP_KEYCLOAK_REALM
 - name: SE_WORKSHOP_KEYCLOAK_ADMIN_USER
 - name: SE_WORKSHOP_KEYCLOAK_ADMIN_PWD
+- name: SE_WORKSHOP_IDP_ACCOUNT_ID

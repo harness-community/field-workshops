@@ -38,5 +38,22 @@ else:
 ################################## END OF DO NOT MODIFY SECTION ##################################
 
 ############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
-#
-#
+IDP_ACCOUNT_ID = os.getenv("SE_WORKSHOP_IDP_ACCOUNT_ID")
+
+# Get IDP catalog items
+catalog_items = harness.platform.get_all_idp_catalog_items(HARNESS_PAT, IDP_ACCOUNT_ID)
+
+# Verify there are catalog items to filter
+if catalog_items:
+    print(f"Found {len(catalog_items)} catalog items to process.")
+    # Filter list to items created by this workshop session
+    matching_ids = harness.platform.find_ids_with_target(catalog_items, HARNESS_PROJECT)
+    # Verify there are IDs to delete
+    if matching_ids:
+        print(f"Found {len(matching_ids)} items to delete.")
+        # Delete IDP catalog items created during this workshop session
+        harness.platform.delete_matching_idp_catalog_ids(HARNESS_PAT, IDP_ACCOUNT_ID, matching_ids)
+    else:
+        print("No matching items found to delete.")
+else:
+    print("No catalog items found to process.")
