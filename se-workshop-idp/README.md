@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This workshop is designed to provide hands-on experience with Harness Internal Developer Portal. Participants will TBD.
+This workshop is designed to provide hands-on experience with Harness Internal Developer Portal. Participants will learn how to create service components, how dependency relationships are defined, create custom scorecards and refine their weights and metrics, create self-service workflows, and associate pipelines with service components. As a bonus, participants will also explore the new Cloud Developer Environments feature, which provide secure remote development environments that reduce toil and make developers happy.
 
 ## Labs
 
