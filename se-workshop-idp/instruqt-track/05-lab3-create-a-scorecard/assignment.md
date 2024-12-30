@@ -11,7 +11,7 @@ notes:
   contents: |-
     <h1>Scorecards</h1>
 
-    <img src="https://cdn.prod.website-files.com/6222ca42ea87e1bd1aa1d10c/6502644fc4b918072a62e67f_Scorecards.svg" width="900" style="display: inline; vertical-align: middle;">
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_Scorecards.svg" width="900" style="display: inline; vertical-align: middle;">
 
     - **Measure software maturity**
     - **Drive migrations and adoption of standards**

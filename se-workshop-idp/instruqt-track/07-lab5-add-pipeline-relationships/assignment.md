@@ -44,23 +44,23 @@ notes:
 
     <div class="plugins-grid">
       <div class="plugin-item">
-        <img src="https://cdn.prod.website-files.com/6222ca42ea87e1bd1aa1d10c/6500c564f73b2108c5825e4c_Harness%20CI-CD%20(1).svg" alt="Harness CI/CD" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/harness_padded.svg" alt="Harness CI/CD" width="150">
         <p>Harness CI/CD</p>
       </div>
       <div class="plugin-item">
-        <img src="https://cdn.prod.website-files.com/6222ca42ea87e1bd1aa1d10c/6500c561a593ecc0b3dd350e_PagerDuty%20(1).svg" alt="PagerDuty" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/pagerduty_padded.svg" alt="PagerDuty" width="150">
         <p>PagerDuty</p>
       </div>
       <div class="plugin-item">
-        <img src="https://cdn.prod.website-files.com/6222ca42ea87e1bd1aa1d10c/6500c55df5468e9a8a5f1694_Kubernetes%20(1).svg" alt="Kubernetes" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/kubernetes_padded.svg" alt="Kubernetes" width="150">
         <p>Kubernetes</p>
       </div>
       <div class="plugin-item">
-        <img src="https://cdn.prod.website-files.com/6222ca42ea87e1bd1aa1d10c/6500c559c7a841caed716b12_Firehydrant%20(1).svg" alt="Firehydrant" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/firehydrant_padded.svg" alt="Firehydrant" width="150">
         <p>Firehydrant</p>
       </div>
       <div class="plugin-item">
-        <img src="https://cdn.prod.website-files.com/6222ca42ea87e1bd1aa1d10c/6500c5565e13f7b9dd969df2_Jira%20(1).svg" alt="Jira" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/jira_software_padded.svg" alt="Jira" width="150">
         <p>Jira</p>
       </div>
     </div>

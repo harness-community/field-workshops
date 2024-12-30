@@ -10,8 +10,8 @@ notes:
   contents: |-
     <h1>Service Onboarding</h1>
 
-    <img src="https://cdn.prod.website-files.com/6222ca42ea87e1bd1aa1d10c/6508b13cccf2fa0ede041886_Pipeline%20(10).svg" width="500" style="display: inline; vertical-align: left;">
-    <img src="https://cdn.prod.website-files.com/6222ca42ea87e1bd1aa1d10c/656db4734ca9ba49911b19cf_idp-serving-image.svg" width="300" style="display: inline; vertical-align: right;">
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_Pipeline.svg" width="500" style="display: inline; vertical-align: left;">
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_Serving_Image.svg" width="300" style="display: inline; vertical-align: right;">
 
     - **Initiate new projects and services in minutes**
     - **Build Software Templates with best practices baked in**

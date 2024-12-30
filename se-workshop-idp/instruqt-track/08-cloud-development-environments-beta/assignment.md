@@ -11,7 +11,7 @@ notes:
 
     Developers can start coding immediately with environments tailored to their projects, accessible from anywhere while maintaining familiarity with their preferred tools.
 
-    <img src="https://cdn.prod.website-files.com/6222ca42ea87e1bd1aa1d10c/66edbd734bd10626df0dadea_CDE%20streamline%20dev%20loop-min.webp" width="800" style="display: inline; vertical-align: center;">
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_streamline_dev_loop.png" width="800" style="display: inline; vertical-align: center;">
 
     - **Run preferred IDEs locally or in the cloud**
     - **On-demand development environments**

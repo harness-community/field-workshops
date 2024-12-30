@@ -1,0 +1,45 @@
+<svg width="223" height="222" viewBox="0 0 223 222" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter0_dd_1069_5299)">
+        <rect x="16.5" y="8" width="190" height="190" rx="8" fill="#353535" />
+    </g>
+    <rect x="59.5" y="51" width="104" height="104" fill="url(#pattern0)" />
+    <defs>
+        <filter id="filter0_dd_1069_5299" x="0.5" y="0" width="222" height="222"
+            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feColorMatrix in="SourceAlpha" type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+            <feOffset dy="8" />
+            <feGaussianBlur stdDeviation="8" />
+            <feColorMatrix type="matrix"
+                values="0 0 0 0 0.376471 0 0 0 0 0.380392 0 0 0 0 0.439216 0 0 0 0.16 0" />
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1069_5299" />
+            <feColorMatrix in="SourceAlpha" type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+            <feOffset dy="2" />
+            <feGaussianBlur stdDeviation="2" />
+            <feColorMatrix type="matrix"
+                values="0 0 0 0 0.156863 0 0 0 0 0.160784 0 0 0 0 0.239216 0 0 0 0.04 0" />
+            <feBlend mode="normal" in2="effect1_dropShadow_1069_5299"
+                result="effect2_dropShadow_1069_5299" />
+            <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_1069_5299"
+                result="shape" />
+        </filter>
+        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="6.6316 98.3045 73.2549 75.8" width="1" height="1" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <linearGradient id="linear-gradient" x1="60.98" y1="98.55" x2="45.34" y2="114.19" gradientUnits="userSpaceOnUse">
+                        <stop offset="0.18" stop-color="#0050d3"></stop>
+                        <stop offset="1" stop-color="#0082ff"></stop>
+                    </linearGradient>
+                    <linearGradient id="linear-gradient-2" x1="65.12" y1="143.48" x2="80.73" y2="127.87" href="#linear-gradient"></linearGradient>
+                </defs>
+                <g transform="matrix(1, 0, 0, 1, -19.7110595703125, 15.10451889038086)">
+                    <path class="cls-2" d="M98.74,119l-32.6-32.6L63,83.2h0L38.44,107.74h0L27.22,119a3,3,0,0,0,0,4.24l22.42,22.42L63,159l24.54-24.54.38-.38L98.74,123.2A3,3,0,0,0,98.74,119ZM63,132.28l-11.2-11.2L63,109.88l11.2,11.2Z" style="fill: rgb(0, 130, 255);"></path>
+                    <path class="cls-3" d="M63,109.88a18.86,18.86,0,0,1-.08-26.59l-24.5,24.5,13.34,13.34L63,109.88Z" style="fill: url(#linear-gradient);"></path>
+                    <path class="cls-4" d="M74.21,121.05,63,132.28A18.86,18.86,0,0,1,63,159h0l24.57-24.57Z" style="fill: url(#linear-gradient-2);"></path>
+                </g>
+            </svg>
+        </pattern>
+    </defs>
+</svg>

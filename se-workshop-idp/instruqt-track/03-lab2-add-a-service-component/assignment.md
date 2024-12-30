@@ -9,7 +9,7 @@ notes:
   contents: |-
     <h1>Software Catalog</h1>
 
-    <img src="https://cdn.prod.website-files.com/6222ca42ea87e1bd1aa1d10c/6502437c71a3b62fff9dff0d_Catalog%20Graph%20(2).svg" width="800" style="display: inline; vertical-align: middle;">
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_Catalog_Graph.svg" width="800" style="display: inline; vertical-align: middle;">
 
     - **A living software registry**
     - **Establish service ownership with teams**
