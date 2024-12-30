@@ -57,7 +57,7 @@ data:
         server_name {{ HOSTNAME }}-{{ APP_PORT }}-{{ PARTICIPANT_ID }};
 
         location / {
-            proxy_pass {{ IP_ADDRESS }};
+            proxy_pass https://{{ IP_ADDRESS }};
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
