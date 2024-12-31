@@ -7,8 +7,52 @@ teaser: For this workshop we will be using Harness Code, but this process works 
   same with any git based SCM.
 notes:
 - type: text
-  contents: |
-    - For this workshop we will be using Harness Code, but this process works the same with any git based SCM
+  contents: |-
+    <style>
+      .plugins-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        justify-items: center;
+        gap: 20px;
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .plugin-item img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .plugin-item p {
+        margin-top: 10px;
+        font-size: 19px;
+      }
+    </style>
+
+    For this workshop we will be using Harness Code, but this process works the same with any git based SCM.
+
+    <div class="plugins-grid">
+      <div class="plugin-item">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/svg/code.svg" alt="Harness Code" width="150">
+        <p>Harness Code</p>
+      </div>
+      <div class="plugin-item">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/github.svg" alt="GitHub" width="150">
+        <p>GitHub</p>
+      </div>
+      <div class="plugin-item">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/gitlab.svg" alt="GitLab" width="150">
+        <p>GitLab</p>
+      </div>
+      <div class="plugin-item">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/bitbucket.svg" alt="BitBucket" width="150">
+        <p>BitBucket</p>
+      </div>
+      <div class="plugin-item">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/git_scm.svg" alt="Git" width="150">
+        <p>Git</p>
+      </div>
+    </div>
 tabs:
 - id: 9v1f5dkcnmft
   title: Harness Platform
