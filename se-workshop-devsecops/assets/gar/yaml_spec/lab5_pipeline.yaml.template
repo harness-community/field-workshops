@@ -117,6 +117,32 @@ pipeline:
                         sbom:
                           format: spdx-json
     - stage:
+        name: Approval
+        identifier: Approval
+        description: ""
+        type: Approval
+        spec:
+          execution:
+            steps:
+              - step:
+                  name: Harness Approval
+                  identifier: Harness_Approval
+                  type: HarnessApproval
+                  timeout: 1d
+                  spec:
+                    approvalMessage: |-
+                      Please review the following information
+                      and approve the pipeline progression
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                      userGroups:
+                        - Production_Approvers
+                    isAutoRejectEnabled: false
+                    approverInputs: []
+        tags: {}
+    - stage:
         name: Frontend - Deployment
         identifier: Frontend_Deployment
         description: ""
@@ -148,41 +174,6 @@ pipeline:
                   spec:
                     skipDryRun: false
                     pruningEnabled: false
-              - step:
-                  type: ServiceNowCreate
-                  name: ServiceNow - Create Ticket
-                  identifier: ServiceNow_Create_Ticket
-                  spec:
-                    connectorRef: ServiceNow
-                    ticketType: change_request
-                    fields:
-                      - name: description
-                        value: "Change Detail: Promote version <+variable.username>-<+pipeline.sequenceId> of <+service.name> to production."
-                      - name: short_description
-                        value: Begin promotion of <+service.name> to production
-                    createType: Normal
-                  timeout: 10m
-              - step:
-                  type: ServiceNowUpdate
-                  name: ServiceNow - Update Ticket
-                  identifier: ServiceNow_Update_Ticket
-                  spec:
-                    useServiceNowTemplate: false
-                    connectorRef: ServiceNow
-                    ticketType: change_request
-                    ticketNumber: <+execution.steps.ServiceNow_Create_Ticket.ticket.ticketNumber>
-                    fields:
-                      - name: assignment_group
-                        value: CAB Approval
-                      - name: backout_plan
-                        value: Harness Continuous Verification and Automatic Rollback.
-                      - name: implementation_plan
-                        value: |-
-                          Harness Pipeline Deployment Details:
-                            Deployed Artifact: <+artifacts.primary.image>
-                            Harness Execution: <+pipeline.executionId>
-                            Deployment URL: https://app.harness.io/ng/account/<+account.identifier>/all/orgs/<+org.identifier>/default/projects/<+project.identifier>/pipelines/<+pipeline.identifier>/executions/<+pipeline.executionId>/pipeline
-                  timeout: 10m
             rollbackSteps:
               - step:
                   name: Rollback Rollout Deployment
@@ -198,38 +189,6 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
-    - stage:
-        name: Approval
-        identifier: Approval
-        description: ""
-        type: Approval
-        spec:
-          execution:
-            steps:
-              - step:
-                  name: ServiceNow Approval
-                  identifier: ServiceNow_Approval
-                  type: ServiceNowApproval
-                  timeout: 1d
-                  spec:
-                    approvalCriteria:
-                      type: KeyValues
-                      spec:
-                        matchAnyCondition: true
-                        conditions:
-                          - key: state
-                            operator: equals
-                            value: Implement
-                    rejectionCriteria:
-                      type: KeyValues
-                      spec:
-                        matchAnyCondition: true
-                        conditions: []
-                    connectorRef: ServiceNow
-                    ticketNumber: <+pipeline.stages.Frontend_Deployment.spec.execution.steps.ServiceNow_Create_Ticket.ticket.ticketNumber>
-                    retryInterval: 1m
-                    ticketType: change_request
-        tags: {}
     - parallel:
         - stage:
             name: Backend - Deployment
