@@ -134,10 +134,10 @@ pipeline:
                       primaryArtifactRef: <+input>
                       sources: <+input>
           environment:
-            environmentRef: dev
+            environmentRef: prod
             deployToAll: false
             infrastructureDefinitions:
-              - identifier: k8s_dev
+              - identifier: k8s_prod
           execution:
             steps:
               - step:
