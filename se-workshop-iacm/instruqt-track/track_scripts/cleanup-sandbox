@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 
-# Standard library imports
+# Standard imports
 import os
-from pyharnessworkshop import harness, keycloak, utils 
+
+# Third-party imports
+#   None
+
+# Library-specific imports
+from pyharnessworkshop import harness, keycloak, utils
 
 ####################### ADD ANY WORKSHOP SPECIFIC CLEANUP AT THE VERY BOTTOM #######################
 

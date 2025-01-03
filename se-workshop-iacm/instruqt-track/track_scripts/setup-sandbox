@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
-# Standard library imports
+# Standard imports
 import os
 import time
 import shutil
 
 # Third-party imports
+#   None
+
+# Library-specific imports
 from pyharnessworkshop import harness, keycloak, utils
 
 ######################## ADD ANY WORKSHOP SPECIFIC SETUP AT THE VERY BOTTOM ########################
@@ -18,7 +21,6 @@ HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
 HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
 HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
 HARNESS_USER_GROUP = os.getenv("SE_WORKSHOP_USER_GRP_ID")
-USER_PWD = os.getenv("SE_WORKSHOP_USER_PWD")
 KEYCLOAK_ENDPOINT = os.getenv("SE_WORKSHOP_KEYCLOAK_ENDPOINT")
 KEYCLOAK_REALM = os.getenv("SE_WORKSHOP_KEYCLOAK_REALM")
 KEYCLOAK_ADMIN_USER = os.getenv("SE_WORKSHOP_KEYCLOAK_ADMIN_USER")
@@ -34,15 +36,16 @@ while not os.path.isfile("/opt/instruqt/bootstrap/host-bootstrap-completed"):
 # Wait for the Kubernetes API server to become available
 utils.k8s.wait_for_kubernetes_api("http://localhost:8001/api")
 
-random_suffix = utils.misc.generate_random_suffix()
+random_suffix = utils.misc.generate_random_suffix(5)
 harness_project = f"{WORKSHOP_TYPE}{random_suffix}"
 user_name = f"{WORKSHOP_TYPE}{random_suffix}"
 user_email = f"{user_name}@harness.io"
+user_pwd = utils.misc.generate_password()
 
 # Generate Keycloak Bearer Token
 keycloak_token = keycloak.auth.generate_keycloak_token(KEYCLOAK_ENDPOINT, KEYCLOAK_ADMIN_USER, KEYCLOAK_ADMIN_PWD)
 # Create workshop user in Keycloak Realm
-keycloak.user.create_keycloak_user(KEYCLOAK_ENDPOINT, KEYCLOAK_REALM, keycloak_token, user_email, user_name, USER_PWD)
+keycloak.user.create_keycloak_user(KEYCLOAK_ENDPOINT, KEYCLOAK_REALM, keycloak_token, user_email, user_name, user_pwd)
 
 # Create a Sandbox Project for the User in Harness
 harness.platform.create_harness_project(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project)
@@ -55,12 +58,12 @@ harness.platform.invite_user_to_harness_project_loop(HARNESS_PAT, HARNESS_ACCOUN
 template_path = "assets/kubernetes-manifests/harness-delegate.yaml.template"
 utils.misc.fetch_template_from_url(template_path, "/opt/harness/harness-delegate.yaml.template")
 harness.platform.deploy_harness_delegate(
-        HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project,
-        "/opt/harness/harness-delegate.yaml.template", f"{harness_project}-delegate"
+    HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project,
+    "/opt/harness/harness-delegate.yaml.template", f"{harness_project}-delegate"
 )
 
 utils.instruqt.set_agent_variable("HARNESS_USER", user_email)
-utils.instruqt.set_agent_variable("HARNESS_PWD", USER_PWD)
+utils.instruqt.set_agent_variable("HARNESS_PWD", user_pwd)
 utils.instruqt.set_agent_variable("HARNESS_PRJ_ID", harness_project)
 utils.instruqt.set_agent_variable("HARNESS_PRJ_CREATED", harness_project_created)
 ################################## END OF DO NOT MODIFY SECTION ##################################
