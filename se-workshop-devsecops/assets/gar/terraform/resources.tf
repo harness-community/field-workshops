@@ -64,7 +64,7 @@ resource "harness_platform_service" "proj_service" {
                   store:
                     type: HarnessCode
                     spec:
-                      repoName: harnessrepo
+                      repoName: "${var.new_repo_id}"
                       gitFetchType: Branch
                       paths:
                         - harness-deploy/backend/manifests

@@ -7,7 +7,7 @@ pipeline:
   properties:
     ci:
       codebase:
-        repoName: harnessrepo
+        repoName: {{ harness_repo }}
         build: <+input>
   stages:
     - stage:

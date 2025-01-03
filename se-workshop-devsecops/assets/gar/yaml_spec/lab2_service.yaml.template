@@ -16,7 +16,7 @@ service:
                   gitFetchType: Branch
                   paths:
                     - harness-deploy/frontend/manifests
-                  repoName: harnessrepo
+                  repoName: {{ harness_repo }}
                   branch: main
               valuesPaths:
                 - harness-deploy/frontend/values.yaml
