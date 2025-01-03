@@ -141,14 +141,6 @@ pipeline:
           execution:
             steps:
               - step:
-                  name: Rollout Deployment
-                  identifier: rolloutDeployment
-                  type: K8sRollingDeploy
-                  timeout: 10m
-                  spec:
-                    skipDryRun: false
-                    pruningEnabled: false
-              - step:
                   type: ServiceNowCreate
                   name: ServiceNow - Create Ticket
                   identifier: ServiceNow_Create_Ticket
@@ -162,6 +154,14 @@ pipeline:
                         value: Begin promotion of <+service.name> to production
                     createType: Normal
                   timeout: 10m
+              - step:
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
               - step:
                   type: ServiceNowUpdate
                   name: ServiceNow - Update Ticket
