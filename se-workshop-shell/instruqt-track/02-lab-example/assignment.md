@@ -1,5 +1,5 @@
 ---
-slug: lab1-your-lab-name-here
+slug: lab-example
 id: w4n3mkjlpydl
 type: challenge
 title: Lab 1 - TBD
@@ -25,6 +25,7 @@ tabs:
   port: 8000
 difficulty: basic
 timelimit: 1600
+enhanced_loading: null
 ---
 
 <style type="text/css" rel="stylesheet">
