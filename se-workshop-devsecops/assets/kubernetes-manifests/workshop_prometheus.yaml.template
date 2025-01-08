@@ -35,7 +35,7 @@ subjects:
   namespace: {{ namespace }}
 roleRef:
   kind: Role
-  name: namespace-admin
+  name: prometheus-role
   apiGroup: rbac.authorization.k8s.io
 
 ---
