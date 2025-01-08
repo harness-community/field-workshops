@@ -154,8 +154,8 @@ resource "harness_platform_monitored_service" "dev_monitored_service" {
         connectorRef = "prometheus"
         metricDefinitions = [
           {
-            identifier = "CPU Usage",
-            metricName = "CPU_Usage",
+            identifier = "CPU_Usage",
+            metricName = "CPU Usage",
             riskProfile = {
               riskCategory = "Performance_Other"
               thresholdTypes = [
