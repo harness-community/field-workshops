@@ -244,7 +244,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: prometheus.{{ namespace }}.instruqt.harness-demo.site
+  - host: {{ namespace }}-prometheus.instruqt.harness-demo.site
     http:
       paths:
       - path: /
@@ -256,4 +256,4 @@ spec:
               number: 80
   tls:
   - hosts:
-    - prometheus.{{ namespace }}.instruqt.harness-demo.site
+    - {{ namespace }}-prometheus.instruqt.harness-demo.site
