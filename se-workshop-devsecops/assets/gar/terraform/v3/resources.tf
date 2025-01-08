@@ -37,7 +37,7 @@ resource "harness_platform_connector_prometheus" "prometheus" {
   org_id             = var.org_id
   project_id         = var.project_id
   description        = "Connector to Instruqt workshop Prometheus instance"
-  url                = "https://${var.project_id}-prometheus.instruqt.harness-demo.site/"
+  url                = "http://prometheus-k8s.monitoring.svc.cluster.local:9090/"
   delegate_selectors = [var.delegate_selector]
 }
 
@@ -154,8 +154,30 @@ resource "harness_platform_monitored_service" "dev_monitored_service" {
         connectorRef = "prometheus"
         metricDefinitions = [
           {
-            identifier = "Average_CPU",
-            metricName = "Average CPU",
+            identifier = "CPU Usage",
+            metricName = "CPU_Usage",
+            riskProfile = {
+              riskCategory = "Performance_Other"
+              thresholdTypes = [
+                "ACT_WHEN_HIGHER"
+              ]
+            }
+            analysis = {
+              liveMonitoring = {
+                enabled = true
+              }
+              deploymentVerification = {
+                enabled                  = true
+                serviceInstanceFieldName = "pod"
+              }
+            }
+            query         = "avg(container_cpu_usage_seconds_total { namespace=\"${var.namespace}\" , container=\"backend\"})"
+            groupName     = "Infrastructure"
+            isManualQuery = true
+          },
+          {
+            identifier = "System_CPU",
+            metricName = "System CPU",
             riskProfile = {
               riskCategory = "Performance_Other"
               thresholdTypes = [
@@ -172,6 +194,138 @@ resource "harness_platform_monitored_service" "dev_monitored_service" {
               }
             }
             query         = "avg(container_cpu_system_seconds_total { namespace=\"${var.namespace}\" , container=\"backend\"})"
+            groupName     = "Infrastructure"
+            isManualQuery = true
+          },
+          {
+            identifier = "User_CPU",
+            metricName = "User CPU",
+            riskProfile = {
+              riskCategory = "Performance_Other"
+              thresholdTypes = [
+                "ACT_WHEN_HIGHER"
+              ]
+            }
+            analysis = {
+              liveMonitoring = {
+                enabled = true
+              }
+              deploymentVerification = {
+                enabled                  = true
+                serviceInstanceFieldName = "pod"
+              }
+            }
+            query         = "avg(container_cpu_user_seconds_total { namespace=\"${var.namespace}\" , container=\"backend\"})"
+            groupName     = "Infrastructure"
+            isManualQuery = true
+          },
+          {
+            identifier = "Filesystem_Read_Bytes",
+            metricName = "Filesystem Read Bytes",
+            riskProfile = {
+              riskCategory = "Performance_Other"
+              thresholdTypes = [
+                "ACT_WHEN_HIGHER"
+              ]
+            }
+            analysis = {
+              liveMonitoring = {
+                enabled = true
+              }
+              deploymentVerification = {
+                enabled                  = true
+                serviceInstanceFieldName = "pod"
+              }
+            }
+            query         = "avg(container_fs_reads_bytes_total { namespace=\"${var.namespace}\" , container=\"backend\"})"
+            groupName     = "Infrastructure"
+            isManualQuery = true
+          },
+          {
+            identifier = "Filesystem_Write_Bytes",
+            metricName = "Filesystem Write Bytes",
+            riskProfile = {
+              riskCategory = "Performance_Other"
+              thresholdTypes = [
+                "ACT_WHEN_HIGHER"
+              ]
+            }
+            analysis = {
+              liveMonitoring = {
+                enabled = true
+              }
+              deploymentVerification = {
+                enabled                  = true
+                serviceInstanceFieldName = "pod"
+              }
+            }
+            query         = "avg(container_fs_writes_bytes_total { namespace=\"${var.namespace}\" , container=\"backend\"})"
+            groupName     = "Infrastructure"
+            isManualQuery = true
+          },
+          {
+            identifier = "Block_IO_Usage",
+            metricName = "Block IO Usage",
+            riskProfile = {
+              riskCategory = "Performance_Other"
+              thresholdTypes = [
+                "ACT_WHEN_HIGHER"
+              ]
+            }
+            analysis = {
+              liveMonitoring = {
+                enabled = true
+              }
+              deploymentVerification = {
+                enabled                  = true
+                serviceInstanceFieldName = "pod"
+              }
+            }
+            query         = "avg(container_blkio_device_usage_total { namespace=\"${var.namespace}\" , container=\"backend\"})"
+            groupName     = "Infrastructure"
+            isManualQuery = true
+          },
+          {
+            identifier = "Total_Memory_Usage",
+            metricName = "Total Memory Usage",
+            riskProfile = {
+              riskCategory = "Performance_Other"
+              thresholdTypes = [
+                "ACT_WHEN_HIGHER"
+              ]
+            }
+            analysis = {
+              liveMonitoring = {
+                enabled = true
+              }
+              deploymentVerification = {
+                enabled                  = true
+                serviceInstanceFieldName = "pod"
+              }
+            }
+            query         = "avg(container_memory_usage_bytes { namespace=\"${var.namespace}\" , container=\"backend\"})"
+            groupName     = "Infrastructure"
+            isManualQuery = true
+          },
+          {
+            identifier = "Active_Memory_Usage",
+            metricName = "Active Memory Usage",
+            riskProfile = {
+              riskCategory = "Performance_Other"
+              thresholdTypes = [
+                "ACT_WHEN_HIGHER"
+              ]
+            }
+            analysis = {
+              liveMonitoring = {
+                enabled = true
+              }
+              deploymentVerification = {
+                enabled                  = true
+                serviceInstanceFieldName = "pod"
+              }
+            }
+            query         = "avg(container_memory_working_set_bytes { namespace=\"${var.namespace}\" , container=\"backend\"})"
             groupName     = "Infrastructure"
             isManualQuery = true
           }
