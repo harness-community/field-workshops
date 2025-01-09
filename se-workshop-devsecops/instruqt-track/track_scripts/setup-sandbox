@@ -160,3 +160,4 @@ utils.servicenow.add_user_to_group(SN_INSTANCE, SN_USERNAME, SN_PASSWORD, sn_use
 utils.instruqt.set_agent_variable("HARNESS_REPO", code_repo)
 utils.instruqt.set_agent_variable("SN_USER_SYS_ID", sn_user_sys_id)
 utils.instruqt.set_agent_variable("SN_INSTANCE_ID", SN_INSTANCE)
+utils.instruqt.set_agent_variable("SOLVE_SCRIPT_YAML_PATH", "se-workshop-devsecops/assets/yaml_spec")

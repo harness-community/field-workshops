@@ -9,6 +9,7 @@ HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
 HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
 HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
 CODE_REPO = utils.instruqt.get_agent_variable("HARNESS_REPO")
+YAML_PATH = utils.instruqt.get_agent_variable("SOLVE_SCRIPT_YAML_PATH")
 
 # Lab values
 lab_id = "lab4"
@@ -31,7 +32,7 @@ pipeline_context = {
     "harness_repo": CODE_REPO
 }
 
-pipeline_yaml = utils.misc.render_template_from_url(pipeline_context, f"se-workshop-devsecops/assets/gar/yaml_spec/{lab_id}_pipeline.yaml.template")
+pipeline_yaml = utils.misc.render_template_from_url(pipeline_context, f"{YAML_PATH}/{lab_id}_pipeline.yaml.template")
 
 if pipeline_data:
     print("Updating pipeline.")
