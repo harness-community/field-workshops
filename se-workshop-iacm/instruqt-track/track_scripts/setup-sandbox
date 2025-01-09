@@ -71,7 +71,7 @@ utils.instruqt.set_agent_variable("HARNESS_PRJ_CREATED", harness_project_created
 ############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
 harness_path = "/opt/harness"
 workshop_path = "/opt/workshop"
-code_repo = "iacm-repo"
+code_repo = f"{WORKSHOP_TYPE}-repo"
 os.makedirs(f"{workshop_path}/{code_repo}", exist_ok=True)
 os.makedirs('/opt/harness/terraform', exist_ok=True)
 os.makedirs('/root/notes', exist_ok=True)

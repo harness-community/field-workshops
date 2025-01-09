@@ -66,7 +66,7 @@ utils.instruqt.set_agent_variable("HARNESS_USER_NAME", user_name)
 ############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
 harness_path = "/opt/harness"
 workshop_path = "/opt/workshop"
-code_repo = "devsecops-repo"
+code_repo = f"{WORKSHOP_TYPE}-repo"
 os.makedirs(f"{workshop_path}/{code_repo}", exist_ok=True)
 os.makedirs(f"{harness_path}/terraform", exist_ok=True)
 os.makedirs(f"{harness_path}/misc/kubernetes-manifests", exist_ok=True)
