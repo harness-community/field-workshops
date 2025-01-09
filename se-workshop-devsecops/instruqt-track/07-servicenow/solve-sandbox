@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+
+import os
+from pyharnessworkshop import harness, utils
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+USER_PWD = utils.instruqt.get_agent_variable("HARNESS_PWD")
+SN_INSTANCE = utils.instruqt.get_agent_variable("SN_INSTANCE_ID")
+CODE_REPO = utils.instruqt.get_agent_variable("HARNESS_REPO")
+
+# Lab values
+lab_id = "lab6"
+default_pipeline_name = "Workshop Build and Deploy"
+default_pipeline_id = "Workshop_Build_and_Deploy"
+execution_notes = f"Automatically executed via Instruqt '{lab_id.title()}' Track Skip."
+
+json_response = harness.platform.list_pipelines(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT)
+pipeline_data = harness.platform.get_pipeline_by_id(json_response, default_pipeline_id)
+
+# Extract details or use default values
+pipeline_name = pipeline_data.get("name", default_pipeline_name) if pipeline_data else default_pipeline_name
+pipeline_id = pipeline_data.get("identifier", default_pipeline_id) if pipeline_data else default_pipeline_id
+
+pipeline_context = {
+    "pipeline_name": pipeline_name,
+    "pipeline_id": pipeline_id,
+    "project_id": HARNESS_PROJECT,
+    "org_id": HARNESS_ORG_ID,
+    "harness_repo": CODE_REPO
+}
+
+pipeline_yaml = utils.misc.render_template_from_url(pipeline_context, f"se-workshop-devsecops/assets/gar/yaml_spec/{lab_id}_pipeline.yaml.template")
+
+# Create ServiceNow secret and connector
+secret_yaml = f"""\
+secret:
+  type: SecretText
+  name: servicenow-pw
+  identifier: servicenow-pw
+  orgIdentifier: {HARNESS_ORG_ID}
+  projectIdentifier: {HARNESS_PROJECT}
+  description: "Automatically created via Instruqt '{lab_id.title()}' Track Skip."
+  spec:
+    secretManagerIdentifier: harnessSecretManager
+    valueType: Inline
+    value: {USER_PWD}
+"""
+print("Creating Project Secret for ServiceNow...")
+harness.platform.create_project_secret(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, secret_yaml)
+
+connector_yaml = f"""\
+connector:
+  name: ServiceNow
+  identifier: ServiceNow
+  description: "Automatically created via Instruqt '{lab_id.title()}' Track Skip."
+  accountIdentifier: {HARNESS_ACCOUNT_ID}
+  orgIdentifier: {HARNESS_ORG_ID}
+  projectIdentifier: {HARNESS_PROJECT}
+  type: ServiceNow
+  spec:
+    serviceNowUrl: https://{SN_INSTANCE}.service-now.com
+    delegateSelectors:
+      - {HARNESS_PROJECT}-delegate
+    auth:
+      type: UsernamePassword
+      spec:
+        username: {HARNESS_PROJECT}
+        passwordRef: servicenow-pw
+    ignoreTestConnection: true
+"""
+
+print("Creating Connector for ServiceNow...")
+harness.platform.create_project_connector(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, connector_yaml)
+
+# Update or create pipeline
+if pipeline_data:
+    print("Updating pipeline.")
+    harness.platform.update_pipeline(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, pipeline_id, pipeline_yaml)
+else:
+    print("Pipeline not found. Creating a new pipeline.")
+    harness.platform.create_harness_pipeline(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, pipeline_yaml)
+
+execution_yaml = f"""\
+pipeline:
+  identifier: {pipeline_id}
+  properties:
+    ci:
+      codebase:
+        build:
+          spec:
+            branch: main
+          type: branch
+"""
+
+harness.platform.execute_pipeline(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, pipeline_id, execution_yaml, execution_notes)

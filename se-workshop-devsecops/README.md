@@ -19,23 +19,23 @@ Create your first service and build a deployment pipeline utilizing a rollout de
 ### Lab 3: Continuous Deployment - Backend
 Harness natively supports complex deployment strategies like **Canary** and **Blue/Green**, and in this lab, we will configure a pipeline to deploy the backend of your application using the Canary deployment strategy.
 
-### Lab 4: Integrating Security
+### Lab 4: Security Testing Orchestration
 Shift-left and integrate security scanners into your pipelines, using Harness to automate vulnerability scanning, compliance checks, and other security measures.
 - **SCA (Software Composition Analysis):** Integrate OWASP Dependency-Check, OSV (Open Source Vulnerabilities), and BlackDuck to identify vulnerabilities in open-source dependencies.
 - **SAST (Static Application Security Testing):** Use Semgrep to detect vulnerabilities and enforce secure coding standards.
 - **Container Scanning:** Integrate Wiz to scan your container images for vulnerabilities before deployment.
 - **DAST (Dynamic Application Security Testing):** Automate runtime vulnerability scanning using tools like ZAP and Veracode to ensure application security at runtime.
 
-### Lab 5: Implementing Change Controls
+### Lab 5: Governance and Policy as Code
+Explore how to enforce governance via OPA policies within Harness, defining and applying policy rules to ensure compliance and best practices across your projects.
+- **Security Scanners:** Enforce the use of SCA, SAST, Container, and DAST scanners as part of the pipeline policy to meet governance requirements.
+- **Change Approval Required:** Integrate change management tools like ServiceNow to enforce approvals and audit compliance before any deployment occurs.
+
+### Lab 6: ServiceNow RFC Automation
 Learn how to integrate ServiceNow for change control management, ensuring approvals and audit trails are integrated into your deployment pipelines.
 - Configure **ServiceNow** integration in Harness.
 - Automate change request creation, tracking, and approval workflows.
 - Use change control to gate deployments based on business and compliance requirements.
-
-### Lab 6: Governance and Policy as Code
-Explore how to enforce governance via OPA policies within Harness, defining and applying policy rules to ensure compliance and best practices across your projects.
-- **Security Scanners:** Enforce the use of SCA, SAST, Container, and DAST scanners as part of the pipeline policy to meet governance requirements.
-- **Change Approval Required:** Integrate change management tools like ServiceNow to enforce approvals and audit compliance before any deployment occurs.
 
 ### Lab 7: Continuous Verification
 Implement continuous verification practices, using Harness to automate the process of post-deployment validation by leveraging existing monitoring tools and validating the health and performance of your deployments in real time.
