@@ -1,26 +1,46 @@
 ---
 slug: logging-into-your-harness-sandbox-account
-id: nazykluateuq
+id: mjbfbux2r3tp
 type: challenge
 title: Logging into your Harness Sandbox Account
 teaser: Let's log into Harness using your student credentials!
 notes:
 - type: text
-  contents: |
-    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/ci-cd-devdays/assets/images/cicd_devdays_med.png)<br><br>
-    Welcome to the CI/CD DevDays workshop <br><br>
-    **Please wait while we setup your Harness Sandbox environment**
+  contents: |-
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/harness.png" width="35" style="display: inline; vertical-align: middle;"> **harness**<br>
+    ***The AI-Native Software Delivery Platform™***
+
+    Today's workshop will provide you with hands-on experience with:<br>
+
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/ci.png" width="40" style="display: inline; vertical-align: middle;"> **Continuous Integration**
+    - Build 4x faster with any source code, in any language, and on any operating system.
+
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/cd.png" width="40" style="display: inline; vertical-align: middle;"> **Continuous Delivery & GitOps**
+    - Fully automate pipelines for multi-cloud, multi-region, and multi-service software deployments.
+
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/sto.png" width="40" style="display: inline; vertical-align: middle;"> **Security Testing Orchestration**
+    - Shift left and orchestrate security scans throughout your CI/CD pipelines with 40+ security scanner integrations and OPA policies.
+    - Automatically remediate vulnerabilities using AI.
+
+    <br>
+
+    **Please wait while we setup your Sandbox environment**
 tabs:
-- id: nljyqrdsttta
+- id: qrr7ykqmz4cz
   title: Workshop SSO Login
   type: browser
   hostname: harness
-- id: ihny6gf1bgfb
+- id: vonxixjtctcu
   title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html
   port: 8000
+- id: fjz1dyt9qnvx
+  title: Harness Platform
+  type: website
+  url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
+  new_window: true
 difficulty: basic
 timelimit: 1600
 enhanced_loading: null
@@ -42,7 +62,16 @@ h2.cyan { color: cyan; }
 ## A Sandbox Account has been provisioned for you to use for the duration of this workshop.
 Login to your **Harness Sandbox** account using the details provided below.👇
 
----
+> [!IMPORTANT]
+> 1) The Instruqt platform this workshop is delivered by uses a browser in browser to simplify the hands-on lab experience.
+> 1) Zoom content by clicking in the browser in browser and pressing:
+>    1) Mac:`⌘ -`
+>    1) PC: `CTRL -`
+> 1) *If you experience any issues you can access the Harness Platform in your browser tab by clicking: \
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-2) tab*
+
+Harness Account
+===
 ## Harness Sandbox Account details:
 |  |   |
 | ----- | ----- |
@@ -51,15 +80,27 @@ Login to your **Harness Sandbox** account using the details provided below.👇
 
 > [!NOTE]
 > *All credentials for this lab can always be found on the: <br>
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">`Lab Credentials` tab*
-
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-1) tab*
 
 ---
+
+Signing In
+===
 
 > 📝 *Click Single sign-on* <br>
 > *Login using the credentials above:* <br>
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sso_login.png)
 
-===============
+Project Selection
+===
+
+> A **Project** has been created for you and is where you will perform the tasks in the subsequent labs. \
+> Click on `Select a Project` \
+> Click on project `[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]` \
+   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/platform_project_selection.png)
+
+
+Conclusion
+===
 
 Click the **Check** button to continue.

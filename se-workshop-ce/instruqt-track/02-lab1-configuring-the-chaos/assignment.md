@@ -10,7 +10,7 @@ notes:
     - Chaos engineering is the continuous process of proactively introducing disruptions to systems to assess and improve their resilience against real-world outages.
     - In this first lab you will setup the Chaos Environment that you will use for fault injection in subsequent labs.
 
-    ![Chaos Engineering](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/chaos-eng-steps.png)
+    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/chaos-eng-steps.png)
 tabs:
 - id: ynxtb8ngb9ed
   title: Harness Platform

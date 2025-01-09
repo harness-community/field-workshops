@@ -1,0 +1,104 @@
+pipeline:
+  name: {{ pipeline_name }}
+  identifier: {{ pipeline_id }}
+  projectIdentifier: {{ project_id }}
+  orgIdentifier: {{ org_id }}
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        repoName: {{ harness_repo }}
+        build: <+input>
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Test
+                  name: Test Intelligence
+                  identifier: Test_Intelligence
+                  spec:
+                    shell: Sh
+                    command: |-
+                      cd ./python-tests
+                      pytest
+                    intelligenceMode: true
+              - step:
+                  name: Compile
+                  identifier: Compile
+                  template:
+                    templateRef: Compile_Application
+                    versionLabel: v0.1
+              - step:
+                  type: BuildAndPushGAR
+                  name: Push to Google Artifact Registry
+                  identifier: Push_to_Google_Artifact_Registry
+                  spec:
+                    connectorRef: org.workshopgar
+                    host: us-docker.pkg.dev
+                    projectID: seworkshop/seworkshop
+                    imageName: harness-workshop
+                    tags:
+                      - <+variable.username>-<+pipeline.sequenceId>
+                    caching: true
+                    dockerfile: /harness/frontend-app/harness-webapp/Dockerfile
+                    context: /harness/frontend-app/harness-webapp
+    - stage:
+        name: Frontend - Deployment
+        identifier: Frontend_Deployment
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: frontend
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: dev
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: k8s_dev
+          execution:
+            steps:
+              - step:
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback

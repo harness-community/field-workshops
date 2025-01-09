@@ -5,7 +5,7 @@ import os
 from pyharnessworkshop import harness, keycloak, utils
 
 ####################### ADD ANY WORKSHOP SPECIFIC CLEANUP AT THE VERY BOTTOM #######################
-
+GENERATOR_URI = os.getenv("SE_WORKSHOP_GKE_GENERATOR")
 ################################## START OF DO NOT MODIFY SECTION ##################################
 # REQUIRED VARIABLES LIST
 HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
@@ -22,7 +22,7 @@ KEYCLOAK_ADMIN_PWD = os.getenv("SE_WORKSHOP_KEYCLOAK_ADMIN_PWD")
 
 # Generate Keycloak Bearer Token
 keycloak_token = keycloak.auth.generate_keycloak_token(KEYCLOAK_ENDPOINT, KEYCLOAK_ADMIN_USER, KEYCLOAK_ADMIN_PWD, cleanup=True)
-# Create workshop user in Keycloak Realm
+# Delete workshop user from Keycloak Realm
 keycloak.user.delete_keycloak_user(KEYCLOAK_ENDPOINT, KEYCLOAK_REALM, keycloak_token, USER_EMAIL_CLEAN, cleanup=True)
 
 print(f"HARNESS_PROJECT_CREATED: {HARNESS_PROJECT_CREATED}")
@@ -38,5 +38,6 @@ else:
 ################################## END OF DO NOT MODIFY SECTION ##################################
 
 ############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
-#
-#
+# Delete GKE namespace
+print("Cleaning up GKE cluster credentials...")
+utils.misc.revoke_gke_credentials(GENERATOR_URI, HARNESS_PROJECT)
