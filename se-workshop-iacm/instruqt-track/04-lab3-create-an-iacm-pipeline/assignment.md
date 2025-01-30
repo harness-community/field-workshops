@@ -6,8 +6,58 @@ title: Lab 3 - Create an IaCM Pipeline
 teaser: Creating a Pipeline with Approval
 notes:
 - type: text
-  contents: |
-    Learn how to create a pipeline in Harness IaCM. This lab will cover the basics of pipeline configuration, including how to trigger deployments and manage infrastructure changes effectively.
+  contents: |-
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: 90vh;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+
+      .harness-image {
+        max-width: 90%;
+        max-height: 65%;
+        object-fit: contain;
+      }
+
+      .features-list {
+        list-style-type: none;
+        padding: 0;
+        position: sticky;
+      }
+
+      .features-list li {
+        margin: 5px 0;
+        font-weight: bold;
+        font-size: 25px;
+      }
+
+      @media (max-width: 768px) {
+        .features-list li {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .features-list li {
+          font-size: 1rem;
+        }
+    </style>
+
+    <div class="container">
+      <h1>Shared Pipeline for Infrastructure Changes</h1>
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/iac_pipeline_graphic.png">
+      <ul class="features-list">
+        <li>CI/CD for Infrastructure</li>
+        <li>Integrated Pipeline</li>
+        <li>Scale with Templates</li>
+      </ul>
+    </div>
 tabs:
 - id: eeddtl9wsi8s
   title: Harness Platform

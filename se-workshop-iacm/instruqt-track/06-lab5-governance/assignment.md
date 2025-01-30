@@ -6,8 +6,87 @@ title: Lab 5 - Governance
 teaser: Using OPA policy to limit Terraform variables
 notes:
 - type: text
-  contents: |
-    Explore how to integrate Open Policy Agent (OPA) with Harness IaCM to enforce governance policies. This lab will demonstrate setting up policy-as-code frameworks to ensure compliance across your infrastructure deployments.
+  contents: |-
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: 90vh;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+
+      .sub-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
+      .harness-image {
+        max-width: 90%;
+        max-height: 55%;
+        object-fit: contain;
+      }
+
+      .features-list {
+        list-style-type: none;
+        padding: 0;
+        position: sticky;
+      }
+
+      .features-list li {
+        margin: 5px 0;
+        font-weight: bold;
+        font-size: 25px;
+      }
+
+      .features-list .sub-list {
+        list-style-type: disc;
+        margin-left: 20px;
+        font-weight: normal;
+        font-size: 20px;
+        font-style: italic;
+      }
+
+      @media (max-width: 768px) {
+        .features-list li {
+          font-size: 1.25rem;
+        }
+
+        .features-list .sub-list {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .features-list li {
+          font-size: 1rem;
+        }
+
+        .features-list .sub-list {
+          font-size: 1rem;
+        }
+    </style>
+
+    <div class="container">
+      <h1>Guardrail your deployments</h1>
+      <div class="sub-container">
+        <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/cd_opa_guardrails.avif">
+        <ul class="features-list">
+          <li>Flexible policies using Open Policy Agent</li>
+          <li>Give developers permission to edit pipelines while central teams dictate rules like:
+            <ul class="sub-list">
+              <li>All production deployments must have an approval step</li>
+              <li>Only certain instance sizes or families are allowed</li>
+            </ul>
+          </li>
+          <li>With OPA, teams can be empowered while scalable guardrails ensure compliance</li>
+        </ul>
+      </div>
+    </div>
 tabs:
 - id: wvglh0v0bydi
   title: Harness Platform

@@ -6,8 +6,57 @@ title: Lab 6 - Cost Estimation and State Changes
 teaser: Visibility into the Cost of Changes and State Changes
 notes:
 - type: text
-  contents: |
-    In this lab you will learn how to utilize Harness IaCM to estimate costs and track state changes in your infrastructure, enabling more informed decision-making.
+  contents: |-
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: 90vh;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+
+      .harness-image {
+        max-width: 90%;
+        max-height: 65%;
+        object-fit: contain;
+      }
+
+      .features-list {
+        list-style-type: none;
+        padding: 0;
+        position: sticky;
+      }
+
+      .features-list li {
+        margin: 5px 0;
+        font-weight: bold;
+        font-size: 25px;
+      }
+
+      @media (max-width: 768px) {
+        .features-list li {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .features-list li {
+          font-size: 1rem;
+        }
+    </style>
+
+    <div class="container">
+      <h1>Cost estimation and State management</h1>
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/iac_state_management.png">
+      <ul class="features-list">
+        <li>Harness IaCM helps users proactively identify cost impact associated with resource changes, which prevents unplanned and exorbitant cloud bills.</li>
+        <li>Harness provides an out-of-the-box hosted backend, eliminating the need to host state and manage locking mechanism and access control.</li>
+      </ul>
+    </div>
 tabs:
 - id: i5yyslrra1gt
   title: Harness Platform
@@ -59,13 +108,13 @@ h2.cyan { color: cyan; }
 > - Wait for your pipeline to reach the **Approval** step
 > - Click **Review** and let's examine the detailed information \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_review.png)
-> - From here select one of your **EC2 instances** from the list \
+> - First the `Monthly Cost Change` details what the cost impact of your update will be \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_cost_change_estimation.png)
+> - You can also expand the `aws_instance` **Resource Type** to see the detail for your individual **EC2 instances**
+> - Scroll down from here and select one of your **EC2 instances** from the list \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_planned_changes.png)
 > - Scroll down in this list to see the details of the planned change and the `New Value` vs. the `Old Value` \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_instance_type_update.png)
-> - Now click on the `Cost Change Estimation` tab and see what the cost impact of your update will be. \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_cost_change_estimation.png)
-> - You can also expand the `aws_instance` **Resource Type** to see the detail for your individual **EC2 instances**
 
 > Click **Approve** and the pipeline will proceed with the **apply** step \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_approve.png)
