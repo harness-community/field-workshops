@@ -6,8 +6,56 @@ title: Lab 7 - PR Triggers and Validation
 teaser: Harness IaCM supports reviewing infrastructure changes via pull request automation
 notes:
 - type: text
-  contents: |
-    This functionality allows developers to see the changes, such as the plan details, as comments in the PR, so they can see what the resource changes will be before applying the plan.
+  contents: |-
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: 90vh;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+
+      .harness-image {
+        max-width: 90%;
+        max-height: 65%;
+        object-fit: contain;
+      }
+
+      .features-list {
+        list-style-type: none;
+        padding: 0;
+        position: sticky;
+      }
+
+      .features-list li {
+        margin: 5px 0;
+        font-weight: bold;
+        font-size: 25px;
+      }
+
+      @media (max-width: 768px) {
+        .features-list li {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .features-list li {
+          font-size: 1rem;
+        }
+    </style>
+
+    <div class="container">
+      <h1>PR automation</h1>
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/iac_pr_automation.png">
+      <ul class="features-list">
+        <li>By implementing PR automation, developers significantly reduce the likelihood of errors when making resource changes. This capability brings the visibility of planned changes into the PR process.</li>
+      </ul>
+    </div>
 tabs:
 - id: sxysnqlycjsn
   title: Harness Platform
@@ -78,6 +126,8 @@ h2.cyan { color: cyan; }
 > - Select **Pull Request** operation \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pr_step.png)
 > - Click **Use Operation**
+> - Click **Save** in the top right to save your new pipeline \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_save.png)
 
 <br>
 
