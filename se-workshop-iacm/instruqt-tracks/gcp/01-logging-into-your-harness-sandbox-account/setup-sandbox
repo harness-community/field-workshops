@@ -1,0 +1,169 @@
+#!/usr/bin/env python3
+
+# Standard imports
+import os
+import base64
+import json
+import shutil
+
+# Third-party imports
+import requests
+
+# Library-specific imports
+from pyharnessworkshop import harness, utils
+
+######################## ADD ANY WORKSHOP SPECIFIC SETUP AT THE VERY BOTTOM ########################
+########################### ADD ANY ADDITIONAL CREDENTIALS REQUIRED HERE ###########################
+INSTRUQT_GCP_PROJECT = os.getenv("INSTRUQT_GCP_PROJECTS")
+INSTRUQT_GCP_ZONE = utils.instruqt.get_agent_variable("HARNESS_GCP_ZONE")
+GCP_PROJECT_ID_ENV_VAR = f"INSTRUQT_GCP_PROJECT_{INSTRUQT_GCP_PROJECT}_PROJECT_ID"
+GCP_USER_EMAIL_ENV_VAR = f"INSTRUQT_GCP_PROJECT_{INSTRUQT_GCP_PROJECT}_USER_EMAIL"
+GCP_USER_PASSWORD_ENV_VAR = f"INSTRUQT_GCP_PROJECT_{INSTRUQT_GCP_PROJECT}_USER_PASSWORD"
+GCP_SERVICE_ACCOUNT_KEY_ENV_VAR = f"INSTRUQT_GCP_PROJECT_{INSTRUQT_GCP_PROJECT}_SERVICE_ACCOUNT_KEY"
+GCP_PROJECT_ID = os.getenv(GCP_PROJECT_ID_ENV_VAR)
+GCP_USER_EMAIL = os.getenv(GCP_USER_EMAIL_ENV_VAR)
+GCP_USER_PASSWORD = os.getenv(GCP_USER_PASSWORD_ENV_VAR)
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+CUSTOM_CREDENTIALS = [
+    {
+        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/google_cloud_logo.svg",
+        "name": "GCP",
+        "auth": {
+            "Project ID": f"{GCP_PROJECT_ID}",
+            "Username": f"{GCP_USER_EMAIL}",
+            "Password": f"{GCP_USER_PASSWORD}"
+        }
+    }
+]
+#################################### DO NOT MODIFY THIS SCRIPT ####################################
+
+# REQUIRED VARIABLES LIST
+OUTPUT_HTML = "/opt/harness/misc/credential_tab.html"
+USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
+USER_PWD = utils.instruqt.get_agent_variable("HARNESS_PWD")
+DEFAULT_CREDENTIALS = [
+    {
+        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png",
+        "name": "Harness",
+        "auth": {
+            "Username": f"{USER_EMAIL}",
+            "Password": f"{USER_PWD}"
+        }
+    }
+]
+
+if 'CUSTOM_CREDENTIALS' in globals():
+    combined_creds = DEFAULT_CREDENTIALS + CUSTOM_CREDENTIALS
+else:
+    combined_creds = DEFAULT_CREDENTIALS
+
+# Render HTML
+generated_html = utils.misc.generate_credentials_html(combined_creds)
+
+# Check if the HTML was generated successfully
+if generated_html:
+    with open(OUTPUT_HTML, "w") as file:
+        file.write(generated_html)
+    print(f"HTML file '{OUTPUT_HTML}' generated successfully.")
+else:
+    print("Failed to generate HTML file.")
+
+# Serve it on port 8000
+service_content = """\
+[Unit]
+Description=Lab Credentials
+After=network.target
+
+[Service]
+Type=simple
+User=harness
+WorkingDirectory=/opt/harness/misc/
+ExecStart=/usr/bin/python3 -m http.server 8000
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+"""
+utils.misc.create_systemd_service(service_content, "lab_credentials")
+
+################################## END OF DO NOT MODIFY SECTION ##################################
+
+############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
+def upload_secret_file(api_key, account_identifier, org_identifier, project_identifier, spec, file_path):
+    url = "https://app.harness.io/ng/api/v2/secrets/files"
+    params = {
+        "accountIdentifier": account_identifier,
+        "orgIdentifier": org_identifier,
+        "projectIdentifier": project_identifier
+    }
+    headers = {
+        "x-api-key": api_key
+    }
+    spec_json = json.dumps(spec)
+    with open(file_path, "rb") as f:
+        files = {
+            "spec": (None, spec_json, "application/json"),
+            "file": (file_path, f, "application/octet-stream")
+        }
+        response = requests.post(url, params=params, headers=headers, files=files)
+    return response
+
+
+harness_path = "/opt/harness"
+encoded_key = os.getenv(GCP_SERVICE_ACCOUNT_KEY_ENV_VAR)
+decoded_bytes = base64.b64decode(encoded_key)
+try:
+    decoded_str = decoded_bytes.decode("utf-8")
+    service_account_json = json.loads(decoded_str)
+except Exception as e:
+    raise ValueError("Failed to parse the decoded service account key as JSON.") from e
+
+with open(f"{harness_path}/misc/sa-key.json", "w") as f:
+    json.dump(service_account_json, f, indent=2)
+
+spec = {
+    "secret": {
+        "type": "SecretFile",
+        "name": "gcpsecret",
+        "identifier": "gcpsecret",
+        "orgIdentifier": f"{HARNESS_ORG_ID}",
+        "projectIdentifier": f"{HARNESS_PROJECT}",
+        "spec": {
+            "secretManagerIdentifier": "harnessSecretManager"
+        }
+    }
+}
+file_path = f"{harness_path}/misc/sa-key.json"
+print("Creating Project Secret for GCP_SERVICE_ACCOUNT_KEY...")
+response = upload_secret_file(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, spec, file_path)
+
+connector_yaml = f"""\
+connector:
+  name: instruqt-workshop-connector
+  identifier: instruqtworkshopconnector
+  description: "Automatically created for this lab"
+  accountIdentifier: {HARNESS_ACCOUNT_ID}
+  orgIdentifier: {HARNESS_ORG_ID}
+  projectIdentifier: {HARNESS_PROJECT}
+  type: Gcp
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        secretKeyRef: gcpsecret
+    executeOnDelegate: false
+    proxy: false
+    ignoreTestConnection: false
+"""
+
+print("Creating Connector for new GCP Environment...")
+harness.platform.create_project_connector(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, connector_yaml)
+shutil.copy(f"{harness_path}/misc/sa-key.json", "/opt/workshop/")
+
+# Set GCP CLI Project
+utils.misc.run_command(f"gcloud config set project {GCP_PROJECT_ID} --quiet")
+
+utils.instruqt.set_agent_variable("HARNESS_GCP_PROJECT_ID", GCP_PROJECT_ID)

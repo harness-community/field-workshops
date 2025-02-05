@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+
+import os
+from pyharnessworkshop import harness, utils
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+GCP_PROJECT_ID = utils.instruqt.get_agent_variable("HARNESS_GCP_PROJECT_ID")
+
+# Lab values
+default_workspace_id = "demoworkspace"
+workspace_missing_fail_message = """\
+You don't seem to have created a workspace yet. Please correct this using the instructions in the lab guide.
+"""
+
+# Get workspace data
+json_response = harness.platform.list_workspaces(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT)
+workspace_content = json_response
+if workspace_content:
+    print("    DEBUG: We found a workspace.")
+    workspace_data = harness.platform.get_workspace_by_id(json_response, default_workspace_id)
+else:
+    print("    DEBUG: No workspace exists.")
+    utils.instruqt.raise_lab_failure_message(workspace_missing_fail_message)
+
+# Extract details or use default values
+workspace_id = workspace_data.get("identifier", default_workspace_id) if workspace_data else default_workspace_id
+
+# Get stage id and validate configuration
+workspace_config = harness.platform.get_workspace_detail(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, workspace_id)
+workspace_context = {
+    "provider_connector": "instruqtworkshopconnector",
+    "repository": "iacm-repo",
+    "repository_branch": "main",
+    "repository_connector": "",
+    "repository_path": "gcp/v1",
+    "cost_estimation_enabled": "true",
+    "terraform_variables": {
+        "gcp_project_id": {
+            "key": "gcp_project_id",
+            "value": f"{GCP_PROJECT_ID}",
+            "value_type": "string"
+        },
+        "instance_type": {
+            "key": "instance_type",
+            "value": "e2-micro",
+            "value_type": "string"
+        }
+    }
+}
+workspace_misconfiguration = utils.misc.validate_workspace_configuration(workspace_config, workspace_context)
+if workspace_misconfiguration:
+    all_messages = ""
+    for item in workspace_misconfiguration:
+        if "message" in item:
+            all_messages += "ERROR: " + item["message"] + " "
+    utils.instruqt.raise_lab_failure_message(all_messages)
+else:
+    print("No misconfigurations found!")
