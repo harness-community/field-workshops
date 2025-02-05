@@ -10,7 +10,7 @@ import os
 from pyharnessworkshop import harness, keycloak, utils
 
 ####################### ADD ANY WORKSHOP SPECIFIC CLEANUP AT THE VERY BOTTOM #######################
-
+GENERATOR_URI = os.getenv("SE_WORKSHOP_GKE_GENERATOR")
 ################################## START OF DO NOT MODIFY SECTION ##################################
 # REQUIRED VARIABLES LIST
 HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
@@ -43,5 +43,6 @@ else:
 ################################## END OF DO NOT MODIFY SECTION ##################################
 
 ############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
-#
-#
+# Delete GKE namespace
+print("Cleaning up GKE cluster credentials...")
+utils.misc.revoke_gke_credentials(GENERATOR_URI, HARNESS_PROJECT)

@@ -161,7 +161,7 @@ h2.cyan { color: cyan; }
 
 <br>
 
-> # Switch to the [button label=">_Shell" variant="success"](tab-2) tab to continue
+> ## Switch to the [button label=">_Shell" variant="success"](tab-2) tab to continue
 
 ## Create a new branch
 ```bash,run
@@ -169,7 +169,7 @@ cd iacm-repo/
 git checkout -b demo
 ```
 
-> # Switch to the [button label="Code Editor" variant="success"](tab-1) tab to continue
+> ## Switch to the [button label="Code Editor" variant="success"](tab-1) tab to continue
 
 ## Now let's add a new resource to test out our trigger
 > **Update `aws/v1` **>** `resources.tf` file**
@@ -196,7 +196,7 @@ resource "aws_s3_bucket" "demo_bucket" {
 > - Click `OK` \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/vs_code_remote_branch.png)
 
-> # Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
+> ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 ## Time to open a PR
 ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/module_code.png)
@@ -208,12 +208,20 @@ Select the **Code Repository** module from the list <br>
 > - Click on **Pull Requests** in the left Nav
 > - Click `+New Pull Request` \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_new_pull_request.png)
-> - Select a branch here: `demo`
+> - Select a branch here: `demo` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pr_open.png)
 > - Click on **Create pull request**
+> - This will activate our `pipeline trigger` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pr_checks.png)
+
+> [!IMPORTANT]
+> *What information do you think will be shown here?*
+
+<br><br>
 
 > [!NOTE]
-> This will activate our trigger and after a minute or so we will see our PR decorated <br><br>
-> *What information do you think will be shown here?*
+> After a minute or so we will see your PR decorated \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pr_planned_changes.png)
 
 <br><br>
 

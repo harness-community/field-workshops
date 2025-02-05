@@ -90,9 +90,6 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br><br>
 
-First let's select the project that's been created for this workshop <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/project_selection.png)
-
 ## Let's take a look at our code
 ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/module_code.png)
 
@@ -107,7 +104,7 @@ And then click `+Generate Clone Credential` <br>
 
 Copy the values from here and store them on the `Notes` 📝 tab or locally on your machine.
 
-> # Switch to the [button label=">_Shell" variant="success"](tab-2) tab to continue
+> ## Switch to the [button label=">_Shell" variant="success"](tab-2) tab to continue
 
 ### Update our credential file
 > [!NOTE]
@@ -125,7 +122,7 @@ Click `▶️ run` and then provide the token you just copied.
 git clone [[ Instruqt-Var key="HARNESS_REPO_URL" hostname="sandbox" ]]
 ```
 
-> # Switch to the [button label="Code Editor" variant="success"](tab-1) tab to continue
+> ## Switch to the [button label="Code Editor" variant="success"](tab-1) tab to continue
 From here we can take a look at our Terraform code to get a better understanding of what we will provision through an IaCM pipeline in the following labs.
 
 > [!IMPORTANT]

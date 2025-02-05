@@ -6,7 +6,8 @@ import time
 import shutil
 
 # Third-party imports
-#   None
+import jinja2
+from kubernetes import config
 
 # Library-specific imports
 from pyharnessworkshop import harness, keycloak, utils
@@ -14,6 +15,7 @@ from pyharnessworkshop import harness, keycloak, utils
 ######################## ADD ANY WORKSHOP SPECIFIC SETUP AT THE VERY BOTTOM ########################
 WORKSHOP_TYPE = "iacm"
 WORKSHOP_REPO = "harness-community/se-iacm-workshop"
+GENERATOR_URI = os.getenv("SE_WORKSHOP_GKE_GENERATOR")
 ################################## START OF DO NOT MODIFY SECTION ##################################
 
 # REQUIRED VARIABLES LIST
@@ -54,14 +56,6 @@ harness_project_created = "true"
 # Add the workshop user to the Harness project as an admin
 harness.platform.invite_user_to_harness_project_loop(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project, user_email)
 
-# Install delegate
-template_path = "assets/kubernetes-manifests/harness-delegate.yaml.template"
-utils.misc.fetch_template_from_url(template_path, "/opt/harness/harness-delegate.yaml.template")
-harness.platform.deploy_harness_delegate(
-    HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project,
-    "/opt/harness/harness-delegate.yaml.template", f"{harness_project}-delegate"
-)
-
 utils.instruqt.set_agent_variable("HARNESS_USER", user_email)
 utils.instruqt.set_agent_variable("HARNESS_PWD", user_pwd)
 utils.instruqt.set_agent_variable("HARNESS_PRJ_ID", harness_project)
@@ -73,7 +67,8 @@ harness_path = "/opt/harness"
 workshop_path = "/opt/workshop"
 code_repo = f"{WORKSHOP_TYPE}-repo"
 os.makedirs(f"{workshop_path}/{code_repo}", exist_ok=True)
-os.makedirs('/opt/harness/terraform', exist_ok=True)
+os.makedirs(f"{harness_path}/terraform", exist_ok=True)
+os.makedirs(f"{harness_path}/misc/kubernetes-manifests", exist_ok=True)
 os.makedirs('/root/notes', exist_ok=True)
 utils.misc.run_command("touch /root/notes/scratch.txt")
 
@@ -81,8 +76,45 @@ utils.misc.run_command("touch /root/notes/scratch.txt")
 print("Cloning field-workshops repo...")
 utils.misc.run_command("git clone https://github.com/harness-community/field-workshops.git")
 shutil.copytree("field-workshops/se-workshop-iacm/assets/terraform/", f"{harness_path}/terraform", dirs_exist_ok=True)
-shutil.copy("field-workshops/unscripted-workshop-2024/assets/scripts/update_netrc.sh", f"{workshop_path}/script.sh")
+shutil.copytree("field-workshops/assets/kubernetes-manifests/v2/", f"{harness_path}/misc", dirs_exist_ok=True)
+shutil.copy("field-workshops/assets/scripts/update_netrc.sh", f"{workshop_path}/script.sh")
 shutil.rmtree("field-workshops")
+
+# Get GKE K8s config and clean up K3s config
+shutil.copy("/etc/rancher/k3s/k3s.yaml", f"{harness_path}/misc/k3s.yaml")
+os.remove("/root/.kube/config")
+os.remove("/etc/rancher/k3s/k3s.yaml")
+utils.misc.generate_gke_credentials(GENERATOR_URI, user_name, f"{harness_path}/misc/gke.yaml", "namespace-admin")
+os.environ["KUBECONFIG"] = f"{harness_path}/misc/k3s.yaml:{harness_path}/misc/gke.yaml"
+utils.misc.run_command("kubectl config view --merge --flatten > /root/.kube/config")
+os.environ["KUBECONFIG"] = "/root/.kube/config"
+
+# Template delegate
+template_file_path = f"{harness_path}/misc/harness-delegate.yaml.template"
+delegate_name = f"{harness_project}-delegate"
+delegate_image = harness.platform.get_latest_delegate_tag(HARNESS_PAT, HARNESS_ACCOUNT_ID)
+delegate_token = harness.platform.generate_delegate_token(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project, f"{delegate_name}-token")
+with open(template_file_path, "r") as file:
+    template = jinja2.Template(file.read())
+rendered_content = template.render(
+    delegate_name=delegate_name,
+    delegate_namespace=harness_project,
+    account_id=HARNESS_ACCOUNT_ID,
+    delegate_token=delegate_token,
+    delegate_image=delegate_image
+)
+with open(f"{harness_path}/misc/harness-delegate.yaml", "w") as file:
+    file.write(rendered_content)
+
+# Set K8s context
+contexts, active_context = config.list_kube_config_contexts()
+gke_context = next(ctx for ctx in contexts if ctx['name'].startswith(f'{WORKSHOP_TYPE}'))['name']
+config.load_kube_config(context=gke_context)
+
+# Apply manifests
+utils.k8s.apply_k8s_manifests([
+    f"{harness_path}/misc/harness-delegate.yaml"
+], user_name)
 
 # Provision resources
 instruqt_sandbox_id = os.getenv("INSTRUQT_PARTICIPANT_ID")

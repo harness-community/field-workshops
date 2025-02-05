@@ -71,6 +71,7 @@ notes:
         }
     </style>
 
+    <br>
     <div class="container">
       <h1>Guardrail your deployments</h1>
       <div class="sub-container">
@@ -190,6 +191,9 @@ Head back over to your workspace. <br>
 > [!NOTE]
 > That is `Policy as Code` in action! Isn't it beautiful? <br>
 > Harness has wrapped the ***entire platform*** with `OPA` so this is just the tip of the iceberg!
+
+> - Click the **X** in the top right corner to close out of the ***Policy Set Evaluations***
+> - Click ❌ to discard the change for this variable
 
 ===============
 

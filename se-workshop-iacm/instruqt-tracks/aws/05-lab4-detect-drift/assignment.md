@@ -88,7 +88,7 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br>
 
-> # Switch to the [button label=">_Shell" variant="success"](tab-2) tab to continue
+> ## Switch to the [button label=">_Shell" variant="success"](tab-2) tab to continue
 
 ## Now it's time to introduce some drift
 
@@ -132,7 +132,7 @@ aws ec2 describe-instances \
   | jq
 ```
 
-> # Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
+> ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 ## Now let's create an IaCM Pipeline to detect drift
 Click on **Pipelines** in the left Nav <br>
