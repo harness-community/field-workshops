@@ -48,8 +48,8 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br><br>
 
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_nav_admin.png)
-> ### Click on **Admin** in the left Nav
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_nav_configure.png)
+> ### Click on **Configure** in the left Nav
 > - Then click on **Scorecards** in the left Nav \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_nav_scorecards.png)
 > - And then click `Create New Scorecard` \
