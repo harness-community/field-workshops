@@ -6,8 +6,72 @@ title: Lab 2 - Create Resilience Probes
 teaser: Creating Resilience Probes for Chaos Experiment Evaluation
 notes:
 - type: text
-  contents: |
-    <br>In this first lab you will learn how to create resilience probes to automate the evaluation of your experiment hypothesis. This is crucial for understanding the impact of faults injected during chaos experiments.
+  contents: |-
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: 90vh;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+
+      .harness-image {
+        max-width: 90%;
+        max-height: 65%;
+        object-fit: contain;
+      }
+
+      .features-list li {
+        margin: 5px 0;
+        font-weight: bold;
+        font-size: 25px;
+      }
+
+      .features-list .sub-list {
+        list-style-type: disc;
+        margin-left: 20px;
+        font-weight: normal;
+        font-size: 20px;
+        font-style: italic;
+      }
+
+      @media (max-width: 768px) {
+        .features-list li {
+          font-size: 1.25rem;
+        }
+
+        .features-list .sub-list {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .features-list li {
+          font-size: 1rem;
+        }
+
+        .features-list .sub-list {
+          font-size: 1rem;
+        }
+    </style>
+
+    <div class="container">
+      <h1>What is a resilience probe?</h1>
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/ce_resilience_probes.png">
+      <ul class="features-list">
+        <li>Declarative checks that determine the outcome of a fault:
+            <ul class="sub-list">
+              <li>Monitors your application's health before, during and after a chaos experiment</li>
+              <li>Explore the behavior of a system in a chaotic or unpredictable manner</li>
+              <li>Validate the declarative hypothesis set by the user</li>
+            </ul>
+          </li>
+      </ul>
+    </div>
 tabs:
 - id: rexhcvpkslzm
   title: Harness Platform
@@ -60,7 +124,9 @@ h2.cyan { color: cyan; }
 >   - Timeout: `10s`
 >   - Interval: `2s`
 >   - Attempt: `5`
-> - Click **Setup Probe >**
+>   - Polling Interval: `30s`
+>   - Initial Delay: `5s`
+> - Click **Create Probe >**
 
 ===============
 

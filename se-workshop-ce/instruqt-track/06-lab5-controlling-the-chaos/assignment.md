@@ -7,8 +7,86 @@ teaser: Using ChaosGuard to enforce controls around who, what, when, and where c
   experiments are allowed
 notes:
 - type: text
-  contents: |
-    Now let's implement ChaosGuard to restrict execution of chaos experiments.
+  contents: |-
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: 90vh;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+
+      .sub-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
+      .harness-image {
+        max-width: 90%;
+        max-height: 55%;
+        object-fit: contain;
+      }
+
+      .features-list {
+        list-style-type: none;
+        padding: 0;
+        position: sticky;
+      }
+
+      .features-list li {
+        margin: 5px 0;
+        font-weight: bold;
+        font-size: 25px;
+      }
+
+      .features-list .sub-list {
+        list-style-type: disc;
+        margin-left: 20px;
+        font-weight: normal;
+        font-size: 20px;
+        font-style: italic;
+      }
+
+      @media (max-width: 768px) {
+        .features-list li {
+          font-size: 1.25rem;
+        }
+
+        .features-list .sub-list {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .features-list li {
+          font-size: 1rem;
+        }
+
+        .features-list .sub-list {
+          font-size: 1rem;
+        }
+    </style>
+    <br><br>
+    <div class="container">
+      <h1>ChaosGuard for easy scaling</h1>
+      <div class="sub-container">
+        <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/ce_chaosguard.png">
+        <ul class="features-list">
+          <li>Controlled Testing</li>
+          <li>Policy Driven:
+            <ul class="sub-list">
+              <li>Block Node Delete during working hours</li>
+              <li>Block All experiments on a specific namespace</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
 tabs:
 - id: hrygywaxdh12
   title: Harness Platform

@@ -6,11 +6,59 @@ title: Lab 1 - Configuring the Chaos Infrastructure
 teaser: Setting up your Harness Chaos Environment
 notes:
 - type: text
-  contents: |
-    - Chaos engineering is the continuous process of proactively introducing disruptions to systems to assess and improve their resilience against real-world outages.
-    - In this first lab you will setup the Chaos Environment that you will use for fault injection in subsequent labs.
+  contents: |-
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: 90vh;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
 
-    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/chaos-eng-steps.png)
+      .harness-image {
+        max-width: 90%;
+        max-height: 65%;
+        object-fit: contain;
+      }
+
+      .features-list {
+        list-style-type: none;
+        padding: 0;
+        position: sticky;
+      }
+
+      .features-list li {
+        margin: 5px 0;
+        font-weight: bold;
+        font-size: 25px;
+      }
+
+      @media (max-width: 768px) {
+        .features-list li {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .features-list li {
+          font-size: 1rem;
+        }
+    </style>
+
+    <div class="container">
+      <h1>What is Chaos Engineering?</h1>
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/ce_overview_graphic.png">
+      <ul class="features-list">
+        <li>Increase System Resilience</li>
+        <li>Better Customer Experience</li>
+        <li>Optimize Cost</li>
+        <li>Faster Incident Report Time</li>
+      </ul>
+    </div>
 tabs:
 - id: ynxtb8ngb9ed
   title: Harness Platform
@@ -38,7 +86,7 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br><br>
 
-> # Switch to the [button label="Architecture" variant="success"](tab-1) tab to continue
+> ## Switch to the [button label="Architecture" variant="success"](tab-1) tab to continue
 
 > [!NOTE]
 > This is the demo app that we will leverage for fault injection in a later lab. Each box represents an individual microservice.
@@ -47,7 +95,7 @@ h2.cyan { color: cyan; }
 
 <br>
 
-> # Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
+> ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 
 

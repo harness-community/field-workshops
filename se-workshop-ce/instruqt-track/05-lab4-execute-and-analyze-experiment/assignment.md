@@ -6,8 +6,57 @@ title: Lab 4 - Execute and Analyze Experiment Results
 teaser: Execute your chaos experiment and use the resilience probes to collect data
 notes:
 - type: text
-  contents: |
-    Execute the chaos experiment and use the resilience probes to collect data. Learn how to analyze the results to understand the experiment's impact on your system.
+  contents: |-
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: 90vh;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+
+      .harness-image {
+        max-width: 90%;
+        max-height: 65%;
+        object-fit: contain;
+      }
+
+      .features-list {
+        list-style-type: none;
+        padding: 0;
+        position: sticky;
+      }
+
+      .features-list li {
+        margin: 5px 0;
+        font-weight: bold;
+        font-size: 25px;
+      }
+
+      @media (max-width: 768px) {
+        .features-list li {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .features-list li {
+          font-size: 1rem;
+        }
+    </style>
+
+    <div class="container">
+      <h1>Analyze experiment</h1>
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/ce_pipelines.png">
+      <ul class="features-list">
+        <li>Observe the status of fault injection during execution</li>
+        <li>Learn what a Resilience Score is and how it is calculated</li>
+      </ul>
+    </div>
 tabs:
 - id: qree9oe4rlxq
   title: Harness Platform
@@ -45,15 +94,15 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br>
 
-> # Switch to the [button label="Boutique App" variant="success"](tab-1) tab to continue
+> ## Switch to the [button label="Boutique App" variant="success"](tab-1) tab to continue
 
 > [!NOTE]
 > This is our demo app we are targeting for fault injection during our Chaos Experiments.
 
-### Feel free to *browse* around, *add to cart*, *checkout* and see that everything is working as expected.
+### Please *browse* around, *add to cart*, *checkout* and verify that everything is working as expected.
 
 
-> # Switch to the [button label="Grafana" variant="success"](tab-2) tab to continue
+> ## Switch to the [button label="Grafana" variant="success"](tab-2) tab to continue
 |  |   |
 | ----- | ----- |
 | **Username**    |<pre>`admin`</pre>|
@@ -76,7 +125,7 @@ h2.cyan { color: cyan; }
 > [!NOTE]
 > We will use this dashboard to get a better understanding of how our chaos experiment impacts the Online Boutique.
 
-> # Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
+> ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 ## Time to unleash the chaos!
 > Click **Run** to execute your experiment. <br>
@@ -91,7 +140,7 @@ h2.cyan { color: cyan; }
 >   - Is this the result you were expecting?
 >   - Why would this behavior be problematic?
 
-> # Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
+> ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 ## Let's take a look at the results of our experiment
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_experiment_probe_frontend.png)

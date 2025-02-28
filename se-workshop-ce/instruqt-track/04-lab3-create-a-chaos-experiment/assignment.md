@@ -6,8 +6,57 @@ title: Lab 3 - Create a Chaos Experiment
 teaser: Creating your first Chaos Experiment and target an application for fault injection
 notes:
 - type: text
-  contents: |
-    In this lab, participants will design their first chaos experiment, selecting targets and defining what actions will be introduced to simulate disruptive events.
+  contents: |-
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: 90vh;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+
+      .harness-image {
+        max-width: 90%;
+        max-height: 65%;
+        object-fit: contain;
+      }
+
+      .features-list {
+        list-style-type: none;
+        padding: 0;
+        position: sticky;
+      }
+
+      .features-list li {
+        margin: 5px 0;
+        font-weight: bold;
+        font-size: 25px;
+      }
+
+      @media (max-width: 768px) {
+        .features-list li {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .features-list li {
+          font-size: 1rem;
+        }
+    </style>
+
+    <div class="container">
+      <h1>Industry’s  widest coverage on Chaos Faults™</h1>
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/ce_experiment_coverage.png">
+      <ul class="features-list">
+        <li>Boost your organization's chaos engineering effectiveness with our ChaosHub.</li>
+        <li>Featuring a wide range of curated, pre-built chaos scenarios, it's designed for easy implementation and maximum resilience.</li>
+      </ul>
+    </div>
 tabs:
 - id: vjcae98tyu8q
   title: Harness Platform
@@ -55,10 +104,11 @@ h2.cyan { color: cyan; }
 > - Chaos Infrastructure Type: `Kubernetes` \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_k8s_v1_infrastructure.png)
 > - Select Infrastructure: `lab-hce`
+>   - Click **Apply**
 > - Click **Next >**
 
 > **Experiment Builder**
-> - Select `Continue with blank canvas` \
+> - Select `Start with blank canvas` \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_experiment_blank_canvas.png)
 > - Click `+Add` on the canvas \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_add_to_canvas.png)
