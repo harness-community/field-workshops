@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 
-# Standard library imports
+# Standard imports
 import os
 import time
 import shutil
 
 # Third-party imports
+from kubernetes import config
+
+# Library-specific imports
 from pyharnessworkshop import harness, keycloak, utils
 
 ######################## ADD ANY WORKSHOP SPECIFIC SETUP AT THE VERY BOTTOM ########################
-from kubernetes import config
 WORKSHOP_TYPE = "chaos"
 GENERATOR_URI = os.getenv("SE_WORKSHOP_GKE_GENERATOR")
 GRAFANA_PW = os.getenv("SE_WORKSHOP_GRAFANA_PW")
@@ -20,7 +22,6 @@ HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
 HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
 HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
 HARNESS_USER_GROUP = os.getenv("SE_WORKSHOP_USER_GRP_ID")
-USER_PWD = os.getenv("SE_WORKSHOP_USER_PWD")
 KEYCLOAK_ENDPOINT = os.getenv("SE_WORKSHOP_KEYCLOAK_ENDPOINT")
 KEYCLOAK_REALM = os.getenv("SE_WORKSHOP_KEYCLOAK_REALM")
 KEYCLOAK_ADMIN_USER = os.getenv("SE_WORKSHOP_KEYCLOAK_ADMIN_USER")
@@ -36,15 +37,16 @@ while not os.path.isfile("/opt/instruqt/bootstrap/host-bootstrap-completed"):
 # Wait for the Kubernetes API server to become available
 utils.k8s.wait_for_kubernetes_api("http://localhost:8001/api")
 
-random_suffix = utils.misc.generate_random_suffix()
+random_suffix = utils.misc.generate_random_suffix(5)
 harness_project = f"{WORKSHOP_TYPE}{random_suffix}"
 user_name = f"{WORKSHOP_TYPE}{random_suffix}"
 user_email = f"{user_name}@harness.io"
+user_pwd = utils.misc.generate_password()
 
 # Generate Keycloak Bearer Token
 keycloak_token = keycloak.auth.generate_keycloak_token(KEYCLOAK_ENDPOINT, KEYCLOAK_ADMIN_USER, KEYCLOAK_ADMIN_PWD)
 # Create workshop user in Keycloak Realm
-keycloak.user.create_keycloak_user(KEYCLOAK_ENDPOINT, KEYCLOAK_REALM, keycloak_token, user_email, user_name, USER_PWD)
+keycloak.user.create_keycloak_user(KEYCLOAK_ENDPOINT, KEYCLOAK_REALM, keycloak_token, user_email, user_name, user_pwd)
 
 # Create a Sandbox Project for the User in Harness
 harness.platform.create_harness_project(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project)
@@ -53,57 +55,47 @@ harness_project_created = "true"
 # Add the workshop user to the Harness project as an admin
 harness.platform.invite_user_to_harness_project_loop(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project, user_email)
 
-# Install delegate
-template_path = "assets/kubernetes-manifests/harness-delegate.yaml.template"
-utils.misc.fetch_template_from_url(template_path, "/opt/harness/harness-delegate.yaml.template")
-harness.platform.deploy_harness_delegate(
-    HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project,
-    "/opt/harness/harness-delegate.yaml.template", f"{harness_project}-delegate"
-)
-
 utils.instruqt.set_agent_variable("HARNESS_USER", user_email)
-utils.instruqt.set_agent_variable("HARNESS_PWD", USER_PWD)
+utils.instruqt.set_agent_variable("HARNESS_PWD", user_pwd)
 utils.instruqt.set_agent_variable("HARNESS_PRJ_ID", harness_project)
 utils.instruqt.set_agent_variable("HARNESS_PRJ_CREATED", harness_project_created)
+utils.instruqt.set_agent_variable("HARNESS_USER_NAME", user_name)
 ################################## END OF DO NOT MODIFY SECTION ##################################
 
 ############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
-utils.instruqt.set_agent_variable("HARNESS_USER_NAME", user_name)
-utils.instruqt.set_agent_variable("GRAFANA_PWD", GRAFANA_PW)
-misc_path = "/opt/harness/misc"
-manifest_path = f"{misc_path}/kubernetes-manifests"
-utils.misc.run_command(f"mkdir -p {manifest_path}")
+harness_path = "/opt/harness"
+workshop_path = "/opt/workshop"
+os.makedirs(f"{workshop_path}", exist_ok=True)
+os.makedirs(f"{harness_path}/terraform", exist_ok=True)
+os.makedirs(f"{harness_path}/misc/kubernetes-manifests", exist_ok=True)
 
 # Get assets for workshop
 print("Cloning field-workshops repo...")
-# ├── assets
-# │     └── kubernetes-manifests
-# └── se-workshop-ce
-#       └── assets
-#           └── boutique-app
 utils.misc.run_command("git clone https://github.com/harness-community/field-workshops.git")
-shutil.copytree("field-workshops/assets/kubernetes-manifests", f"{manifest_path}/", dirs_exist_ok=True)
-shutil.copytree("field-workshops/se-workshop-ce/assets/boutique-app", f"{manifest_path}/", dirs_exist_ok=True)
+shutil.copytree("field-workshops/assets/kubernetes-manifests", f"{harness_path}/misc/kubernetes-manifests", dirs_exist_ok=True)
+shutil.copytree("field-workshops/se-workshop-ce/assets/boutique-app", f"{harness_path}/misc/kubernetes-manifests", dirs_exist_ok=True)
 shutil.rmtree("field-workshops")
 
 # Get GKE K8s config and clean up K3s config
-shutil.copy("/etc/rancher/k3s/k3s.yaml", f"{misc_path}/k3s.yaml")
+shutil.copy("/etc/rancher/k3s/k3s.yaml", f"{harness_path}/misc/k3s.yaml")
 os.remove("/root/.kube/config")
 os.remove("/etc/rancher/k3s/k3s.yaml")
-utils.misc.generate_gke_credentials(GENERATOR_URI, user_name, f"{misc_path}/gke.yaml")
-os.environ["KUBECONFIG"] = f"{misc_path}/k3s.yaml:{misc_path}/gke.yaml"
+utils.misc.generate_gke_credentials(GENERATOR_URI, user_name, f"{harness_path}/misc/gke.yaml", "chaos-admin")
+os.environ["KUBECONFIG"] = f"{harness_path}/misc/k3s.yaml:{harness_path}/misc/gke.yaml"
 utils.misc.run_command("kubectl config view --merge --flatten > /root/.kube/config")
 os.environ["KUBECONFIG"] = "/root/.kube/config"
 
 print("Deploying Boutique app...")
 contexts, active_context = config.list_kube_config_contexts()
-gke_context = next(ctx for ctx in contexts if ctx['name'].startswith('chaos'))['name']
+gke_context = next(ctx for ctx in contexts if ctx['name'].startswith(f'{WORKSHOP_TYPE}'))['name']
 config.load_kube_config(context=gke_context)
+
+# Apply manifests
 utils.k8s.create_k8s_secret("grafana-admin", GRAFANA_PW, user_name)
 utils.k8s.apply_k8s_manifests([
-    f"{manifest_path}/workshop_app.yaml",
-    f"{manifest_path}/workshop_prometheus.yaml",
-    f"{manifest_path}/workshop_grafana.yaml"
+    f"{harness_path}/misc/kubernetes-manifests/workshop_app.yaml",
+    f"{harness_path}/misc/kubernetes-manifests/workshop_prometheus.yaml",
+    f"{harness_path}/misc/kubernetes-manifests/workshop_grafana.yaml"
 ], user_name)
 boutique_ip = utils.k8s.get_k8s_loadbalancer_ip("frontend-external", user_name)
 grafana_ip = utils.k8s.get_k8s_loadbalancer_ip("grafana", user_name)
@@ -116,12 +108,15 @@ utils.instruqt.set_agent_variable("HARNESS_BOUTIQUE_URL", f"http://{boutique_ip}
 config.load_kube_config(context="default")
 print("Deploying nginx on sandbox k3s...")
 assignment_service_tabs = f"boutique:30001:{boutique_ip},grafana:30002:{grafana_ip}"
-utils.k8s.render_manifest_from_template(f"{manifest_path}/nginx.yaml.template", manifest_path, assignment_service_tabs)
+utils.k8s.render_manifest_from_template(f"{harness_path}/misc/kubernetes-manifests/nginx.yaml.template", f"{harness_path}/misc/kubernetes-manifests", assignment_service_tabs)
 utils.k8s.apply_k8s_manifests([
-    f"{manifest_path}/nginx-boutique.yaml",
-    f"{manifest_path}/nginx-grafana.yaml"
+    f"{harness_path}/misc/kubernetes-manifests/nginx-boutique.yaml",
+    f"{harness_path}/misc/kubernetes-manifests/nginx-grafana.yaml"
 ])
 
 # Delete default context (k3s) as it's not necessary for the workshop
 utils.misc.run_command(f"kubectl config use-context {gke_context}")
 utils.misc.run_command("kubectl config delete-context default")
+
+# Export additional variables for later use
+utils.instruqt.set_agent_variable("GRAFANA_PWD", GRAFANA_PW)

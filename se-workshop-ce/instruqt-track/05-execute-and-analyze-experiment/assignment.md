@@ -1,5 +1,5 @@
 ---
-slug: lab4-execute-and-analyze-experiment
+slug: execute-and-analyze-experiment
 id: c6fvq5g4ng7f
 type: challenge
 title: Lab 4 - Execute and Analyze Experiment Results

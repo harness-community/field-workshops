@@ -1,5 +1,5 @@
 ---
-slug: lab5-controlling-the-chaos
+slug: controlling-the-chaos
 id: ymjy7djb6hma
 type: challenge
 title: Lab 5 - Controlling the Chaos with ChaosGuard

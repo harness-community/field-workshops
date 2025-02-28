@@ -1,5 +1,5 @@
 ---
-slug: lab3-create-a-chaos-experiment
+slug: create-a-chaos-experiment
 id: nwdknzrac9ri
 type: challenge
 title: Lab 3 - Create a Chaos Experiment

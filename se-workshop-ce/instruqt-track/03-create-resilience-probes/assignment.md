@@ -1,5 +1,5 @@
 ---
-slug: lab2-create-resilience-probes
+slug: create-resilience-probes
 id: g5vsdqunpxzr
 type: challenge
 title: Lab 2 - Create Resilience Probes

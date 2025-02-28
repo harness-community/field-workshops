@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 
+# Standard imports
 import os
+
+# Third-party imports
+# None
+
+# Library-specific imports
 from pyharnessworkshop import utils
 
 # REQUIRED VARIABLES LIST
 OUTPUT_HTML = "/opt/harness/misc/credential_tab.html"
 USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
-USER_PWD = os.getenv("SE_WORKSHOP_USER_PWD")
+USER_PWD = utils.instruqt.get_agent_variable("HARNESS_PWD")
 GRAFANA_PW = os.getenv("SE_WORKSHOP_GRAFANA_PW")
 CREDENTIALS = [
     {

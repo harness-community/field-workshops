@@ -1,5 +1,5 @@
 ---
-slug: lab1-configuring-the-chaos
+slug: configuring-the-chaos
 id: x8cfeuiglibv
 type: challenge
 title: Lab 1 - Configuring the Chaos Infrastructure
