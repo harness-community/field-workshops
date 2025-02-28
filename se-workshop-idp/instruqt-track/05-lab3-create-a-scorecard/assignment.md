@@ -80,7 +80,7 @@ h2.cyan { color: cyan; }
 >     - Filter: <pre>`[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]`</pre>
 
 > [!NOTE]
-> - Your scorecard should appear with a grade of 6 (This is NOT good!) \
+> - Your scorecard should appear with a grade of 19 (This is NOT good!) \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_component_scorecard.png)
 
 > [!IMPORTANT]
@@ -93,8 +93,8 @@ h2.cyan { color: cyan; }
 
 > **Change the criteria** <br>
 > - Let’s fix our score the easy way by changing the grading standards
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_nav_admin.png)
-> ### Click on **Admin** in the left Nav
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_nav_configure.png)
+> ### Click on **Configure** in the left Nav
 > - Then click on **Scorecards** in the left Nav \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_nav_scorecards.png)
 > - Find your scorecard
