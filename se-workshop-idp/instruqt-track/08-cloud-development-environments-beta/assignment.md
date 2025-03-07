@@ -57,8 +57,8 @@ h2.cyan { color: cyan; }
 > 1) *If you experience any issues you can access the Harness Platform in your browser tab by clicking: \
 >  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-1) tab*
 
-# There are two types of Cloud Development Environments
-## Expand the section for the Gitspace you'd like to configure
+# Harness supports multiple types of Cloud Development Environments
+## This lab will focus on the VS Code Online Gitspace
 
 VS Code Online in the Gitspace
 ===
@@ -82,9 +82,15 @@ Configure your Gitspace as per the instructions provided below ↓ <br>
 >   - Git Provider: `GitHub Cloud`
 >   - Repo URL: <pre>`https://github.com/jtitra/haikus`</pre>
 >   - Repo Branch: `main`
-> - IDE: `VS Code Browser`
+> - IDE: `VS Code Browser` \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_vs_code_browser.png)
 > - Region: `us-west`
 > - Machine Type: `Standard`
+
+> [!IMPORTANT]
+> Your gitspace should look like this. \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_gitspace_configuration.png)
+
 > - Click **Create Gitspace**
 
 <br>
@@ -101,32 +107,23 @@ Configure your Gitspace as per the instructions provided below ↓ <br>
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_open_vs_code_online.png)
 > - Due to a limitation with the **Instruqt** platform, you will need to click on the prompt and show the pop-up \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_instruqt_allow_pop_up.png)
+> - If the **Instruqt** platform is giving you any issues, you can always access the Harness Platform in your browser tab by clicking: \
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-1) tab*
 > - You are now ready to start coding!
-
-> [!NOTE]
-> Please skip over the `VS Code Desktop` section below and continue with `Running Your App`
 
 Running Your App
 ===
 ## In your VS Code Editor
 
-> - Click in the top search bar and select <br> `Show and Run Commands >`
-> - Or use the shortcut:
-> <div class="monaco-keybinding" custom-hover="true" aria-label="Shift+Command+P"
->    style="color: var(--vscode-keybindingLabel-foreground);"><span class="monaco-keybinding-key"
->        style="background-color: var(--vscode-keybindingLabel-background); border-top-color: ; border-right-color: ; border-bottom-color: var(--vscode-keybindingLabel-bottomBorder); border-left-color: ; box-shadow: inset 0 -1px 0 var(--vscode-widget-shadow);">⇧</span><span
->        class="monaco-keybinding-key"
->        style="background-color: var(--vscode-keybindingLabel-background); border-top-color: ; border-right-color: ; border-bottom-color: var(--vscode-keybindingLabel-bottomBorder); border-left-color: ; box-shadow: inset 0 -1px 0 var(--vscode-widget-shadow);">⌘</span><span
->        class="monaco-keybinding-key"
->        style="background-color: var(--vscode-keybindingLabel-background); border-top-color: ; border-right-color: ; border-bottom-color: var(--vscode-keybindingLabel-bottomBorder); border-left-color: ; box-shadow: inset 0 -1px 0 var(--vscode-widget-shadow);">P</span>
-></div>
->
-> - Select or type: `Create New Terminal`
-> - Select: `bash`
-> - A new terminal will open at the bottom of your IDE
-> - You can now run your commands and start building your application in this terminal
-> - Type `yarn start` into the terminal and press enter to run your application
-> - Click `Open in Browser` to see your application! \
+> 1) Click in the top search bar and select <br> `Show and Run Commands >` \
+>  *Or use the shortcut:* <div class="monaco-keybinding" custom-hover="true" aria-label="Shift+Command+P" style="color: var(--vscode-keybindingLabel-foreground);"><span class="monaco-keybinding-key" style="background-color: var(--vscode-keybindingLabel-background); border-top-color: ; border-right-color: ; border-bottom-color: var(--vscode-keybindingLabel-bottomBorder); border-left-color: ; box-shadow: inset 0 -1px 0 var(--vscode-widget-shadow);">⇧</span><span class="monaco-keybinding-key" style="background-color: var(--vscode-keybindingLabel-background); border-top-color: ; border-right-color: ; border-bottom-color: var(--vscode-keybindingLabel-bottomBorder); border-left-color: ; box-shadow: inset 0 -1px 0 var(--vscode-widget-shadow);">⌘</span><span class="monaco-keybinding-key" style="background-color: var(--vscode-keybindingLabel-background); border-top-color: ; border-right-color: ; border-bottom-color: var(--vscode-keybindingLabel-bottomBorder); border-left-color: ; box-shadow: inset 0 -1px 0 var(--vscode-widget-shadow);">P</span></div>
+> 1) Select or type: `Create New Terminal`
+> 1) Select: `bash`
+>    1) A new terminal will open at the bottom of your IDE \
+>         *You can now run your commands and start building your application in this terminal*
+>    1) In the terminal type: <pre>`yarn start`</pre>
+>    1) Press enter to run your application
+> 1) Click `Open in Browser` to see your application! \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_open_in_browser.png)
 
 
