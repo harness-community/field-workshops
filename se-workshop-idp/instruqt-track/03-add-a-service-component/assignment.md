@@ -1,5 +1,5 @@
 ---
-slug: lab2-add-a-service-component
+slug: add-a-service-component
 id: zqqovkxnj48y
 type: challenge
 title: Lab 2a - Add a Service Component

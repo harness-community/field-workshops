@@ -1,5 +1,5 @@
 ---
-slug: lab2b-add-a-dependent-service-component
+slug: add-a-dependent-service-component
 id: cradh1f80n9q
 type: challenge
 title: Lab 2b - Add a Service Component

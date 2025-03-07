@@ -1,5 +1,5 @@
 ---
-slug: logging-into-your-harness-sandbox-account
+slug: logging-in
 id: pxfxazgzoa37
 type: challenge
 title: Logging into your Harness Sandbox Account

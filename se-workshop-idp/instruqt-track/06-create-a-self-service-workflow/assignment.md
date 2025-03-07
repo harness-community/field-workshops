@@ -1,5 +1,5 @@
 ---
-slug: lab4-create-a-self-service-workflow
+slug: create-a-self-service-workflow
 id: ya61nfoj1xhy
 type: challenge
 title: Lab 4 - Create a Self-Service Workflow

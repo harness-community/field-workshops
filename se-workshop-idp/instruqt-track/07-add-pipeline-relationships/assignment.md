@@ -1,5 +1,5 @@
 ---
-slug: lab5-add-pipeline-relationships
+slug: add-pipeline-relationships
 id: bldv4hdw2yro
 type: challenge
 title: Lab 5 - Add Pipeline Relationships

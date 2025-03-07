@@ -1,5 +1,5 @@
 ---
-slug: lab3-create-a-scorecard
+slug: create-a-scorecard
 id: ddtgss4lwl6b
 type: challenge
 title: Lab 3 - Create a Scorecard

@@ -1,5 +1,5 @@
 ---
-slug: lab1-clone-the-repo
+slug: clone-the-repo
 id: 7tuv4ozrtvjr
 type: challenge
 title: Lab 1 - Clone the IDP Repo
