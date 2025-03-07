@@ -6,8 +6,84 @@ title: Lab 1 - TBD
 teaser: TBD
 notes:
 - type: text
-  contents: |
-    TBD
+  contents: |-
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: 90vh;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+
+      .sub-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
+      .harness-image {
+        max-width: 90%;
+        max-height: 55%;
+        object-fit: contain;
+      }
+
+      .features-list {
+        list-style-type: none;
+        padding: 0;
+        position: sticky;
+      }
+
+      .features-list li {
+        margin: 5px 0;
+        font-weight: bold;
+        font-size: 25px;
+      }
+
+      .features-list .sub-list {
+        list-style-type: disc;
+        margin-left: 20px;
+        font-weight: normal;
+        font-size: 20px;
+        font-style: italic;
+      }
+
+      @media (max-width: 768px) {
+        .features-list li {
+          font-size: 1.25rem;
+        }
+
+        .features-list .sub-list {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .features-list li {
+          font-size: 1rem;
+        }
+
+        .features-list .sub-list {
+          font-size: 1rem;
+        }
+    </style>
+
+    <div class="container">
+      <h1>Modernize DevOps</h1>
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/re_mapped_pipeline.avif">
+      <ul class="features-list">
+        <li>Upgrade your software delivery with modern, AI-native tools:</li>
+        <ul class="sub-list">
+          <li>CI/CD</li>
+          <li>Feature Flags</li>
+          <li>Infrastructure Management</li>
+          <li>Chaos Engineering</li>
+        </ul>
+      </ul>
+    </div>
 tabs:
 - id: vlaj62szy0x8
   title: Harness Platform
