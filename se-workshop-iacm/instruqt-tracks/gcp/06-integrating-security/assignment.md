@@ -109,7 +109,7 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 >    1) Configure with the details below ↓
 
 > **Configure Wiz**
-> - Type: <pre><code>`Wiz IaC Scan`</pre></code>
+> - Type: <pre><code>Wiz IaC Scan</pre></code>
 > - **Authentication**
 >   - Access Id: <pre><code><+secrets.getValue("org.wiz_access_id")></pre></code>
 >   - Access Token: <pre><code><+secrets.getValue("org.wiz_access_token")></pre></code>
