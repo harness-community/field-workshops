@@ -110,6 +110,7 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 
 > **Configure Wiz**
 > - Type: <pre><code>Wiz IaC Scan</pre></code>
+> - Workspace: <pre><code>/harness/gcp</pre></code>
 > - **Authentication**
 >   - Access Id: <pre><code><+secrets.getValue("org.wiz_access_id")></pre></code>
 >   - Access Token: <pre><code><+secrets.getValue("org.wiz_access_token")></pre></code>
@@ -126,9 +127,9 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 > - Click **Run Pipeline**
 
 ### Security Scan Results
-The scans take ~3 minutes to run. <br>
+The Wiz scan takes less than 1 minute to run. <br>
 After the execution is complete, go to the `Security Tests` tab to see the *deduplicated*, *normalized* and *prioritized* list of `vulnerabilities` discovered across your scanners. <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_security_tests_tab.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_security_tests_tab_gcp.png)
 
 ===============
 
