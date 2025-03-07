@@ -1,5 +1,5 @@
 ---
-slug: logging-into-your-harness-sandbox-account
+slug: logging-in
 id: svdhfudpwz4t
 type: challenge
 title: Logging into your Harness Sandbox Account
@@ -98,7 +98,6 @@ Project Selection
 > Click on `Select a Project` \
 > Click on project `[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]` \
    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/platform_project_selection.png)
-
 
 Conclusion
 ===
