@@ -100,22 +100,16 @@ h2.cyan { color: cyan; }
 > - Store: `Inline`
 > - Click **Start**
 
-<br>
-
 > - Click `+Add Stage` <br>
 > - Choose **Infrastructure** stage type \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
 > - Give it a name: <pre>`IaCM`</pre>
 > - Click **Set Up Stage**
 
-<br>
-
 > - On the  **Infrastructure** tab \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_infrastructure.png)
 > - Keep the defaults (**Cloud**)
 > - Click **Next >**
-
-<br>
 
 > - On the **Workspace** tab \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_workspace.png)
@@ -132,8 +126,6 @@ h2.cyan { color: cyan; }
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_provision_step.png)
 > - Click **Use Operation**
 
-<br>
-
 > - On the **Execution** tab \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_execution.png)
 > - Hover over the pipeline between `plan` and `apply` and click `+` \
@@ -148,8 +140,6 @@ h2.cyan { color: cyan; }
 > - ✅ Auto approve when the plan does not change
 > - Click **Apply Changes** in the top right
 
-<br>
-
 > [!NOTE]
 > Your pipeline should look like this: \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/full_pipeline_iacm_provision.png)
@@ -161,8 +151,6 @@ h2.cyan { color: cyan; }
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
 > - Then select your `demoworkspace` **Workspace** to execute the pipeline
 > - Click **Run Pipeline**
-
-<br>
 
 > - Wait for your pipeline to reach the **Approval** step
 > - Click **Review** and take a moment to examine the detailed information \

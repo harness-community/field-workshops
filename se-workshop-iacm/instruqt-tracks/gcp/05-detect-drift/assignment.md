@@ -140,22 +140,16 @@ And then click `+Create Pipeline` <br>
 > - Store: `Inline`
 > - Click **Start**
 
-<br>
-
 > - Click `+Add Stage` <br>
 > - Choose **Infrastructure** stage type \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
 > - Give it a name: <pre>`IaCM`</pre>
 > - Click **Set Up Stage**
 
-<br>
-
 > - On the  **Infrastructure** tab \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_infrastructure.png)
 > - Keep the defaults (**Cloud**)
 > - Click **Next >**
-
-<br>
 
 > - On the **Workspace** tab \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_workspace.png)
@@ -163,19 +157,13 @@ And then click `+Create Pipeline` <br>
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_workspace_runtime_input.png)
 > - Click **Next >**
 
-<br>
-
 > - Select **Detect Drift** operation \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_step.png)
 > - Click **Use Operation**
 
-<br>
-
 > [!NOTE]
 > Your pipeline should look like this: \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/full_pipeline_iacm_drift.png)
-
-<br>
 
 ### Execute your new IaCM Pipeline
 > - Click **Save** in the top right to save your new pipeline \
@@ -188,8 +176,6 @@ And then click `+Create Pipeline` <br>
 > [!NOTE]
 > - *What do you expect to happen?*
 > - *What drift should be detected?*
-
-<br>
 
 > **Now that the piplne execution has completed**
 > - Click on the `Resources` tab \
