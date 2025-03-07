@@ -73,11 +73,11 @@ h2.cyan { color: cyan; }
 ### Now navigate to one of your services
 
 > In the left Nav <br>
-> - Click on **<- Back to Main Menu**
-> - Click on **Catalog**
-> - Select your first service
->   - You can use the filter to narrow down the list if needed
->     - Filter: <pre>`[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]`</pre>
+> 1) Click on **<- Back to Main Menu**
+> 1) Click on **Catalog**
+>    1) You can use the filter to narrow down the list if needed
+>       - Filter: <pre>`[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]`</pre>
+> 1) Select your first service
 
 > [!NOTE]
 > - Your scorecard should appear with a grade of 19 (This is NOT good!) \
@@ -97,11 +97,12 @@ h2.cyan { color: cyan; }
 > ### Click on **Configure** in the left Nav
 > - Then click on **Scorecards** in the left Nav \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_nav_scorecards.png)
-> - Find your scorecard
+> - Find your scorecard: `[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]`
 > - Click `Edit`
 >   - Toggle **Adjust Weights** on the right hand side \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_scorecard_adjust_weights_toggle.png)
->   - Set the value to `100` for the following checks:
+>   - Set the value to `100` for the following checks \
+>       *(near the bottom of the list)*:
 >     - Spec owner exists
 >     - Tech Docs exists
 > - Click `Update Scorecard`
@@ -110,6 +111,15 @@ h2.cyan { color: cyan; }
 > [!NOTE]
 > - *How do you expect your services score to change?*
 
+
+### Now navigate back to one of your services
+
+> In the left Nav <br>
+> 1) Click on **<- Back to Main Menu**
+> 1) Click on **Catalog**
+>    1) You can use the filter to narrow down the list if needed
+>       - Filter: <pre>`[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]`</pre>
+> 1) Select your first service
 
 ### Congratulations on your service's passing grade!
 

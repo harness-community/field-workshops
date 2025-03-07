@@ -98,7 +98,12 @@ Click on **Workflows** in the left Nav <br>
 > ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 > In the left Nav <br>
-> - Head back to the **IDP Module**
+> Click on project `[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]` \
+   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_project_selection.png)
+
+## Head back to the *IDP Module*
+
+> In the left Nav <br>
 > - Click on **Catalog**
 > - Select your newly created service
 >   - You can use the filter to narrow down the list if needed

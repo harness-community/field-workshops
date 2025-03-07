@@ -90,7 +90,7 @@ h2.cyan { color: cyan; }
 
 Select the **Code Repository** module from the list <br>
 
-Click on the **idp-workshop** that's been setup for you <br>
+Click on the **idp-repo** that's been setup for you <br>
 ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_code_repo.png)
 
 Click on **Clone** in the top right <br>

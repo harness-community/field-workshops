@@ -2,6 +2,11 @@
 
 # Standard library imports
 import os
+
+# Third-party imports
+#   None
+
+# Library-specific imports
 from pyharnessworkshop import harness, keycloak, utils
 
 ####################### ADD ANY WORKSHOP SPECIFIC CLEANUP AT THE VERY BOTTOM #######################
@@ -57,3 +62,21 @@ if catalog_items:
         print("No matching items found to delete.")
 else:
     print("No catalog items found to process.")
+
+# Get IDP scorecards
+scorecards = harness.platform.get_all_idp_scorecards(HARNESS_PAT, HARNESS_ACCOUNT_ID)
+
+# Verify there are scorecards to filter
+if scorecards:
+    print(f"Found {len(scorecards)} scorecards to process.")
+    # Filter list to items created by this workshop session
+    matching_ids = harness.platform.find_idp_scorecard_matches(scorecards, HARNESS_PROJECT)
+    # Verify there are IDs to delete
+    if matching_ids:
+        print(f"Found {len(matching_ids)} items to delete.")
+        # Delete IDP scorecards created during this workshop session
+        harness.platform.delete_idp_scorecard(HARNESS_PAT, HARNESS_ACCOUNT_ID, matching_ids)
+    else:
+        print("No matching scorecards found to delete.")
+else:
+    print("No scorecards found to process.")
