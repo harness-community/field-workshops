@@ -6,6 +6,11 @@
 
 This workshop is designed to provide hands-on experience with Harness Infrastructure as Code Management. Participants will learn how to create workspaces, build pipelines, detect configuration drifts, and enforce governance using Open Policy Agent (OPA).
 
+## Versions
+ - [AWS](https://github.com/harness-community/field-workshops/tree/main/se-workshop-iacm/instruqt-tracks/aws) - Each attendee gets their own AWS account to deploy and drift EC2 instances
+ - [GCP](https://github.com/harness-community/field-workshops/tree/main/se-workshop-iacm/instruqt-tracks/gcp) - Each attendee gets their own GCP project to deploy and drift GCE instances
+ - Azure (coming soon)
+
 ## Labs
 
 ### Lab 1: Clone the IaC Repo
@@ -20,13 +25,17 @@ Learn how to create a pipeline in Harness IaCM. This lab will cover the basics o
 ### Lab 4: Drift Detection with Harness IaCM
 This lab focuses on detecting configuration drifts in your infrastructure. Participants will learn how to set up drift detection, interpret its results, and understand the impact of drift on infrastructure management.
 
-### Lab 5: Governance with OPA
+### Lab 5: Security Testing Orchestration
+Shift-left and integrate security scanners into your pipelines, using Harness to automate vulnerability scanning, compliance checks, and other security measures.
+ - IaC (Infrastructure as Code): Integrate Wiz to identify vulnerabilities before you deploy your infrastructure.
+
+### Lab 6: Governance with OPA
 Explore how to integrate Open Policy Agent (OPA) with Harness IaCM to enforce governance policies. This lab will demonstrate setting up policy-as-code frameworks to ensure compliance across your infrastructure deployments.
 
-### Lab 6: Cost Estimation and State Changes
+### Lab 7: Cost Estimation and State Changes
 In this lab you will learn how to utilize Harness IaCM to estimate costs and track state changes in your infrastructure, enabling more informed decision-making.
 
-### Lab 7 - PR Triggers and Validation
+### Lab 8: PR Triggers and Validation
 In our final lab, you will create a PR Validation pipeline that we will trigger by adding a new TF resource.
 
 ## Additional Resources
