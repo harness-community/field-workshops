@@ -1,6 +1,6 @@
 ---
 slug: integrating-security
-id: xwfatg1wqcxh
+id: xyjfknccj4iu
 type: challenge
 title: Lab 5 - Security Testing Orchestration
 teaser: Orchestrate security tests and remediate vulnerabilities with AI guidance.
@@ -59,20 +59,20 @@ notes:
       </ul>
     </div>
 tabs:
-- id: rtvuxpegvdwv
+- id: ro9ypwipoi08
   title: Harness Platform
   type: browser
   hostname: harness
-- id: cxfys8wsguzb
+- id: kiwolojubfxt
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: wwx0xaiwapki
+- id: nhxi77bxj3fv
   title: Shell
   type: terminal
   hostname: sandbox
-- id: jdcxgelba0ll
+- id: hodbfw1xyw4n
   title: Lab Credentials
   type: service
   hostname: sandbox
@@ -108,18 +108,11 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 >       ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_step_wiz.png)
 >    1) Configure with the details below ↓
 
->    1) In the existing pipeline, click on the ***IaCM*** stage `after` the ***Plan*** step click on `+` \
->        ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_add_sto_step.png)
->    1) Select `Add Step`
->    1) Select `Wiz` \
->       ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_step_wiz.png)
-> 1) Configure with the details below ↓
-
 > **Configure Wiz**
 > - Type: <pre><code>`Wiz IaC Scan`</pre></code>
 > - **Authentication**
->   - Access Id: <pre><code><+secrets.getValue("org.wiz_access_token")></pre></code>
->   - Access Token: <pre><code><+secrets.getValue("org.wiz_access_id")></pre></code>
+>   - Access Id: <pre><code><+secrets.getValue("org.wiz_access_id")></pre></code>
+>   - Access Token: <pre><code><+secrets.getValue("org.wiz_access_token")></pre></code>
 > - Click **Apply Changes** in the top right
 
 <br>
@@ -135,7 +128,7 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 ### Security Scan Results
 The scans take ~3 minutes to run. <br>
 After the execution is complete, go to the `Security Tests` tab to see the *deduplicated*, *normalized* and *prioritized* list of `vulnerabilities` discovered across your scanners. <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_security_tests_tab.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_security_tests_tab.png)
 
 ===============
 

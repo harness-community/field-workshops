@@ -10,9 +10,10 @@ description: |2-
     - Lab 2 - Creating a Workspace
     - Lab 3 - Create a Harness IaCM Pipeline
     - Lab 4 - Drift Detection w/Harness IaCM
-    - Lab 5 - Governance w/OPA
-    - Lab 6 - Cost Estimation and State
-    - Lab 7 - PR Triggers and Validation
+    - Lab 5 - Security Testing Orchestration
+    - Lab 6 - Governance w/OPA
+    - Lab 7 - Cost Estimation and State
+    - Lab 8 - PR Triggers and Validation
 icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/iacm.png
 tags: []
 owner: harness
@@ -29,5 +30,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "2731168788004154477"
+checksum: "10594715770665400501"
 enhanced_loading: false
