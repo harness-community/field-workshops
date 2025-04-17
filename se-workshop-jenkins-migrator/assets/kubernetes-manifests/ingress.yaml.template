@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jenkins-external
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "{{ PARTICIPANT_ID }}.instruqt.harness-demo.site"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: jenkins
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - "{{ PARTICIPANT_ID }}.instruqt.harness-demo.site"
