@@ -25,7 +25,7 @@ spec:
           runAsUser: 0
       containers:
       - name: jenkins
-        image: us-east1-docker.pkg.dev/sales-209522/titra/jenkins-lab:0.0.4
+        image: us-east1-docker.pkg.dev/sales-209522/titra/jenkins-lab:0.0.9
         ports:
         - containerPort: 8080
           name: http
@@ -34,9 +34,13 @@ spec:
         env:
         - name: JAVA_OPTS
           value: "-Djenkins.install.runSetupWizard=false -Dhudson.model.DirectoryBrowserSupport.CSP='' -Djenkins.security.FrameOptionsPageDecorator.enabled=false -Djava.util.logging.ConsoleHandler.level=FINE"
+        - name: DOCKER_HOST
+          value: "unix:///var/run/docker.sock"
         volumeMounts:
         - name: jenkins-home
           mountPath: /var/jenkins_home
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
         resources:
           limits:
             cpu: "1"
@@ -44,10 +48,29 @@ spec:
           requests:
             cpu: "0.5"
             memory: "1Gi"
+      - name: dind
+        image: docker:24.0-dind
+        securityContext:
+          privileged: true
+        env:
+        - name: DOCKER_TLS_CERTDIR
+          value: ""
+        volumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "512Mi"
+          requests:
+            cpu: "0.2"
+            memory: "256Mi"
       volumes:
       - name: jenkins-home
         persistentVolumeClaim:
           claimName: jenkins-pvc
+      - name: docker-socket
+        emptyDir: {}
 
 ---
 apiVersion: v1
