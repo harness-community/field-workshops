@@ -1,10 +1,44 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins-global-libraries
+data:
+  GlobalLibraries.xml: |
+    <?xml version='1.1' encoding='UTF-8'?>
+    <org.jenkinsci.plugins.workflow.libs.GlobalLibraries plugin="pipeline-groovy-lib@752.vdddedf804e72">
+      <libraries>
+        <org.jenkinsci.plugins.workflow.libs.LibraryConfiguration>
+          <name>build-utils</name>
+          <retriever class="org.jenkinsci.plugins.workflow.libs.SCMSourceRetriever">
+            <clone>true</clone>
+            <libraryPath>./</libraryPath>
+            <scm class="jenkins.plugins.git.GitSCMSource" plugin="git@5.7.0">
+              <id>743a1528-5dd2-4f82-8931-6d691a4f198d</id>
+              <remote>https://github.com/jamie-harness/jenkins-shared-library-examples.git</remote>
+              <credentialsId></credentialsId>
+              <traits>
+                <jenkins.plugins.git.traits.BranchDiscoveryTrait/>
+              </traits>
+            </scm>
+          </retriever>
+          <defaultVersion>main</defaultVersion>
+          <implicit>false</implicit>
+          <allowVersionOverride>true</allowVersionOverride>
+          <includeInChangesets>true</includeInChangesets>
+        </org.jenkinsci.plugins.workflow.libs.LibraryConfiguration>
+      </libraries>
+    </org.jenkinsci.plugins.workflow.libs.GlobalLibraries>
+
+---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: jenkins
   labels:
     app: jenkins
 spec:
+  serviceName: jenkins
   replicas: 1
   selector:
     matchLabels:
@@ -23,9 +57,17 @@ spec:
           mountPath: /var/jenkins_home
         securityContext:
           runAsUser: 0
+      - name: configure-global-libraries
+        image: busybox:latest
+        command: ["sh", "-c", "cp /config/GlobalLibraries.xml /var/jenkins_home/org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml && chown 1000:1000 /var/jenkins_home/org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml"]
+        volumeMounts:
+        - name: jenkins-home
+          mountPath: /var/jenkins_home
+        - name: global-libraries-config
+          mountPath: /config
       containers:
       - name: jenkins
-        image: us-east1-docker.pkg.dev/sales-209522/titra/jenkins-lab:0.0.9
+        image: us-east1-docker.pkg.dev/sales-209522/titra/jenkins-lab:0.1.1
         ports:
         - containerPort: 8080
           name: http
@@ -39,8 +81,8 @@ spec:
         volumeMounts:
         - name: jenkins-home
           mountPath: /var/jenkins_home
-        - name: docker-socket
-          mountPath: /var/run/docker.sock
+        - name: docker-run
+          mountPath: /var/run
         resources:
           limits:
             cpu: "1"
@@ -55,9 +97,11 @@ spec:
         env:
         - name: DOCKER_TLS_CERTDIR
           value: ""
+        - name: DOCKER_HOST
+          value: "unix:///var/run/docker.sock"
         volumeMounts:
-        - name: docker-socket
-          mountPath: /var/run/docker.sock
+        - name: docker-run
+          mountPath: /var/run
         resources:
           limits:
             cpu: "0.5"
@@ -66,24 +110,21 @@ spec:
             cpu: "0.2"
             memory: "256Mi"
       volumes:
-      - name: jenkins-home
-        persistentVolumeClaim:
-          claimName: jenkins-pvc
-      - name: docker-socket
+      - name: docker-run
         emptyDir: {}
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jenkins-pvc
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
-  storageClassName: standard
+      - name: global-libraries-config
+        configMap:
+          name: jenkins-global-libraries
+  volumeClaimTemplates:
+  - metadata:
+      name: jenkins-home
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: standard
 
 ---
 apiVersion: v1
