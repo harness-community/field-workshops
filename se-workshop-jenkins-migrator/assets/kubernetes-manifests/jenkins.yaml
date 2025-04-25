@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: jenkins-global-libraries
+  name: jenkins-config
 data:
   GlobalLibraries.xml: |
     <?xml version='1.1' encoding='UTF-8'?>
@@ -29,6 +29,167 @@ data:
         </org.jenkinsci.plugins.workflow.libs.LibraryConfiguration>
       </libraries>
     </org.jenkinsci.plugins.workflow.libs.GlobalLibraries>
+  credentials.xml: |
+    <?xml version='1.1' encoding='UTF-8'?>
+      <com.cloudbees.plugins.credentials.SystemCredentialsProvider plugin="credentials@1415.v831096eb_5534">
+        <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+          <entry>
+            <com.cloudbees.plugins.credentials.domains.Domain>
+              <specifications/>
+            </com.cloudbees.plugins.credentials.domains.Domain>
+            <java.util.concurrent.CopyOnWriteArrayList>
+              <com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
+                <scope>GLOBAL</scope>
+                <id>docker-hub-credentials</id>
+                <description></description>
+                <username>seworkshop</username>
+                <password>{AQAAABAAAAAwhfsPVkIaDvAXMxJaBktJfkqrE3bsIl+d32rJYmBIu1mgAEsNrcbUYLXKEb8ZlLDqBzPnD1ml/h6+p+WX263pCg==}</password>
+                <usernameSecret>false</usernameSecret>
+              </com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
+            </java.util.concurrent.CopyOnWriteArrayList>
+          </entry>
+        </domainCredentialsMap>
+      </com.cloudbees.plugins.credentials.SystemCredentialsProvider>
+  config.xml: |
+    <?xml version='1.1' encoding='UTF-8'?>
+    <hudson>
+      <disabledAdministrativeMonitors>
+        <string>hudson.util.DoubleLaunchChecker</string>
+      </disabledAdministrativeMonitors>
+      <version>2.492.3</version>
+      <numExecutors>0</numExecutors>
+      <mode>EXCLUSIVE</mode>
+      <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured"/>
+      <securityRealm class="hudson.security.SecurityRealm$None"/>
+      <disableRememberMe>false</disableRememberMe>
+      <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
+      <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULL_NAME}</workspaceDir>
+      <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
+      <jdks/>
+      <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
+      <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
+      <clouds>
+        <org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud plugin="kubernetes@4324.vfec199a_33512">
+          <name>gke</name>
+          <templates>
+            <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
+              <id>ecfac917-9f97-4ffe-bc55-139e787ef5a0</id>
+              <name>build-agent</name>
+              <privileged>false</privileged>
+              <capOnlyOnAlivePods>false</capOnlyOnAlivePods>
+              <alwaysPullImage>false</alwaysPullImage>
+              <instanceCap>2147483647</instanceCap>
+              <slaveConnectTimeout>1000</slaveConnectTimeout>
+              <idleMinutes>0</idleMinutes>
+              <activeDeadlineSeconds>0</activeDeadlineSeconds>
+              <hostNetwork>false</hostNetwork>
+              <volumes/>
+              <containers/>
+              <envVars/>
+              <annotations/>
+              <imagePullSecrets/>
+              <nodeProperties/>
+              <agentInjection>false</agentInjection>
+              <yaml>apiVersion: v1
+    kind: Pod
+    metadata:
+      labels:
+        app: jenkins-agent
+    spec:
+      containers:
+      - name: gradle
+        image: gradle:8.3.0-jdk17
+        command:
+        - cat
+        tty: true
+        volumeMounts:
+        - name: workspace
+          mountPath: /home/jenkins/workspace
+      - name: docker
+        image: docker:dind
+        securityContext:
+          privileged: true
+        env:
+        - name: DOCKER_TLS_CERTDIR
+          value: &quot;&quot;
+        command:
+        - dockerd
+        - --host=tcp://0.0.0.0:2375
+        - --host=unix:///var/run/docker.sock
+        volumeMounts:
+        - name: workspace
+          mountPath: /home/jenkins/workspace
+      volumes:
+      - name: workspace
+        emptyDir: {}</yaml>
+              <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+              <inheritYamlMergeStrategy>false</inheritYamlMergeStrategy>
+              <showRawYaml>true</showRawYaml>
+            </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
+          </templates>
+          <serverUrl>https://kubernetes.default.svc</serverUrl>
+          <useJenkinsProxy>false</useJenkinsProxy>
+          <skipTlsVerify>false</skipTlsVerify>
+          <addMasterProxyEnvVars>false</addMasterProxyEnvVars>
+          <capOnlyOnAlivePods>false</capOnlyOnAlivePods>
+          <restrictedPssSecurityContext>false</restrictedPssSecurityContext>
+          <webSocket>false</webSocket>
+          <directConnection>false</directConnection>
+          <jenkinsUrl>http://35.231.98.154</jenkinsUrl>
+          <containerCap>10</containerCap>
+          <retentionTimeout>5</retentionTimeout>
+          <connectTimeout>5</connectTimeout>
+          <readTimeout>15</readTimeout>
+          <podLabels>
+            <org.csanchez.jenkins.plugins.kubernetes.PodLabel>
+              <key>jenkins</key>
+              <value>slave</value>
+            </org.csanchez.jenkins.plugins.kubernetes.PodLabel>
+          </podLabels>
+          <usageRestricted>false</usageRestricted>
+          <maxRequestsPerHost>32</maxRequestsPerHost>
+          <waitForPodSec>600</waitForPodSec>
+          <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Never"/>
+        </org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud>
+      </clouds>
+      <quietPeriod>5</quietPeriod>
+      <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson" reference="../../.."/>
+          <name>all</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+      <primaryView>all</primaryView>
+      <slaveAgentPort>50000</slaveAgentPort>
+      <label></label>
+      <crumbIssuer class="hudson.security.csrf.DefaultCrumbIssuer">
+        <excludeClientIPFromCrumb>false</excludeClientIPFromCrumb>
+      </crumbIssuer>
+      <nodeProperties/>
+      <globalNodeProperties/>
+      <nodeRenameMigrationNeeded>false</nodeRenameMigrationNeeded>
+    </hudson>
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: jenkins-secrets
+type: Opaque
+data:
+  secret.key: |
+    ZDk4NTRlZmVjNDA0MTNmNTlhMTc0M2MxZmE2NTIzY2I3YjA0NjNiMmFlNmZmMTFlODhjZDhjOGQ1
+    YTJjOTFiZg==
+  master.key: |
+    ZWVkYTZhMTU3YjhjYWRhZjUyMTJhNzFkYjdlNDc0ZjRiYjE4YmNkNjgzODYzYTA2ZTQ4ZDAzNWYz
+    YmY4YTk2YjlmYzVhNTViNTgyMGU5ZTYyOTIzODg0YTIyODZiMmI5Yzc3YzdjNDg5NTQxZTA0NDJj
+    MDYxZjFkNmFlYWE4NmYxMjdjYTgwMTMzZmVhYjAxYTQwMWE2YjI0ZDg2NWE4MjMzN2MwYjY0NDIy
+    ZDJmZWMwNTkxMjdlZGJhMTE4ZDhjODhjYWVjMDhmOGE5MjYyMDNhMDg0YjBmZmY0YjAzZmY5MGRm
+    Yzg0ODQ5MzNmMGYwOWY4OWJkY2UyZTNkOGI2Mg==
 
 ---
 apiVersion: apps/v1
@@ -57,17 +218,19 @@ spec:
           mountPath: /var/jenkins_home
         securityContext:
           runAsUser: 0
-      - name: configure-global-libraries
+      - name: configure-jenkins
         image: busybox:latest
-        command: ["sh", "-c", "cp /config/GlobalLibraries.xml /var/jenkins_home/org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml && chown 1000:1000 /var/jenkins_home/org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml"]
+        command: ["sh", "-c", "mkdir -p /var/jenkins_home/secrets && cp /config/GlobalLibraries.xml /var/jenkins_home/org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml && cp /config/config.xml /var/jenkins_home/config.xml && cp /config/credentials.xml /var/jenkins_home/credentials.xml && cp /secrets/secret.key /var/jenkins_home/secret.key && cp /secrets/master.key /var/jenkins_home/secrets/master.key && chown -R 1000:1000 /var/jenkins_home"]
         volumeMounts:
         - name: jenkins-home
           mountPath: /var/jenkins_home
-        - name: global-libraries-config
+        - name: jenkins-config
           mountPath: /config
+        - name: jenkins-secrets
+          mountPath: /secrets
       containers:
       - name: jenkins
-        image: us-east1-docker.pkg.dev/sales-209522/titra/jenkins-lab:0.1.1
+        image: us-east1-docker.pkg.dev/sales-209522/titra/jenkins-lab:0.1.2
         ports:
         - containerPort: 8080
           name: http
@@ -112,9 +275,12 @@ spec:
       volumes:
       - name: docker-run
         emptyDir: {}
-      - name: global-libraries-config
+      - name: jenkins-config
         configMap:
-          name: jenkins-global-libraries
+          name: jenkins-config
+      - name: jenkins-secrets
+        secret:
+          secretName: jenkins-secrets
   volumeClaimTemplates:
   - metadata:
       name: jenkins-home
