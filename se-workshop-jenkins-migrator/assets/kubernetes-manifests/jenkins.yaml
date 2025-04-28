@@ -252,7 +252,7 @@ spec:
           mountPath: /secrets
       containers:
       - name: jenkins
-        image: us-east1-docker.pkg.dev/sales-209522/titra/jenkins-lab:0.1.4
+        image: us-east1-docker.pkg.dev/sales-209522/titra/jenkins-lab:0.1.5
         command:
           - /bin/bash
           - -c
