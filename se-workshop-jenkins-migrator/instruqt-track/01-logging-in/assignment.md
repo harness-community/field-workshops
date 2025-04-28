@@ -23,10 +23,6 @@ tabs:
   title: Workshop SSO Login
   type: browser
   hostname: harness
-- id: 74fy4dlx7jyg
-  title: Jenkins
-  type: website
-  url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
 - id: pblwpuzotxgb
   title: Lab Credentials
   type: service

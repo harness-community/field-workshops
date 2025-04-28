@@ -143,6 +143,7 @@ h2.cyan { color: cyan; }
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_harness_migration_results.png)
 > - Your pipeline should now show up in your **Harness** project!
 
+> ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 ## Head over to your Harness project
 ### Select your pipeline
 

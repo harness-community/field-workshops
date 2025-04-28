@@ -82,10 +82,11 @@ tabs:
   title: Harness Platform
   type: browser
   hostname: harness
-- id: dzxhnxbxypjb
+- id: nmz9rrq5usgm
   title: Jenkins
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
+  new_window: true
 - id: 3hrh0m8djs1o
   title: Shell
   type: terminal
@@ -101,11 +102,6 @@ tabs:
   type: website
   url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
   new_window: true
-- id: nmz9rrq5usgm
-  title: Jenkins
-  type: website
-  url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-  new_window: true
 difficulty: basic
 timelimit: 1600
 enhanced_loading: null
@@ -118,6 +114,11 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br><br>
 
+> ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
+
+## Create a new API Key
+> - Click on your username in the bottom of the left nav \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/harness_left_nav_user.png)
 > - Click `+ API Key` \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/harness_new_api_key.png)
 > **New API Key**
@@ -131,7 +132,7 @@ h2.cyan { color: cyan; }
 > - Click: Generate Token
 > - Copy the Value
 
-## Switch to Jenkins Tab
+> ## Switch to the [button label="Jenkins" variant="success"](tab-1) tab to continue
 
 ### Configure Harness Migration Plugin
 > - Click on `Manage Jenkins` \
