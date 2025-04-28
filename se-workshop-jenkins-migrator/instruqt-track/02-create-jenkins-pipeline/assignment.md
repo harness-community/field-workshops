@@ -228,8 +228,14 @@ pipeline {
 > - Click **Save**
 > - Click `Build Now` \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_build_now.png)
+> - Click on the running build \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_running_build.png)
+> - Click `Console Output` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_console_output.png)
 
-
+> [!NOTE]
+> The build will take ~7 minutes to complete. Once it's finished move on to the next lab. \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_pipeline_success.png)
 
 ===============
 

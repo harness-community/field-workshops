@@ -92,6 +92,7 @@ tabs:
   title: Jenkins
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
+  new_window: true
 - id: 6in8xullxic9
   title: Shell
   type: terminal
@@ -107,11 +108,6 @@ tabs:
   type: website
   url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
   new_window: true
-- id: rn7jdgn0ii5e
-  title: Jenkins
-  type: website
-  url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-  new_window: true
 difficulty: basic
 timelimit: 1600
 enhanced_loading: null
@@ -125,6 +121,9 @@ h2.cyan { color: cyan; }
 <br><br>
 
 ## Let's get it started!
+
+> ## Switch to the [button label="Jenkins" variant="success"](tab-1) tab to continue
+
 > - Head back to the **Jenkins Dashboard**
 > - Click `Migrate to Harness` \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_harness_migrate_to_harness.png)
