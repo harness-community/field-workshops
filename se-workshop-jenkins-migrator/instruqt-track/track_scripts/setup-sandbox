@@ -125,6 +125,9 @@ jenkins_ip = utils.k8s.get_k8s_loadbalancer_ip("jenkins", user_name)
 print("  DEBUG: External IP Addresses:")
 print(f"                      Jenkins: {jenkins_ip}")
 
+# Add the workshop user to the WorkshopUserGroup group
+harness.platform.add_user_to_user_group(HARNESS_PAT, HARNESS_ACCOUNT_ID, user_email, "WorkshopUserGroup")
+
 # Export additional variables for later use
 utils.instruqt.set_agent_variable("HARNESS_ACCOUNT_ID", HARNESS_ACCOUNT_ID)
 utils.instruqt.set_agent_variable("HARNESS_ORG_ID", HARNESS_ORG_ID)

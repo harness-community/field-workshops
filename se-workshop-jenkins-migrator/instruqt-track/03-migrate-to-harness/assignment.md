@@ -124,8 +124,69 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br><br>
 
+## Let's get it started!
+> - Head back to the **Jenkins Dashboard**
+> - Click `Migrate to Harness` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_harness_migrate_to_harness.png)
 
-TBD
+> **Select Pipelines for Migration**
+> 1) Available Pipelines: `se-lab`
+> 1) Convert: `Send to Harness`
+> 1) Click **Convert YAML** \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_harness_migrator.png)
+
+> [!NOTE]
+> ***Preview the Pipeline*** <br>
+> You can also click `View in browser` to see what the Harness pipeline will look like prior to sending it.
+
+### Success
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_harness_migration_results.png)
+> - Your pipeline should now show up in your **Harness** project!
+
+## Head over to your Harness project
+### Select your pipeline
+
+Select **Unified View** from the list \
+   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/module_unified.png)
+
+> 1) Click on **Pipelines** in the left Nav \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/nav_pipelines.png)
+> 1) Click on your pipeline created via the Jenkins Migrator
+
+## Update the pipeline
+> 1) In the right nav, click on `Codebase` \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/harness_pipeline_codebase.png)
+
+> **Codebase**
+> 1) Select Git Provider: `Third-party Git provider`
+> 1) Connector: `workshop-github`
+> 1) Repository Name: <pre>`anurag-harness/zuul`</pre>
+> 1) Click **Apply Changes** \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/harness_configure_codebase.png)
+
+### Click on the `Build` stage
+> - On the **Execution** tab \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_execution.png)
+> - Take a look at how our the **Jenkins Migrator** translated our Jenkins pipeline to Harness
+
+### Execute your new Pipeline
+> Click **Save** in the top right to save your new pipeline. \
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_save.png)
+
+> Now click **Run** to execute the pipeline \
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
+> - Docker Connector: `workshop-docker`
+> - Click **Apply Selected** \
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-devsecops/assets/images/harness_run_pipeline.png)
+> Then click **Run Pipeline** \
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-devsecops/assets/images/pipeline_run_pipeline.png)
+
+> [!NOTE]
+> How did the execution time compare to what we just saw with Jenkins?
+
+# Congratulations on completing this **Harness workshop**! 🏆
+### That's all for now. We hope you enjoyed your hands-on experience with the Harness platform. <br> 📈 We are always looking to improve so please rate your experience and share any suggestions or issues you may have encountered. Thank you!
+
 
 ===============
 
