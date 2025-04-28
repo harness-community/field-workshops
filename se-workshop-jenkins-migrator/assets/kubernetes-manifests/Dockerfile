@@ -40,6 +40,16 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Install prerequisites (Git and curl for downloading binary)
+RUN apt-get update && \
+    apt-get install -y git curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Download convert-server binary and make it executable
+RUN curl -L -o /usr/local/bin/convert_server_amd64 https://github.com/harness-community/jenkins-migration-binary/raw/main/convert-server-binaries/convert_server_amd64 && \
+    chmod +x /usr/local/bin/convert_server_amd64
+
 # Add Jenkins user to the docker group (GID 999 to match DIND container)
 RUN groupadd -g 999 docker && usermod -aG docker jenkins
 

@@ -43,7 +43,7 @@ data:
                 <id>docker-hub-credentials</id>
                 <description></description>
                 <username>seworkshop</username>
-                <password>{AQAAABAAAAAwhfsPVkIaDvAXMxJaBktJfkqrE3bsIl+d32rJYmBIu1mgAEsNrcbUYLXKEb8ZlLDqBzPnD1ml/h6+p+WX263pCg==}</password>
+                <password>{AQAAABAAAAAw+AoVVj//NMbyVDdHP52MJfq+kf7xB3TRXXFG9CRwRXzwF13asKG1bLSnlTmDzEiuXP3mqj9HXeggUHeHIZHyfQ==}</password>
                 <usernameSecret>false</usernameSecret>
               </com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
             </java.util.concurrent.CopyOnWriteArrayList>
@@ -135,7 +135,7 @@ data:
           <restrictedPssSecurityContext>false</restrictedPssSecurityContext>
           <webSocket>false</webSocket>
           <directConnection>false</directConnection>
-          <jenkinsUrl>http://35.231.98.154</jenkinsUrl>
+          <jenkinsUrl>http://jenkins</jenkinsUrl>
           <containerCap>10</containerCap>
           <retentionTimeout>5</retentionTimeout>
           <connectTimeout>5</connectTimeout>
@@ -167,7 +167,7 @@ data:
       <slaveAgentPort>50000</slaveAgentPort>
       <label></label>
       <crumbIssuer class="hudson.security.csrf.DefaultCrumbIssuer">
-        <excludeClientIPFromCrumb>false</excludeClientIPFromCrumb>
+        <excludeClientIPFromCrumb>true</excludeClientIPFromCrumb>
       </crumbIssuer>
       <nodeProperties/>
       <globalNodeProperties/>
@@ -190,6 +190,12 @@ data:
     MDYxZjFkNmFlYWE4NmYxMjdjYTgwMTMzZmVhYjAxYTQwMWE2YjI0ZDg2NWE4MjMzN2MwYjY0NDIy
     ZDJmZWMwNTkxMjdlZGJhMTE4ZDhjODhjYWVjMDhmOGE5MjYyMDNhMDg0YjBmZmY0YjAzZmY5MGRm
     Yzg0ODQ5MzNmMGYwOWY4OWJkY2UyZTNkOGI2Mg==
+  hudson.util.Secret: |
+    Tpo2/hLOnK3rvYEqKJizmVhjmJML+JQeEPqQgxXYvE40yHpmh/4H81/KuefisUvxE3sXU0m57rt1
+    fRZuaoRgltPSn6uo7aGaK8DvRpkay9ddBEwayPg3OnjgNq22ZCFQDK/R0tnCrg3pH4Y5hJhhHw32
+    TH6063HvTlSdhYQmC4aszfPXDwA3369s4Lq2ktdbmtTO6jsKgCBT+L5zS+zgin42lVCCZeE8ghCh
+    M1B/3fNrEj/H4bBssi5S7HRQmLk81/G+pmrhB1oT1P47RgQP34ex1+KqhRolH3neMH2Bf8KK1Lzh
+    Ztla/o69kHWA7A29j8LGD6uoilh/UeiHSMZRu7BfbmaIbVFcc4Jy2gkmZA4=
 
 ---
 apiVersion: apps/v1
@@ -212,7 +218,12 @@ spec:
       initContainers:
       - name: fix-permissions
         image: busybox:latest
-        command: ["sh", "-c", "chown -R 1000:1000 /var/jenkins_home && chmod -R 770 /var/jenkins_home"]
+        command:
+          - sh
+          - '-c'
+          - >-
+            chown -R 1000:1000 /var/jenkins_home && chmod -R 770
+            /var/jenkins_home
         volumeMounts:
         - name: jenkins-home
           mountPath: /var/jenkins_home
@@ -220,7 +231,18 @@ spec:
           runAsUser: 0
       - name: configure-jenkins
         image: busybox:latest
-        command: ["sh", "-c", "mkdir -p /var/jenkins_home/secrets && cp /config/GlobalLibraries.xml /var/jenkins_home/org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml && cp /config/config.xml /var/jenkins_home/config.xml && cp /config/credentials.xml /var/jenkins_home/credentials.xml && cp /secrets/secret.key /var/jenkins_home/secret.key && cp /secrets/master.key /var/jenkins_home/secrets/master.key && chown -R 1000:1000 /var/jenkins_home"]
+        command:
+          - sh
+          - '-c'
+          - >-
+            mkdir -p /var/jenkins_home/secrets &&
+            cp /config/GlobalLibraries.xml /var/jenkins_home/org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml &&
+            cp /config/config.xml /var/jenkins_home/config.xml
+            && cp /config/credentials.xml /var/jenkins_home/credentials.xml
+            && cp /secrets/secret.key /var/jenkins_home/secret.key
+            && cp /secrets/master.key /var/jenkins_home/secrets/master.key
+            && cp /secrets/hudson.util.Secret /var/jenkins_home/secrets/hudson.util.Secret
+            && chown -R 1000:1000 /var/jenkins_home
         volumeMounts:
         - name: jenkins-home
           mountPath: /var/jenkins_home
@@ -230,7 +252,15 @@ spec:
           mountPath: /secrets
       containers:
       - name: jenkins
-        image: us-east1-docker.pkg.dev/sales-209522/titra/jenkins-lab:0.1.2
+        image: us-east1-docker.pkg.dev/sales-209522/titra/jenkins-lab:0.1.4
+        command:
+          - /bin/bash
+          - -c
+          - |
+            # Start convert_server_amd64 with nohup in the background
+            nohup convert_server_amd64 > /var/jenkins_home/convert_server_amd64.log 2>&1 &
+            # Run Jenkins default entrypoint
+            exec /usr/local/bin/jenkins.sh
         ports:
         - containerPort: 8080
           name: http
@@ -238,7 +268,13 @@ spec:
           name: agent
         env:
         - name: JAVA_OPTS
-          value: "-Djenkins.install.runSetupWizard=false -Dhudson.model.DirectoryBrowserSupport.CSP='' -Djenkins.security.FrameOptionsPageDecorator.enabled=false -Djava.util.logging.ConsoleHandler.level=FINE"
+          value: >-
+            -Djenkins.install.runSetupWizard=false
+            -Dhudson.model.DirectoryBrowserSupport.CSP=''
+            -Djenkins.security.FrameOptionsPageDecorator.enabled=false
+            -Djava.util.logging.ConsoleHandler.level=FINE
+            -Dhudson.ProxyConfiguration.DISABLE_REVERSE_PROXY_CHECK=true
+            -Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF=true
         - name: DOCKER_HOST
           value: "unix:///var/run/docker.sock"
         volumeMounts:
