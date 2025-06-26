@@ -128,7 +128,7 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 
 ### Security Scan Results
 The Wiz scan takes less than 1 minute to run. <br>
-After the execution is complete, go to the `Security Tests` tab to see the *deduplicated*, *normalized* and *prioritized* list of `vulnerabilities` discovered across your scanners. <br>
+After the execution is complete, go to the `Vulnerabilities` tab to see the *deduplicated*, *normalized* and *prioritized* list of `Security Issues` discovered across your scanners. <br>
 ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_security_tests_tab_aws.png)
 
 ===============
