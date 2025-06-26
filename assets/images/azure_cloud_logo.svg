@@ -1,0 +1,34 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M22.225 4.362h17.359l-18.02 53.392a2.768 2.768 0 0 1-2.622 1.883H5.432a2.764 2.764 0 0 1-2.618-3.647L19.603 6.245a2.768 2.768 0 0 1 2.622-1.883Z"
+        fill="url(#AzureIcon_svg__a)"></path>
+    <path
+        d="M47.45 40.174H19.923a1.274 1.274 0 0 0-.87 2.206l17.688 16.51a2.78 2.78 0 0 0 1.898.746h15.586L47.45 40.174Z"
+        fill="#0078D4"></path>
+    <path
+        d="M22.225 4.363a2.745 2.745 0 0 0-2.629 1.92L2.834 55.944a2.76 2.76 0 0 0 2.606 3.692h13.858a2.962 2.962 0 0 0 2.273-1.934l3.343-9.85 11.94 11.136c.5.414 1.128.643 1.777.648H54.16l-6.81-19.463-19.855.005L39.647 4.363H22.225Z"
+        fill="url(#AzureIcon_svg__b)"></path>
+    <path
+        d="M44.397 6.243a2.763 2.763 0 0 0-2.619-1.88H22.432a2.764 2.764 0 0 1 2.619 1.88l16.79 49.746a2.764 2.764 0 0 1-2.62 3.649h19.347a2.765 2.765 0 0 0 2.618-3.648L44.396 6.242Z"
+        fill="url(#AzureIcon_svg__c)"></path>
+    <defs>
+        <linearGradient id="AzureIcon_svg__a" x1="28.552" y1="8.458" x2="10.525" y2="61.716"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#114A8B"></stop>
+            <stop offset="1" stop-color="#0669BC"></stop>
+        </linearGradient>
+        <linearGradient id="AzureIcon_svg__b" x1="34.183" y1="33.278" x2="30.013" y2="34.688"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-opacity="0.3"></stop>
+            <stop offset="0.071" stop-opacity="0.2"></stop>
+            <stop offset="0.321" stop-opacity="0.1"></stop>
+            <stop offset="0.623" stop-opacity="0.05"></stop>
+            <stop offset="1" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id="AzureIcon_svg__c" x1="31.89" y1="6.905" x2="51.679" y2="59.626"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#3CCBF4"></stop>
+            <stop offset="1" stop-color="#2892DF"></stop>
+        </linearGradient>
+    </defs>
+</svg>
