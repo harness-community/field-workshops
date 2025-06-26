@@ -1,0 +1,147 @@
+#!/usr/bin/env python3
+
+# Standard imports
+import os
+import time
+import shutil
+
+# Third-party imports
+import jinja2
+from kubernetes import config
+
+# Library-specific imports
+from pyharnessworkshop import harness, keycloak, utils
+
+######################## ADD ANY WORKSHOP SPECIFIC SETUP AT THE VERY BOTTOM ########################
+WORKSHOP_TYPE = "iacm"
+WORKSHOP_REPO = "harness-community/se-iacm-workshop"
+GENERATOR_URI = os.getenv("SE_WORKSHOP_GKE_GENERATOR")
+################################## START OF DO NOT MODIFY SECTION ##################################
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_USER_GROUP = os.getenv("SE_WORKSHOP_USER_GRP_ID")
+KEYCLOAK_ENDPOINT = os.getenv("SE_WORKSHOP_KEYCLOAK_ENDPOINT")
+KEYCLOAK_REALM = os.getenv("SE_WORKSHOP_KEYCLOAK_REALM")
+KEYCLOAK_ADMIN_USER = os.getenv("SE_WORKSHOP_KEYCLOAK_ADMIN_USER")
+KEYCLOAK_ADMIN_PWD = os.getenv("SE_WORKSHOP_KEYCLOAK_ADMIN_PWD")
+
+print("We've only just begun...")
+
+# Wait for Instruqt bootstrap to complete
+while not os.path.isfile("/opt/instruqt/bootstrap/host-bootstrap-completed"):
+    print("Waiting for Instruqt to finish booting the virtual machine")
+    time.sleep(1)
+
+# Wait for the Kubernetes API server to become available
+utils.k8s.wait_for_kubernetes_api("http://localhost:8001/api")
+
+random_suffix = utils.misc.generate_random_suffix(5)
+harness_project = f"{WORKSHOP_TYPE}{random_suffix}"
+user_name = f"{WORKSHOP_TYPE}{random_suffix}"
+user_email = f"{user_name}@harness.io"
+user_pwd = utils.misc.generate_password()
+
+# Generate Keycloak Bearer Token
+keycloak_token = keycloak.auth.generate_keycloak_token(KEYCLOAK_ENDPOINT, KEYCLOAK_ADMIN_USER, KEYCLOAK_ADMIN_PWD)
+# Create workshop user in Keycloak Realm
+keycloak.user.create_keycloak_user(KEYCLOAK_ENDPOINT, KEYCLOAK_REALM, keycloak_token, user_email, user_name, user_pwd)
+
+# Create a Sandbox Project for the User in Harness
+harness.platform.create_harness_project(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project)
+harness_project_created = "true"
+
+# Add the workshop user to the Harness project as an admin
+harness.platform.invite_user_to_harness_project_loop(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project, user_email)
+
+utils.instruqt.set_agent_variable("HARNESS_USER", user_email)
+utils.instruqt.set_agent_variable("HARNESS_PWD", user_pwd)
+utils.instruqt.set_agent_variable("HARNESS_PRJ_ID", harness_project)
+utils.instruqt.set_agent_variable("HARNESS_PRJ_CREATED", harness_project_created)
+################################## END OF DO NOT MODIFY SECTION ##################################
+
+############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
+harness_path = "/opt/harness"
+workshop_path = "/opt/workshop"
+code_repo = f"{WORKSHOP_TYPE}-repo"
+os.makedirs(f"{workshop_path}/{code_repo}", exist_ok=True)
+os.makedirs(f"{harness_path}/terraform", exist_ok=True)
+os.makedirs(f"{harness_path}/misc/kubernetes-manifests", exist_ok=True)
+os.makedirs('/root/notes', exist_ok=True)
+utils.misc.run_command("touch /root/notes/scratch.txt")
+
+# Get assets for workshop
+print("Cloning field-workshops repo...")
+utils.misc.run_command("git clone https://github.com/harness-community/field-workshops.git")
+shutil.copytree("field-workshops/se-workshop-iacm/assets/terraform/", f"{harness_path}/terraform", dirs_exist_ok=True)
+shutil.copytree("field-workshops/assets/kubernetes-manifests/v2/", f"{harness_path}/misc", dirs_exist_ok=True)
+shutil.copy("field-workshops/assets/scripts/update_netrc.sh", f"{workshop_path}/script.sh")
+shutil.rmtree("field-workshops")
+
+# Get GKE K8s config and clean up K3s config
+shutil.copy("/etc/rancher/k3s/k3s.yaml", f"{harness_path}/misc/k3s.yaml")
+os.remove("/root/.kube/config")
+os.remove("/etc/rancher/k3s/k3s.yaml")
+utils.misc.generate_gke_credentials(GENERATOR_URI, user_name, f"{harness_path}/misc/gke.yaml", "namespace-admin")
+os.environ["KUBECONFIG"] = f"{harness_path}/misc/k3s.yaml:{harness_path}/misc/gke.yaml"
+utils.misc.run_command("kubectl config view --merge --flatten > /root/.kube/config")
+os.environ["KUBECONFIG"] = "/root/.kube/config"
+
+# Template delegate
+template_file_path = f"{harness_path}/misc/harness-delegate.yaml.template"
+delegate_name = f"{harness_project}-delegate"
+delegate_image = harness.platform.get_latest_delegate_tag(HARNESS_PAT, HARNESS_ACCOUNT_ID)
+delegate_token = harness.platform.generate_delegate_token(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project, f"{delegate_name}-token")
+with open(template_file_path, "r") as file:
+    template = jinja2.Template(file.read())
+rendered_content = template.render(
+    delegate_name=delegate_name,
+    delegate_namespace=harness_project,
+    account_id=HARNESS_ACCOUNT_ID,
+    delegate_token=delegate_token,
+    delegate_image=delegate_image
+)
+with open(f"{harness_path}/misc/harness-delegate.yaml", "w") as file:
+    file.write(rendered_content)
+
+# Set K8s context
+contexts, active_context = config.list_kube_config_contexts()
+gke_context = next(ctx for ctx in contexts if ctx['name'].startswith(f'{WORKSHOP_TYPE}'))['name']
+config.load_kube_config(context=gke_context)
+
+# Apply manifests
+utils.k8s.apply_k8s_manifests([
+    f"{harness_path}/misc/harness-delegate.yaml"
+], user_name)
+
+# Provision resources
+instruqt_sandbox_id = os.getenv("INSTRUQT_PARTICIPANT_ID")
+utils.misc.run_command(f"tofu -chdir={harness_path}/terraform init > {harness_path}/misc/tofu_init.log 2>&1")
+tfvars_file_content = f"""\
+// Platform
+account_id = "{HARNESS_ACCOUNT_ID}"
+org_id     = "{HARNESS_ORG_ID}"
+project_id = "{harness_project}"
+api_key    = "{HARNESS_PAT}"
+
+// Repo
+new_repo_id          = "{code_repo}"
+github_repo_to_clone = "{WORKSHOP_REPO}"
+
+// Harness Variables
+instruqt_sandbox_id = "{instruqt_sandbox_id}"
+"""
+with open(f"{harness_path}/terraform/terraform.tfvars", "w") as tfvars_file:
+    tfvars_file.write(tfvars_file_content)
+utils.misc.run_command(f"nohup tofu -chdir={harness_path}/terraform apply -auto-approve > {harness_path}/misc/tofu_apply.log 2>&1 &")
+
+# Install VS Code
+utils.misc.setup_vs_code(8443, f"{workshop_path}/{code_repo}")
+utils.misc.run_command(f"set-workdir {workshop_path}")
+extensions = ["HashiCorp.terraform"]
+utils.misc.install_vscode_extensions(extensions)
+
+# Export additional variables for later use
+utils.instruqt.set_agent_variable("HARNESS_CODE_REPO", code_repo)

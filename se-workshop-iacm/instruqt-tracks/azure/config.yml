@@ -1,0 +1,35 @@
+version: "3"
+virtualbrowsers:
+- name: harness
+  url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
+virtualmachines:
+- name: sandbox
+  image: sales-209522/harness-se-workshop-v0-0-19
+  shell: /bin/bash
+  memory: 32768
+  cpus: 8
+  allow_external_ingress:
+  - http
+  - https
+  - high-ports
+secrets:
+- name: SE_WORKSHOP_PAT
+- name: SE_WORKSHOP_ORG_ID
+- name: SE_WORKSHOP_ACCOUNT_ID
+- name: SE_WORKSHOP_USER_GRP_ID
+- name: SE_WORKSHOP_KEYCLOAK_ENDPOINT
+- name: SE_WORKSHOP_KEYCLOAK_REALM
+- name: SE_WORKSHOP_KEYCLOAK_ADMIN_USER
+- name: SE_WORKSHOP_KEYCLOAK_ADMIN_PWD
+- name: SE_WORKSHOP_GKE_GENERATOR
+azure_subscriptions:
+- name: harness-iacm
+  services:
+  - Microsoft.Compute
+  - Microsoft.Storage
+  - Microsoft.Network
+  - Microsoft.Resources
+  regions:
+  - eastus2
+  roles:
+  - Contributor

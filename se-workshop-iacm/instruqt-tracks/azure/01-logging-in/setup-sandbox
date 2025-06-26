@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+
+# Standard imports
+import os
+
+# Third-party imports
+#   None
+
+# Library-specific imports
+from pyharnessworkshop import harness, utils
+
+######################## ADD ANY WORKSHOP SPECIFIC SETUP AT THE VERY BOTTOM ########################
+########################### ADD ANY ADDITIONAL CREDENTIALS REQUIRED HERE ###########################
+ARM_CLIENT_ID = os.getenv("ARM_CLIENT_ID")
+ARM_CLIENT_SECRET = os.getenv("ARM_CLIENT_SECRET")
+ARM_SUBSCRIPTION_ID = os.getenv("ARM_SUBSCRIPTION_ID")
+ARM_TENANT_ID = os.getenv("ARM_TENANT_ID")
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+CUSTOM_CREDENTIALS = [
+    {
+        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/azure_cloud_logo.svg",
+        "name": "Azure",
+        "auth": {
+            "ARM_CLIENT_ID": f"{ARM_CLIENT_ID}",
+            "ARM_CLIENT_SECRET": f"{ARM_CLIENT_SECRET}",
+            "ARM_SUBSCRIPTION_ID": f"{ARM_SUBSCRIPTION_ID}",
+            "ARM_TENANT_ID": f"{ARM_TENANT_ID}"
+        }
+    }
+]
+#################################### DO NOT MODIFY THIS SCRIPT ####################################
+
+# REQUIRED VARIABLES LIST
+OUTPUT_HTML = "/opt/harness/misc/credential_tab.html"
+USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
+USER_PWD = utils.instruqt.get_agent_variable("HARNESS_PWD")
+DEFAULT_CREDENTIALS = [
+    {
+        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_black-logo.png",
+        "name": "Harness",
+        "auth": {
+            "Username": f"{USER_EMAIL}",
+            "Password": f"{USER_PWD}"
+        }
+    }
+]
+
+if 'CUSTOM_CREDENTIALS' in globals():
+    combined_creds = DEFAULT_CREDENTIALS + CUSTOM_CREDENTIALS
+else:
+    combined_creds = DEFAULT_CREDENTIALS
+
+# Render HTML
+generated_html = utils.misc.generate_credentials_html(combined_creds)
+
+# Check if the HTML was generated successfully
+if generated_html:
+    with open(OUTPUT_HTML, "w") as file:
+        file.write(generated_html)
+    print(f"HTML file '{OUTPUT_HTML}' generated successfully.")
+else:
+    print("Failed to generate HTML file.")
+
+# Serve it on port 800
+service_content = """\
+[Unit]
+Description=Lab Credentials
+After=network.target
+
+[Service]
+Type=simple
+User=harness
+WorkingDirectory=/opt/harness/misc/
+ExecStart=/usr/bin/python3 -m http.server 8000
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+"""
+utils.misc.create_systemd_service(service_content, "lab_credentials")
+
+################################## END OF DO NOT MODIFY SECTION ##################################
+
+############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
+secret_yaml = f"""\
+secret:
+  name: azure-secret
+  identifier: azuresecret
+  org: {HARNESS_ORG_ID}
+  project: {HARNESS_PROJECT}
+  description: "Automatically created for this lab"
+  spec:
+    type: SecretText
+    secret_manager_identifier: harnessSecretManager
+    value_type: Inline
+    value: {ARM_CLIENT_SECRET}
+"""
+
+print("Creating Project Secret for ARM_CLIENT_SECRET...")
+harness.platform.create_project_secret(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, secret_yaml)
+
+connector_yaml = f"""\
+connector:
+  name: instruqt-workshop-connector
+  identifier: instruqtworkshopconnector
+  description: "Automatically created for this lab"
+  accountIdentifier: {HARNESS_ACCOUNT_ID}
+  orgIdentifier: {HARNESS_ORG_ID}
+  projectIdentifier: {HARNESS_PROJECT}
+  type: Azure
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        applicationId: {ARM_CLIENT_ID}
+        tenantId: {ARM_TENANT_ID}
+        auth:
+          type: Secret
+          spec:
+            secretRef: azuresecret
+    azureEnvironmentType: AZURE
+    executeOnDelegate: false
+    ignoreTestConnection: false
+"""
+
+print("Creating Connector for new Azure Environment...")
+harness.platform.create_project_connector(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, connector_yaml)
+
+utils.instruqt.set_agent_variable("HARNESS_ARM_CLIENT_ID", ARM_CLIENT_ID)
+utils.instruqt.set_agent_variable("HARNESS_ARM_CLIENT_SECRET", ARM_CLIENT_SECRET)
+utils.instruqt.set_agent_variable("HARNESS_ARM_SUBSCRIPTION_ID", ARM_SUBSCRIPTION_ID)
+utils.instruqt.set_agent_variable("HARNESS_ARM_TENANT_ID", ARM_TENANT_ID)

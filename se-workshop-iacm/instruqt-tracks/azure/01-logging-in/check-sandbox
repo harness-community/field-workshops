@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+
+#################################### DO NOT MODIFY THIS SCRIPT ####################################
+import os
+from pyharnessworkshop import harness, utils
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
+
+# Debug
+utils.misc.run_command("echo $INSTRUQT_AUTH_TOKEN > /opt/harness/misc/debug_token")
+# Verify that the workshop user has logged into the Harness project
+login_found = harness.platform.verify_harness_login(HARNESS_PAT, HARNESS_ACCOUNT_ID, USER_EMAIL)
+if not login_found:
+    utils.instruqt.raise_lab_failure_message("No Login events were found for your user. Please login with the credentials provided.")
+
+################################## END OF DO NOT MODIFY SECTION ##################################
