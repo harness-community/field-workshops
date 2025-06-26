@@ -1,6 +1,6 @@
 ---
 slug: cloud-development-environments-beta
-id: ftiejxgmvfxx
+id: hzompbvi5kfy
 type: challenge
 title: Lab 6 - Cloud Development Environments Beta
 teaser: On-demand development environments.
@@ -17,25 +17,25 @@ notes:
     - **On-demand development environments**
     - **Integrate with existing workflows**
 tabs:
-- id: gbelzfu0gzoe
+- id: gqs9xstlvbtx
   title: Harness Platform
   type: browser
   hostname: harness
-- id: yylauhqlyp7m
+- id: g44f3dcfbua6
   title: Harness Platform
   type: website
   url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/module/cde/orgs/WorkshopOrg/projects
   new_window: true
-- id: 4ra6zmpptujy
+- id: ym4drm6sboqg
   title: Shell
   type: terminal
   hostname: sandbox
-- id: mm2qrwvexzj3
+- id: bd6rlcb0d8jh
   title: Public Key
   type: code
   hostname: sandbox
   path: /root/.ssh/harness_cde.pub
-- id: wh7geypyj9mv
+- id: qdwfkn5nxrfq
   title: Lab Credentials
   type: service
   hostname: sandbox

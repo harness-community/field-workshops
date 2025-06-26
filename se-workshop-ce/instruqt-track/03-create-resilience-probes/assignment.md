@@ -1,6 +1,6 @@
 ---
 slug: create-resilience-probes
-id: g5vsdqunpxzr
+id: 5jskxhyc8wja
 type: challenge
 title: Lab 2 - Create Resilience Probes
 teaser: Creating Resilience Probes for Chaos Experiment Evaluation
@@ -73,15 +73,15 @@ notes:
       </ul>
     </div>
 tabs:
-- id: rexhcvpkslzm
+- id: paryygzvwgja
   title: Harness Platform
   type: browser
   hostname: harness
-- id: yhdz0gxtv2yl
+- id: 7vos8qbng4kh
   title: Architecture
   type: website
   url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/harness-community/field-workshops/blob/main/se-workshop-ce/assets/misc/diagram.html
-- id: blmi1uerkhzl
+- id: flfs0yeemi8y
   title: Lab Credentials
   type: service
   hostname: sandbox

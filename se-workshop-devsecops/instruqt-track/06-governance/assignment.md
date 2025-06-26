@@ -1,6 +1,6 @@
 ---
 slug: governance
-id: rnenwpmyscan
+id: ikiztncfzeit
 type: challenge
 title: Lab 5 - Governance via Policy as Code
 teaser: Explore how to enforce governance via OPA policies within Harness, defining
@@ -89,24 +89,24 @@ notes:
       </div>
     </div>
 tabs:
-- id: kuyxaytlii3p
+- id: migo0fixi1rn
   title: Harness Platform
   type: browser
   hostname: harness
-- id: 3ksycccp4bbz
+- id: v1t0fhxvjwex
   title: Demo App
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-- id: zqa0rcedcng8
+- id: 3y8nxrhkzxo0
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: cfnelraa3gb5
+- id: ydax0sjpx5iy
   title: Shell
   type: terminal
   hostname: sandbox
-- id: gshtjr2l20if
+- id: omzghjw7d5h5
   title: Lab Credentials
   type: service
   hostname: sandbox

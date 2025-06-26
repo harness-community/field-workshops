@@ -1,6 +1,6 @@
 ---
 slug: clone-the-repo
-id: bhnpt1x9ilr3
+id: gvavccxp4j0l
 type: challenge
 title: Lab 1 - Clone the IaC Repo
 teaser: For this workshop we will be using Harness Code, but this process works the
@@ -54,25 +54,25 @@ notes:
       </div>
     </div>
 tabs:
-- id: 9v1f5dkcnmft
+- id: f8s8eq3oxx7p
   title: Harness Platform
   type: browser
   hostname: harness
-- id: gyhxvkvqjmkz
+- id: pbqsmsyt8ghj
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: 6tt2eycijprw
+- id: fy7e5aikytca
   title: Shell
   type: terminal
   hostname: sandbox
-- id: 2mxzsvuu1g0k
+- id: yacyc0qmz5gw
   title: Notes
   type: code
   hostname: sandbox
   path: /root/notes
-- id: zadrovayhp0t
+- id: crkuelhxut5n
   title: Lab Credentials
   type: service
   hostname: sandbox

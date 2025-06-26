@@ -1,6 +1,6 @@
 ---
 slug: cd-backend
-id: fewv39aranqw
+id: dbiwgtkiiqiy
 type: challenge
 title: Lab 3 - Continuous Deployment - Backend
 teaser: Deploy the backend of your application, configuring pipelines with advanced
@@ -60,24 +60,24 @@ notes:
       </ul>
     </div>
 tabs:
-- id: xpnbnnyrqdty
+- id: akjfjblihgyx
   title: Harness Platform
   type: browser
   hostname: harness
-- id: kviafrp0dyzo
+- id: slmprme7txoq
   title: Demo App
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-- id: pznxkw45dnum
+- id: 5fivg18prggj
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: a9ovmqyfg3bq
+- id: urmugxemkxyi
   title: Shell
   type: terminal
   hostname: sandbox
-- id: bmaimvljhqkm
+- id: g8nnti5ywzai
   title: Lab Credentials
   type: service
   hostname: sandbox

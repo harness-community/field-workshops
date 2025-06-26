@@ -1,6 +1,6 @@
 ---
 slug: create-a-scorecard
-id: ddtgss4lwl6b
+id: 7jdjuszzncww
 type: challenge
 title: Lab 3 - Create a Scorecard
 teaser: Gain confidence by measuring if a service is really gold standard from a DevOps,
@@ -17,20 +17,20 @@ notes:
     - **Drive migrations and adoption of standards**
     - **Enforce Best Practices**
 tabs:
-- id: np8y6ccxgycw
+- id: huxejekfjhyt
   title: Harness Platform
   type: browser
   hostname: harness
-- id: xvqxi1sd6vwg
+- id: xr6x6lrxt4xo
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: akwcfep3cv96
+- id: zjqxje6rn487
   title: Shell
   type: terminal
   hostname: sandbox
-- id: lvssa3u1kltf
+- id: ydde2pgv4yqt
   title: Lab Credentials
   type: service
   hostname: sandbox

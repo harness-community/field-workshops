@@ -1,5 +1,5 @@
 slug: se-workshop-jenkins-migrator
-id: kjxnxtl5l2dz
+id: ycjefw2z361t
 title: Harness SE Workshop Jenkins Migrator
 description: |2-
 
@@ -10,7 +10,7 @@ description: |2-
     - Lab 2 - Migrate to Harness
 icon: https://raw.githubusercontent.com/jtitra/flockjay/refs/heads/main/ProductIcons/light/jenkins.svg
 tags: []
-owner: harness
+owner: harness-se
 developers:
 - joseph.titra@harness.io
 show_timer: true
@@ -24,5 +24,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "11589896411024880731"
+checksum: "7244187532790299800"
 enhanced_loading: false

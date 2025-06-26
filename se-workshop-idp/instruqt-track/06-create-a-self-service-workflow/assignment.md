@@ -1,6 +1,6 @@
 ---
 slug: create-a-self-service-workflow
-id: ya61nfoj1xhy
+id: f3zshchazju5
 type: challenge
 title: Lab 4 - Create a Self-Service Workflow
 teaser: Standing up a new service often results in tickets flowing back and forth
@@ -17,25 +17,25 @@ notes:
     - **Build Software Templates with best practices baked in**
     - **Create self-service flows and avoid hundreds of tickets**
 tabs:
-- id: kyi862q9cdh0
+- id: sxldfwjtlzde
   title: Harness Platform
   type: browser
   hostname: harness
-- id: ydmdqanzdoow
+- id: rhnp5akwdy9f
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: m452fjjqlo3y
+- id: 8hvmvl8z9t1b
   title: Shell
   type: terminal
   hostname: sandbox
-- id: hx1jdikngbnj
+- id: 1b8whlfg8zyo
   title: GitHub
   type: website
   url: https://github.com/orgs/harnessworkshop/repositories
   new_window: true
-- id: wklfjgzqdu68
+- id: qysxm7vkna6u
   title: Lab Credentials
   type: service
   hostname: sandbox

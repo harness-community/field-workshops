@@ -1,6 +1,6 @@
 ---
 slug: build
-id: eddyfskm7t7f
+id: pqi08ibh97mq
 type: challenge
 title: Lab 1 - Building the Application
 teaser: Learn how to build your application using Harness, including setting up build
@@ -60,20 +60,20 @@ notes:
       </ul>
     </div>
 tabs:
-- id: xa8gg4nb4kaz
+- id: 9yu6iq4f4rf4
   title: Harness Platform
   type: browser
   hostname: harness
-- id: y4f0zhhznjpf
+- id: n26cgrwtltjg
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: oxhzzslgb5hy
+- id: zqzdajnjvu95
   title: Shell
   type: terminal
   hostname: sandbox
-- id: jollfviqrkxw
+- id: xbfraaftyqka
   title: Lab Credentials
   type: service
   hostname: sandbox

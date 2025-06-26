@@ -1,6 +1,6 @@
 ---
 slug: configuring-the-chaos
-id: x8cfeuiglibv
+id: ugmgfphx3js6
 type: challenge
 title: Lab 1 - Configuring the Chaos Infrastructure
 teaser: Setting up your Harness Chaos Environment
@@ -60,15 +60,15 @@ notes:
       </ul>
     </div>
 tabs:
-- id: ynxtb8ngb9ed
+- id: nnsuvvsiztjd
   title: Harness Platform
   type: browser
   hostname: harness
-- id: 9h6asoxak7qt
+- id: iha0f13tuxug
   title: Architecture
   type: website
   url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/harness-community/field-workshops/blob/main/se-workshop-ce/assets/misc/diagram.html
-- id: zzjpiaxw4hpv
+- id: ssufowntwx7o
   title: Lab Credentials
   type: service
   hostname: sandbox

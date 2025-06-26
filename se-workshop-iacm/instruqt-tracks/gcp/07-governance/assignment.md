@@ -1,6 +1,6 @@
 ---
 slug: governance
-id: zhgacucvgtm7
+id: aqpatgnt4ocm
 type: challenge
 title: Lab 6 - Governance
 teaser: Using OPA policy to limit Terraform variables
@@ -89,20 +89,20 @@ notes:
       </div>
     </div>
 tabs:
-- id: 8d1sdgbup7iy
+- id: kh3jmhbfuz6k
   title: Harness Platform
   type: browser
   hostname: harness
-- id: 6ktkgpjncetx
+- id: ftzbo85mn53w
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: qwofjsg98ijw
+- id: nfsrzxze0ueo
   title: Shell
   type: terminal
   hostname: sandbox
-- id: 3joeudyxshzf
+- id: 6yxnjj9d5zas
   title: Lab Credentials
   type: service
   hostname: sandbox

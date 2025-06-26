@@ -1,5 +1,5 @@
 slug: se-workshop-iacm-gcp
-id: k4jsxzsahxag
+id: afw7gyexpibd
 title: Harness IaCM Workshop - GCP
 description: |2-
 
@@ -16,7 +16,7 @@ description: |2-
     - Lab 8 - PR Triggers and Validation
 icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/iacm.png
 tags: []
-owner: harness
+owner: harness-se
 developers:
 - joseph.titra@harness.io
 show_timer: true
@@ -30,5 +30,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "6664152119058608584"
+checksum: "18409287636448148487"
 enhanced_loading: false

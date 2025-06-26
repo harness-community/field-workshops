@@ -1,6 +1,6 @@
 ---
 slug: add-pipeline-relationships
-id: bldv4hdw2yro
+id: 7u6rb6ahle3q
 type: challenge
 title: Lab 5 - Add Pipeline Relationships
 teaser: Integrate with the tools and providers you use to bring the most useful information
@@ -71,20 +71,20 @@ notes:
       <li>Create your own custom Plugins</li>
     </ul>
 tabs:
-- id: my58bbn4u9zz
+- id: ohtdrcpbzq8u
   title: Harness Platform
   type: browser
   hostname: harness
-- id: ddydxsezn1zc
+- id: hvrgx2rfursv
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: dxfqhp9njpgm
+- id: mwyernm71bkc
   title: Shell
   type: terminal
   hostname: sandbox
-- id: 9clvljyxk0ft
+- id: gjo7014cgkc2
   title: Lab Credentials
   type: service
   hostname: sandbox

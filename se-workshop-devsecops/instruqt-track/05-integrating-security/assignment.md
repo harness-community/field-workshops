@@ -1,6 +1,6 @@
 ---
 slug: integrating-security
-id: jkbpur601sxu
+id: tl8e0qcke7l0
 type: challenge
 title: Lab 4 - Security Testing Orchestration
 teaser: Orchestrate security tests and remediate vulnerabilities with AI guidance.
@@ -59,24 +59,24 @@ notes:
       </ul>
     </div>
 tabs:
-- id: xfeylgt6wfd4
+- id: ghowd3ydrygf
   title: Harness Platform
   type: browser
   hostname: harness
-- id: 0h6jalpmnh34
+- id: r8yqha3jdsxg
   title: Demo App
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-- id: byo9w0nmbj9x
+- id: 68crixqd4tom
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: ljiiamikse9u
+- id: gwgaslawncru
   title: Shell
   type: terminal
   hostname: sandbox
-- id: qh6vkwxdhrdd
+- id: slgrwmiinigp
   title: Lab Credentials
   type: service
   hostname: sandbox

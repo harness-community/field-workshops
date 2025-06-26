@@ -1,5 +1,5 @@
 slug: se-workshop-ce
-id: olmwzmuhq1yz
+id: pzqnvtebm3xy
 title: Harness Chaos Engineering Workshop
 description: |2-
 
@@ -13,7 +13,7 @@ description: |2-
     - Lab 5 - Controlling the Chaos with ChaosGuard
 icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/ce.png
 tags: []
-owner: harness
+owner: harness-se
 developers:
 - joseph.titra@harness.io
 show_timer: true
@@ -28,5 +28,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "10143349717787793678"
+checksum: "14665361665832117214"
 enhanced_loading: false

@@ -1,6 +1,6 @@
 ---
 slug: detect-drift
-id: pqxqpsyxyzxh
+id: 6yofvrgnenhw
 type: challenge
 title: Lab 4 - Introduce Drift
 teaser: Introduce and Detect Drift
@@ -57,20 +57,20 @@ notes:
       </ul>
     </div>
 tabs:
-- id: dtqbqlvpsxvv
+- id: 8i2lzruelguf
   title: Harness Platform
   type: browser
   hostname: harness
-- id: vvqhvjkg19lk
+- id: ttdko7cyvrxa
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: jans5xisvc9p
+- id: pdzdsynw3jgq
   title: Shell
   type: terminal
   hostname: sandbox
-- id: owbskefrsjnc
+- id: k9qk1fippqov
   title: Lab Credentials
   type: service
   hostname: sandbox

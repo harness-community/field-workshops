@@ -1,6 +1,6 @@
 ---
 slug: servicenow
-id: n4a705qkkvez
+id: ctsun7qqmerv
 type: challenge
 title: Lab 6 - ServiceNow RFC Automation
 teaser: Automate this repetitive manual task that doesn't contribute to innovation
@@ -60,28 +60,28 @@ notes:
       </ul>
     </div>
 tabs:
-- id: otoxka8ck5ax
+- id: kw7qhcj34856
   title: Harness Platform
   type: browser
   hostname: harness
-- id: gbd8pty0wuhg
+- id: sxuxz1iho840
   title: ServiceNow
   type: browser
   hostname: servicenow
-- id: hrmpugqyrfyj
+- id: es4txfse87hx
   title: Demo App
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-- id: awhjl8pruugy
+- id: hsnveivxffsg
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: ugycfsskc2io
+- id: gnxdjvffpx1x
   title: Shell
   type: terminal
   hostname: sandbox
-- id: i5deidsfuqa2
+- id: xfn9rjsfl5dd
   title: Lab Credentials
   type: service
   hostname: sandbox

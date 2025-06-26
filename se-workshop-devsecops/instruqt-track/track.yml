@@ -1,6 +1,6 @@
-slug: beta-se-workshop-devsecops
-id: hiy1qqz3skxg
-title: BETA - Harness DevSecOps Workshop
+slug: se-workshop-devsecops
+id: djn1cxxblz9s
+title: Harness DevSecOps Workshop
 description: |2-
 
   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
@@ -15,7 +15,7 @@ description: |2-
     - Lab 7 - Continuous Verification
 icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-devsecops/assets/images/harness_devsecops.svg
 tags: []
-owner: harness
+owner: harness-se
 developers:
 - joseph.titra@harness.io
 show_timer: true
@@ -30,5 +30,5 @@ lab_config:
   override_challenge_layout: false
   hideStopButton: false
   default_layout_sidebar_size: 25
-checksum: "9316474762427335724"
+checksum: "14599180006468015265"
 enhanced_loading: false

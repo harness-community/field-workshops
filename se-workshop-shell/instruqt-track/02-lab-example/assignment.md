@@ -1,6 +1,6 @@
 ---
 slug: lab-example
-id: w4n3mkjlpydl
+id: ve4txn9l1oxc
 type: challenge
 title: Lab 1 - TBD
 teaser: TBD
@@ -85,15 +85,15 @@ notes:
       </ul>
     </div>
 tabs:
-- id: vlaj62szy0x8
+- id: bcrffdrqgdeq
   title: Harness Platform
   type: browser
   hostname: harness
-- id: lpoeouqvcxxt
+- id: anjtzgqq8ybt
   title: Shell
   type: terminal
   hostname: sandbox
-- id: povro89tjuyb
+- id: 9huv2bjmgfzr
   title: Lab Credentials
   type: service
   hostname: sandbox

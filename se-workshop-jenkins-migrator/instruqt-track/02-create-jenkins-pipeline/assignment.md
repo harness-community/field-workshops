@@ -1,6 +1,6 @@
 ---
 slug: create-jenkins-pipeline
-id: bke6koh2myc4
+id: lybsqgvllksn
 type: challenge
 title: Lab 1 - Create a Jenkins Pipeline
 notes:
@@ -78,26 +78,26 @@ notes:
       </ul>
     </div>
 tabs:
-- id: 5mznaz5kj0ho
+- id: rudmfglhhjgb
   title: Harness Platform
   type: browser
   hostname: harness
-- id: nmz9rrq5usgm
+- id: mkxkzi2mnwxx
   title: Jenkins
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
   new_window: true
-- id: 3hrh0m8djs1o
+- id: rxonethrszyz
   title: Shell
   type: terminal
   hostname: sandbox
-- id: pvuaw7vdg722
+- id: sw9q4m3jiyqp
   title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html
   port: 8000
-- id: w7ylo74e9rle
+- id: esyv9esu6b7p
   title: Harness Platform
   type: website
   url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard

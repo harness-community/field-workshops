@@ -1,6 +1,6 @@
 ---
 slug: create-an-iacm-pipeline
-id: 2ignrf20vy2c
+id: jlrugmdzqltn
 type: challenge
 title: Lab 3 - Create an IaCM Pipeline
 teaser: Creating a Pipeline with Approval
@@ -59,20 +59,20 @@ notes:
       </ul>
     </div>
 tabs:
-- id: db90oe9d7r7x
+- id: a7y6evlhmwrz
   title: Harness Platform
   type: browser
   hostname: harness
-- id: 5mgsyavieped
+- id: lfrarxeogu4p
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: one0mtbvseva
+- id: ba8dgcsmeruo
   title: Shell
   type: terminal
   hostname: sandbox
-- id: wlotfqs2be6a
+- id: 42t2ibynlfao
   title: Lab Credentials
   type: service
   hostname: sandbox

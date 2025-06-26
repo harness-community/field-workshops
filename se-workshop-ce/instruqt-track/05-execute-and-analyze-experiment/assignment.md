@@ -1,6 +1,6 @@
 ---
 slug: execute-and-analyze-experiment
-id: c6fvq5g4ng7f
+id: jql96kanwcwc
 type: challenge
 title: Lab 4 - Execute and Analyze Experiment Results
 teaser: Execute your chaos experiment and use the resilience probes to collect data
@@ -58,25 +58,25 @@ notes:
       </ul>
     </div>
 tabs:
-- id: qree9oe4rlxq
+- id: fnzevwxm8r8z
   title: Harness Platform
   type: browser
   hostname: harness
-- id: ftnuenwjdeze
+- id: p1okvbzrxwvx
   title: Boutique App
   type: service
   hostname: sandbox
   path: /
   port: 30001
-- id: evyzswmmhiqm
+- id: dhpbxana3oub
   title: Grafana
   type: website
   url: https://sandbox-30002-${_SANDBOX_ID}.env.play.instruqt.com/d/edruqxvqvulmoa/boutique-app-dashboard
-- id: irxtllt8gqqu
+- id: r5lnbxcvlwre
   title: Architecture
   type: website
   url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/harness-community/field-workshops/blob/main/se-workshop-ce/assets/misc/diagram.html
-- id: hx3cyfqdfpcl
+- id: w1hll3poyghd
   title: Lab Credentials
   type: service
   hostname: sandbox

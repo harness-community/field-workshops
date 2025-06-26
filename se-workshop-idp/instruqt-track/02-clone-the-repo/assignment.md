@@ -1,6 +1,6 @@
 ---
 slug: clone-the-repo
-id: 7tuv4ozrtvjr
+id: vzxlx6lioxqc
 type: challenge
 title: Lab 1 - Clone the IDP Repo
 teaser: For this workshop we will be using Harness Code, but this process works the
@@ -54,20 +54,20 @@ notes:
       </div>
     </div>
 tabs:
-- id: pnkbunaxykef
+- id: kwpxp1fzqtnt
   title: Harness Platform
   type: browser
   hostname: harness
-- id: isjuvjax6upx
+- id: fwrw8jubfdx7
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: 8yzzcntmbdnp
+- id: vvtgvtknfi38
   title: Shell
   type: terminal
   hostname: sandbox
-- id: r3emfsfsgytm
+- id: zwfci061sy8p
   title: Lab Credentials
   type: service
   hostname: sandbox

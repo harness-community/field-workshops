@@ -1,6 +1,6 @@
 ---
 slug: controlling-the-chaos
-id: ymjy7djb6hma
+id: 65kw8mqgbenz
 type: challenge
 title: Lab 5 - Controlling the Chaos with ChaosGuard
 teaser: Using ChaosGuard to enforce controls around who, what, when, and where chaos
@@ -88,11 +88,11 @@ notes:
       </div>
     </div>
 tabs:
-- id: hrygywaxdh12
+- id: awtuujwxzywq
   title: Harness Platform
   type: browser
   hostname: harness
-- id: ox7h4txqykxu
+- id: jidrpuu7bhhs
   title: Lab Credentials
   type: service
   hostname: sandbox

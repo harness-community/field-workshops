@@ -1,6 +1,6 @@
 ---
 slug: pr-validation
-id: koztk8fktuxy
+id: pzubgof2q5oy
 type: challenge
 title: Lab 7 - PR Triggers and Validation
 teaser: Harness IaCM supports reviewing infrastructure changes via pull request automation
@@ -57,20 +57,20 @@ notes:
       </ul>
     </div>
 tabs:
-- id: sxysnqlycjsn
+- id: ojndx6lidxl3
   title: Harness Platform
   type: browser
   hostname: harness
-- id: cmpg73f8j1gc
+- id: c2z7p04wg9pt
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: 3hitxnqnasrq
+- id: es61grp5ntyk
   title: Shell
   type: terminal
   hostname: sandbox
-- id: b7mqlhhcozyh
+- id: 2ttte9jj2jey
   title: Lab Credentials
   type: service
   hostname: sandbox

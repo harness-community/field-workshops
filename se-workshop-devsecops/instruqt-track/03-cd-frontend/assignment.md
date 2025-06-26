@@ -1,6 +1,6 @@
 ---
 slug: cd-frontend
-id: mwcvft6xe40b
+id: qzol66zqoymh
 type: challenge
 title: Lab 2 - Continuous Deployment - Frontend
 teaser: Deploy the frontend of your application using Harness, setting up deployment
@@ -60,24 +60,24 @@ notes:
       </ul>
     </div>
 tabs:
-- id: knpn6b4lap3m
+- id: sabnldgavx1i
   title: Harness Platform
   type: browser
   hostname: harness
-- id: sdnln6xyr3mi
+- id: adoecccp3aej
   title: Demo App
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-- id: vzng7ppnbj7y
+- id: xe2yunsgu2ob
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: adxmav2k0v8y
+- id: afiww3fxwjge
   title: Shell
   type: terminal
   hostname: sandbox
-- id: guvzbjkfiry1
+- id: irgpthvt8e5u
   title: Lab Credentials
   type: service
   hostname: sandbox

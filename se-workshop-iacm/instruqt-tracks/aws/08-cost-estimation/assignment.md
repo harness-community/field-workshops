@@ -1,6 +1,6 @@
 ---
 slug: cost-estimation
-id: bpudglwdk7mc
+id: w7nzy5oea196
 type: challenge
 title: Lab 6 - Cost Estimation and State Changes
 teaser: Visibility into the Cost of Changes and State Changes
@@ -58,20 +58,20 @@ notes:
       </ul>
     </div>
 tabs:
-- id: i5yyslrra1gt
+- id: 2dfqbifjexen
   title: Harness Platform
   type: browser
   hostname: harness
-- id: bxoazd66oco3
+- id: uk162ur6rzep
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: zvzumqgcakty
+- id: y8h0rccvmd8q
   title: Shell
   type: terminal
   hostname: sandbox
-- id: cx3vmkkx02yi
+- id: y3f9iouyuuly
   title: Lab Credentials
   type: service
   hostname: sandbox

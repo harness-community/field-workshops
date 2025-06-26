@@ -1,6 +1,6 @@
 ---
 slug: creating-a-workspace
-id: ymogqrrog4hp
+id: qzyao07urkvo
 type: challenge
 title: Lab 2 - Creating a Workspace
 teaser: Setting up your first IaCM Workspace
@@ -57,16 +57,16 @@ notes:
       </ul>
     </div>
 tabs:
-- id: 4kvvbl7z3asd
+- id: 7eqtpbfpn0wr
   title: Harness Platform
   type: browser
   hostname: harness
-- id: criau5j1x3m4
+- id: fcixvvvmhias
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: qewe0dlkzmw2
+- id: emldkb5se60x
   title: Lab Credentials
   type: service
   hostname: sandbox
@@ -94,19 +94,23 @@ And then click `+New Workspace` <br>
 ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_new_workspace.png)
 
 > **New Workspace**
-> - Name: <pre>`demo-workspace`</pre>
-> - Cloud Cost Estimation: `ON`
-> - **Provisioner**
->   - Connector: `instruqt-workshop-connector`
->   - Type: `Terraform`
->   - Version: `1.5.7`
-> - **Repository**
+> - **About Workspace**
+>   - Name: <pre>`demo-workspace`</pre>
+>   - Cloud Cost Estimation: `ON`
+>   - Click **Next**
+> - **Configure Repository Details**
 >   - Select Git Provider: `Harness Code Repository`
 >   - Select Repository: `iacm-repo`
 >   - Git Fetch Type: `Latest from Branch`
 >   - Branch: `main`
 >   - Folder Path: <pre>`gcp/v1`</pre>
-> - Click **Save**
+>   - Click **Next**
+> - **Provisioner**
+>   - Connector: `instruqt-workshop-connector`
+>   - Type: `Terraform`
+>   - Version: `1.5.7`
+> - Click **Create**
+
 
 > **Configure Workspace**
 > - Click on the **Variables** tab

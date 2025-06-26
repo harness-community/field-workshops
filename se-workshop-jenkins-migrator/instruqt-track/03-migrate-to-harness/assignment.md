@@ -1,6 +1,6 @@
 ---
 slug: migrate-to-harness
-id: qgbxvlwvrycu
+id: gzowfwhjsabg
 type: challenge
 title: Lab 2 - Migrate to Harness
 notes:
@@ -84,26 +84,26 @@ notes:
       </ul>
     </div>
 tabs:
-- id: vhkkxyzrj1jt
+- id: omx0gwop5pb2
   title: Harness Platform
   type: browser
   hostname: harness
-- id: qxbwotuwpene
+- id: ht3rkudjcu6i
   title: Jenkins
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
   new_window: true
-- id: 6in8xullxic9
+- id: pdyveaqn7dia
   title: Shell
   type: terminal
   hostname: sandbox
-- id: cx9xtkyemnk3
+- id: uls0yadd4rtx
   title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html
   port: 8000
-- id: 41tj3oq860o3
+- id: i1lbyzuddhho
   title: Harness Platform
   type: website
   url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard

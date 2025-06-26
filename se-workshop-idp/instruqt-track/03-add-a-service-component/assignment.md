@@ -1,6 +1,6 @@
 ---
 slug: add-a-service-component
-id: zqqovkxnj48y
+id: heumbhbwmqc0
 type: challenge
 title: Lab 2a - Add a Service Component
 teaser: Configure a service component and associate it with a team, and create a dependency.
@@ -15,20 +15,20 @@ notes:
     - **Establish service ownership with teams**
     - **Track dependencies across services**
 tabs:
-- id: mntipy0bnuvk
+- id: jqrniiablcvv
   title: Harness Platform
   type: browser
   hostname: harness
-- id: iwddsyo57zos
+- id: eo7bl2nxfc76
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: m0ohvdgi5cob
+- id: rsb4wkkslyih
   title: Shell
   type: terminal
   hostname: sandbox
-- id: hsbobtlga5k5
+- id: fwsoys9e77f3
   title: Lab Credentials
   type: service
   hostname: sandbox

@@ -1,6 +1,6 @@
 ---
 slug: logging-in
-id: ca1uvxqxum18
+id: 1g8waubnfu4h
 type: challenge
 title: Logging into your Harness Sandbox Account
 teaser: Let's log into Harness using your student credentials!
@@ -19,17 +19,17 @@ notes:
 
     **Please wait while we setup your Sandbox environment**
 tabs:
-- id: covkexffx8th
+- id: p6u6uuxn6c1o
   title: Workshop SSO Login
   type: browser
   hostname: harness
-- id: k7mtdhtzjtrk
+- id: c460xv6yk9uy
   title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html
   port: 8000
-- id: 0duikrsleexs
+- id: fub3xbxbogh6
   title: Harness Platform
   type: website
   url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard

@@ -23,6 +23,11 @@ secrets:
 - name: SE_WORKSHOP_GKE_GENERATOR
 aws_accounts:
 - name: harness-iacm
+  services:
+  - ec2
+  - s3
+  regions:
+  - us-east-1
   managed_policies:
   - arn:aws:iam::aws:policy/AmazonEC2FullAccess
   - arn:aws:iam::aws:policy/AmazonVPCFullAccess

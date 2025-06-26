@@ -1,6 +1,6 @@
 ---
 slug: continuous-verification
-id: msal3gvdflyr
+id: 9u870fipg8vx
 type: challenge
 title: Lab 7 - Continuous Verification
 teaser: Implement continuous verification practices, using Harness to automate the
@@ -84,28 +84,28 @@ notes:
       </ul>
     </div>
 tabs:
-- id: qzdtopjro0c0
+- id: bobxmg9tt7gc
   title: Harness Platform
   type: browser
   hostname: harness
-- id: mvb1zlbtjczr
+- id: ets99zeddlee
   title: Demo App
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-- id: ez9gyh3swuof
+- id: wvbvderi4l3g
   title: ServiceNow
   type: browser
   hostname: servicenow
-- id: hfzac5aqovca
+- id: ffck081htrdf
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: k7khf6nqylyg
+- id: tldjqrucrnsd
   title: Shell
   type: terminal
   hostname: sandbox
-- id: s0bibpv6q1tg
+- id: ywmht2fhi76v
   title: Lab Credentials
   type: service
   hostname: sandbox

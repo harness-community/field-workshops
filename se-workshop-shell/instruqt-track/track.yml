@@ -1,5 +1,5 @@
 slug: se-workshop-shell
-id: zl6yx54s7wrs
+id: jxke2pgshxz2
 title: Harness SE Workshop Shell
 description: |2-
 
@@ -9,7 +9,7 @@ description: |2-
     - Lab 1 - TBD
 icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/harness.png
 tags: []
-owner: harness
+owner: harness-se
 developers:
 - joseph.titra@harness.io
 show_timer: true
@@ -23,5 +23,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "5271950227981308006"
+checksum: "4914439703070498697"
 enhanced_loading: false

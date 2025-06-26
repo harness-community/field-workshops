@@ -1,5 +1,5 @@
 slug: se-workshop-idp
-id: zm0rv9uwgvwa
+id: gllnisz44c14
 title: Harness IDP Workshop
 description: |2-
 
@@ -14,7 +14,7 @@ description: |2-
     - Lab 6 - Cloud Developer Environments Beta
 icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/idp.png
 tags: []
-owner: harness
+owner: harness-se
 developers:
 - joseph.titra@harness.io
 show_timer: true
@@ -28,5 +28,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "6913217801121730315"
+checksum: "14929568242099087746"
 enhanced_loading: false

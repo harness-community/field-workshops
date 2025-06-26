@@ -1,6 +1,6 @@
 ---
 slug: create-a-chaos-experiment
-id: nwdknzrac9ri
+id: srwjnh56ucs2
 type: challenge
 title: Lab 3 - Create a Chaos Experiment
 teaser: Creating your first Chaos Experiment and target an application for fault injection
@@ -58,25 +58,25 @@ notes:
       </ul>
     </div>
 tabs:
-- id: vjcae98tyu8q
+- id: l6wwcixxew2d
   title: Harness Platform
   type: browser
   hostname: harness
-- id: svlgiydwxl7d
+- id: w7qfbbhm0zh4
   title: Boutique App
   type: service
   hostname: sandbox
   path: /
   port: 30001
-- id: lx7sus9u8o6p
+- id: ugyci4dhmzjx
   title: Grafana
   type: website
   url: https://sandbox-30002-${_SANDBOX_ID}.env.play.instruqt.com/d/edruqxvqvulmoa/boutique-app-dashboard
-- id: pt6a1owotvzo
+- id: nbyivpoqld1o
   title: Architecture
   type: website
   url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/harness-community/field-workshops/blob/main/se-workshop-ce/assets/misc/diagram.html
-- id: gurdaotbrhqt
+- id: khrkvywzfspi
   title: Lab Credentials
   type: service
   hostname: sandbox
