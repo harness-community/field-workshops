@@ -1,6 +1,6 @@
 ---
 slug: integrating-security
-id: xwfatg1wqcxh
+id: jkbpur601sxu
 type: challenge
 title: Lab 4 - Security Testing Orchestration
 teaser: Orchestrate security tests and remediate vulnerabilities with AI guidance.
@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Comprehensive Built-In Security Testing Orchestration</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sto_pipeline.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/sto_pipeline.png">
       <ul class="features-list">
         <li>Orchestrate Security Scans in the Pipeline</li>
         <li>Rapidly Prioritize Vulnerabilities</li>
@@ -59,24 +59,24 @@ notes:
       </ul>
     </div>
 tabs:
-- id: rtvuxpegvdwv
+- id: xfeylgt6wfd4
   title: Harness Platform
   type: browser
   hostname: harness
-- id: 059fnf0iloo0
+- id: 0h6jalpmnh34
   title: Demo App
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-- id: cxfys8wsguzb
+- id: byo9w0nmbj9x
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: wwx0xaiwapki
+- id: ljiiamikse9u
   title: Shell
   type: terminal
   hostname: sandbox
-- id: jdcxgelba0ll
+- id: qh6vkwxdhrdd
   title: Lab Credentials
   type: service
   hostname: sandbox
@@ -98,16 +98,16 @@ h2.cyan { color: cyan; }
 Harness offers robust and versatile solutions tailored to meet the stringent demands of even the most discerning security professionals.
 
 > Go back to the **Harness** `Pipeline Studio` by clicking the **Edit Pipeline** button \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_edit.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_edit.png)
 
 ### Adding SCA Scanners
 ===
 > 1) In the existing pipeline, within the ***Build*** stage `after` the ***Compile*** step click on `+ Add Step` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_gar_build_add_sca_step.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_gar_build_add_sca_step.png)
 > 1) Select `Add Step` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_build_add_step_buitin_scanners.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_pipeline_build_add_step_buitin_scanners.png)
 > 1) Select `Built-in Scanners` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sto_built_in_scanner_sca.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/sto_built_in_scanner_sca.png)
 > 1) Select `SCA`
 > 1) Click **Add Scanners**
 > 1) Select the steps we just added
@@ -117,11 +117,11 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 ### Adding Container Image Scanner
 ===
 > 1) In the existing pipeline, within the ***Build*** stage `after` the ***Push to Google Artifact Registry*** step click on `+ Add Step` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_add_step.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_add_step.png)
 > 1) Select `Add Step` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_build_add_step_buitin_scanners.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_pipeline_build_add_step_buitin_scanners.png)
 > 1) Select `Built-in Scanners` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sto_built_in_scanner_container.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/sto_built_in_scanner_container.png)
 > 1) Select `Container` from the Step Library and configure with the details below ↓
 
 > **Built-in Container Scanners**
@@ -138,7 +138,7 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 >       1) Domain: <pre><code>us-docker.pkg.dev</pre></code>
 >    1) Click **Apply Changes** in the top right
 > 1) Then click on the `dind` step \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_step_dind.png) \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_step_dind.png) \
 >    and configure with the details below ↓
 
 > **Configure Background Step**
@@ -155,9 +155,9 @@ Now we are going to add a `Stage` template to run DAST Scans.
 > Typically, the security team owns these scans, and as such, they will manage and version the template as needed. They simply require that we include it in our pipeline.
 
 > 1) In the existing pipeline, click on the `+` icon under the ***Backend - Deployment*** stage to add a new stage \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_add_sto_stage.png)<br>
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_pipeline_add_sto_stage.png)<br>
 > 1) Select `Use template` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_stage_use_template.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_stage_use_template.png)
 > 1) Select `DAST Scans` template and click `Use template`
 > 1) Name the stage <pre>`DAST Scans`</pre>
 
@@ -166,15 +166,15 @@ Now we are going to add a `Stage` template to run DAST Scans.
 ### Execute your updated Pipeline
 ===
 > Click **Save** in the top right to save your pipeline. <br>
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_save.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
 
 > Now click **Run** to execute the pipeline. <br>
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
 
 ### Security Scan Results
 The scans take ~3 minutes to run. <br>
 After the execution is complete, go to the `Security Tests` tab to see the *deduplicated*, *normalized* and *prioritized* list of `vulnerabilities` discovered across your scanners. <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_security_tests_tab.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_pipeline_security_tests_tab.png)
 
 Conclusion
 ===
@@ -185,11 +185,11 @@ Click the **Check** button to continue.
 ===
 ### Adding SAST Scanner
 > 1) In the existing pipeline, within the ***Build*** stage `under` the ***OSV Scan*** step click on `+ Add Step` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_add_step.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_add_step.png)
 > 1) Select `Add Step` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_build_add_step_buitin_scanners.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_pipeline_build_add_step_buitin_scanners.png)
 > 1) Select `Built-in Scanners` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sto_built_in_scanner_sast.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/sto_built_in_scanner_sast.png)
 > 1) Select `SAST` and click **Add Scanner**
 > 1) Rename the step to `Semgrep`
 

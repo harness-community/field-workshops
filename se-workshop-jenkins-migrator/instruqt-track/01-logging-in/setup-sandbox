@@ -15,7 +15,7 @@ from pyharnessworkshop import utils
 ######################## ADD ANY WORKSHOP SPECIFIC SETUP AT THE VERY BOTTOM ########################
 # CUSTOM_CREDENTIALS = [
 #     {
-#         "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/Amazon_Web_Services_Logo.svg",
+#         "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/Amazon_Web_Services_Logo.svg",
 #         "name": "AWS",
 #         "auth": {
 #             "AWS_ACCESS_KEY_ID": f"{AWS_ACCESS_KEY_ID}",
@@ -23,7 +23,7 @@ from pyharnessworkshop import utils
 #         }
 #     },
 #     {
-#         "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/grafana_logo.svg",
+#         "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/grafana_logo.svg",
 #         "name": "Grafana",
 #         "auth": {
 #             "Username": f"{GRAFANA_USER}"
@@ -38,7 +38,7 @@ USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
 USER_PWD = utils.instruqt.get_agent_variable("HARNESS_PWD")
 DEFAULT_CREDENTIALS = [
     {
-        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png",
+        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_black-logo.png",
         "name": "Harness",
         "auth": {
             "Username": f"{USER_EMAIL}",

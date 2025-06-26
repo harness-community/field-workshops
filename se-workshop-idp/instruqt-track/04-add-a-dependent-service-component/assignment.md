@@ -9,7 +9,7 @@ notes:
   contents: |-
     <h1>Software Catalog - Part 2</h1>
 
-    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_Catalog_Graph.svg" width="800" style="display: inline; vertical-align: middle;">
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_Catalog_Graph.svg" width="800" style="display: inline; vertical-align: middle;">
 
     - **A living software registry**
     - **Establish service ownership with teams**
@@ -61,12 +61,12 @@ h2.cyan { color: cyan; }
 >   - dependsOn: <pre>`component:default/[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]-service`</pre>
 
 > 1) Click on `Source Control` tab on the left nav \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/vs_code_commit.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/vs_code_commit.png)
 > 2) Enter your commit message e.g., <pre>`updated dependent component details`</pre>
 > 3) Click the dropdown `v`
 > 4) Click `Commit & Push`
 > - Click `Yes` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/vs_code_stage_changes.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/vs_code_stage_changes.png)
 
 > ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
@@ -74,7 +74,7 @@ Click on **Register** in the left Nav <br>
 
 > **Register an existing component**
 > - Select URL: <pre>`[[ Instruqt-Var key="HARNESS_IDP_REPO_PATH" hostname="sandbox" ]]/components/catalog-info-dependent.yaml`</pre> \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_component_import_url.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_component_import_url.png)
 >   - Click `Analyze`
 >   - Click `Import`
 > - Click `View Component`
@@ -82,7 +82,7 @@ Click on **Register** in the left Nav <br>
 
 > [!IMPORTANT]
 > Your component should look like this \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_component_dependency_overview.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_component_dependency_overview.png)
 > - Take a moment to explore links, source, etc. that were defined in your component and how they are rendered in the UI
 >   - Be sure to click on the Dependencies tab
 

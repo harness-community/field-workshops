@@ -61,7 +61,7 @@ notes:
 
     <div class="container">
       <h1>What is a resilience probe?</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/ce_resilience_probes.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/ce_resilience_probes.png">
       <ul class="features-list">
         <li>Declarative checks that determine the outcome of a fault:
             <ul class="sub-list">
@@ -99,15 +99,15 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br>
 
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_probes.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_nav_probes.png)
 > ### Click on **Resilience Probes** in the left Nav
 > - Click `+New Probe` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_probe.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_new_probe.png)
 
 > **Select your probe type**
 > - Infrastructure Type: `Kubernetes`
 > - Chaos probe: `HTTP` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_probe_k8s_http.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_probe_k8s_http.png)
 
 > **HTTP Probe**
 > - **Overview**

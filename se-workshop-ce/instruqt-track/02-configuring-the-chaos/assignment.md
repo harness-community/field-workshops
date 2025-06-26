@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>What is Chaos Engineering?</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/ce_overview_graphic.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/ce_overview_graphic.png">
       <ul class="features-list">
         <li>Increase System Resilience</li>
         <li>Better Customer Experience</li>
@@ -99,14 +99,14 @@ h2.cyan { color: cyan; }
 
 
 ## Now it's time to start creating some chaos!
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/module_ce.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/module_ce.png)
 
 Select the **Chaos Engineering** module from the list <br>
 
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_environments.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_nav_environments.png)
 > ### Click on **Environments** in the left Nav
 > - Click `+New Environment` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_environment.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_new_environment.png)
 
 > **New Environment**
 > - Name: <pre>`lab`</pre>
@@ -115,16 +115,16 @@ Select the **Chaos Engineering** module from the list <br>
 
 <br>
 
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_lab_environment.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_lab_environment.png)
 > ### Now click on the environment we just created.
 > - Select Infrastructure type: `Kubernetes`
 > - Click `+New Infrastructure` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_infrastructure.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_new_infrastructure.png)
 
 > [!IMPORTANT]
 > We will NOT be using a Harness Delegate for this Lab.
 > - Please Select `No` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_infrastructure_v1_or_v2.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_new_infrastructure_v1_or_v2.png)
 > - Click **Next >** and configure with the details below ↓
 
 > **New Infrastructure**
@@ -134,9 +134,9 @@ Select the **Chaos Engineering** module from the list <br>
 > - **Configure**
 >   - Installation Type: `Kubernetes`
 >   - Access Type:
->     - Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pencil.svg" alt="Pencil icon" width="16" height="16" style="display: inline; vertical-align: middle;">***CHANGE***
+>     - Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pencil.svg" alt="Pencil icon" width="16" height="16" style="display: inline; vertical-align: middle;">***CHANGE***
 >     - Select `Specific namespace access` \
->         ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_enable_infra_namespace.png)
+>         ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_enable_infra_namespace.png)
 >   - Installation Location (Namespace): <pre>`[[ Instruqt-Var key="HARNESS_USER_NAME" hostname="sandbox" ]]`</pre>
 >   - Service Account Name: `hce`
 >   - Click **Next >**

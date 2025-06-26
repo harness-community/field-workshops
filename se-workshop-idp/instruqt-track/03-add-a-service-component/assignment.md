@@ -9,7 +9,7 @@ notes:
   contents: |-
     <h1>Software Catalog</h1>
 
-    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_Catalog_Graph.svg" width="800" style="display: inline; vertical-align: middle;">
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_Catalog_Graph.svg" width="800" style="display: inline; vertical-align: middle;">
 
     - **A living software registry**
     - **Establish service ownership with teams**
@@ -60,17 +60,17 @@ h2.cyan { color: cyan; }
 >   - owner: <pre>`TeamA`</pre>
 
 > 1) Click on `Source Control` tab on the left nav \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/vs_code_commit.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/vs_code_commit.png)
 > 2) Enter your commit message e.g., <pre>`updated component details`</pre>
 > 3) Click the dropdown `v`
 > 4) Click `Commit & Push`
 > - Click `Yes` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/vs_code_stage_changes.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/vs_code_stage_changes.png)
 
 > ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 ## Now it's time to create an IDP Service Component
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/module_idp.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/module_idp.png)
 
 Select the **Internal Developer Portal** module from the list <br>
 
@@ -78,7 +78,7 @@ Click on **Register** in the left Nav <br>
 
 > **Register an existing component**
 > - Select URL: <pre>`[[ Instruqt-Var key="HARNESS_IDP_REPO_PATH" hostname="sandbox" ]]/components/catalog-info.yaml`</pre> \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_component_import_url.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_component_import_url.png)
 >   - Click `Analyze`
 >   - Click `Import`
 > - Click `View Component`
@@ -86,7 +86,7 @@ Click on **Register** in the left Nav <br>
 
 > [!IMPORTANT]
 > Your component should look like this \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_component_overview.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_component_overview.png)
 > - Take a moment to explore links, source, etc. that were defined in your component and how they are rendered in the UI
 >   - Be sure to click on the CI/CD, Scorecard, and API tabs
 

@@ -1,6 +1,6 @@
 # Harness DevSecOps Instruqt Workshop
 
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-devsecops/assets/images/dark_mode/Platform_Landing_Page.svg)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-devsecops/assets/images/dark_mode/Platform_Landing_Page.svg)
 
 ## Introduction
 

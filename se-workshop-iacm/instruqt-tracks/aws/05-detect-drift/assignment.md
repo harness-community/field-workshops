@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Drift detection</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/iac_drift_detection.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/iac_drift_detection.png">
       <ul class="features-list">
         <li>Harness IaCM provides automated drift detection and reconciliation, preventing discrepancies between desired and actual state, ensuring git is the single source of truth for infrastructure changes.</li>
       </ul>
@@ -137,7 +137,7 @@ aws ec2 describe-instances \
 ## Now let's create an IaCM Pipeline to detect drift
 Click on **Pipelines** in the left Nav <br>
 And then click `+Create Pipeline` <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_create.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_create.png)
 
 > **Create new Pipeline**
 > - Name: <pre>`IaCM Drift`</pre>
@@ -146,34 +146,34 @@ And then click `+Create Pipeline` <br>
 
 > - Click `+Add Stage` <br>
 > - Choose **Infrastructure** stage type \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
 > - Give it a name: <pre>`IaCM`</pre>
 > - Click **Set Up Stage**
 
 > - On the  **Infrastructure** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_infrastructure.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_infrastructure.png)
 > - Keep the defaults (**Cloud**)
 > - Click **Next >**
 
 > - On the **Workspace** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_workspace.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_workspace.png)
 > - Set the type to `Runtime input` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_workspace_runtime_input.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_workspace_runtime_input.png)
 > - Click **Next >**
 
 > - Select **Detect Drift** operation \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_step.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_drift_step.png)
 > - Click **Use Operation**
 
 > [!NOTE]
 > Your pipeline should look like this: \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/full_pipeline_iacm_drift.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/full_pipeline_iacm_drift.png)
 
 ### Execute your new IaCM Pipeline
 > - Click **Save** in the top right to save your new pipeline \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_save.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
 > - Now click **Run** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
 > - Then select your `demoworkspace` **Workspace** to execute the pipeline
 > - Click **Run Pipeline**
 
@@ -183,12 +183,12 @@ And then click `+Create Pipeline` <br>
 
 > **Now that the piplne execution has completed**
 > - Click on the `Resources` tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_resources.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_drift_resources.png)
 > - Click on `Drift Changes` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_changes.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_drift_changes.png)
 > - Select the drifted **EC2 instance** from the list
 > - Scroll down in this list to see the details of the drift detected and the `Actual Value` vs. the `Expected Value` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_drift_details.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_drift_details.png)
 
 > [!NOTE]
 > - *Was this what you expected to see?*

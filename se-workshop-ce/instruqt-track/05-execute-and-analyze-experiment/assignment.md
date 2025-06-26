@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Analyze experiment</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/ce_pipelines.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/ce_pipelines.png">
       <ul class="features-list">
         <li>Observe the status of fault injection during execution</li>
         <li>Learn what a Resilience Score is and how it is calculated</li>
@@ -110,17 +110,17 @@ h2.cyan { color: cyan; }
 
 > [!NOTE]
 > *All credentials for this lab can always be found on the: <br>
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-4) tab*
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-4) tab*
 
 
 
 > ### Let's open the `Boutique App Dashboard`
 > - Click on **Open menu** and select `Dashboards` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_grafana_dashboards.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_grafana_dashboards.png)
 > - Select: `Boutique App Dashboard` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_grafana_boutique_app_dashboard.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_grafana_boutique_app_dashboard.png)
 > - Click on **Undock menu** to minimize the left nav \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_grafana_undock_menu.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_grafana_undock_menu.png)
 
 > [!NOTE]
 > We will use this dashboard to get a better understanding of how our chaos experiment impacts the Online Boutique.
@@ -129,7 +129,7 @@ h2.cyan { color: cyan; }
 
 ## Time to unleash the chaos!
 > Click **Run** to execute your experiment. <br>
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
 
 > [!IMPORTANT]
 > This experiment execution will take a few minutes to run. While it's executing switch back to the [button label="Grafana" variant="success"](tab-2) tab and monitor what happens when fault injection begins.
@@ -143,12 +143,12 @@ h2.cyan { color: cyan; }
 > ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 ## Let's take a look at the results of our experiment
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_experiment_probe_frontend.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_experiment_probe_frontend.png)
 > We can see that the frontend availability probe failed, which means that our entire website was unavailable even though fault injection only targeted the cart service. This is likely unexpected and definitely undesired behavior.
 
 > [!NOTE]
 > The result of these *probes*, as well as the fault weightage (configured on the `Tune Fault` tab for each fault in the experiment) are used to calculate the experiments `Resililence Score`. If we add additional *probes* to our fault, and/or additional faults to our experiment the calculation will adjust accordingly.
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_experiment_result_resilience_score_0.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_experiment_result_resilience_score_0.png)
 
 ===============
 

@@ -1,6 +1,6 @@
 ---
 slug: continuous-verification
-id: gejlegux3hbo
+id: msal3gvdflyr
 type: challenge
 title: Lab 7 - Continuous Verification
 teaser: Implement continuous verification practices, using Harness to automate the
@@ -84,28 +84,28 @@ notes:
       </ul>
     </div>
 tabs:
-- id: llammqmyprht
+- id: qzdtopjro0c0
   title: Harness Platform
   type: browser
   hostname: harness
-- id: valu0lmval2p
+- id: mvb1zlbtjczr
   title: Demo App
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-- id: k5xkvjoorfix
+- id: ez9gyh3swuof
   title: ServiceNow
   type: browser
   hostname: servicenow
-- id: 9ffrhlpllhxp
+- id: hfzac5aqovca
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: ecuymkddnhx7
+- id: k7khf6nqylyg
   title: Shell
   type: terminal
   hostname: sandbox
-- id: eq2lgvczzuvp
+- id: s0bibpv6q1tg
   title: Lab Credentials
   type: service
   hostname: sandbox
@@ -125,31 +125,31 @@ h2.cyan { color: cyan; }
 
 ## Now let's add Continuous Verification
 > Go back to the **Harness** `Pipeline Studio` by clicking the **Edit Pipeline** button \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_edit.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_edit.png)
 > 1) In the right nav, click on `Advanced Options` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_advanced_options.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_advanced_options.png)
 >    1) Under **Stage Execution Settings** click the radio button next to `Yes` \
->       ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_allow_stage_execution.png)
+>       ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_allow_stage_execution.png)
 >     *This will allow us to execute an individual **Stage** of our pipeline*
 >    1) Click **Apply Changes** in the top right
 > 1) Hover over the ***Approval*** stage and click the **X** to delete it \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-devsecops/assets/images/pipeline_delete_approval_stage.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-devsecops/assets/images/pipeline_delete_approval_stage.png)
 > 1) Click on the ***Backend - Deployment*** stage
 > 1) Click on the **Environment** tab \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_environment.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_environment.png)
 >    1) Click on the radio button next to \
 >     `Deploy to Different Environment`
 >    1) Specify Environment: `Dev`
 >    1) Specify Infrastructure: `K8s Dev`
 >    1) Click **Continue >**
 > 1) On the **Execution** tab \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_execution.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_execution.png)
 >    1) `Between` the ***Canary Deployment*** and the ***Canary Delete*** steps
 >    1) Click on the `+` icon to add a new step \
->       ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_deploy_canary_add_step.png)
+>       ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_pipeline_deploy_canary_add_step.png)
 >    1) Select `Add Step`
 >    1) Select `Verify` from the Step Library \
->       ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_step_verify.png)
+>       ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_step_verify.png)
 >    1) Configure with the details below ↓
 
 > **Verify**
@@ -166,13 +166,13 @@ h2.cyan { color: cyan; }
 Execute your Pipeline
 ===
 > Click **Save** in the top right to save your pipeline. <br>
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_save.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
 
 > Now click **Run** to execute the pipeline. <br>
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)<br>
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)<br>
 > - Click the **All Stages** dropdown
 > - Select only the `Backend - Deployment` stage \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-devsecops/assets/images/pipeline_stage_execute_backend.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-devsecops/assets/images/pipeline_stage_execute_backend.png)
 > - Then Click **Run Pipeline**
 
 > [!NOTE]
@@ -184,14 +184,14 @@ Visualize the Canary Deployment
 > #### Switch to the [button label="Demo App" variant="success"](tab-1) tab to continue
 > - Click the `Check Release` button \
 >  *(Don't worry! Keep on clicking it!)* \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_captain_canary.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_captain_canary.png)
 
 <br>
 
 ### Distribution Test
 > - Now click on the `Start` button on the **Distribution Test** panel
 > - Then click the **Play** `▶️` button to observe the traffic distribution \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_traffic_distribution_test.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_traffic_distribution_test.png)
 
 <br>
 
@@ -201,7 +201,7 @@ Visualize the Canary Deployment
 > 2) Select the `Verify` step
 > 3) Uncheck the option to `Display only anomalous metrics and affected nodes`
 > 4) Click the `⏷` to view the details
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_cv_verification.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_cv_verification.png)
 
 > [!NOTE]
 **This is just the beginning**<br>

@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Industry’s  widest coverage on Chaos Faults™</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/ce_experiment_coverage.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/ce_experiment_coverage.png">
       <ul class="features-list">
         <li>Boost your organization's chaos engineering effectiveness with our ChaosHub.</li>
         <li>Featuring a wide range of curated, pre-built chaos scenarios, it's designed for easy implementation and maximum resilience.</li>
@@ -94,26 +94,26 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br>
 
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_experiments.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_nav_experiments.png)
 > ### Click on **Chaos Experiments** in the left Nav
 > - Click `+New Experiment` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_experiment.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_new_experiment.png)
 
 > **Experiment Overview**
 > - Name: <pre>`cart-delete`</pre>
 > - Chaos Infrastructure Type: `Kubernetes` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_k8s_v1_infrastructure.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_k8s_v1_infrastructure.png)
 > - Select Infrastructure: `lab-hce`
 >   - Click **Apply**
 > - Click **Next >**
 
 > **Experiment Builder**
 > - Select `Start with blank canvas` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_experiment_blank_canvas.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_new_experiment_blank_canvas.png)
 > - Click `+Add` on the canvas \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_add_to_canvas.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_add_to_canvas.png)
 > - Navigate to **Kubernetes** faults and select `Pod Delete` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_fault_pod_delete.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_fault_pod_delete.png)
 > - Configure with the details below ↓
 
 > **pod-delete**
@@ -130,11 +130,11 @@ h2.cyan { color: cyan; }
 >     - Select `OnChaos`
 >     - Click `Apply Changes`
 > - Click **Apply Changes** \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_experiment_apply_changes.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_experiment_apply_changes.png)
 
 ### Save your Experiment
 > Click **Save** in the top right to save your experiment. <br>
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_save.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_save.png)
 
 > [!NOTE]
 > Don't **Run** your experiment yet. We will get to that in the next lab!

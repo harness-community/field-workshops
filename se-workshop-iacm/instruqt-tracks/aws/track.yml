@@ -3,7 +3,7 @@ id: oyfnyidbl0xu
 title: Harness IaCM Workshop - AWS
 description: |2-
 
-  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
 
   **This track demonstrates how to:**
     - Lab 1 - Clone the IaC Repo
@@ -14,7 +14,7 @@ description: |2-
     - Lab 6 - Governance w/OPA
     - Lab 7 - Cost Estimation and State
     - Lab 8 - PR Triggers and Validation
-icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/iacm.png
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/iacm.png
 tags: []
 owner: harness
 developers:
@@ -30,5 +30,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "4585992075826050028"
+checksum: "2787570387847168486"
 enhanced_loading: false

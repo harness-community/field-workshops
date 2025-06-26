@@ -1,6 +1,6 @@
 ---
 slug: governance
-id: gkzngarfph4u
+id: rnenwpmyscan
 type: challenge
 title: Lab 5 - Governance via Policy as Code
 teaser: Explore how to enforce governance via OPA policies within Harness, defining
@@ -75,7 +75,7 @@ notes:
     <div class="container">
       <h1>Guardrail your deployments</h1>
       <div class="sub-container">
-        <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/cd_opa_guardrails.avif">
+        <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/cd_opa_guardrails.avif">
         <ul class="features-list">
           <li>Flexible policies using Open Policy Agent</li>
           <li>Give developers permission to edit pipelines while central teams dictate rules like:
@@ -89,24 +89,24 @@ notes:
       </div>
     </div>
 tabs:
-- id: phoolyx7ds2h
+- id: kuyxaytlii3p
   title: Harness Platform
   type: browser
   hostname: harness
-- id: fabyuz4axeuf
+- id: 3ksycccp4bbz
   title: Demo App
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-- id: txq9436jyt46
+- id: zqa0rcedcng8
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: rzzyrcxloqr2
+- id: cfnelraa3gb5
   title: Shell
   type: terminal
   hostname: sandbox
-- id: 82h58cua3w2d
+- id: gshtjr2l20if
   title: Lab Credentials
   type: service
   hostname: sandbox
@@ -130,7 +130,7 @@ h2.cyan { color: cyan; }
 > - Click on **Policies**
 > - This is the Overview screen
 >   - In the top right of this screen click **Policies** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/opa_new_policy.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/opa_new_policy.png)
 >   - Then click `+New Policy` and configure with the details below ↓
 
 > [!IMPORTANT]
@@ -184,7 +184,7 @@ contains(arr, elem) {
 
 ## Create new Policy Set
 > 1) In the top right of this screen click **Policy Sets** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/opa_new_policy_set.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/opa_new_policy_set.png)
 > 2) And then click `+New Policy Set` <br>
 >
 > **Policy Set**
@@ -204,7 +204,7 @@ contains(arr, elem) {
 
 > [!WARNING]
 > - Be sure to click the toggle under `ENFORCED` to enable your **Policy Set** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/opa_policy_toggle.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/opa_policy_toggle.png)
 
 > [!NOTE]
 > *How is this policy set enforcing our policy?*
@@ -212,23 +212,23 @@ contains(arr, elem) {
 ## Let's test it out
 > Head back over to your pipeline.
 > 1) Select the ***Frontend - Deployment*** stage \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_environment.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_environment.png)
 > 2) Click on the  **Environment** tab
 >   - Specify Environment: `Prod`
 >   - Specify Infrastructure: `K8s Prod`
 
 > Click **Save** in the top right to save your pipeline. \
->   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_save.png)
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
 
 > [!IMPORTANT]
 > Oops. That's not allowed. \
->   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_missing_approval.png)
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_pipeline_missing_approval.png)
 > Click the **X** in the upper right of this pop-up and let's add an approval stage so we can get back on track.
 
 > 1) `Before` the ***Frontend - Deployment*** stage click on the `+` icon to add a new stage \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_add_approval_stage.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_pipeline_add_approval_stage.png)
 > 1) Select `Approval` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_stage_approval.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_stage_approval.png)
 > 1) Configure with the details below ↓
 
 > **About your Stage**
@@ -243,18 +243,18 @@ contains(arr, elem) {
 >   1) User Groups: Click `Select User Group(s)`
 >      1) Click on `Project`
 >      1) Select: `Production Approvers` \
->         ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_approval_group.png)
+>         ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_approval_group.png)
 >      1) Click **Apply Selected**
 > - Click **Apply Changes** in the top right
 
 > Click **Save** in the top right to save your pipeline \
->   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_save.png)
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
 
 # Success!
 
 ### Execute your Pipeline
 > Now click **Run** to execute the pipeline \
->   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
 
 <br>
 

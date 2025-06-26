@@ -3,7 +3,7 @@ id: olmwzmuhq1yz
 title: Harness Chaos Engineering Workshop
 description: |2-
 
-  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
 
   **This track demonstrates how to:**
     - Lab 1 - Configure Your Chaos Infrastructure
@@ -11,7 +11,7 @@ description: |2-
     - Lab 3 - Create a Chaos Experiment
     - Lab 4 - Execute and Analyze Experiment Results
     - Lab 5 - Controlling the Chaos with ChaosGuard
-icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/ce.png
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/ce.png
 tags: []
 owner: harness
 developers:

@@ -1,6 +1,6 @@
 ---
 slug: cd-frontend
-id: ce7otpvk690t
+id: mwcvft6xe40b
 type: challenge
 title: Lab 2 - Continuous Deployment - Frontend
 teaser: Deploy the frontend of your application using Harness, setting up deployment
@@ -52,7 +52,7 @@ notes:
 
     <div class="container">
       <h1>Build powerful pipelines</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/cd_editor_switch_static.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/cd_editor_switch_static.png">
       <ul class="features-list">
         <li>Visual and code editor</li>
         <li>Advanced controls</li>
@@ -60,24 +60,24 @@ notes:
       </ul>
     </div>
 tabs:
-- id: pmujdhtjjtar
+- id: knpn6b4lap3m
   title: Harness Platform
   type: browser
   hostname: harness
-- id: ryaogc2fydji
+- id: sdnln6xyr3mi
   title: Demo App
   type: website
   url: https://${_SANDBOX_ID}.instruqt.harness-demo.site/
-- id: ymegx9bobx6s
+- id: vzng7ppnbj7y
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: zcuw73v4fenr
+- id: adxmav2k0v8y
   title: Shell
   type: terminal
   hostname: sandbox
-- id: wdkdyt4qczzr
+- id: guvzbjkfiry1
   title: Lab Credentials
   type: service
   hostname: sandbox
@@ -96,12 +96,12 @@ h2.cyan { color: cyan; }
 <br><br>
 
 ## Time to deploy our new artifact
-> Go back to the **Harness** `Pipeline Studio` by clicking the **Edit Pipeline** button \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_edit.png)
+> Go back to the **Harness** `Pipeline Studio` by clicking the **Edit Pipeline** button at the top of the screen \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_edit.png)
 
 > 1) Click `+Add Stage`
 > 1) Choose **Deploy** stage type \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_stage_deploy.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_stage_deploy.png)
 > 1) Configure with the details below ↓
 
 > **Deploy Stage**
@@ -110,7 +110,7 @@ h2.cyan { color: cyan; }
 > - Click **Set Up Stage**
 
 > - On the **Service** tab \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_service.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_service.png)
 >    1) Click `+ Add Service`
 >    1) Configure with the details below ↓
 
@@ -147,13 +147,13 @@ h2.cyan { color: cyan; }
 >        -  Package: <pre>`harness-workshop`</pre>
 >        -  Version: <pre><code><+variable.username>-<+pipeline.sequenceId></code></pre> \
 >            (change the field type to expression) \
->            ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/change_input_expression.png)
+>            ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/change_input_expression.png)
 >     - Click **Submit >**
 >   - Click **Save**
 > - Click **Continue >**
 
 > - On the **Environment** tab \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_environment.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_environment.png)
 >    1) Specify Environment: `Dev`
 >    1) Specify Infrastructure: `K8s Dev`
 
@@ -161,9 +161,9 @@ h2.cyan { color: cyan; }
 > With Harness, a platform team can easily create and manage environments and infrastructure, then developers can use them to deploy their applications.
 
 > - On the **Execution** tab \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_execution.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_execution.png)
 >    1) Select: `Rolling` \
->       ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/deploy_rolling.png)
+>       ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/deploy_rolling.png)
 >    1) Click **Use Strategy**
 
 > [!NOTE]
@@ -172,15 +172,15 @@ h2.cyan { color: cyan; }
 
 ### Execute your Pipeline
 > Click **Save** in the top right to save your pipeline. \
->   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_save.png)
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
 
 > Now click **Run** to execute the pipeline \
->   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
 > Then click **Run Pipeline** \
->   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-devsecops/assets/images/pipeline_run_pipeline.png)
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-devsecops/assets/images/pipeline_run_pipeline.png)
 
 > The build should run using: <br>
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_lab3_execution.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/unscripted_lab3_execution.png)
 > - Branch Name: `main`
 > - Stage: **Frontend - Deployment**
 >   - Primary Artifact: `frontend`

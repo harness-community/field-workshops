@@ -140,6 +140,8 @@ utils.misc.run_command(f"nohup tofu -chdir={harness_path}/terraform apply -auto-
 # Install VS Code
 utils.misc.setup_vs_code(8443, f"{workshop_path}/{code_repo}")
 utils.misc.run_command(f"set-workdir {workshop_path}")
+extensions = ["HashiCorp.terraform"]
+utils.misc.install_vscode_extensions(extensions)
 
 # Set AWS CLI Region
 utils.misc.run_command("aws configure set region us-east-1")

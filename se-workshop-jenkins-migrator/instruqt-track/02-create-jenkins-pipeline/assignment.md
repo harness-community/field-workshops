@@ -72,7 +72,7 @@ notes:
 
     <div class="container">
       <h1>Legacy DevOps</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_devil.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-jenkins-migrator/assets/images/jenkins_devil.png">
       <ul class="features-list">
         <li>Plugin Hell. Brought to you by Jenkins.</li>
       </ul>
@@ -118,15 +118,15 @@ h2.cyan { color: cyan; }
 
 ## Create a new API Key
 > - Click on your username in the bottom of the left nav \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/harness_left_nav_user.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-jenkins-migrator/assets/images/harness_left_nav_user.png)
 > - Click `+ API Key` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/harness_new_api_key.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-jenkins-migrator/assets/images/harness_new_api_key.png)
 > **New API Key**
 > - Name: <pre>`Service Accounts`</pre>
 > - Click: Save
 
 > - Click `+ Token` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/harness_new_api_token.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-jenkins-migrator/assets/images/harness_new_api_token.png)
 > **New Token**
 > - Name: <pre>`Jenkins`</pre>
 > - Click: Generate Token
@@ -136,9 +136,9 @@ h2.cyan { color: cyan; }
 
 ### Configure Harness Migration Plugin
 > - Click on `Manage Jenkins` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_manage_jenkins.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-jenkins-migrator/assets/images/jenkins_manage_jenkins.png)
 > - Click on `System` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_configure_system.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-jenkins-migrator/assets/images/jenkins_configure_system.png)
 > - Scroll down to `Harness Migration`
 > - Configure with the details below ↓
 
@@ -152,7 +152,7 @@ h2.cyan { color: cyan; }
 
 ### Create a Jenkins Pipeline
 > - Click `+New Item` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_new_item.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-jenkins-migrator/assets/images/jenkins_new_item.png)
 
 > **New Item**
 > - Name: <pre>`se-lab`</pre>
@@ -227,15 +227,15 @@ pipeline {
 
 > - Click **Save**
 > - Click `Build Now` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_build_now.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-jenkins-migrator/assets/images/jenkins_build_now.png)
 > - Click on the running build \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_running_build.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-jenkins-migrator/assets/images/jenkins_running_build.png)
 > - Click `Console Output` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_console_output.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-jenkins-migrator/assets/images/jenkins_console_output.png)
 
 > [!NOTE]
 > The build will take ~7 minutes to complete. Once it's finished move on to the next lab. \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-jenkins-migrator/assets/images/jenkins_pipeline_success.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-jenkins-migrator/assets/images/jenkins_pipeline_success.png)
 
 ===============
 

@@ -75,7 +75,7 @@ notes:
     <div class="container">
       <h1>Guardrail your deployments</h1>
       <div class="sub-container">
-        <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/cd_opa_guardrails.avif">
+        <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/cd_opa_guardrails.avif">
         <ul class="features-list">
           <li>Flexible policies using Open Policy Agent</li>
           <li>Give developers permission to edit pipelines while central teams dictate rules like:
@@ -127,7 +127,7 @@ h2.cyan { color: cyan; }
 > - Click the **X** in the top right corner to close out of the quick start
 > - This is the Overview screen
 >   - In the top right of this screen click **Policies** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/opa_new_policy.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/opa_new_policy.png)
 >   - Then click `+New Policy`and configure with the details below ↓
 
 > **Policy Name**
@@ -156,7 +156,7 @@ deny[msg] {
 
 ### Create new Policy Set
 In the top right of this screen click **Policy Sets** <br>
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/opa_new_policy_set.png)<br>
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/opa_new_policy_set.png)<br>
 And then click `+New Policy Set` <br>
 
 > **Policy Set**
@@ -175,7 +175,7 @@ And then click `+New Policy Set` <br>
 
 > [!IMPORTANT]
 > - Be sure to click the toggle under `ENFORCED` to enable your **Policy Set** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/opa_policy_toggle.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/opa_policy_toggle.png)
 
 ### Let's test it out
 Head back over to your workspace. <br>
@@ -183,7 +183,7 @@ Head back over to your workspace. <br>
 > **Configure Workspace**
 > - Click on the **Variables** tab
 > - And then click on **Terraform Variables** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
 > - Click the **pencil** icon next to `instance_type`
 > - Change the value to <pre>`t2.large`</pre>
 > - Click ✅ to save this variable

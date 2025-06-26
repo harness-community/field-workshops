@@ -11,7 +11,7 @@ notes:
   contents: |-
     <h1>Scorecards</h1>
 
-    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_Scorecards.svg" width="900" style="display: inline; vertical-align: middle;">
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_Scorecards.svg" width="900" style="display: inline; vertical-align: middle;">
 
     - **Measure software maturity**
     - **Drive migrations and adoption of standards**
@@ -48,12 +48,12 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br><br>
 
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_nav_configure.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_nav_configure.png)
 > ### Click on **Configure** in the left Nav
 > - Then click on **Scorecards** in the left Nav \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_nav_scorecards.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_nav_scorecards.png)
 > - And then click `Create New Scorecard` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_create_new_scorecard.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_create_new_scorecard.png)
 > - Configure with the details below ↓
 
 > **Create Scorecard**
@@ -81,7 +81,7 @@ h2.cyan { color: cyan; }
 
 > [!NOTE]
 > - Your scorecard should appear with a grade of 19 (This is NOT good!) \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_component_scorecard.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_component_scorecard.png)
 
 > [!IMPORTANT]
 > - If more than one scorecard is present, chances are that someone in this workshop misconfigured their scorecard filters
@@ -93,14 +93,14 @@ h2.cyan { color: cyan; }
 
 > **Change the criteria** <br>
 > - Let’s fix our score the easy way by changing the grading standards
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_nav_configure.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_nav_configure.png)
 > ### Click on **Configure** in the left Nav
 > - Then click on **Scorecards** in the left Nav \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_nav_scorecards.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_nav_scorecards.png)
 > - Find your scorecard: `[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]`
 > - Click `Edit`
 >   - Toggle **Adjust Weights** on the right hand side \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_scorecard_adjust_weights_toggle.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_scorecard_adjust_weights_toggle.png)
 >   - Set the value to `100` for the following checks \
 >       *(near the bottom of the list)*:
 >     - Spec owner exists

@@ -15,7 +15,7 @@ USER_NAME = utils.instruqt.get_agent_variable("HARNESS_USER_NAME")
 USER_PWD = utils.instruqt.get_agent_variable("HARNESS_PWD")
 CUSTOM_CREDENTIALS = [
     {
-        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/servicenow.svg",
+        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/servicenow.svg",
         "name": "ServiceNow",
         "auth": {
             "Username": f"{USER_NAME}",
@@ -29,7 +29,7 @@ OUTPUT_HTML = "/opt/harness/misc/credential_tab.html"
 USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
 DEFAULT_CREDENTIALS = [
     {
-        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png",
+        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_black-logo.png",
         "name": "Harness",
         "auth": {
             "Username": f"{USER_EMAIL}",

@@ -6,7 +6,7 @@ virtualbrowsers:
   url: https://ven03172.service-now.com/now/nav/ui/classic/params/target/change_request_list.do%3Fsysparm_userpref_module%3Dcd579a82c0a8016400aa77d97a4d70a8%26sysparm_fixed_query%3Dopened_by%3Djavascript%3Ags.getUserID()
 virtualmachines:
 - name: sandbox
-  image: sales-209522/harness-se-workshop-v0-0-15
+  image: sales-209522/harness-se-workshop-v0-0-19
   shell: /bin/bash
   machine_type: n2-standard-8
   allow_external_ingress:

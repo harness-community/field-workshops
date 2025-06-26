@@ -30,7 +30,7 @@ Every track has a few key components: <br>
   - For a basic workshop this will not require any modification.
 - **track.yml**
   - This only requires a few updates and controls how your track is rendered in Instruqt.
-  - ![Instruqt Track](https://raw.githubusercontent.com/harness-community/field-workshops/main/aaa-se-workshop-template/assets/images/EXAMPLE.png)
+  - ![Instruqt Track](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/aaa-se-workshop-template/assets/images/EXAMPLE.png)
 - **track_scripts**
   - `setup-sandbox`
     - This script contains the standard setup required for every Instruqt track.
@@ -80,7 +80,7 @@ For more information on Instruqt and its capabilities, please visit the followin
 
 
 # Use the structure below when creating the track readme.
-You can also reference this example: https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/README.md
+You can also reference this example: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/README.md
 
 # Harness TEMPLATE Instruqt Workshop
 

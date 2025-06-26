@@ -73,7 +73,7 @@ notes:
 
     <div class="container">
       <h1>Modernize DevOps</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/re_mapped_pipeline.avif">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/re_mapped_pipeline.avif">
       <ul class="features-list">
         <li>Upgrade your software delivery with modern, AI-native tools:</li>
         <ul class="sub-list">

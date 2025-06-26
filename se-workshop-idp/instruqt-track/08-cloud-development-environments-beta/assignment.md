@@ -11,7 +11,7 @@ notes:
 
     Developers can start coding immediately with environments tailored to their projects, accessible from anywhere while maintaining familiarity with their preferred tools.
 
-    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_streamline_dev_loop.png" width="800" style="display: inline; vertical-align: center;">
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/cde_streamline_dev_loop.png" width="800" style="display: inline; vertical-align: center;">
 
     - **Run preferred IDEs locally or in the cloud**
     - **On-demand development environments**
@@ -55,7 +55,7 @@ h2.cyan { color: cyan; }
 
 > [!IMPORTANT]
 > 1) *If you experience any issues you can access the Harness Platform in your browser tab by clicking: \
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-1) tab*
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-1) tab*
 
 # Harness supports multiple types of Cloud Development Environments
 ## This lab will focus on the VS Code Online Gitspace
@@ -63,18 +63,18 @@ h2.cyan { color: cyan; }
 VS Code Online in the Gitspace
 ===
 ## Now let's create a CDE Gitspace
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/module_cde.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/module_cde.png)
 
 Select the **Cloud Development Environments** module from the list <br>
 
 Click on **Gitspaces** in the left Nav <br>
 And then click `Get Started Now >` <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_get_started_now.png) <br>
+![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/cde_get_started_now.png) <br>
 Configure your Gitspace as per the instructions provided below ↓ <br>
 
 > [!NOTE]
 > We are using a public GitHub repo for this workshop so you can ignore the OAuth message. \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_github_configure_oauth.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/cde_github_configure_oauth.png)
 
 
 > **Create Gitspace**
@@ -83,13 +83,13 @@ Configure your Gitspace as per the instructions provided below ↓ <br>
 >   - Repo URL: <pre>`https://github.com/jtitra/haikus`</pre>
 >   - Repo Branch: `main`
 > - IDE: `VS Code Browser` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_vs_code_browser.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/cde_vs_code_browser.png)
 > - Region: `us-west`
 > - Machine Type: `Standard`
 
 > [!IMPORTANT]
 > Your gitspace should look like this. \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_gitspace_configuration.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/cde_gitspace_configuration.png)
 
 > - Click **Create Gitspace**
 
@@ -98,17 +98,17 @@ Configure your Gitspace as per the instructions provided below ↓ <br>
 
 > [!NOTE]
 > This will set up your development environment in the cloud and will take approximately 2-3 minutes to complete. \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_gitspace_starting.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/cde_gitspace_starting.png)
 > - Expand `Gitspace Activity` and `Container Logs` to see this process in real-time.
 
 ## Now that your development environment is set up, you can start coding and testing your applications!
 > [!IMPORTANT]
 > - Scroll to the top of the page and click on the **Open VS Code Online** button to launch your coding environment \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_open_vs_code_online.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/cde_open_vs_code_online.png)
 > - Due to a limitation with the **Instruqt** platform, you will need to click on the prompt and show the pop-up \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_instruqt_allow_pop_up.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/cde_instruqt_allow_pop_up.png)
 > - If the **Instruqt** platform is giving you any issues, you can always access the Harness Platform in your browser tab by clicking: \
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-1) tab*
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-1) tab*
 > - You are now ready to start coding!
 
 Running Your App
@@ -124,7 +124,7 @@ Running Your App
 >    1) In the terminal type: <pre>`yarn start`</pre>
 >    1) Press enter to run your application
 > 1) Click `Open in Browser` to see your application! \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/cde_open_in_browser.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/cde_open_in_browser.png)
 
 
 <br><br>
