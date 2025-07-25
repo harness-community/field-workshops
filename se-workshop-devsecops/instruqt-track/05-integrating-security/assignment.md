@@ -87,6 +87,7 @@ timelimit: 1600
 enhanced_loading: null
 ---
 
+
 <style type="text/css" rel="stylesheet">
 hr.cyan { background-color: cyan; color: cyan; height: 2px; margin-bottom: -10px; }
 h2.cyan { color: cyan; }
@@ -94,7 +95,7 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br><br>
 
-## Now let's add Harness Built-in Scanners
+## Now let's add Harness Open Source Scanners
 Harness offers robust and versatile solutions tailored to meet the stringent demands of even the most discerning security professionals.
 
 > Go back to the **Harness** `Pipeline Studio` by clicking the **Edit Pipeline** button \
@@ -105,8 +106,8 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 > 1) In the existing pipeline, within the ***Build*** stage `after` the ***Compile*** step click on `+ Add Step` \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_gar_build_add_sca_step.png)
 > 1) Select `Add Step` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_build_add_step_buitin_scanners.png)
-> 1) Select `Built-in Scanners` \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_build_add_step_opensource_scanners.png)
+> 1) Select `Open Source Scanners` \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sto_built_in_scanner_sca.png)
 > 1) Select `SCA`
 > 1) Click **Add Scanners**
@@ -119,8 +120,8 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 > 1) In the existing pipeline, within the ***Build*** stage `after` the ***Push to Google Artifact Registry*** step click on `+ Add Step` \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_add_step.png)
 > 1) Select `Add Step` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_build_add_step_buitin_scanners.png)
-> 1) Select `Built-in Scanners` \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_build_add_step_opensource_scanners.png)
+> 1) Select `Open Source Scanners` \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sto_built_in_scanner_container.png)
 > 1) Select `Container` from the Step Library and configure with the details below ↓
 
@@ -187,8 +188,8 @@ Click the **Check** button to continue.
 > 1) In the existing pipeline, within the ***Build*** stage `under` the ***OSV Scan*** step click on `+ Add Step` \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_add_step.png)
 > 1) Select `Add Step` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/unscripted_pipeline_build_add_step_buitin_scanners.png)
-> 1) Select `Built-in Scanners` \
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_build_add_step_opensource_scanners.png)
+> 1) Select `Open Source Scanners` \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sto_built_in_scanner_sast.png)
 > 1) Select `SAST` and click **Add Scanner**
 > 1) Rename the step to `Semgrep`
