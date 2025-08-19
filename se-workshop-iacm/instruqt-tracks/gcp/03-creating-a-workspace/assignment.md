@@ -96,7 +96,6 @@ And then click `+New Workspace` <br>
 > **New Workspace**
 > - **About Workspace**
 >   - Name: <pre>`demo-workspace`</pre>
->   - Cloud Cost Estimation: `ON`
 >   - Click **Next**
 > - **Configure Repository Details**
 >   - Select Git Provider: `Harness Code Repository`
@@ -107,6 +106,7 @@ And then click `+New Workspace` <br>
 >   - Click **Next**
 > - **Provisioner**
 >   - Connector: `instruqt-workshop-connector`
+>   - Cloud Cost Estimation: `ON`
 >   - Type: `Terraform`
 >   - Version: `1.5.7`
 > - Click **Create**
