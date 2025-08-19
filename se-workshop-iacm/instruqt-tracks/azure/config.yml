@@ -4,7 +4,7 @@ virtualbrowsers:
   url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
 virtualmachines:
 - name: sandbox
-  image: sales-209522/harness-se-workshop-v0-0-19
+  image: sales-209522/harness-se-workshop-v0-0-20
   shell: /bin/bash
   memory: 32768
   cpus: 8

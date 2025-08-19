@@ -2,7 +2,7 @@
 slug: pr-validation
 id: pzubgof2q5oy
 type: challenge
-title: Lab 7 - PR Triggers and Validation
+title: Lab 8 - PR Triggers and Validation
 teaser: Harness IaCM supports reviewing infrastructure changes via pull request automation
 notes:
 - type: text

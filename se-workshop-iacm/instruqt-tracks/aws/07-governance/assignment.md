@@ -2,7 +2,7 @@
 slug: governance
 id: nsopiqok447r
 type: challenge
-title: Lab 5 - Governance
+title: Lab 6 - Governance
 teaser: Using OPA policy to limit Terraform variables
 notes:
 - type: text

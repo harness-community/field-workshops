@@ -2,7 +2,7 @@
 slug: cost-estimation
 id: w7nzy5oea196
 type: challenge
-title: Lab 6 - Cost Estimation and State Changes
+title: Lab 7 - Cost Estimation and State Changes
 teaser: Visibility into the Cost of Changes and State Changes
 notes:
 - type: text
