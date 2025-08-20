@@ -91,6 +91,9 @@ h2.cyan { color: cyan; }
 
 ## Now let's explore `Cost Estimation`
 > **Configure Workspace**
+> - Click on the **Variables** tab
+> - And then click on **Terraform Variables** \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
 > - Click the **pencil** icon next to `instance_type`
 > - Change the value to <pre>`t3.micro`</pre>
 > - Click ✅ to save this variable
