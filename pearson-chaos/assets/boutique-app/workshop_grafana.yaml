@@ -1,0 +1,154 @@
+##Grafana Configuration
+#Version: 11.0.0
+#Updated: 06/18/2024
+
+#Create secret first
+#kubectl create secret generic grafana-admin3 \
+#  --from-literal=password=$GRAFANA_PW
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: grafana
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: grafana-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "endpoints", "configmaps", "secrets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["extensions", "apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["batch"]
+  resources: ["jobs", "cronjobs"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["networkpolicies"]
+  verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grafana-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: grafana-role
+subjects:
+- kind: ServiceAccount
+  name: grafana
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      serviceAccountName: grafana
+      containers:
+      - name: grafana
+        image: grafana/grafana:11.0.0
+        ports:
+        - containerPort: 3000
+        env:
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: grafana-admin
+              key: password
+        - name: GF_PATHS_PROVISIONING
+          value: /etc/grafana/provisioning
+        volumeMounts:
+        - name: grafana-dashboards
+          mountPath: /var/lib/grafana/dashboards
+        - name: grafana-dashboard-provider
+          mountPath: /etc/grafana/provisioning/dashboards
+        - name: grafana-datasources
+          mountPath: /etc/grafana/provisioning/datasources
+      volumes:
+      - name: grafana-dashboards
+        configMap:
+          name: grafana-dashboards
+      - name: grafana-dashboard-provider
+        configMap:
+          name: grafana-dashboard-provider
+      - name: grafana-datasources
+        configMap:
+          name: grafana-datasources
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+    name: http
+  selector:
+    app: grafana
+
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  labels:
+    grafana_dashboard: "1"
+data:
+  boutique-app-dashboard.json: |
+    {"annotations":{"list":[{"builtIn":1,"datasource":{"type":"grafana","uid":"-- Grafana --"},"enable":true,"hide":true,"iconColor":"rgba(0, 211, 255, 1)","name":"Annotations & Alerts","target":{"limit":100,"matchAny":false,"tags":[],"type":"dashboard"},"type":"dashboard"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"enable":true,"expr":"litmuschaos_awaited_experiments{job=\"chaos-exporter\"}","iconColor":"red","name":"Chaos Period","step":"5s","target":{"limit":100,"matchAny":false,"tags":[],"type":"dashboard"}}]},"editable":true,"fiscalYearStartMonth":0,"graphTooltip":0,"id":4,"links":[],"liveNow":false,"panels":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"","axisPlacement":"left","axisSoftMax":100,"barAlignment":0,"drawStyle":"line","fillOpacity":8,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]}},"overrides":[{"__systemRef":"hideSeriesFrom","matcher":{"id":"byNames","options":{"mode":"exclude","names":["{instance=\"frontend:80\", job=\"prometheus-blackbox-exporter\"}"],"prefix":"All except:","readOnly":true}},"properties":[{"id":"custom.hideFrom","value":{"legend":false,"tooltip":false,"viz":true}}]}]},"gridPos":{"h":9,"w":24,"x":0,"y":0},"id":2,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"timezone":[""],"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"avg_over_time(probe_success{instance=\"frontend:80\", job=\"prometheus-blackbox-exporter\"}[60s:1s])*100","refId":"A"}],"title":"Online Boutique Availability","type":"timeseries"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"QPS(1 min)","axisPlacement":"left","barAlignment":-1,"drawStyle":"line","fillOpacity":14,"gradientMode":"hue","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineStyle":{"fill":"solid"},"lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"always","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"ops"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":0,"y":9},"id":16,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"sum(rate(http_server_request_duration_seconds_count{route=\"/\",status_code=~\"2..\"}[1m])) * 100","refId":"A"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"sum(rate(http_server_request_duration_seconds_count{route=\"/\",status_code=~\"4.+|5.+\"}[1m])) * 100","hide":false,"refId":"B"}],"title":"Frontend QPS","type":"timeseries"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":8,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"ms"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":12,"y":9},"id":4,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"avg_over_time(probe_duration_seconds{job=\"prometheus-blackbox-exporter\", instance=\"frontend:80\"}[60s:1s])*1000","refId":"A"}],"title":"Access Duration (Frontend service)","type":"timeseries"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"description":"","fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"QPS (1 min)","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":8,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineStyle":{"fill":"solid"},"lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"ops"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":0,"y":17},"id":18,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"sum(rate(http_server_request_duration_seconds_count{route=\"/cart\",status_code=~\"2..\"}[1m])) * 100","refId":"A"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"sum(rate(http_server_request_duration_seconds_count{route=\"/cart\",status_code=~\"4.+|5.+\"}[1m])) * 100","hide":false,"refId":"B"}],"title":"Cart QPS","type":"timeseries"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":8,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"ms"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":12,"y":17},"id":8,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"avg_over_time(probe_duration_seconds{job=\"prometheus-blackbox-exporter\", instance=\"cartservice:7070\"}[60s:1s])*1000","refId":"A"}],"title":"Access Duration(cartservice)","type":"timeseries"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"QPS (1 min)","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":8,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"ops"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":0,"y":25},"id":20,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"sum(rate(http_server_request_duration_seconds_count{route=\"/product/{id}\",status_code=~\"2..\"}[1m])) * 100","refId":"A"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"sum(rate(http_server_request_duration_seconds_count{route=\"/product/{id}\",status_code=~\"4.+|5.+\"}[1m])) * 100","hide":false,"refId":"B"}],"title":"Product QPS","type":"timeseries"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":8,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"ms"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":12,"y":25},"id":12,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"avg_over_time(probe_duration_seconds{job=\"prometheus-blackbox-exporter\", instance=\"productcatalogservice:3550\"}[60s:1s])*1000","refId":"A"}],"title":"Access Duration(ProductCatalogservice)","type":"timeseries"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"QPS (1 min)","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":8,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"ops"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":0,"y":33},"id":22,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"sum(rate(http_server_request_duration_seconds_count{route=\"/cart/checkout\",status_code=~\"2..\"}[1m])) * 100","refId":"A"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"sum(rate(http_server_request_duration_seconds_count{route=\"/cart/checkout\",status_code=~\"4.+|5.+\"}[1m])) * 100","hide":false,"refId":"B"}],"title":"Checkout Qps","type":"timeseries"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":8,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"ms"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":12,"y":33},"id":10,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"avg_over_time(probe_duration_seconds{job=\"prometheus-blackbox-exporter\", instance=\"checkoutservice:5050\"}[60s:1s])*1000","refId":"A"}],"title":"Access Duration(checkoutservice)","type":"timeseries"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":8,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"ms"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":12,"y":41},"id":6,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"avg_over_time(probe_duration_seconds{job=\"prometheus-blackbox-exporter\", instance=\"adservice:9555\"}[60s:1s])*1000","refId":"A"}],"title":"Access Duration(Adservice)","type":"timeseries"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":8,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"ms"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":12,"y":49},"id":24,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"avg_over_time(probe_duration_seconds{job=\"prometheus-blackbox-exporter\", instance=\"currencyservice:7000\"}[60s:1s])*1000","refId":"A"}],"title":"Currency Service Latency","type":"timeseries"},{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisBorderShow":false,"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":8,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"ms"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":12,"y":57},"id":14,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"expr":"avg_over_time(probe_duration_seconds{job=\"prometheus-blackbox-exporter\", instance=\"redis-cart:6379\"}[60s:1s])*1000","refId":"A"}],"title":"Access Duration(redis-cart)","type":"timeseries"}],"refresh":"5s","schemaVersion":39,"tags":[],"templating":{"list":[{"current":{"selected":false,"text":"pod-cpu-hog-dhk8q5qm-pod-cpu-hog","value":"pod-cpu-hog-dhk8q5qm-pod-cpu-hog"},"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"definition":"label_values(litmuschaos_awaited_experiments{job=~\"chaos-exporter\"}, chaosresult_name)","description":"Chaos results","hide":0,"includeAll":false,"label":"Chaos Result","multi":true,"name":"chaosresult_name","options":[],"query":{"query":"label_values(litmuschaos_awaited_experiments{job=~\"chaos-exporter\"}, chaosresult_name)","refId":"StandardVariableQuery"},"refresh":2,"regex":"","skipUrlSync":false,"sort":0,"type":"query"},{"current":{"isNone":true,"selected":false,"text":"None","value":""},"datasource":{"type":"Prometheus","uid":"PBFE396EC0B189D67"},"definition":"label_values(litmuschaos_experiment_verdict{job=~\"chaos-exporter\"}, chaosengine_context)","description":"Chaos Engine contexts","hide":0,"includeAll":false,"label":"Chaos Engine context","multi":true,"name":"chaosengine_context","options":[],"query":{"query":"label_values(litmuschaos_experiment_verdict{job=~\"chaos-exporter\"}, chaosengine_context)","refId":"StandardVariableQuery"},"refresh":1,"regex":"","skipUrlSync":false,"sort":0,"type":"query"}]},"time":{"from":"now-5m","to":"now"},"timepicker":{},"timezone":"","title":"Boutique App DashBoard","uid":"edruqxvqvulmoa","version":1,"weekStart":""}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-provider
+data:
+  provider.yaml: |
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: true
+      updateIntervalSeconds: 10
+      options:
+        path: /var/lib/grafana/dashboards
+
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+data:
+  prometheus.yaml:  |
+    apiVersion: 1
+    datasources:
+    - name: 'DS_PROMETHEUS'
+      type: prometheus
+      access: proxy
+      url: http://prometheus-k8s:9090
+      isDefault: true
+      editable: true
