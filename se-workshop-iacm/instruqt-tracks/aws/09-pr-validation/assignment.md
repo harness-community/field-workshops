@@ -94,7 +94,7 @@ h2.cyan { color: cyan; }
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_create.png)
 
 > **Create new Pipeline**
-> - Name: <pre>`IaCM Validation`</pre>
+> - Name: <pre>`IaCM Pull Request`</pre>
 > - Store: `Inline`
 > - Click **Start**
 
