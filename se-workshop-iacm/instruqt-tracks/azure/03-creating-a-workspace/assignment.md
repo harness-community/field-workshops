@@ -91,7 +91,7 @@ Select the **Infrastructure as Code Management** module from the list <br>
 
 Click on **Workspaces** in the left Nav <br>
 And then click `+New Workspace` <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_new_workspace.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_new_workspace.png)
 
 > **New Workspace**
 > - **About Workspace**
@@ -115,14 +115,14 @@ And then click `+New Workspace` <br>
 > **Configure Workspace**
 > - Click on the **Variables** tab
 > - And then click on **Environment Variables** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_workspace_env_variables.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_env_variables.png)
 > - Click `+New Environment Variable`
 >     | Key           | Value     |
 >     |---------------|-----------|
 >     | <pre>`ARM_SUBSCRIPTION_ID`</pre> | <pre>`[[ Instruqt-Var key="HARNESS_ARM_SUBSCRIPTION_ID" hostname="sandbox" ]]`</pre> |
 > - Click ✅ to save this variable
 > - And then click on **Terraform Variables** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_workspace_tf_variables.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_tf_variables.png)
 > - Click `+New Terraform Variable`
 >     | Key           | Value     |
 >     |---------------|-----------|

@@ -93,7 +93,7 @@ h2.cyan { color: cyan; }
 > **Configure Workspace**
 > - Click on the **Variables** tab
 > - And then click on **Terraform Variables** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
 > - Click the **pencil** icon next to `instance_type`
 > - Change the value to <pre>`t3.micro`</pre>
 > - Click ✅ to save this variable
@@ -110,17 +110,17 @@ h2.cyan { color: cyan; }
 
 > - Wait for your pipeline to reach the **Approval** step
 > - Click **Review** and let's examine the detailed information \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_review.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_review.png)
 > - First the `Monthly Cost Change` details what the cost impact of your update will be \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_cost_change_estimation.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_cost_change_estimation.png)
 > - You can also expand the `aws_instance` **Resource Type** to see the detail for your individual **EC2 instances**
 > - Scroll down from here and select one of your **EC2 instances** from the list \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_planned_changes.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_planned_changes.png)
 > - Scroll down in this list to see the details of the planned change and the `New Value` vs. the `Old Value` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_instance_type_update.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_instance_type_update.png)
 
 > Click **Approve** and the pipeline will proceed with the **apply** step \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_approve.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_approve.png)
 
 <br>
 
@@ -128,13 +128,13 @@ h2.cyan { color: cyan; }
 > - Click on **Workspaces** in the left Nav
 > - Click on your workspace
 > - From here click on the  **State** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_state_tab.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_state_tab.png)
 >   - You should see two versions here
 >   - Select the most recent version in the list
 >   - Click the dropdown and select the prior version to compare against \
->       ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_state_compare_with.png)
+>       ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_state_compare_with.png)
 >   - You can now easily see a side-by-side comparison with the differences highlighted \
->       ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_state_compare.png)
+>       ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_state_compare.png)
 
 > [!NOTE]
 > The Harness IaCM module keeps a version of state for every successful apply to make it easy to track changes over time

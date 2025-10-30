@@ -102,7 +102,7 @@ h2.cyan { color: cyan; }
 
 > - Click `+Add Stage` <br>
 > - Choose **Infrastructure** stage type \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
 > - Give it a name: <pre>`IaCM`</pre>
 > - Click **Set Up Stage**
 
@@ -124,7 +124,7 @@ h2.cyan { color: cyan; }
 <br>
 
 > - Select **Pull Request** operation \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pr_step.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pr_step.png)
 > - Click **Use Operation**
 > - Click **Save** in the top right to save your new pipeline \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_save.png)
@@ -133,13 +133,13 @@ h2.cyan { color: cyan; }
 
 ## Create a Pipeline Trigger
 > - Click on **Triggers** in the top right of the pipeline screen \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_triggers.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_triggers.png)
 > - Click `+New Trigger` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_new_trigger.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_new_trigger.png)
 
 > **New Triggers**
 > - Webhook: `Harness` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_new_trigger_harness.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_new_trigger_harness.png)
 > - **1) Configuration**
 >   - **Trigger Configuration: On New Webhook**
 >     - Name: <pre>`PR`</pre>
@@ -194,7 +194,7 @@ resource "google_storage_bucket" "demo_bucket" {
 > - Click `Yes` \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/unscripted/vs_code_stage_changes.png)
 > - Click `OK` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/vs_code_remote_branch.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/vs_code_remote_branch.png)
 
 > ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
@@ -204,15 +204,15 @@ resource "google_storage_bucket" "demo_bucket" {
 Select the **Code Repository** module from the list <br>
 
 > - Click on our **iacm-repo** \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_code_repo.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_code_repo.png)
 > - Click on **Pull Requests** in the left Nav
 > - Click `+New Pull Request` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_new_pull_request.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_new_pull_request.png)
 > - Select a branch here: `demo` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pr_open.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pr_open.png)
 > - Click on **Create pull request**
 > - This will activate our `pipeline trigger` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pr_checks.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pr_checks.png)
 
 > [!IMPORTANT]
 > *What information do you think will be shown here?*
@@ -221,7 +221,7 @@ Select the **Code Repository** module from the list <br>
 
 > [!NOTE]
 > After a minute or so we will see your PR decorated \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pr_planned_changes.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pr_planned_changes.png)
 
 <br><br>
 

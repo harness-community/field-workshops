@@ -183,7 +183,7 @@ Head back over to your workspace. <br>
 > **Configure Workspace**
 > - Click on the **Variables** tab
 > - And then click on **Terraform Variables** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
 > - Click the **pencil** icon next to `instance_type`
 > - Change the value to <pre>`n2-standard-8`</pre>
 > - Click ✅ to save this variable

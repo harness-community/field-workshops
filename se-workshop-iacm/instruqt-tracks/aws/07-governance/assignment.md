@@ -181,19 +181,17 @@ And then click `+New Policy Set` <br>
 Head back over to your workspace. <br>
 
 > **Configure Workspace**
-> - Click on the **Variables** tab
-> - And then click on **Terraform Variables** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
-> - Click the **pencil** icon next to `instance_type`
+> - Click on the **Connectors and Variables** tab
+> - Go to `instance_type` variable in the **Terraform Variables** section \
+>      ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_variables_update.png)
 > - Change the value to <pre>`t2.large`</pre>
-> - Click ✅ to save this variable
+> - Click the ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_save_variable_changes.png) button
 
 > [!NOTE]
 > That is `Policy as Code` in action! Isn't it beautiful? <br>
 > Harness has wrapped the ***entire platform*** with `OPA` so this is just the tip of the iceberg!
 
 > - Click the **X** in the top right corner to close out of the ***Policy Set Evaluations***
-> - Click ❌ to discard the change for this variable
 
 ===============
 

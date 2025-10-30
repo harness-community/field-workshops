@@ -91,7 +91,7 @@ Select the **Infrastructure as Code Management** module from the list <br>
 
 Click on **Workspaces** in the left Nav <br>
 And then click `+New Workspace` <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_new_workspace.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_new_workspace.png)
 
 > **New Workspace**
 > - **About Workspace**
@@ -107,19 +107,19 @@ And then click `+New Workspace` <br>
 > - **Provisioner**
 >   - Connector: `instruqt-workshop-connector`
 >   - Cloud Cost Estimation: `ON`
->   - Type: `Terraform`
->   - Version: `1.5.7`
+>   - Type: `OpenTofu`
+>   - Version: `1.10.6`
 > - Click **Create**
 
 > **Configure Workspace**
-> - Click on the **Variables** tab
-> - And then click on **Terraform Variables** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
-> - Click `+New Terraform Variable`
+> - Click on the **Connectors and Variables** tab
+> - And then click `+ Add Variable`  in the **Terraform Variables** section \
+>      ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
+>  - Configure the variable as follows:
 >     | Key           | Value     |
 >     |---------------|-----------|
 >     | <pre>`instance_type`</pre> | <pre>`t2.micro`</pre> |
-> - Click ✅ to save this variable
+> - Click the ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_save_variable_changes.png) button
 
 > [!IMPORTANT]
 > You could also reference a variable file from another location or another repository entirely!

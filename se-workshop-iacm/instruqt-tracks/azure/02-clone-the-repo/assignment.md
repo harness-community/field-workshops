@@ -96,7 +96,7 @@ h2.cyan { color: cyan; }
 Select the **Code Repository** module from the list <br>
 
 Click on the **iacm-repo** that's been setup for you <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_code_repo.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_code_repo.png)
 
 Click on **Clone** in the top right <br>
 And then click `+Generate Clone Credential` <br>

@@ -92,8 +92,8 @@ h2.cyan { color: cyan; }
 
 ## Now it's time to create an IaCM Pipeline
 > - Click on **Pipelines** in the left Nav
-> - Click `+Create Pipeline` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_create.png)
+> - Click the down arrow next to `Create a Pipeline (AI)` and select `Create Manually`\
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_create_manual.png)
 
 > **Create new Pipeline**
 > - Name: <pre>`IaCM Provision`</pre>
@@ -102,7 +102,7 @@ h2.cyan { color: cyan; }
 
 > - Click `+Add Stage` <br>
 > - Choose **Infrastructure** stage type \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
 > - Give it a name: <pre>`IaCM`</pre>
 > - Click **Set Up Stage**
 
@@ -123,15 +123,15 @@ h2.cyan { color: cyan; }
 <br>
 
 > - Select **Provision** operation \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_provision_step.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_provision_step.png)
 > - Click **Use Operation**
 
 > - On the **Execution** tab \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_tab_execution.png)
 > - Hover over the pipeline between `plan` and `apply` and click `+` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_add_step.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_add_step.png)
 > - Select **Add Step** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_approval_step.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_approval_step.png)
 > - Select `IACM Approval` from the Step Library and configure with the details below ↓
 
 
@@ -142,7 +142,7 @@ h2.cyan { color: cyan; }
 
 > [!NOTE]
 > Your pipeline should look like this: \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/full_pipeline_iacm_provision.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/full_pipeline_iacm_provision.png)
 
 ### Execute your new IaCM Pipeline
 > - Click **Save** in the top right to save your new pipeline \
@@ -154,14 +154,14 @@ h2.cyan { color: cyan; }
 
 > - Wait for your pipeline to reach the **Approval** step
 > - Click **Review** and take a moment to examine the detailed information \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_review.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_review.png)
 
 > [!NOTE]
 > *What resources will be added?*
 
 
 > - Click **Approve Now** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_approve.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_approve.png)
 > - Your pipeline will now proceed with the `apply` step
 
 ===============

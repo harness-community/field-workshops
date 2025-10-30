@@ -142,7 +142,7 @@ And then click `+Create Pipeline` <br>
 
 > - Click `+Add Stage` <br>
 > - Choose **Infrastructure** stage type \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
 > - Give it a name: <pre>`IaCM`</pre>
 > - Click **Set Up Stage**
 
@@ -158,12 +158,12 @@ And then click `+Create Pipeline` <br>
 > - Click **Next >**
 
 > - Select **Detect Drift** operation \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_drift_step.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_drift_step.png)
 > - Click **Use Operation**
 
 > [!NOTE]
 > Your pipeline should look like this: \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/full_pipeline_iacm_drift.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/full_pipeline_iacm_drift.png)
 
 ### Execute your new IaCM Pipeline
 > - Click **Save** in the top right to save your new pipeline \
@@ -179,12 +179,12 @@ And then click `+Create Pipeline` <br>
 
 > **Now that the piplne execution has completed**
 > - Click on the `Resources` tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_drift_resources.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_drift_resources.png)
 > - Click on `Drift Changes` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_drift_changes_gcp.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_drift_changes_gcp.png)
 > - Select the drifted **GCE instance** from the list
 > - Scroll down in this list to see the details of the drift detected and the `Actual Value` vs. the `Expected Value` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_drift_details_gcp.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_drift_details_gcp.png)
 
 > [!NOTE]
 > - *Was this what you expected to see?*
