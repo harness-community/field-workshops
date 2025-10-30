@@ -91,12 +91,11 @@ h2.cyan { color: cyan; }
 
 ## Now let's explore `Cost Estimation`
 > **Configure Workspace**
-> - Click on the **Variables** tab
-> - And then click on **Terraform Variables** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
-> - Click the **pencil** icon next to `instance_type`
+> - Click on the **Connectors and Variables** tab
+> - Go to `instance_type` variable in the **Terraform Variables** section \
+>      ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_variables_update.png)
 > - Change the value to <pre>`t3.micro`</pre>
-> - Click ✅ to save this variable
+> - Click the ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_save_variable_changes.png) button
 
 ### Let's rerun our provision pipeline to deploy this change
 > - Click on **Pipelines** in the left Nav
