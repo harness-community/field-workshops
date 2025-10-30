@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Industry’s  widest coverage on Chaos Faults™</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/ce_experiment_coverage.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/ce_experiment_coverage.png">
       <ul class="features-list">
         <li>Boost your organization's chaos engineering effectiveness with our ChaosHub.</li>
         <li>Featuring a wide range of curated, pre-built chaos scenarios, it's designed for easy implementation and maximum resilience.</li>

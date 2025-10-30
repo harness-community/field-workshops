@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Comprehensive Built-In Security Testing Orchestration</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/sto_pipeline.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/sto_pipeline.png">
       <ul class="features-list">
         <li>Orchestrate Security Scans in the Pipeline</li>
         <li>Rapidly Prioritize Vulnerabilities</li>
@@ -100,12 +100,12 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 
 > 1) In the existing pipeline, click on the ***IaCM*** stage
 > 1) Click on the **Execution** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_execution.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_tab_execution.png)
 >    1) Hover over the pipeline between `plan` and `IACM Approval` and click `+` \
 >        ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_add_sto_step.png)
 >    1) Select `Add Step`
 >    1) Select `Wiz` \
->       ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_step_wiz.png)
+>       ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_step_wiz.png)
 >    1) Configure with the details below ↓
 
 > **Configure Wiz**
@@ -120,9 +120,9 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 
 ### Execute your updated Pipeline
 > - Click **Save** in the top right to save your new pipeline \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_save.png)
 > - Now click **Run** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_run.png)
 > - Then select your `demoworkspace` **Workspace** to execute the pipeline
 > - Click **Run Pipeline**
 

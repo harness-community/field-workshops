@@ -72,7 +72,7 @@ notes:
 
     <div class="container">
       <h1>Modernize DevOps</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/re_mapped_pipeline.avif">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/re_mapped_pipeline.avif">
       <ul class="features-list">
         <li>Upgrade your software delivery with modern, AI-native tools:</li>
         <ul class="sub-list">
@@ -147,10 +147,10 @@ h2.cyan { color: cyan; }
 ### Select your pipeline
 
 Select **Unified View** from the list \
-   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/module_unified.png)
+   ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/module_unified.png)
 
 > 1) Click on **Pipelines** in the left Nav \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/nav_pipelines.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/nav_pipelines.png)
 > 1) Click on your pipeline created via the Jenkins Migrator
 
 ## Update the pipeline
@@ -166,15 +166,15 @@ Select **Unified View** from the list \
 
 ### Click on the `Build` stage
 > - On the **Execution** tab \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_execution.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_tab_execution.png)
 > - Take a look at how our the **Jenkins Migrator** translated our Jenkins pipeline to Harness
 
 ### Execute your new Pipeline
 > Click **Save** in the top right to save your new pipeline. \
->   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_save.png)
 
 > Now click **Run** to execute the pipeline \
->   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_run.png)
 > - Docker Connector: `workshop-docker`
 > - Click **Apply Selected** \
 >   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-devsecops/assets/images/harness_run_pipeline.png)

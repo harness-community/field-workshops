@@ -60,17 +60,17 @@ h2.cyan { color: cyan; }
 >   - owner: <pre>`TeamA`</pre>
 
 > 1) Click on `Source Control` tab on the left nav \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/vs_code_commit.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/unscripted/vs_code_commit.png)
 > 2) Enter your commit message e.g., <pre>`updated component details`</pre>
 > 3) Click the dropdown `v`
 > 4) Click `Commit & Push`
 > - Click `Yes` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/vs_code_stage_changes.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/unscripted/vs_code_stage_changes.png)
 
 > ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 ## Now it's time to create an IDP Service Component
-![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/module_idp.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/module_idp.png)
 
 Select the **Internal Developer Portal** module from the list <br>
 

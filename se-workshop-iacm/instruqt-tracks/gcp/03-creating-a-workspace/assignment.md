@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Create a Workspace</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/iac_workspace.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iac_workspace.png">
       <ul class="features-list">
         <li>A workspace is a named environment that stores Terraform configurations, variables, states, and other resources necessary to manage infrastructure.</li>
       </ul>
@@ -85,7 +85,7 @@ h2.cyan { color: cyan; }
 <br>
 
 ## Now it's time to create an IaCM Workspace
-![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/module_iacm.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/module_iacm.png)
 
 Select the **Infrastructure as Code Management** module from the list <br>
 

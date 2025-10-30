@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>What is Chaos Engineering?</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/ce_overview_graphic.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/ce_overview_graphic.png">
       <ul class="features-list">
         <li>Increase System Resilience</li>
         <li>Better Customer Experience</li>
@@ -99,7 +99,7 @@ h2.cyan { color: cyan; }
 
 
 ## Now it's time to start creating some chaos!
-![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/module_ce.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/module_ce.png)
 
 Select the **Chaos Engineering** module from the list <br>
 
@@ -134,7 +134,7 @@ Select the **Chaos Engineering** module from the list <br>
 > - **Configure**
 >   - Installation Type: `Kubernetes`
 >   - Access Type:
->     - Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pencil.svg" alt="Pencil icon" width="16" height="16" style="display: inline; vertical-align: middle;">***CHANGE***
+>     - Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pencil.svg" alt="Pencil icon" width="16" height="16" style="display: inline; vertical-align: middle;">***CHANGE***
 >     - Select `Specific namespace access` \
 >         ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_enable_infra_namespace.png)
 >   - Installation Location (Namespace): <pre>`[[ Instruqt-Var key="HARNESS_USER_NAME" hostname="sandbox" ]]`</pre>

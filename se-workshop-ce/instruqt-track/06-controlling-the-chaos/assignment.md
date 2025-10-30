@@ -75,7 +75,7 @@ notes:
     <div class="container">
       <h1>ChaosGuard for easy scaling</h1>
       <div class="sub-container">
-        <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/ce_chaosguard.png">
+        <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/ce_chaosguard.png">
         <ul class="features-list">
           <li>Controlled Testing</li>
           <li>Policy Driven:

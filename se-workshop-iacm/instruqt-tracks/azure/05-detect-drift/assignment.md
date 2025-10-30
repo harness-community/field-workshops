@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Drift detection</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/iac_drift_detection.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iac_drift_detection.png">
       <ul class="features-list">
         <li>Harness IaCM provides automated drift detection and reconciliation, preventing discrepancies between desired and actual state, ensuring git is the single source of truth for infrastructure changes.</li>
       </ul>
@@ -143,7 +143,7 @@ az vm list \
 ## Now let's create an IaCM Pipeline to detect drift
 Click on **Pipelines** in the left Nav <br>
 And then click `+Create Pipeline` <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_create.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_create.png)
 
 > **Create new Pipeline**
 > - Name: <pre>`IaCM Drift`</pre>
@@ -157,14 +157,14 @@ And then click `+Create Pipeline` <br>
 > - Click **Set Up Stage**
 
 > - On the  **Infrastructure** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_infrastructure.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_tab_infrastructure.png)
 > - Keep the defaults (**Cloud**)
 > - Click **Next >**
 
 > - On the **Workspace** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_workspace.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_tab_workspace.png)
 > - Set the type to `Runtime input` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_workspace_runtime_input.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_workspace_runtime_input.png)
 > - Click **Next >**
 
 > - Select **Detect Drift** operation \
@@ -177,9 +177,9 @@ And then click `+Create Pipeline` <br>
 
 ### Execute your new IaCM Pipeline
 > - Click **Save** in the top right to save your new pipeline \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_save.png)
 > - Now click **Run** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_run.png)
 > - Then select your `demoworkspace` **Workspace** to execute the pipeline
 > - Click **Run Pipeline**
 

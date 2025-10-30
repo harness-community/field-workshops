@@ -61,7 +61,7 @@ notes:
 
     <div class="container">
       <h1>What is a resilience probe?</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/ce_resilience_probes.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/ce_resilience_probes.png">
       <ul class="features-list">
         <li>Declarative checks that determine the outcome of a fault:
             <ul class="sub-list">

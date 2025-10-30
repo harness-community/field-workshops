@@ -61,12 +61,12 @@ h2.cyan { color: cyan; }
 >   - dependsOn: <pre>`component:default/[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]-service`</pre>
 
 > 1) Click on `Source Control` tab on the left nav \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/vs_code_commit.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/unscripted/vs_code_commit.png)
 > 2) Enter your commit message e.g., <pre>`updated dependent component details`</pre>
 > 3) Click the dropdown `v`
 > 4) Click `Commit & Push`
 > - Click `Yes` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/vs_code_stage_changes.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/unscripted/vs_code_stage_changes.png)
 
 > ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 

@@ -33,23 +33,23 @@ notes:
 
     <div class="plugins-grid">
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/svg/code.svg" alt="Harness Code" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/modules/svg/code.svg" alt="Harness Code" width="150">
         <p>Harness Code</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/github.svg" alt="GitHub" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/logos/svg/github.svg" alt="GitHub" width="150">
         <p>GitHub</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/gitlab.svg" alt="GitLab" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/logos/svg/gitlab.svg" alt="GitLab" width="150">
         <p>GitLab</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/bitbucket.svg" alt="BitBucket" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/logos/svg/bitbucket.svg" alt="BitBucket" width="150">
         <p>BitBucket</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/git_scm.svg" alt="Git" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/logos/svg/git_scm.svg" alt="Git" width="150">
         <p>Git</p>
       </div>
     </div>
@@ -86,7 +86,7 @@ h2.cyan { color: cyan; }
 <br><br>
 
 ## Let's take a look at our code
-![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/module_code.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/module_code.png)
 
 Select the **Code Repository** module from the list <br>
 
@@ -95,7 +95,7 @@ Click on the **idp-repo** that's been setup for you <br>
 
 Click on **Clone** in the top right <br>
 And then click `+Generate Clone Credential` <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/code_clone.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/unscripted/code_clone.png)
 
 Copy the `Password (API Token)` to your clipboard 📝
 

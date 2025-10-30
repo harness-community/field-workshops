@@ -3,7 +3,7 @@ id: 12yusi1mdqew
 title: BETA - Harness IaCM Workshop - Azure
 description: |2-
 
-  ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/harness_white-logo.png)
 
   **This track demonstrates how to:**
     - Lab 1 - Clone the IaC Repo
@@ -14,7 +14,7 @@ description: |2-
     - Lab 6 - Governance w/OPA
     - Lab 7 - Cost Estimation and State
     - Lab 8 - PR Triggers and Validation
-icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/iacm.png
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/modules/iacm.png
 tags: []
 owner: harness-se
 developers:

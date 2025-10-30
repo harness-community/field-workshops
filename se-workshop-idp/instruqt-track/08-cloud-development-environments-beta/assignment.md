@@ -55,7 +55,7 @@ h2.cyan { color: cyan; }
 
 > [!IMPORTANT]
 > 1) *If you experience any issues you can access the Harness Platform in your browser tab by clicking: \
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-1) tab*
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-1) tab*
 
 # Harness supports multiple types of Cloud Development Environments
 ## This lab will focus on the VS Code Online Gitspace
@@ -63,7 +63,7 @@ h2.cyan { color: cyan; }
 VS Code Online in the Gitspace
 ===
 ## Now let's create a CDE Gitspace
-![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/module_cde.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/module_cde.png)
 
 Select the **Cloud Development Environments** module from the list <br>
 
@@ -108,7 +108,7 @@ Configure your Gitspace as per the instructions provided below ↓ <br>
 > - Due to a limitation with the **Instruqt** platform, you will need to click on the prompt and show the pop-up \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/cde_instruqt_allow_pop_up.png)
 > - If the **Instruqt** platform is giving you any issues, you can always access the Harness Platform in your browser tab by clicking: \
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-1) tab*
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-1) tab*
 > - You are now ready to start coding!
 
 Running Your App

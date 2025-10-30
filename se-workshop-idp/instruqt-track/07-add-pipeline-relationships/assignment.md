@@ -44,23 +44,23 @@ notes:
 
     <div class="plugins-grid">
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/harness_padded.svg" alt="Harness CI/CD" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/logos/svg/harness_padded.svg" alt="Harness CI/CD" width="150">
         <p>Harness CI/CD</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/pagerduty_padded.svg" alt="PagerDuty" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/logos/svg/pagerduty_padded.svg" alt="PagerDuty" width="150">
         <p>PagerDuty</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/kubernetes_padded.svg" alt="Kubernetes" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/logos/svg/kubernetes_padded.svg" alt="Kubernetes" width="150">
         <p>Kubernetes</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/firehydrant_padded.svg" alt="Firehydrant" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/logos/svg/firehydrant_padded.svg" alt="Firehydrant" width="150">
         <p>Firehydrant</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/jira_software_padded.svg" alt="Jira" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/logos/svg/jira_software_padded.svg" alt="Jira" width="150">
         <p>Jira</p>
       </div>
     </div>
@@ -118,12 +118,12 @@ harness.io/pipelines: |
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_component_w_pipeline_yaml.png)
 
 > 1) Click on `Source Control` tab on the left nav \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/vs_code_commit.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/unscripted/vs_code_commit.png)
 > 2) Enter your commit message e.g., <pre>`added 'Build and Deploy' pipeline`</pre>
 > 3) Click the dropdown `v`
 > 4) Click `Commit & Push`
 > - Click `Yes` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/vs_code_stage_changes.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/unscripted/vs_code_stage_changes.png)
 
 
 > ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue

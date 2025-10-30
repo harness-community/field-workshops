@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Shared Pipeline for Infrastructure Changes</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/iac_pipeline_graphic.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iac_pipeline_graphic.png">
       <ul class="features-list">
         <li>CI/CD for Infrastructure</li>
         <li>Integrated Pipeline</li>
@@ -93,7 +93,7 @@ h2.cyan { color: cyan; }
 ## Now it's time to create an IaCM Pipeline
 > - Click on **Pipelines** in the left Nav
 > - Click `+Create Pipeline` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_create.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_create.png)
 
 > **Create new Pipeline**
 > - Name: <pre>`IaCM Provision`</pre>
@@ -107,14 +107,14 @@ h2.cyan { color: cyan; }
 > - Click **Set Up Stage**
 
 > - On the  **Infrastructure** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_infrastructure.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_tab_infrastructure.png)
 > - Keep the defaults (**Cloud**)
 > - Click **Next >**
 
 > - On the **Workspace** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_workspace.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_tab_workspace.png)
 > - Set the type to `Runtime input` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_workspace_runtime_input.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_workspace_runtime_input.png)
 > - Click **Next >**
 
 > [!NOTE]
@@ -127,7 +127,7 @@ h2.cyan { color: cyan; }
 > - Click **Use Operation**
 
 > - On the **Execution** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_execution.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_tab_execution.png)
 > - Hover over the pipeline between `plan` and `apply` and click `+` \
 >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_add_step.png)
 > - Select **Add Step** \
@@ -146,9 +146,9 @@ h2.cyan { color: cyan; }
 
 ### Execute your new IaCM Pipeline
 > - Click **Save** in the top right to save your new pipeline \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_save.png)
 > - Now click **Run** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_run.png)
 > - Then select your `demoworkspace` **Workspace** to execute the pipeline
 > - Click **Run Pipeline**
 

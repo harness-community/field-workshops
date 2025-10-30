@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Cost estimation and State management</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/iac_state_management.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iac_state_management.png">
       <ul class="features-list">
         <li>Harness IaCM helps users proactively identify cost impact associated with resource changes, which prevents unplanned and exorbitant cloud bills.</li>
         <li>Harness provides an out-of-the-box hosted backend, eliminating the need to host state and manage locking mechanism and access control.</li>
@@ -102,7 +102,7 @@ h2.cyan { color: cyan; }
 > - Click on **Pipelines** in the left Nav
 > - Click on your `IaCM Provision` pipeline
 > - Now click **Run** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_run.png)
 > - Then select your `demoworkspace` **Workspace** to execute the pipeline
 > - Click **Run Pipeline**
 

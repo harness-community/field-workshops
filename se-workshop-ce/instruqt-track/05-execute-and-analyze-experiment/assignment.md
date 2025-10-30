@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Analyze experiment</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/ce_pipelines.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/ce_pipelines.png">
       <ul class="features-list">
         <li>Observe the status of fault injection during execution</li>
         <li>Learn what a Resilience Score is and how it is calculated</li>
@@ -110,7 +110,7 @@ h2.cyan { color: cyan; }
 
 > [!NOTE]
 > *All credentials for this lab can always be found on the: <br>
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-4) tab*
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-4) tab*
 
 
 
@@ -129,7 +129,7 @@ h2.cyan { color: cyan; }
 
 ## Time to unleash the chaos!
 > Click **Run** to execute your experiment. <br>
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_run.png)
 
 > [!IMPORTANT]
 > This experiment execution will take a few minutes to run. While it's executing switch back to the [button label="Grafana" variant="success"](tab-2) tab and monitor what happens when fault injection begins.

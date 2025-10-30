@@ -104,10 +104,10 @@ Now let's configure a ServiceNow connector
 > - Click on **Project Settings** in the left Nav
 > - Scroll down to **Project-level resources**
 > - Click on **Connectors** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/new_connector.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/new_connector.png)
 > - And then click `+New Connector`
 > - Under **Ticketing Systems** select `ServiceNow` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/connector_servicenow.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/connector_servicenow.png)
 > - Configure with the details below ↓
 
 > **ServiceNow**
@@ -120,7 +120,7 @@ Now let's configure a ServiceNow connector
 >   - Password/API Key:
 >     - Click `Create or Select a Secret`
 >       - Click `+New Secret Text` \
->            ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/new_secret_text.png)
+>            ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/new_secret_text.png)
 >       - Secret Name: <pre>`servicenow-pw`</pre>
 >       - Secret Value: <pre>`[[ Instruqt-Var key="HARNESS_PWD" hostname="sandbox" ]]`</pre>
 >       - Click **Save**
@@ -148,9 +148,9 @@ RFC Automation
 > 1) Before the ***Rollout Deployment*** step
 >    1) Select `Add Step`, then `Add Step` again
 >    1) Filter the Step Library by clicking on `ServiceNow` in the right nav \
->        ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_step_library_servicenow.png)
+>        ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_step_library_servicenow.png)
 >    1) Select `ServiceNow Create` from the Step Library \
->        ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_step_servicenow_create.png)
+>        ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_step_servicenow_create.png)
 >    1) Configure with the details below ↓
 
 > **ServiceNow Create**
@@ -173,9 +173,9 @@ RFC Automation
 > 1) After the ***Rollout Deployment*** step
 >    1) Select `Add Step`, then `Add Step` again
 >    1) Filter the Step Library by clicking on `ServiceNow` in the right nav \
->        ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_step_library_servicenow.png)
+>        ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_step_library_servicenow.png)
 >    1) Select `ServiceNow Update` from the Step Library \
->        ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_step_servicenow_update.png)
+>        ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_step_servicenow_update.png)
 >    1) Configure with the details below ↓
 
 > **ServiceNow Update**
@@ -204,7 +204,7 @@ ServiceNow Approval Stage
 > 1) `After` the ***Frontend - Deployment*** stage click on the `+` icon to add a new stage \
 >    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-devsecops/assets/images/pipeline_add_servicenow_approval_stage.png)
 > 1) Select `Approval` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_stage_approval.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_stage_approval.png)
 > 1) Configure with the details below ↓
 
 > **About your Stage**
@@ -236,10 +236,10 @@ ServiceNow Approval Stage
 Execute your Pipeline
 ===
 > Click **Save** in the top right to save your pipeline. \
->   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_save.png)
 
 > Now click **Run** to execute the pipeline \
->   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
+>   ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_run.png)
 > Then click **Run Pipeline** \
 >   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-devsecops/assets/images/pipeline_run_pipeline.png)
 
@@ -253,24 +253,24 @@ Execute your Pipeline
 
 > [!NOTE]
 > *All credentials for this lab can always be found on the: <br>
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-5) tab*
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-5) tab*
 
 CAB Approval
 ===
 > ## Time for the CAB to review and approve our RFC
 > - You can switch back to the [button label="Harness Platform" variant="success"](tab-0) tab to check on the progress of your pipeline
 > - Once the pipeline reaches `Pending` on the **ServiceNow Approval** step \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/servicenow_pending_approval_step.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/servicenow_pending_approval_step.png)
 > - Switch back to the [button label="ServiceNow" variant="success"](tab-1) tab
 
 > [!IMPORTANT]
 > If you aren't on the `Change Requests` page, click the Instruqt browser Home button \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/servicenow_home.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/servicenow_home.png)
 > If you are already on the `Change Requests` page, you may need to click the Instruqt browser refresh button to see your ticket \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/servicenow_cr_refresh.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/servicenow_cr_refresh.png)
 
 > - Take a look at the detail we populated the ticket with and when you're ready click `Implement` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/servicenow_implement.png)
+>    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/servicenow_implement.png)
 > - Head back to the [button label="Harness Platform" variant="success"](tab-0) tab and you will see your pipeline automatically proceed now that our **Approval Criteria** has been met
 
 > [!NOTE]
