@@ -132,9 +132,9 @@ aws ec2 describe-instances \
 > ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
 ## Now let's create an IaCM Pipeline to detect drift
-Click on **Pipelines** in the left Nav <br>
-Click the down arrow next to `Create a Pipeline (AI)` and select `Create Manually`
-![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_create_manual.png)
+> - Click on **Pipelines** in the left Nav
+> - Click `+Create Pipeline` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_create.png)
 
 > **Create new Pipeline**
 > - Name: <pre>`IaCM Drift`</pre>

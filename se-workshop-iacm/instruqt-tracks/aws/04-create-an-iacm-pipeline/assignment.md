@@ -92,8 +92,8 @@ h2.cyan { color: cyan; }
 
 ## Now it's time to create an IaCM Pipeline
 > - Click on **Pipelines** in the left Nav
-> - Click the down arrow next to `Create a Pipeline (AI)` and select `Create Manually`\
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_create_manual.png)
+> - Click `+Create Pipeline` \
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_create.png)
 
 > **Create new Pipeline**
 > - Name: <pre>`IaCM Provision`</pre>

@@ -91,7 +91,7 @@ h2.cyan { color: cyan; }
 ## Now let's create a PR Pipeline
 > - Click on **Pipelines** in the left Nav
 > - Click `+Create Pipeline` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_create.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_create.png)
 
 > **Create new Pipeline**
 > - Name: <pre>`IaCM Pull Request`</pre>
