@@ -85,41 +85,68 @@ h2.cyan { color: cyan; }
 <br>
 
 ## Now it's time to create an IaCM Workspace
+
+Select the **Infrastructure as Code Management** module from the module selector menu <br>
+
 ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/module_iacm.png)
 
-Select the **Infrastructure as Code Management** module from the list <br>
 
-Click on **Workspaces** in the left Nav <br>
-And then click `+New Workspace` <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_new_workspace.png)
+- Click on **Workspaces** in the left Nav
 
-> **New Workspace**
-> - **About Workspace**
->   - Name: <pre>`demo-workspace`</pre>
->   - Click **Next**
-> - **Configure Repository Details**
->   - Select Git Provider: `Harness Code Repository`
->   - Select Repository: `iacm-repo`
->   - Git Fetch Type: `Latest from Branch`
->   - Branch: `main`
->   - Folder Path: <pre>`aws/v1`</pre>
->   - Click **Next**
-> - **Provisioner**
->   - Connector: `instruqt-workshop-connector`
->   - Cloud Cost Estimation: `ON`
->   - Type: `OpenTofu`
->   - Version: `1.10.6`
-> - Click **Create**
+- Click  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/new_workspace_1.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">  and configure as follows
 
-> **Configure Workspace**
-> - Click on the **Connectors and Variables** tab
-> - And then click `+ Add Variable`  in the **Terraform Variables** section \
->      ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
->  - Configure the variable as follows:
->     | Key           | Value     |
->     |---------------|-----------|
->     | <pre>`instance_type`</pre> | <pre>`t2.micro`</pre> |
-> - Click the ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_save_variable_changes.png) button
+  > **Create New Workspace**
+  >
+  > - **About Workspace**
+  >
+  >   - Name: `demo-workspace`
+  >
+  >   - Click **Next**
+  >
+  > - **Configure Repository Details**
+  >
+  >   - Select Git Provider: `Harness Code Repository`
+  >
+  >   - Select Repository: `iacm-repo`
+  >
+  >   - Git Fetch Type: `Latest from Branch`
+  >
+  >   - Branch: `main`
+  >
+  >   - Folder Path: `aws/v1`
+  >
+  >   - Click **Next**
+  >
+  > - **Provisioner**
+  >
+  >   - Connector: `instruqt-workshop-connector`
+  >
+  >   - Cloud Cost Estimation: `ON`
+  >
+  >   - Type: `OpenTofu`
+  >
+  >   - Version: `1.10.6`
+  >
+  >   - Click **Create**
+  
+<br>
+Your newly created workspace will be opened in the editor. 
+
+- Click on the **Connectors and Variables** tab
+
+- Click  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/add_variable.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">  in the **Terraform Variables** section
+      ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_variables.png)
+
+- Configure the variable as follows
+  > - Key: `instance_type`
+  >
+  > - Value: `t2.micro`
+
+<br>
+
+- Click  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/save_changes.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> 
+
+<br>
 
 > [!IMPORTANT]
 > You could also reference a variable file from another location or another repository entirely!
