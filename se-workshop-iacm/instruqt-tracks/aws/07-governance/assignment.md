@@ -116,52 +116,55 @@ enhanced_loading: null
 <style type="text/css" rel="stylesheet">
 hr.cyan { background-color: cyan; color: cyan; height: 2px; margin-bottom: -10px; }
 h2.cyan { color: cyan; }
-</style><h2 class="cyan">Guardrails through OPA Policy</h2>
+</style><h2 class="cyan">Lab 6 - Governance</h2>
 <hr class="cyan">
 <br>
 
-## Now let's configure a policy
-> - Click on **Project Settings** in the left Nav
-> - Scroll down to **Security and Governance**
-> - Click on **Policies**
-> - Click the **X** in the top right corner to close out of the quick start
-> - This is the Overview screen
->   - In the top right of this screen click **Policies** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/opa_new_policy.png)
->   - Then click `+New Policy`and configure with the details below ↓
+Create a Policy
+===
+
+- Click on **Project Settings** in the left Nav
+- Scroll down to **Security and Governance**
+- Click on **Policies**
+- Click the **X** in the top right corner to close out of the quick start
+- On the top right side of the overview screen, click on the **Policies** tab
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/new_policy.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> and configure as follows
 
 > **Policy Name**
-> - Name: <pre>`Restrict AWS EC2 Instance Size`</pre>
+> - Name: `Restrict AWS EC2 Instance Size`
 > - Store: `Inline`
 > - Click **Apply**
-> - Paste in the `OPA Rego Policy` below ↓
-```
-package workspaces
+> - Paste in the `OPA Rego Policy` below
+> ```
+> package workspaces
+>
+> # Define the list of allowed instance types
+> allowed_instance_types := {"t2.micro", "t3.micro", "t3.small"}
+>
+> # deny
+> deny[msg] {
+>   instance_type = input.workspace.terraform_variables.instance_type
+>   not allowed_instance_types[instance_type.value]
+>   instance_types_array := [type | type := allowed_instance_types[_]]
+>   msg := sprintf("Only machine types of: %v are allowed per the policy", [instance_types_array])
+> }
+> ```
 
-# Define the list of allowed instance types
-allowed_instance_types := {"t2.micro", "t3.micro", "t3.small"}
-
-# deny
-deny[msg] {
-  instance_type = input.workspace.terraform_variables.instance_type
-  not allowed_instance_types[instance_type.value]
-  instance_types_array := [type | type := allowed_instance_types[_]]
-  msg := sprintf("Only machine types of: %v are allowed per the policy", [instance_types_array])
-}
-```
-> - After completing configuration select **Save** from the top right to save your new policy
+- Click  **Save** from the top right to save your new policy
 
 > [!NOTE]
 > *What does this policy accomplish?*
 
+Create a Policy Set
+===
+
 ### Create new Policy Set
-In the top right of this screen click **Policy Sets** <br>
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/opa_new_policy_set.png)<br>
-And then click `+New Policy Set` <br>
+- On the top right side of the overview screen, click on the **Policy Sets** tab
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/new_policy_set.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> and configure as follows
 
 > **Policy Set**
 > - **Overview**
->   - Name: <pre>`Prevent Non Standard EC2 Instance Sizes`</pre>
+>   - Name: `Prevent Non Standard EC2 Instance Sizes`
 >   - Entity Type: `Workspace`
 >   - Evaluation: `On Save`
 >   - Click **Continue**
@@ -173,25 +176,26 @@ And then click `+New Policy Set` <br>
 >     - Click `Apply`
 >   - Click `Finish`
 
-> [!IMPORTANT]
-> - Be sure to click the toggle under `ENFORCED` to enable your **Policy Set** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/opa_policy_toggle.png)
+- Click the  **ENFORCED** toggle to make sure that the Policy Set is enabled/enforced
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/opa_policy_toggle.png)
 
+Test the Policy
+===
 ### Let's test it out
 Head back over to your workspace. <br>
-
-> **Configure Workspace**
-> - Click on the **Connectors and Variables** tab
-> - Go to `instance_type` variable in the **Terraform Variables** section \
->      ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_variables_update.png)
-> - Change the value to <pre>`t2.large`</pre>
-> - Click the ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_save_variable_changes.png) button
+- Click **Workspaces** in the left Nav
+- Click into **demo-workspace**
+- Click on the **Connectors and Variables** tab
+- Under the **Terraform Variables** section, change the value for the **instance_type** variable to `t2.large`
+- Click  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/save_changes.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">
 
 > [!NOTE]
-> That is `Policy as Code` in action! Isn't it beautiful? <br>
-> Harness has wrapped the ***entire platform*** with `OPA` so this is just the tip of the iceberg!
+> Did your change get saved? No, because it didn't meet the requirements of your policy.
+>
+> That is **Policy as Code** in action! Isn't it beautiful? <br>
+> Harness has wrapped the ***entire platform*** with ***Open Policy Agent (OPA)*** so this is just the tip of the iceberg!
 
-> - Click the **X** in the top right corner to close out of the ***Policy Set Evaluations***
+- Click the **X** in the top right corner to close out of the ***Policy Set Evaluations***
 
 ===============
 

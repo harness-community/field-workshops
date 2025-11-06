@@ -82,7 +82,6 @@ difficulty: basic
 timelimit: 1600
 enhanced_loading: null
 ---
-
 <style type="text/css" rel="stylesheet">
 hr.cyan { background-color: cyan; color: cyan; height: 2px; margin-bottom: -10px; }
 h2.cyan { color: cyan; }
@@ -109,9 +108,9 @@ There is a repo (**iacm-repo**) that has been provisioned for you.
 
 Before we can clone the repo, we need to generate credentials.
 
-- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/hcr/hcr_clone_button.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> at the top right of the page.
-
 - Click into the **iacm-repo** repo
+
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/hcr/hcr_clone_button.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> at the top right of the page.
 
 - In the **Git clone URL** dialog that appears, click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/hcr/hcr_generate_clone_creds.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">
 
@@ -124,14 +123,14 @@ Clone the Repo and View in IDE
 > ## Switch to the [button label=">_Shell" variant="success"](tab-2) tab to continue
 
 ### Update the credential file
-<br>
 
-Click `▶️ run` and then provide the token you just copied.
+Click `▶️ run` below and then provide the token you just copied.
 ```bash,run
 ./script.sh
 ```
 
 ### Clone the repo
+Click `▶️ run` below
 ```bash,run
 git clone [[ Instruqt-Var key="HARNESS_REPO_URL" hostname="sandbox" ]]
 ```

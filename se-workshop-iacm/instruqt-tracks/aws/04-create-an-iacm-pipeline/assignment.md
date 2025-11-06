@@ -97,7 +97,7 @@ Create the Provisioning Pipeline
 
 - Click on **Pipelines** in the left Nav
 
-- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/step_apply_changes..png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> and configure as follows
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/create_a_pipeline.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> and configure as follows
 
   > **Create new Pipeline**
   >

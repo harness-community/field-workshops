@@ -90,8 +90,6 @@ Select the **Infrastructure as Code Management** module from the module selector
 
 ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/module_iacm.png)
 
-- Click on **Workspaces** in the left Nav
-
 - Click  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/new_workspace_1.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">  and configure as follows
 
   > **Create New Workspace**<br><br>
