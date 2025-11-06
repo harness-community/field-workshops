@@ -97,9 +97,10 @@ Create the Provisioning Pipeline
 
 - Click on **Pipelines** in the left Nav
 
-- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/create_a_pipeline.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> and configure as follows
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/step_apply_changes..png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> and configure as follows
 
   > **Create new Pipeline**
+  >
   > - Name: `IaCM Provision`
   >
   > - Store: `Inline`
@@ -113,69 +114,59 @@ In the newly created pipeline, perform the following steps:
 
 - Choose **Infrastructure** stage type and configure as follows
 
-  ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
-
-
-  > **About your Stage**
-  >
-  > - Stage Name: `IaCM`
-  >
+  > ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
+  > **About your Stage** <br><br>
+  > - Stage Name: `IaCM` <br><br>
   > - Click **Set Up Stage**
 
 In the newly created stage, configure as follows:
 
 
-  > **Infrastructure**
-  > 
-  > - Infrastructure: **Cloud**
+  > **Infrastructure**<br><br>
+  > - Infrastructure: **Cloud**<br><br>
+  > - Click **Next >*
+  >
+  > <br>**Input**<br><br>
+  > - **Workspace**: set the type to `Runtime input` by clicking on the pin icon next to the field. <br><br>*Note that you may get a tooltip that explains the different input types. If so, please close the tooltip in order to access the pin icon.*
+  >
+  >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/workspace_runtime_input.png)
   >
   > - Click **Next >**
-  > 
-  > **Input**
-  > 
-  > - **Workspace**: set the type to `Runtime input` by clicking on the pin icon next to the field
   >
-  >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_workspace_runtime_input.png)
-  > 
-  > - Click **Next >**
+  >   > [!NOTE]
+  >   >*Why do you think we configure the `Workspace` as an input?*
+  > <br><br>
   >
-  > [!NOTE]*Why do you think we configure the `Workspace` as an input?*
-  > <br>
-  > 
-  > **Operations**
   >
-  > - Select **Provision** operation
-  >
+  > **Operations**<br><br>
+  > - Select **Provision** operation<br>
   >   ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_provision_step.png)
   >
   > - Click **Use Operation**
   >
 
 Based on the Operation selected, the **Execution** tab will be configured with the necessary steps to execute the operation. Now we're going to add an approval step before the `apply` step.
+<br><br>
 
->   - Hover over the pipeline between `plan` and `apply` and click `+` 
->
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_add_step.png)
->
->   - Select **Add Step**
->
->   - Select `IACM Approval` from the Step Library and configure as follows:
->
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_approval_step.png)
->
->     **IACM Approval**
->     - Name: `IACM Approval`
->
->     - ✅ Auto approve when the plan does not change
->
->     - Click **Apply Changes** in the top right
->
+- Hover over the pipeline between `plan` and `apply` and click `+`
+
+	![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_add_step.png)
+
+- Select **Add Step**
+
+- Select `IACM Approval` from the Step Library and configure as follows:
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_approval_step.png)
+> **IACM Approval**<br><br>
+>  - Name: `IACM Approval`<br><br>
+>  - Auto approve when the plan does not change: enabled/checked<br><br>
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/step_apply_changes.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> in the top right
+
 > [!NOTE]
-> Your pipeline should look like this: 
+> Your pipeline should look like this:
 >
->  ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/full_pipeline_iacm_provision.png)
-> 
-> - Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/save_pipeline.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> in the top right to save the pipeline
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/full_pipeline_iacm_provision.png)
+>
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/save_pipeline.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> in the top right to save the pipeline
 
 
 Execute the Pipeline
@@ -185,20 +176,21 @@ Execute the Pipeline
 
 - In the **Run Pipeline** dialog, select `demoworkspace` as the workspace
 
-- Click  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/run_pipeline_2.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> 
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/run_pipeline_2.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">
 
 - Wait for your pipeline to reach the **IaCM Approval** step
-- Click **Review** and take a moment to examine the detailed information 
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_review.png)
+
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/approval_review.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> and take a moment to examine the detailed information
 
 > [!NOTE]
 > *What resources will be added?*
 
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/approve.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">
 
-> - Click **Approve Now** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_approve.png)
-> - Your pipeline will now proceed with the `apply` step
+- Your pipeline will now proceed with the `apply` step and create the resources in your AWS account
+
 
 ===============
 
 Click the **Check** button to continue.
+
