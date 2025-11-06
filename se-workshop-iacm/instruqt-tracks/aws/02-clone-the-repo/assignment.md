@@ -82,6 +82,7 @@ difficulty: basic
 timelimit: 1600
 enhanced_loading: null
 ---
+
 <style type="text/css" rel="stylesheet">
 hr.cyan { background-color: cyan; color: cyan; height: 2px; margin-bottom: -10px; }
 h2.cyan { color: cyan; }
@@ -90,10 +91,10 @@ img.inline { height: 5; vertical-align:middle; }
 <hr class="cyan">
 <br><br>
 
-Review IaC Code and Generate Clone Credentials
+Review Repo and Generate Clone Credentials
 ===
 
-## Let's take a look at our code
+## Let's take a look at the repo
 
 Select the **Code Repository** module from the module selector menu <br>
 
@@ -108,16 +109,14 @@ There is a repo (**iacm-repo**) that has been provisioned for you.
 
 Before we can clone the repo, we need to generate credentials.
 
-- Click into the **iacm-repo** repo
-
 - Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/hcr/hcr_clone_button.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> at the top right of the page.
+
+- Click into the **iacm-repo** repo
 
 - In the **Git clone URL** dialog that appears, click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/hcr/hcr_generate_clone_creds.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">
 
 - In the **Generate Clone Credentials** dialog that appears, click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/hcr/hrc_copy_value_button.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> next to the **Password (API Token)** field to copy the token to your clipboard
 <br>
-
-
 
 Clone the Repo and View in IDE
 ===
