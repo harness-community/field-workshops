@@ -110,9 +110,9 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 - Select `Wiz` and configure as follows:
 > ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_step_wiz.png)
 > **Configure Wiz**<br><br>
->  - Name: Wiz Scan
-> - Workspace: `/harness/aws`
-> - **Authentication**<br><br>
+>  - Name: `Wiz Scan`
+>  - Workspace: `/harness/aws`
+>  - **Authentication**<br><br>
 >   - Access Id: `<+secrets.getValue("org.wiz_access_id")>`
 >   - Access Token: `<+secrets.getValue("org.wiz_access_token")>`
 >   <br><br>

@@ -84,97 +84,89 @@ enhanced_loading: null
 <style type="text/css" rel="stylesheet">
 hr.cyan { background-color: cyan; color: cyan; height: 2px; margin-bottom: -10px; }
 h2.cyan { color: cyan; }
-</style><h2 class="cyan">PR Triggers and Validation</h2>
+</style><h2 class="cyan">Pull Request Automation</h2>
 <hr class="cyan">
 <br>
 
-## Now let's create a PR Pipeline
-> - Click on **Pipelines** in the left Nav
-> - Click `+Create Pipeline` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_create.png)
+Create a Pull Request Pipeline
+===
+- Click on **Pipelines** in the left Nav
 
-> **Create new Pipeline**
-> - Name: <pre>`IaCM Pull Request`</pre>
-> - Store: `Inline`
-> - Click **Start**
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/create_a_pipeline.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> and configure as follows
 
-<br>
+  > **Create new Pipeline**
+  >
+  > - Name: `IaCM Pull Request`
+  >
+  > - Store: `Inline`
+  >
+  > - Click **Start**
 
-> - Click `+Add Stage` <br>
-> - Choose **Infrastructure** stage type \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
-> - Give it a name: <pre>`IaCM`</pre>
-> - Click **Set Up Stage**
 
-<br>
+In the newly created pipeline, perform the following steps:
 
-> - On the  **Infrastructure** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_tab_infrastructure.png)
-> - Keep the defaults (**Cloud**)
-> - Click **Next >**
+- Click `+Add Stage`
 
-<br>
+- Choose **Infrastructure** stage type and configure as follows
 
-> - On the **Workspace** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_tab_workspace.png)
-> - Set the type to `Runtime input` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_workspace_runtime_input.png)
-> - Click **Next >**
+  > ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_stage.png)
+  > **About your Stage** <br><br>
+  > - Stage Name: `IaCM` <br><br>
+  > - Click **Set Up Stage**
 
-<br>
+In the newly created stage, configure as follows:
 
-> - Select **Pull Request** operation \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pr_step.png)
-> - Click **Use Operation**
-> - Click **Save** in the top right to save your new pipeline \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_save.png)
 
-<br>
+  > **Infrastructure**<br><br>
+  > - Infrastructure: **Cloud**<br><br>
+  > - Click **Next >**
+  >
+  > <br>**Input**<br><br>
+  > - **Workspace**: set the type to `Runtime input` by clicking on the pin icon next to the field. <br><br>*Note that you may get a tooltip that explains the different input types. If so, please close the tooltip in order to access the pin icon.*
+  >
+  >     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/workspace_runtime_input.png)
+  >
+  > - Click **Next >**
+  > <br>
+  >
+  >**Operations**<br><br>
+  > - Select **Pull Request** operation<br>
+  >   ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pr_step.png)
+  >
+  > - Click **Use Operation**
+  >
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/save_pipeline.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> in the top right to save the pipeline
 
-## Create a Pipeline Trigger
-> - Click on **Triggers** in the top right of the pipeline screen \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_triggers.png)
-> - Click `+New Trigger` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_new_trigger.png)
+Create a Pipeline Trigger
+===
+- Click on **Triggers** in the top right of the pipeline editor
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/new_trigger.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">
+- Select **Harness** under the **Webhook** section and configure as follows
 
-> **New Triggers**
-> - Webhook: `Harness` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_new_trigger_harness.png)
-> - **1) Configuration**
 >   - **Trigger Configuration: On New Webhook**
->     - Name: <pre>`PR`</pre>
+>     - Name: `Pull Request`
 >   - **Listen on New Webhook**
 >     - Repository: `iacm-repo`
 >     - Event: `Pull Request`
 >     - Actions: `Create`
->   - Click **Continue >**
-> - **2) Conditions**
->   - **Conditions**
+>     - Click **Continue >**
+> - **Conditions**
 >     - Attribute: `Changed Files`
->       - Operator: `Starts With`
->       - Matches Value: <pre>`aws/v1/`</pre>
->   - Click **Continue >**
-> - **3) Pipeline Input**
+>     - Operator: `Starts With`
+>     - Matches Value: `aws/v1`
+>     - Click **Continue >**
+> - **Pipeline Input**
 >   - **Stage: IaCM**
 >     - Workspace: `demoworkspace`
-> - Click **Create Trigger >**
+>    - Click **Create Trigger >**
 
-<br>
-
-> ## Switch to the [button label=">_Shell" variant="success"](tab-2) tab to continue
-
-## Create a new branch
-```bash,run
-cd iacm-repo/
-git checkout -b demo
-```
-
+Update the Code and Create a Pull Request
+===
 > ## Switch to the [button label="Code Editor" variant="success"](tab-1) tab to continue
 
-## Now let's add a new resource to test out our trigger
-> **Update `aws/v1` **>** `resources.tf` file**
-> - Scroll to the bottom of the file
->   - Add the resource below ↓
+## Add a new resource to test out our trigger
+- Open the **aws/v1/resources.tf** file
+- Paste the following at the bottom of the file and save
 ```hcl
 resource "aws_s3_bucket" "demo_bucket" {
   bucket = "[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]"
@@ -186,48 +178,47 @@ resource "aws_s3_bucket" "demo_bucket" {
 }
 ```
 
-> 1) Click on `Source Control` tab on the left nav \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/unscripted/vs_code_commit.png)
-> 2) Enter your commit message e.g., <pre>`added s3 bucket`</pre>
-> 3) Click the dropdown `v`
-> 4) Click `Commit & Push`
-> - Click `Yes` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/unscripted/vs_code_stage_changes.png)
-> - Click `OK` \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/vs_code_remote_branch.png)
+> ## Switch to the [button label=">_Shell" variant="success"](tab-2) tab to continue
+
+## Create a new branch and push your code
+```bash,run
+cd iacm-repo
+git checkout -b demo
+git add *
+git commit -m "added s3 bucket"
+git push origin demo
+```
+
 
 > ## Switch to the [button label="Harness Platform" variant="success"](tab-0) tab to continue
 
-## Time to open a PR
-![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/module_code.png)
+## Create a Pull Request and review
+- Select the **Code Repository** module from the list <br>
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/module_code.png)
+- Click into the **iacm-repo** repo
+- Click **Pull Requests** in the left Nav
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/hcr/hcr_new_pull_request.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> 
+- In the dropdown labeled `select a branch here`, select `demo` as the branch
+	![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/hcr/hcr_select_a_branch_here.png)
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/hcr/hcr_create_pull_request.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> 
 
-Select the **Code Repository** module from the list <br>
+<br>
 
-> - Click on our **iacm-repo** \
->    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_code_repo.png)
-> - Click on **Pull Requests** in the left Nav
-> - Click `+New Pull Request` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_new_pull_request.png)
-> - Select a branch here: `demo` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pr_open.png)
-> - Click on **Create pull request**
-> - This will activate our `pipeline trigger` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pr_checks.png)
+Based on the trigger that we created earlier, this PR will automatically run the **IaCM Pull Request** pipeline
 
-> [!IMPORTANT]
-> *What information do you think will be shown here?*
 
-<br><br>
+- Click the <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/hcr/hcr_checks.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">  tab
+- Review the progress of the pipeline
+- Once the check/pipeline is complete, click on the <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/hcr/hcr_conversation.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">  tab
 
-> [!NOTE]
-> After a minute or so we will see your PR decorated \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pr_planned_changes.png)
+<br>
 
-<br><br>
+Harness has decorated the PR with change information so that you can review without having to go to the pipeline
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pr_planned_changes.png)
 
-# Congratulations on completing this `Harness IaCM` workshop!
-> [!IMPORTANT]
-> That's all for now. We hope you enjoyed your hands-on experience with the Harness IaCM module. We are always looking to improve so please rate your experience and share any suggestions or issues you may have encountered. Thank you!
+
+<br>
+
 
 ===============
 

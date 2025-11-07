@@ -60,7 +60,7 @@ Login to your **Harness Sandbox** account using the details provided below.👇
 > 1) Zoom content by clicking in the browser in browser and pressing:
 >    1) Mac:`⌘ -`
 >    1) PC: `CTRL -`
-> 1) *If you experience any issues you can access the Harness Platform in your browser tab by clicking: \
+> 1) *If you experience any issues you can access the Harness Platform in your browser tab by clicking:
 >  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-2) tab*
 
 Harness Account
@@ -87,9 +87,9 @@ Signing In
 Project Selection
 ===
 
-> A **Project** has been created for you and is where you will perform the tasks in the subsequent labs. \
-> Click on `Select a Project` \
-> Click on project `[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]` \
+> A **Project** has been created for you and is where you will perform the tasks in the subsequent labs.
+> Click on `Select a Project`
+> Click on project `[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]`
    ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform_project_selection.png)
 
 

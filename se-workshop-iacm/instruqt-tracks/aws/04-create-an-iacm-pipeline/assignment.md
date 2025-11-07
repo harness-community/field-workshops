@@ -124,7 +124,7 @@ In the newly created stage, configure as follows:
 
   > **Infrastructure**<br><br>
   > - Infrastructure: **Cloud**<br><br>
-  > - Click **Next >*
+  > - Click **Next >**
   >
   > <br>**Input**<br><br>
   > - **Workspace**: set the type to `Runtime input` by clicking on the pin icon next to the field. <br><br>*Note that you may get a tooltip that explains the different input types. If so, please close the tooltip in order to access the pin icon.*
@@ -187,7 +187,7 @@ Execute the Pipeline
 
 - Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/approve.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">
 
-- Your pipeline will now proceed with the `apply` step and create the resources in your AWS account
+- Your pipeline will now proceed with the **apply** step and create the resources in your AWS account
 
 
 ===============

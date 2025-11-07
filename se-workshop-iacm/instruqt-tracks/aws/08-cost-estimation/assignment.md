@@ -89,51 +89,49 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br>
 
-## Now let's explore `Cost Estimation`
-> **Configure Workspace**
-> - Click on the **Connectors and Variables** tab
-> - Go to `instance_type` variable in the **Terraform Variables** section \
->      ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_workspace_variables_update.png)
-> - Change the value to <pre>`t3.micro`</pre>
-> - Click the ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_save_variable_changes.png) button
+Cost Estimation
+===
 
-### Let's rerun our provision pipeline to deploy this change
-> - Click on **Pipelines** in the left Nav
-> - Click on your `IaCM Provision` pipeline
-> - Now click **Run** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/pipeline_run.png)
-> - Then select your `demoworkspace` **Workspace** to execute the pipeline
-> - Click **Run Pipeline**
+## Now let's explore Cost Estimation
+Head back over to your workspace. 
+- Click **Workspaces** in the left Nav
+- Click into **demo-workspace**
+- Click on the **Connectors and Variables** tab
+- Under the **Terraform Variables** section, change the value for the **instance_type** variable to `t3.micro`
+- Click  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/save_changes.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">
 
-<br>
+### Let's rerun our provisioning pipeline to deploy this change
+- Click on **Pipelines** in the left Nav
+- Click on the **IaCM Provision** pipeline
+- To execute your pipeline, click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/run_pipeline.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> at the top right
+- In the **Run Pipeline** dialog, select `demoworkspace` as the workspace
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/platform/run_pipeline_2.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">
+<br><br>
+- Wait for your pipeline to reach the **IaCM Approval** step
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/approval_review.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> and take a moment to examine the detailed information
 
-> - Wait for your pipeline to reach the **Approval** step
-> - Click **Review** and let's examine the detailed information \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_pipeline_review.png)
-> - First the `Monthly Cost Change` details what the cost impact of your update will be \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_cost_change_estimation.png)
-> - You can also expand the `aws_instance` **Resource Type** to see the detail for your individual **EC2 instances**
-> - Scroll down from here and select one of your **EC2 instances** from the list \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_planned_changes.png)
-> - Scroll down in this list to see the details of the planned change and the `New Value` vs. the `Old Value` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_instance_type_update.png)
+>  **Monthly Cost Change** details the cost impact of this potential change<br><br>
+>  You can expand the **aws_instance** Resource Type to see the detail for the individual **EC2 instances**
+>  	![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_cost_change_estimation.png)
+>  	Scroll down from here and select one of your **EC2 instances** from the list
+>  	 ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_planned_changes.png)
+>  	 Scroll down in this list to see the details of the planned change and the **New Value** versus the **Old Value**
 
-> Click **Approve** and the pipeline will proceed with the **apply** step \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_approve.png)
+- Click <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/approve.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">
+- Your pipeline will now proceed with the **apply** step and update the resources in your AWS account
 
-<br>
 
-## Now let's explore the `State Comparison` feature
-> - Click on **Workspaces** in the left Nav
-> - Click on your workspace
-> - From here click on the  **State** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_state_tab.png)
->   - You should see two versions here
->   - Select the most recent version in the list
->   - Click the dropdown and select the prior version to compare against \
->       ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_state_compare_with.png)
->   - You can now easily see a side-by-side comparison with the differences highlighted \
->       ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_state_compare.png)
+State Comparison
+===
+## Now let's explore the **State Comparison** feature
+- Click **Workspaces** in the left Nav
+- Click into **demo-workspace**
+- Click on the **State** tab
+- Select the most recent version in the list (there should be 2 versions listed)
+- In the **Compare with** dropdown, select the prior version 
+
+You can now easily see a side-by-side comparison with the differences highlighted
+![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/iacm_state_compare.png)
 
 > [!NOTE]
 > The Harness IaCM module keeps a version of state for every successful apply to make it easy to track changes over time
