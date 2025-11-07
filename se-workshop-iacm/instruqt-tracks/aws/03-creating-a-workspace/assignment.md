@@ -84,6 +84,9 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br><br>
 
+Create an IaCM Workspace
+===
+
 ## Now it's time to create an IaCM Workspace
 
 Select the **Infrastructure as Code Management** module from the module selector menu <br>
