@@ -99,7 +99,9 @@ Now it's time to introduce some drift into our environment.
 
 ### List out our instances
 ```bash,run
-aws ec2 describe-instances  --query "Reservations[*].Instances[*].[InstanceId,State.Name,InstanceType,Tags[?Key=='name'].Value | [0]]"  | jq
+aws ec2 describe-instances \
+  --query "Reservations[*].Instances[*].[InstanceId,State.Name,InstanceType,Tags[?Key=='name'].Value | [0]]" \
+  | jq
 ```
 
 ### Target one of them for some manual changes
@@ -109,7 +111,9 @@ TARGETED_INSTANCE="<replaceWithInstanceId>"
 
 ### Stop one of the EC2 instances we just provisioned
 ```bash,run
-aws ec2 stop-instances  --instance-ids $TARGETED_INSTANCE  | jq
+aws ec2 stop-instances \
+  --instance-ids $TARGETED_INSTANCE \
+  | jq
 ```
 ### Wait for the EC2 instance to be in `stopped` state
 ```bash,run
@@ -118,16 +122,20 @@ aws ec2 wait instance-stopped --instance-ids $TARGETED_INSTANCE
 
 ### Change that EC2 instance to `t3.micro`
 ```bash,run
-aws ec2 modify-instance-attribute  --instance-id $TARGETED_INSTANCE  --instance-type "{\"Value\": \"t3.micro\"}"
+aws ec2 modify-instance-attribute \
+  --instance-id $TARGETED_INSTANCE \
+  --instance-type "{\"Value\": \"t3.micro\"}"
 ```
 
 ### Run the `describe-instances` command again to confirm the change
 ```bash,run
-aws ec2 describe-instances  --query "Reservations[*].Instances[*].[InstanceId,State.Name,InstanceType,Tags[?Key=='name'].Value | [0]]"  | jq
+aws ec2 describe-instances \
+  --query "Reservations[*].Instances[*].[InstanceId,State.Name,InstanceType,Tags[?Key=='name'].Value | [0]]" \
+  | jq
 ```
 
-<!--Create a Pipeline to Detect Drift
-=== -->
+Create a Pipeline to Detect Drift
+===
 
 Now let's create an IaCM Pipeline to detect drift
 
@@ -177,7 +185,8 @@ In the newly created stage, configure as follows:
 
 
 > [!NOTE]
-> Your pipeline should look like this:>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/full_pipeline_iacm_drift.png)
+> Your pipeline should look like this
+     ![](https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/se-workshop-iacm/assets/images/full_pipeline_iacm_drift.png)
 
 Execute the Pipeline
 ===

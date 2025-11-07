@@ -109,9 +109,9 @@ Select the **Infrastructure as Code Management** module from the module selector
   >   - Type: `OpenTofu`
   >   - Version: `1.10.6`
   >   - Click **Create**
-  
+
 <br>
-Your newly created workspace will be opened in the editor. 
+Your newly created workspace will be opened in the editor.
 
 - Click on the **Connectors and Variables** tab
 
@@ -123,7 +123,7 @@ Your newly created workspace will be opened in the editor.
   >
   > - Value: `t2.micro`
 
-- Click  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/save_changes.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;"> 
+- Click  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/iacm-updates/assets/images/iacm/save_changes.png" style="display:inline; height:24px; width:auto; vertical-align:middle; margin:0; padding:0;">
 
 > [!IMPORTANT]
 > You could also reference a variable file from another location or another repository entirely!
