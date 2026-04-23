@@ -32,8 +32,9 @@ pipeline:
                   spec:
                     shell: Sh
                     command: |-
-                      cd ./python-tests
-                      pytest
+                      pip install 'pytest<9' pytest-html pytest-cov
+                      mkdir -p reports
+                      pytest --junitxml=reports/junit.xml
                     intelligenceMode: true
               - step:
                   name: Compile
