@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+import os
+import time
+import subprocess
+from pyharnessworkshop import harness, utils
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+
+# Get manifest for their infra and apply it
+harness.chaos.get_manifest_for_infra(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, "lab-hce")
+retries = 3
+for attempt in range(retries):
+    try:
+        subprocess.run("kubectl apply -f lab-hce-harness-chaos-enable.yml", shell=True, check=True)
+        print("Command executed successfully.")
+        break
+    except subprocess.CalledProcessError as e:
+        print(f"Attempt {attempt + 1} failed: {e}")
+        if attempt < retries - 1:
+            time.sleep(2)
+        else:
+            print("All retries failed.")
+            raise
