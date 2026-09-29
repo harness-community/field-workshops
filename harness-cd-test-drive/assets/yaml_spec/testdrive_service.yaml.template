@@ -34,7 +34,7 @@ service:
                 region: us
                 repositoryName: seworkshop
                 package: harness-workshop
-                version: stable
+                version: <+lastPublished.tag>
                 digest: ""
               type: GoogleArtifactRegistry
     type: Kubernetes
