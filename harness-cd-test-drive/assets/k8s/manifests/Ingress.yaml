@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-{{ lower .Values.name }}-external
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "{{ lower .Values.ingressSubDomain }}.instruqt.harness-demo.site"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-{{ lower .Values.name }}-svc
+            port:
+              number: {{ .Values.servicePort }}
+  tls:
+  - hosts:
+    - "{{ lower .Values.ingressSubDomain }}.instruqt.harness-demo.site"

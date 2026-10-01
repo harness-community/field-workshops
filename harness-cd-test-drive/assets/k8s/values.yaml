@@ -1,0 +1,9 @@
+name: <+service.name>
+replicas: 2
+image: <+artifact.image>
+version: <+artifact.tag>
+namespace: <+infra.namespace>
+serviceType: ClusterIP
+servicePort: 80
+containerPort: 8080
+ingressSubDomain: <+variable.sandbox_id>
