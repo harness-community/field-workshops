@@ -16,11 +16,11 @@ service:
                   connectorRef: github_public
                   gitFetchType: Branch
                   paths:
-                    - harness-deploy/frontend/manifests
-                  repoName: harness-community/devsecops-workshop
+                    - harness-cd-test-drive/assets/k8s/manifests
+                  repoName: harness-community/field-workshops
                   branch: main
               valuesPaths:
-                - harness-deploy/frontend/values.yaml
+                - harness-cd-test-drive/assets/k8s/values.yaml
               skipResourceVersioning: false
               enableDeclarativeRollback: false
       artifacts:
@@ -29,13 +29,9 @@ service:
           sources:
             - identifier: frontend
               spec:
-                connectorRef: org.workshopgar
-                repositoryType: docker
-                project: seworkshop
-                region: us
-                repositoryName: seworkshop
-                package: harness-workshop
-                version: <+lastPublished.tag>
+                connectorRef: ghcr_public
+                imagePath: harness-community/captain-canary
+                tag: stable
                 digest: ""
-              type: GoogleArtifactRegistry
+              type: DockerRegistry
     type: Kubernetes

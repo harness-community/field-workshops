@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ lower .Values.name }}-deployment
+  labels:
+    app: {{ lower .Values.name }}
+spec:
+  replicas: {{ int .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ lower .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ lower .Values.name }}
+    spec:
+      containers:
+      - name: {{ lower .Values.name }}
+        image: {{ .Values.image }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.containerPort }}
+        env:
+        - name: PORT
+          value: "{{ .Values.containerPort }}"
+        - name: APP_VERSION
+          value: "{{ .Values.version }}"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: {{ .Values.containerPort }}
+          initialDelaySeconds: 2
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: {{ .Values.containerPort }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          requests:
+            cpu: 50m
+            memory: 32Mi
+          limits:
+            memory: 64Mi
