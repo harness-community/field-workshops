@@ -15,14 +15,6 @@ variable "api_key" {
   sensitive = true
 }
 
-variable "new_repo_id" {
-  type = string
-}
-
-variable "github_repo_to_clone" {
-  type = string
-}
-
 variable "delegate_selector" {
   type = string
 }

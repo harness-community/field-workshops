@@ -1,15 +1,20 @@
 // CD Test Drive — minimal resources
-// Creates: Code Repo, K8s Connector, Dev Environment + Infrastructure, Project Variables
+// Creates: GitHub Connector, K8s Connector, Dev Environment + Infrastructure, Project Variables
 
-// Code Repo
-resource "harness_platform_repo" "repo" {
-  identifier     = var.new_repo_id
-  org_id         = var.org_id
-  project_id     = var.project_id
-  default_branch = "main"
-  source {
-    repo = var.github_repo_to_clone
-    type = "github"
+// GitHub Connector (anonymous, for public repos)
+resource "harness_platform_connector_github" "github_public" {
+  identifier  = "github_public"
+  name        = "GitHub Public"
+  org_id      = var.org_id
+  project_id  = var.project_id
+  description = "Anonymous connector for public GitHub repos"
+  url         = "https://github.com"
+  connection_type = "Account"
+
+  credentials {
+    http {
+      anonymous {}
+    }
   }
 }
 

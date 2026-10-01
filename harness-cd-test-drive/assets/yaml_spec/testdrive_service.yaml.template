@@ -11,12 +11,13 @@ service:
             type: K8sManifest
             spec:
               store:
-                type: HarnessCode
+                type: Github
                 spec:
+                  connectorRef: github_public
                   gitFetchType: Branch
                   paths:
                     - harness-deploy/frontend/manifests
-                  repoName: {{ harness_repo }}
+                  repoName: harness-community/devsecops-workshop
                   branch: main
               valuesPaths:
                 - harness-deploy/frontend/values.yaml
