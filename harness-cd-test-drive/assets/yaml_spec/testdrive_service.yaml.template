@@ -30,7 +30,7 @@ service:
             - identifier: frontend
               spec:
                 connectorRef: ghcr_public
-                imagePath: harness-community/captain-canary
+                imagePath: scarolan/captain-canary
                 tag: stable
                 digest: ""
               type: DockerRegistry
