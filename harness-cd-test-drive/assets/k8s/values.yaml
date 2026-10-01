@@ -1,7 +1,8 @@
 name: <+service.name>
 replicas: 2
-image: <+artifact.image>
-version: <+artifact.tag>
+# Harness can't list GHCR tags anonymously, so the image is set here instead of as a service artifact
+image: ghcr.io/scarolan/captain-canary:stable
+version: stable
 namespace: <+infra.namespace>
 serviceType: ClusterIP
 servicePort: 80

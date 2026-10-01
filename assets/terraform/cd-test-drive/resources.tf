@@ -1,5 +1,5 @@
 // CD Test Drive — minimal resources
-// Creates: GitHub Connector, GHCR Connector, K8s Connector, Dev Environment + Infrastructure, Project Variables
+// Creates: GitHub Connector, K8s Connector, Dev Environment + Infrastructure, Project Variables
 
 // GitHub Connector (anonymous, for public repos)
 resource "harness_platform_connector_github" "github_public" {
@@ -16,18 +16,6 @@ resource "harness_platform_connector_github" "github_public" {
       anonymous {}
     }
   }
-}
-
-// GHCR Connector (anonymous, for the public Captain Canary image)
-resource "harness_platform_connector_docker" "ghcr_public" {
-  identifier         = "ghcr_public"
-  name               = "GHCR Public"
-  org_id             = var.org_id
-  project_id         = var.project_id
-  description        = "Anonymous connector for public GitHub Container Registry images"
-  type               = "Other"
-  url                = "https://ghcr.io"
-  delegate_selectors = [var.delegate_selector]
 }
 
 // K8s Connector
