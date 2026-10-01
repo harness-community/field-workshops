@@ -23,15 +23,4 @@ service:
                 - harness-cd-test-drive/assets/k8s/values.yaml
               skipResourceVersioning: false
               enableDeclarativeRollback: false
-      artifacts:
-        primary:
-          primaryArtifactRef: frontend
-          sources:
-            - identifier: frontend
-              spec:
-                connectorRef: ghcr_public
-                imagePath: scarolan/captain-canary
-                tag: stable
-                digest: ""
-              type: DockerRegistry
     type: Kubernetes
