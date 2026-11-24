@@ -6,6 +6,10 @@
 {%- macro smoke_spec() %}
                     shell: Bash
                     onDelegate: true
+                    # Pin the student's own delegate. Without a selector Harness may pick any
+                    # delegate in the account, and cluster DNS only resolves on this cluster.
+                    delegateSelectors:
+                      - {{ project_id }}-delegate
                     source:
                       type: Inline
                       spec:
@@ -13,8 +17,15 @@
                           # Every pod answers through the Service, the canary included. Any
                           # unhealthy answer fails the step and the stage rolls back.
                           url="http://showcase.<+infra.namespace>.svc.cluster.local/health"
+                          echo "Checking $url from $(hostname)"
                           for i in $(seq 1 20); do
                             code=$(curl -s -o /tmp/health -w '%{http_code}' --max-time 3 "$url")
+                            # 000 means no connection yet (endpoints still settling): retry briefly
+                            tries=0
+                            while [ "$code" = "000" ] && [ $tries -lt 5 ]; do
+                              sleep 2; tries=$((tries + 1))
+                              code=$(curl -s -o /tmp/health -w '%{http_code}' --max-time 3 "$url")
+                            done
                             echo "check $i: HTTP $code $(cat /tmp/health 2>/dev/null)"
                             if [ "$code" != "200" ]; then
                               echo "Unhealthy release: rolling back"
