@@ -15,7 +15,9 @@ tagline: "Shipped by the Harness Software Delivery Agent"
 
 # Your brand color, as a six-digit hex code in quotes, like "#00ADE4"
 accent: "#00ADE4"
-emoji: "🚀"
+# An emoji by name: rocket, fire, tada, chart, moneybag, robot, unicorn, trophy...
+# Every name is in internal/brand/emoji.json
+emoji: rocket
 
 # billboard only: the scrolling message
 message: "Hello from Harness!"

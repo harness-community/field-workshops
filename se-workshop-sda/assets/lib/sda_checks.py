@@ -601,6 +601,25 @@ def app_get(path, attempts=3):
 FLAVORS = ("ticker", "billboard")
 
 
+def emoji_problem(value):
+    """Twin of resolveEmoji in internal/brand/emoji.go: a plain name must be in emoji.json."""
+    import re
+    if value is None or value == "":
+        return None
+    m = re.fullmatch(r":?([a-z0-9_+-]+):?", str(value).strip().lower())
+    if not m:
+        return None  # a pasted emoji, used as-is
+    try:
+        with open(f"{SDA_DIR}/app/internal/brand/emoji.json", encoding="utf-8") as f:
+            names = json.load(f)
+    except (OSError, ValueError):
+        return None  # can't check here; the build's unit tests will
+    if m.group(1).replace("-", "_") in names:
+        return None
+    return (f"emoji {value!r} isn't a name the app knows. Try rocket, fire, tada, chart, "
+            "moneybag or robot, or see internal/brand/emoji.json for all of them")
+
+
 def validate_showcase(text):
     """The app's own validation rules (internal/brand/brand.go), so Check can catch a bad
     showcase.yaml before the build's unit tests do. Returns a problem string or None."""
@@ -623,6 +642,9 @@ def validate_showcase(text):
     if not re.fullmatch(r"#[0-9A-Fa-f]{6}", str(accent or "")):
         # An unquoted #color is a YAML comment, so accent comes through empty
         return 'accent must be a six-digit hex color in quotes, like "#00ADE4"'
+    problem = emoji_problem(c.get("emoji"))
+    if problem:
+        return problem
     if len(str(c.get("message") or "")) > 140:
         return "message must be 140 characters or fewer"
     if flavor == "ticker":

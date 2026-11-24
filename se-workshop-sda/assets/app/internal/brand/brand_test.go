@@ -50,3 +50,18 @@ func TestUnhealthyRelease(t *testing.T) {
 		t.Fatal("release.healthy: false should make the release unhealthy")
 	}
 }
+
+func TestEmojiNames(t *testing.T) {
+	base := "flavor: billboard\nname: x\naccent: \"#112233\"\nemoji: "
+	for in, want := range map[string]string{
+		"rocket": "🚀", `":tada:"`: "🎉", "Fire": "🔥", "thumbsup": "👍", "100": "💯", "fox-face": "🦊", `"🦄"`: "🦄", `""`: "🚀",
+	} {
+		c, err := Parse([]byte(base + in + "\n"))
+		if err != nil || c.Emoji != want {
+			t.Errorf("emoji %s: got %q, %v; want %q", in, c.Emoji, err, want)
+		}
+	}
+	if _, err := Parse([]byte(base + "fishy\n")); err == nil || !strings.Contains(err.Error(), "emoji") {
+		t.Errorf("an unknown emoji name should be an error naming the field, got %v", err)
+	}
+}
