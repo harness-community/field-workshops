@@ -1,0 +1,28 @@
+# ============================================================================
+#  sda-showcase: this file is the whole customization.
+#  Change it, commit it, and your pipeline ships it.
+# ============================================================================
+
+# Pick your app: "ticker" (a live market board) or "billboard" (an LED team billboard)
+flavor: ticker
+
+# The release number shown on the page. Bump it every time you ship a change.
+version: 1.0.0
+
+# Your name, or your team's name
+name: "My Trading Desk"
+tagline: "Shipped by the Harness Software Delivery Agent"
+
+# Your brand color, as a six-digit hex code in quotes, like "#00ADE4"
+accent: "#00ADE4"
+emoji: "🚀"
+
+# billboard only: the scrolling message
+message: "Hello from Harness!"
+
+# ticker only: 1 to 8 symbols. FX pairs (USDJPY), crypto (BTCUSD), or anything you like.
+symbols: [USDJPY, EURUSD, GBPUSD, AUDUSD, BTCUSD]
+
+# Release health. Leave this true for now; a later lab asks you to flip it.
+release:
+  healthy: true

@@ -1,0 +1,7 @@
+environment:
+  name: dev
+  identifier: dev
+  orgIdentifier: {{ org_id }}
+  projectIdentifier: {{ project_id }}
+  type: PreProduction
+  tags: {}

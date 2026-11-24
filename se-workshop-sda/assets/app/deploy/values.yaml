@@ -1,0 +1,15 @@
+# Harness fills in the <+...> expressions at deploy time.
+name: showcase
+replicas: 3
+
+# The image Harness picked from the service's artifact source (your HAR registry),
+# and the credentials to pull it
+image: <+artifacts.primary.image>
+dockercfg: <+artifacts.primary.imagePullSecret>
+build: <+artifacts.primary.tag>
+
+environment: <+env.identifier>
+ingressHost: <+variable.sandbox_id>.instruqt.harness-demo.site
+
+servicePort: 80
+containerPort: 8080

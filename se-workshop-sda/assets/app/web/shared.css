@@ -1,0 +1,38 @@
+/* Shared by every flavor: the release strip that makes rollouts, canaries, and rollbacks visible */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: #00ade4; --env: #666; --bg: #07090c; --card: #11151a; --line: #222932; --dim: #8a94a3; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg);
+       color: #e6e9ee; min-height: 100vh; }
+.mono { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.ribbon { background: var(--env); color: #07090c; font-weight: 800; letter-spacing: .18em; text-align: center;
+          padding: .45rem 1rem; font-size: .85rem; }
+.ribbon small { font-weight: 600; letter-spacing: .04em; opacity: .75; margin-left: .75rem; }
+.ribbon.bad { background: #ff5c5c; }
+.release { display: grid; grid-template-columns: auto 1fr 1.2fr; gap: 1rem; margin-top: 1.5rem; }
+@media (max-width: 860px) { .release { grid-template-columns: 1fr; } }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem 1.3rem; }
+.card h2 { font-size: .7rem; color: var(--dim); letter-spacing: .12em; text-transform: uppercase; margin-bottom: .8rem; }
+.version { font-size: 3rem; font-weight: 800; line-height: 1; color: var(--accent); transition: transform .3s; }
+.version.bump { transform: scale(1.1); }
+.facts { display: flex; gap: 1.4rem; margin-top: .8rem; font-size: .8rem; color: var(--dim); }
+.facts b { display: block; color: #e6e9ee; font-weight: 600; margin-top: .15rem; }
+.pods, .log { list-style: none; font-size: .82rem; }
+.pods li, .log li { display: flex; align-items: center; gap: .6rem; padding: .38rem 0; border-bottom: 1px solid var(--line); }
+.pods li:last-child, .log li:last-child { border-bottom: none; }
+.pods .chip { width: 11px; height: 11px; border-radius: 3px; flex: none; }
+.pods .name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pods .ver { color: var(--dim); }
+.pods li.hit .name { color: #fff; font-weight: 600; }
+.pods li.old { opacity: .45; }
+.pods li.sick .ver { color: #ff5c5c; }
+.log time { color: var(--dim); min-width: 5.2rem; }
+.status { display: inline-flex; align-items: center; gap: .45rem; color: var(--dim); font-size: .8rem; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #3ddc84; animation: pulse 2s infinite; }
+.status.down .dot { background: #ff5c5c; animation: none; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 #3ddc8466; } 70% { box-shadow: 0 0 0 9px #3ddc8400; } }
+.toast { position: fixed; left: 50%; top: 3.5rem; transform: translate(-50%, -1rem); opacity: 0; visibility: hidden;
+         background: var(--accent); color: #07090c; font-weight: 700; padding: .85rem 1.3rem; border-radius: 10px;
+         transition: transform .4s, opacity .4s, visibility .4s; box-shadow: 0 10px 30px #000a; z-index: 5; }
+.toast.show { transform: translate(-50%, 0); opacity: 1; visibility: visible; }
+footer { margin-top: 1.5rem; color: #5b6472; font-size: .75rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+footer a { color: var(--dim); }
