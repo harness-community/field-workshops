@@ -9,7 +9,8 @@ dockercfg: <+artifacts.primary.imagePullSecret>
 build: <+artifacts.primary.tag>
 
 environment: <+env.identifier>
-ingressHost: <+variable.sandbox_id>.instruqt.harness-demo.site
 
 servicePort: 80
+# The Your App tab in Instruqt opens this port on your sandbox VM
+nodePort: 30080
 containerPort: 8080
