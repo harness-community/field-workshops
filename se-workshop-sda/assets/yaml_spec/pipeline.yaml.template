@@ -42,6 +42,10 @@ pipeline:
   identifier: showcase
   orgIdentifier: {{ org_id }}
   projectIdentifier: {{ project_id }}
+  # Every delegate task runs on the student's own delegate (Harness Cloud CI ignores this).
+  # Lab setups add the same line to the agent's pipeline: see pin_delegate in sda_checks.py.
+  delegateSelectors:
+    - {{ project_id }}-delegate
   tags: {}
   properties:
     ci:

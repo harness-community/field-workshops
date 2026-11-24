@@ -238,6 +238,45 @@ def upsert_pipeline(pipeline_yaml_text, pipeline_id=PIPELINE_ID):
     must(r, f"Saving pipeline {pipeline_id}")
 
 
+def delegate_selector():
+    return f"{project()}-delegate"
+
+
+def pin_delegate(pipeline_id=None):
+    """Make every delegate task in the student's pipeline run on their own delegate.
+
+    Shell Script steps with no selector of their own can land on any delegate the project can
+    see, account-level ones included, and those can't resolve this VM's cluster DNS. The agent
+    doesn't reliably set step selectors, so this sets one at pipeline level, which every step
+    inherits. Harness Cloud CI stages ignore it. The text is edited in place so the agent's YAML
+    keeps its formatting. Returns True if the pipeline was changed.
+    """
+    pipeline_id = pipeline_id or find_pipeline()
+    text = pipeline_yaml(pipeline_id) if pipeline_id else None
+    if not text:
+        print("No pipeline yet; nothing to pin.")
+        return False
+    wanted = delegate_selector()
+    current = (yaml.safe_load(text) or {}).get("pipeline", {}).get("delegateSelectors") or []
+    if wanted in current:
+        return False
+    if current:
+        # Unusual: someone set a different pipeline-level selector. Replace it.
+        doc = yaml.safe_load(text)
+        doc["pipeline"]["delegateSelectors"] = [wanted]
+        text = yaml.safe_dump(doc, sort_keys=False, width=1000)
+    else:
+        m = re.search(r"^pipeline:[ \t]*\n([ \t]+)\S", text, re.M)
+        if not m:
+            fail(f"Couldn't read the {pipeline_id} pipeline's YAML to pin its delegate.")
+        indent = m.group(1)
+        insert = f"{indent}delegateSelectors:\n{indent}  - {wanted}\n"
+        text = text[:m.end(0) - len(indent) - 1] + insert + text[m.end(0) - len(indent) - 1:]
+    upsert_pipeline(text, pipeline_id)
+    print(f"Pinned pipeline {pipeline_id} to delegate {wanted}.")
+    return True
+
+
 def render(template_name, **context):
     """Render a yaml_spec template from field-workshops main."""
     base = {"org_id": ORG_ID, "project_id": project(), "account_id": ACCOUNT_ID,
