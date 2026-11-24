@@ -1,0 +1,13 @@
+infrastructureDefinition:
+  name: k8s_dev
+  identifier: k8s_dev
+  orgIdentifier: {{ org_id }}
+  projectIdentifier: {{ project_id }}
+  environmentRef: dev
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: workshop_k8s
+    namespace: {{ namespace | default(project_id) }}
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ticker</title>
+<link rel="stylesheet" href="/static/shared.css">
+<style>
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 1.6rem 1.5rem 2.5rem; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; }
+  .eyebrow { color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+  h1 { font-size: 2.3rem; font-weight: 800; margin: .2rem 0 .3rem; }
+  .tagline { color: var(--dim); }
+  .clocks { display: flex; gap: 1.2rem; }
+  .clock { text-align: right; }
+  .clock .k { font-size: .65rem; color: var(--dim); letter-spacing: .12em; }
+  .clock .v { font-size: 1.15rem; color: var(--accent); }
+  .tape { margin-top: 1.3rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden;
+          white-space: nowrap; background: #0b0e12; }
+  .tape-inner { display: inline-block; padding: .55rem 0; animation: scroll 30s linear infinite; }
+  .tape span { margin: 0 1.6rem; font-size: .95rem; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .up { color: #3ddc84; } .down { color: #ff5c5c; }
+  .board { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-top: 1.3rem; }
+  .quote { position: relative; overflow: hidden; }
+  .quote .sym { font-weight: 800; letter-spacing: .08em; font-size: .95rem; }
+  .quote .px { font-size: 2.1rem; font-weight: 700; margin: .35rem 0 .15rem; transition: color .25s; }
+  .quote .px.tick-up { color: #3ddc84; } .quote .px.tick-down { color: #ff5c5c; }
+  .quote .chg { font-size: .85rem; }
+  .quote canvas { width: 100%; height: 46px; margin-top: .6rem; display: block; }
+</style>
+</head>
+<body>
+<div class="ribbon" id="ribbon">CONNECTING<small id="ribbon-sub"></small></div>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow" id="eyebrow">Live market board</div>
+      <h1 id="name"></h1>
+      <p class="tagline" id="tagline"></p>
+    </div>
+    <div class="clocks mono" id="clocks"></div>
+  </header>
+  <div class="tape mono"><div class="tape-inner" id="tape"></div></div>
+  <div class="board" id="board"></div>
+  <div id="release"></div>
+</div>
+<script type="module">
+import { loadConfig, startReleaseStrip, RELEASE_STRIP } from "/static/shared.js";
+const $ = (id) => document.getElementById(id);
+$("release").innerHTML = RELEASE_STRIP;
+
+const cfg = await loadConfig();
+$("name").textContent = `${cfg.emoji} ${cfg.name}`;
+$("tagline").textContent = cfg.tagline;
+
+// Desk clocks: computed in the browser, no network needed
+const ZONES = [["TOKYO", "Asia/Tokyo"], ["LONDON", "Europe/London"], ["NEW YORK", "America/New_York"]];
+function clocks() {
+  $("clocks").innerHTML = ZONES.map(([k, tz]) =>
+    `<div class="clock"><div class="k">${k}</div><div class="v">${new Date().toLocaleTimeString("en-GB", { timeZone: tz, hour: "2-digit", minute: "2-digit", second: "2-digit" })}</div></div>`).join("");
+}
+clocks(); setInterval(clocks, 1000);
+
+const history = new Map(); // symbol -> recent prices for the sparkline
+const last = new Map();
+for (const s of cfg.symbols) {
+  const card = document.createElement("div");
+  card.className = "card quote";
+  card.innerHTML = `<div class="sym"></div><div class="px mono">&ndash;</div><div class="chg mono"></div><canvas width="520" height="92"></canvas>`;
+  card.querySelector(".sym").textContent = s;
+  card.id = `q-${s}`;
+  $("board").appendChild(card);
+  history.set(s, []);
+}
+
+function spark(canvas, points, color) {
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (points.length < 2) return;
+  const lo = Math.min(...points), hi = Math.max(...points), span = hi - lo || 1;
+  ctx.beginPath();
+  points.forEach((p, i) => {
+    const x = (i / (points.length - 1)) * canvas.width;
+    const y = canvas.height - 6 - ((p - lo) / span) * (canvas.height - 12);
+    i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+  });
+  ctx.strokeStyle = color; ctx.lineWidth = 3; ctx.stroke();
+}
+
+async function quotes() {
+  try {
+    const qs = await (await fetch("/api/quotes", { cache: "no-store" })).json();
+    const tape = qs.map((q) => {
+      const cls = q.change >= 0 ? "up" : "down", arrow = q.change >= 0 ? "▲" : "▼";
+      return `<span>${q.symbol} <b>${q.display}</b> <span class="${cls}">${arrow} ${Math.abs(q.changePct).toFixed(2)}%</span></span>`;
+    }).join("");
+    $("tape").innerHTML = tape + tape; // doubled so the scroll loops seamlessly
+    for (const q of qs) {
+      const card = $(`q-${q.symbol}`);
+      if (!card) continue;
+      const px = card.querySelector(".px");
+      const prev = last.get(q.symbol);
+      px.textContent = q.display;
+      px.classList.remove("tick-up", "tick-down");
+      if (prev !== undefined && q.price !== prev) px.classList.add(q.price > prev ? "tick-up" : "tick-down");
+      last.set(q.symbol, q.price);
+      const chg = card.querySelector(".chg");
+      chg.className = `chg mono ${q.change >= 0 ? "up" : "down"}`;
+      chg.textContent = `${q.change >= 0 ? "▲" : "▼"} ${Math.abs(q.changePct).toFixed(3)}% today`;
+      const h = history.get(q.symbol);
+      h.push(q.price); if (h.length > 90) h.shift();
+      spark(card.querySelector("canvas"), h, getComputedStyle(document.documentElement).getPropertyValue("--accent"));
+    }
+  } catch (e) { /* the release strip reports connection problems */ }
+}
+quotes(); setInterval(quotes, 1000);
+startReleaseStrip();
+</script>
+</body>
+</html>

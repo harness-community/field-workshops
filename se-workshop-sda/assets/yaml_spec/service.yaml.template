@@ -1,0 +1,36 @@
+service:
+  name: showcase
+  identifier: showcase
+  orgIdentifier: {{ org_id }}
+  projectIdentifier: {{ project_id }}
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      manifests:
+        - manifest:
+            identifier: showcase
+            type: K8sManifest
+            spec:
+              store:
+                type: HarnessCode
+                spec:
+                  repoName: sda-showcase
+                  gitFetchType: Branch
+                  branch: main
+                  paths:
+                    - deploy/manifests
+              valuesPaths:
+                - deploy/values.yaml
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+      artifacts:
+        primary:
+          primaryArtifactRef: showcase
+          sources:
+            - identifier: showcase
+              type: DockerRegistry
+              spec:
+                connectorRef: har
+                imagePath: {{ image_path }}
+                # The tag CI just pushed, when the build and deploy run in one pipeline
+                tag: <+pipeline.sequenceId>

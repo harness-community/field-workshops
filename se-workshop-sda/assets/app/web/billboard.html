@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billboard</title>
+<link rel="stylesheet" href="/static/shared.css">
+<style>
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 1.6rem 1.5rem 2.5rem; }
+  .title { display: flex; align-items: center; gap: 1rem; }
+  .emoji { font-size: 3.4rem; animation: bob 3s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(-6px) rotate(-4deg); } }
+  h1 { font-size: 2.4rem; font-weight: 800; }
+  .tagline { color: var(--dim); margin-top: .2rem; }
+  /* The LED panel: the message scrolls under a dot grid, glowing in the accent color */
+  .panel { position: relative; margin-top: 1.4rem; height: 210px; border-radius: 16px; overflow: hidden;
+           background: #020304; border: 10px solid #1a1f26; box-shadow: inset 0 0 40px #000, 0 20px 50px #0008; }
+  .panel::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+                  background: radial-gradient(circle, transparent 1.9px, #020304 2.5px) 0 0 / 6px 6px; }
+  .marquee { position: absolute; top: 50%; white-space: nowrap; transform: translateY(-50%);
+             font-family: "Courier New", monospace; font-weight: 900; font-size: 128px; letter-spacing: .06em;
+             color: var(--accent); text-shadow: 0 0 12px var(--accent), 0 0 34px var(--accent);
+             animation: marquee var(--speed, 14s) linear infinite; }
+  @keyframes marquee { from { left: 100%; } to { left: calc(-1 * var(--width, 2000px)); } }
+  .sub { display: flex; justify-content: space-between; margin-top: .8rem; color: var(--dim); font-size: .85rem; }
+  .burst { position: fixed; font-size: 2.2rem; pointer-events: none; z-index: 4; animation: fly 1.8s ease-out forwards; }
+  @keyframes fly { to { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; } }
+</style>
+</head>
+<body>
+<div class="ribbon" id="ribbon">CONNECTING<small id="ribbon-sub"></small></div>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+  <div class="title"><div class="emoji" id="emoji"></div>
+    <div><h1 id="name"></h1><p class="tagline" id="tagline"></p></div></div>
+  <div class="panel"><div class="marquee" id="marquee"></div></div>
+  <div class="sub mono"><span id="clock"></span><span id="len"></span></div>
+  <div id="release"></div>
+</div>
+<script type="module">
+import { loadConfig, startReleaseStrip, RELEASE_STRIP } from "/static/shared.js";
+const $ = (id) => document.getElementById(id);
+$("release").innerHTML = RELEASE_STRIP;
+
+const cfg = await loadConfig();
+$("emoji").textContent = cfg.emoji;
+$("name").textContent = cfg.name;
+$("tagline").textContent = cfg.tagline;
+const message = cfg.message || cfg.name;
+$("marquee").textContent = message;
+$("len").textContent = `${[...message].length} / 140 characters`;
+
+// Scroll at a steady speed whatever the message length
+function fit() {
+  const w = $("marquee").scrollWidth;
+  $("marquee").style.setProperty("--width", `${w}px`);
+  $("marquee").style.setProperty("--speed", `${Math.max(8, (w + innerWidth) / 220)}s`);
+}
+fit(); addEventListener("resize", fit);
+setInterval(() => { $("clock").textContent = new Date().toLocaleString(); }, 1000);
+
+// Celebrate each new release with a burst of the team emoji
+function burst() {
+  for (let i = 0; i < 24; i++) {
+    const e = document.createElement("div");
+    e.className = "burst";
+    e.textContent = cfg.emoji;
+    e.style.left = `${innerWidth / 2}px`;
+    e.style.top = `${innerHeight / 3}px`;
+    e.style.setProperty("--dx", `${(Math.random() - .5) * innerWidth}px`);
+    e.style.setProperty("--dy", `${(Math.random() - .3) * innerHeight}px`);
+    e.style.setProperty("--rot", `${(Math.random() - .5) * 720}deg`);
+    document.body.appendChild(e);
+    setTimeout(() => e.remove(), 1900);
+  }
+}
+startReleaseStrip(burst);
+</script>
+</body>
+</html>

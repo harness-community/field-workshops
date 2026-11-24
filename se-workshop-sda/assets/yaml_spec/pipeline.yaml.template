@@ -1,0 +1,169 @@
+{#- The canonical end state of the showcase pipeline after each lab, used by Skip.
+    Context: org_id, project_id, and
+      deploy:   "none" (Lab 2), "rolling" (Lab 3), "canary" (Labs 4-5)
+      approval: true to add a Harness Approval step before deploying (Lab 5) -#}
+{%- set deploy = deploy | default("none") -%}
+{%- macro smoke_spec() %}
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          # Every pod answers through the Service, the canary included. Any
+                          # unhealthy answer fails the step and the stage rolls back.
+                          url="http://showcase.<+infra.namespace>.svc.cluster.local/health"
+                          for i in $(seq 1 20); do
+                            code=$(curl -s -o /tmp/health -w '%{http_code}' --max-time 3 "$url")
+                            echo "check $i: HTTP $code $(cat /tmp/health 2>/dev/null)"
+                            if [ "$code" != "200" ]; then
+                              echo "Unhealthy release: rolling back"
+                              exit 1
+                            fi
+                            sleep 1
+                          done
+                          echo "20 of 20 health checks passed"
+                    environmentVariables: []
+                    outputVariables: []
+{%- endmacro %}
+pipeline:
+  name: showcase
+  identifier: showcase
+  orgIdentifier: {{ org_id }}
+  projectIdentifier: {{ project_id }}
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        repoName: sda-showcase
+        build:
+          type: branch
+          spec:
+            branch: main
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: {{ arch | default("Amd64") }}
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Unit tests
+                  identifier: Unit_tests
+                  spec:
+                    shell: Sh
+                    image: golang:1.27-alpine
+                    command: go test ./...
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: Build and push to HAR
+                  identifier: Build_and_push_to_HAR
+                  spec:
+                    connectorRef: har
+                    repo: <+variable.image_repo>
+                    tags:
+                      - <+pipeline.sequenceId>
+{%- if deploy != "none" %}
+    - stage:
+        name: Deploy
+        identifier: Deploy
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: showcase
+          environment:
+            environmentRef: dev
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: k8s_dev
+          execution:
+            steps:
+{%- if approval %}
+              - step:
+                  type: HarnessApproval
+                  name: Approve release
+                  identifier: Approve_release
+                  timeout: 1h
+                  spec:
+                    approvalMessage: Release <+pipeline.sequenceId> of showcase to dev. Approve?
+                    includePipelineExecutionHistory: true
+                    isAutoRejectEnabled: false
+                    approvers:
+                      userGroups:
+                        - _project_all_users
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                    approverInputs: []
+{%- endif %}
+{%- if deploy == "canary" %}
+              - step:
+                  type: K8sCanaryDeploy
+                  name: Canary deploy
+                  identifier: Canary_deploy
+                  timeout: 10m
+                  spec:
+                    instanceSelection:
+                      type: Count
+                      spec:
+                        count: 1
+                    skipDryRun: false
+              - step:
+                  type: ShellScript
+                  name: Canary health check
+                  identifier: Canary_health_check
+                  timeout: 3m
+                  spec:{{ smoke_spec() }}
+              - step:
+                  type: K8sCanaryDelete
+                  name: Canary delete
+                  identifier: Canary_delete
+                  timeout: 10m
+                  spec: {}
+{%- endif %}
+              - step:
+                  type: K8sRollingDeploy
+                  name: Rolling deploy
+                  identifier: Rolling_deploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+              - step:
+                  type: ShellScript
+                  name: Health check
+                  identifier: Health_check
+                  timeout: 3m
+                  spec:{{ smoke_spec() }}
+            rollbackSteps:
+{%- if deploy == "canary" %}
+              - step:
+                  type: K8sCanaryDelete
+                  name: Canary delete
+                  identifier: Rollback_canary_delete
+                  timeout: 10m
+                  spec: {}
+{%- endif %}
+              - step:
+                  type: K8sRollingRollback
+                  name: Rolling rollback
+                  identifier: Rolling_rollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+{%- endif %}
