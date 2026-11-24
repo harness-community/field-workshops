@@ -275,13 +275,26 @@ def stage_nodes(execution, node_type=None):
 
 
 def step_nodes(execution, stage_node):
-    """Every step node executed in one stage of an execution."""
-    r = request("GET", f"/pipeline/api/pipelines/execution/v2/{execution['planExecutionId']}",
-                params=scope(stageNodeId=stage_node.get("nodeUuid"), renderFullBottomGraph="true"))
-    if r is None or r.status_code != 200:
-        return []
-    graph = (r.json().get("data") or {}).get("executionGraph") or {}
-    return list((graph.get("nodeMap") or {}).values())
+    """Every step node executed in one stage of an execution, rollback steps included.
+
+    Asks for the stage's graph by node execution ID and by node ID and merges the answers,
+    because which one returns the full graph has varied between Harness clusters.
+    """
+    nodes = {}
+    for params in ({"stageNodeExecutionId": stage_node.get("nodeExecutionId")},
+                   {"stageNodeId": stage_node.get("nodeUuid")}):
+        if not list(params.values())[0]:
+            continue
+        r = request("GET", f"/pipeline/api/pipelines/execution/v2/{execution['planExecutionId']}",
+                    params=scope(renderFullBottomGraph="true", **params))
+        if r is None or r.status_code != 200:
+            print(f"  (step graph by {list(params)[0]}: HTTP {getattr(r, 'status_code', None)})")
+            continue
+        graph = (r.json().get("data") or {}).get("executionGraph") or {}
+        nodes.update(graph.get("nodeMap") or {})
+    if not nodes:
+        print(f"  (no step graph for stage {stage_node.get('name')})")
+    return list(nodes.values())
 
 
 def rolled_back(execution):
@@ -340,7 +353,31 @@ def failure_details(summary):
             step_msg = (step.get("failureInfo") or {}).get("message", "")
             lines.append(f"  step {step.get('name')} [{step_type}] ({step.get('status')})"
                          + (f": {step_msg}" if step_msg not in (run_msg, stage_msg) else ""))
+            if step_type == "ShellScript":
+                lines += [f"    | {out}" for out in step_log(step)[-10:]]
     return lines
+
+
+def step_log(step, command_unit="Execute"):
+    """The output lines of one step's command unit, from the log service ([] if unavailable)."""
+    key = step.get("logBaseKey")
+    if not key:
+        return []
+    token = request("GET", "/gateway/log-service/token", params={"accountID": ACCOUNT_ID})
+    if token is None or token.status_code != 200:
+        return []
+    r = request("GET", "/gateway/log-service/blob",
+                params={"accountID": ACCOUNT_ID, "key": f"{key}-commandUnit:{command_unit}",
+                        "X-Harness-Token": token.text.strip()})
+    if r is None or r.status_code != 200:
+        return []
+    out = []
+    for raw in r.text.splitlines():
+        try:
+            out.append(json.loads(raw).get("out", "").rstrip())
+        except ValueError:
+            continue
+    return out
 
 
 def wait_for(plan_execution_id, timeout=900, until=()):
