@@ -314,6 +314,35 @@ def execution(plan_execution_id):
     return (r.json().get("data") or {}).get("pipelineExecutionSummary")
 
 
+def failure_details(summary):
+    """Lines naming each failed stage and step, with Harness's error message, for the logs."""
+    summary = summary or {}
+    lines = []
+    run_msg = (summary.get("failureInfo") or {}).get("message", "")
+    if run_msg:
+        lines.append(f"run failed: {run_msg}")
+    for detail in (summary.get("governanceMetadata") or {}).get("details") or []:
+        for policy in detail.get("policyMetadata") or []:
+            if policy.get("status") == "error":
+                lines.append(f"policy {policy.get('identifier')} denied: "
+                             f"{'; '.join(policy.get('denyMessages') or [])}")
+    for node in stage_nodes(summary):
+        if node.get("status") not in FINISHED_BAD:
+            continue
+        stage_msg = (node.get("failureInfo") or {}).get("message", "")
+        lines.append(f"stage {node.get('name')} ({node.get('status')})"
+                     + (f": {stage_msg}" if stage_msg != run_msg else ""))
+        for step in step_nodes(summary, node):
+            step_type = str(step.get("stepType", ""))
+            # Skip Harness's wrapper nodes (DEPLOYMENT_STAGE_STEP, NG_SECTION_..., etc.)
+            if step.get("status") not in FINISHED_BAD or step_type.isupper():
+                continue
+            step_msg = (step.get("failureInfo") or {}).get("message", "")
+            lines.append(f"  step {step.get('name')} [{step_type}] ({step.get('status')})"
+                         + (f": {step_msg}" if step_msg not in (run_msg, stage_msg) else ""))
+    return lines
+
+
 def wait_for(plan_execution_id, timeout=900, until=()):
     """Poll a run until it reaches a status in `until` or finishes. Returns the final status."""
     deadline = time.time() + timeout
@@ -322,6 +351,9 @@ def wait_for(plan_execution_id, timeout=900, until=()):
         summary = execution(plan_execution_id) or {}
         status = summary.get("status")
         print(f"  run {plan_execution_id[:8]}: {status}")
+        if status in FINISHED_BAD:
+            for line in failure_details(summary):
+                print(f"  {line}")
         if status in until or status in FINISHED_BAD or status in PASSED:
             return status
         time.sleep(10)
