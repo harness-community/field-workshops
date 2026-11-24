@@ -8,6 +8,6 @@ infrastructureDefinition:
   type: KubernetesDirect
   spec:
     connectorRef: workshop_k8s
-    namespace: {{ namespace | default(project_id) }}
+    namespace: {{ k8s_namespace | default(project_id) }}
     releaseName: release-<+INFRA_KEY_SHORT_ID>
   allowSimultaneousDeployments: false
