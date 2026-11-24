@@ -5,11 +5,12 @@ metadata:
   labels:
     app: {{ .Values.name }}
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - name: http
     port: {{ int .Values.servicePort }}
     targetPort: http
+    nodePort: {{ int .Values.nodePort }}
     protocol: TCP
   # Matches stable and canary pods alike, so a canary takes a share of live traffic
   selector:
