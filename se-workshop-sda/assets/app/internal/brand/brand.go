@@ -54,12 +54,27 @@ func Parse(data []byte) (Config, error) {
 		c.Version = "1.0.0"
 	}
 	if c.Emoji == "" {
-		c.Emoji = "🚀"
+		c.Emoji = "rocket"
 	}
+	emoji, emojiErr := resolveEmoji(c.Emoji)
+	c.Emoji = emoji
 	for i, s := range c.Symbols {
 		c.Symbols[i] = strings.ToUpper(strings.TrimSpace(s))
 	}
-	return c, c.Validate()
+	if err := c.Validate(); err != nil || emojiErr != nil {
+		return c, joinProblems(err, emojiErr)
+	}
+	return c, nil
+}
+
+func joinProblems(errs ...error) error {
+	var parts []string
+	for _, e := range errs {
+		if e != nil {
+			parts = append(parts, e.Error())
+		}
+	}
+	return fmt.Errorf("%s", strings.Join(parts, "; "))
 }
 
 func (c Config) Validate() error {
