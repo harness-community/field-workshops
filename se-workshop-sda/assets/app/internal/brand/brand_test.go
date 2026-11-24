@@ -54,7 +54,7 @@ func TestUnhealthyRelease(t *testing.T) {
 func TestEmojiNames(t *testing.T) {
 	base := "flavor: billboard\nname: x\naccent: \"#112233\"\nemoji: "
 	for in, want := range map[string]string{
-		"rocket": "🚀", `":tada:"`: "🎉", "Fire": "🔥", "thumbsup": "👍", "100": "💯", "fox-face": "🦊", `"🦄"`: "🦄", `""`: "🚀",
+		"rocket": "🚀", `":tada:"`: "🎉", "Fire": "🔥", "thumbsup": "👍", "100": "💯", "fox-face": "🦊", "passenger_ship": "🛳️", `"🦄"`: "🦄", `""`: "🚀",
 	} {
 		c, err := Parse([]byte(base + in + "\n"))
 		if err != nil || c.Emoji != want {
