@@ -1,0 +1,36 @@
+slug: fed-gsa-mcp-server-workshop
+id: opiqtrjetrjd
+title: FED GSA MCP Server Workshop
+teaser: 'You built an MCP server. Now ship it safely: build, scan, fix, evaluate,
+  and gate the release.'
+description: |2
+
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
+
+  **You built an MCP server. Now ship it safely.**
+
+  In this lab you will:
+  - **Lab 1:** Find and fix a vulnerable dependency, then gate the release on an agent evaluation that checks accuracy and expert caveats
+  - **Lab 2:** Add a policy gate so nothing reaches production without approval
+
+  The build and deployment challenges are optional during the live session. Click Skip and we will set them up for you. Your lab stays open afterward so you can come back and explore.
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-devsecops/assets/images/harness_devsecops.svg
+tags: []
+owner: harness-se
+developers:
+- hakan.seber@harness.io
+- sean.carolan@harness.io
+show_timer: true
+skipping_enabled: true
+idle_timeout: 3600
+timelimit: 21600
+lab_config:
+  sidebar_enabled: true
+  feedback_recap_enabled: true
+  feedback_tab_enabled: false
+  loadingMessages: true
+  override_challenge_layout: false
+  hideStopButton: false
+  default_layout_sidebar_size: 25
+checksum: "9849087207964578015"
+enhanced_loading: false

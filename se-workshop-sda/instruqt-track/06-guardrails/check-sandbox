@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+"""Lab 5 passes when the policy is on, the pipeline approves before deploying, and a run since
+the policy went on succeeded."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+if not sda.policy_set_enabled():
+    sda.fail("The guardrails policy set is switched off. Turn it back on in Project Settings → Policies → "
+             "Policy Sets, then run the pipeline again.")
+
+pid = sda.find_pipeline()
+if not pid or not sda.has_approval_before_deploy(sda.pipeline_dict(pid)):
+    sda.fail("Your pipeline still deploys without an approval. Ask the agent to add a Harness Approval step "
+             "at the start of the Deploy stage.")
+
+try:
+    since = int(open(f"{sda.SDA_DIR}/guardrails_started_ms").read())
+except (OSError, ValueError):
+    since = 0
+runs = [r for r in (sda.executions(pid, size=10) or []) if (r.get("startTs") or 0) >= since]
+if any(r.get("status") in sda.PASSED for r in runs):
+    print("Lab 5 complete: your pipeline passed the policy, and you approved the release.")
+    sys.exit(0)
+if runs and runs[0].get("status") == "ApprovalWaiting":
+    sda.fail("Your run is waiting for you. Open it and click Approve, then click Check when it finishes.")
+if runs and runs[0].get("status") in sda.IN_PROGRESS:
+    sda.fail("Your pipeline is still running. Click Check again when it finishes.")
+sda.fail("No successful run since the policy went on. Run the pipeline, approve it, and let it finish.")

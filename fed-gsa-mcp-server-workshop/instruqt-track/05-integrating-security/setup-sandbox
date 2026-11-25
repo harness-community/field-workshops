@@ -1,0 +1,163 @@
+#!/usr/bin/env python3
+
+# Standard library imports
+import base64
+import os
+import shutil
+import subprocess
+import requests
+from pyharnessworkshop import utils
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+HARNESS_API = "https://app.harness.io"
+
+policy_set = "Security_Scan_Steps_Required"
+url = f"{HARNESS_API}/pm/api/v1/policysets/{policy_set}?accountIdentifier={HARNESS_ACCOUNT_ID}&orgIdentifier={HARNESS_ORG_ID}&projectIdentifier={HARNESS_PROJECT}"
+headers = {
+    "Content-Type": "application/json",
+    "x-api-key": HARNESS_PAT
+}
+payload = {
+    "enabled": True
+}
+response = requests.patch(url, headers=headers, json=payload)
+response_code = response.status_code
+if 200 <= response_code < 300:
+    print(f"  INFO: Successfully enabled '{policy_set}' policy set.")
+else:
+    print(f"  ERROR: Request failed. Status Code: {response_code}")
+    print(f"  Response Content: {response.content.decode('utf-8')}")
+
+# GSA MCP workshop: OSV replaces OWASP in this track, so the SCA policy requires OsvScanner only.
+# Never fails the challenge setup; it only logs the result.
+sca_rego = r"""package pipeline
+
+required_sca_steps = ["OsvScanner"]
+required_container_steps = ["AquaTrivy"]
+required_scan_steps = array.concat(required_sca_steps, required_container_steps)
+container_registry = "BuildAndPushGAR"
+
+deny[msg] {
+    required_step := required_scan_steps[_]
+    not missing_scan_step(required_step)
+    msg := sprintf("The CI stage is missing the required '%s' step. It's easy to add using the Harness Built-in Scanners.", [required_step])
+}
+
+deny[msg] {
+    first_step := required_sca_steps[_]
+    second_step := container_registry
+    missing_scan_step(first_step)
+    not incorrect_scan_placement(first_step, second_step)
+    msg := create_message(first_step, second_step)
+}
+
+deny[msg] {
+    first_step := "Compile_Application"
+    second_step := required_sca_steps[_]
+    missing_scan_step(second_step)
+    not incorrect_scan_placement(first_step, second_step)
+    msg := create_message(first_step, second_step)
+}
+
+deny[msg] {
+    first_step := container_registry
+    second_step := required_container_steps[_]
+    missing_scan_step(second_step)
+    not incorrect_scan_placement(first_step, second_step)
+    msg := create_message(first_step, second_step)
+}
+
+contains(arr, elem) {
+    arr[_] == elem
+}
+
+missing_scan_step(required_step) {
+    stage = input.pipeline.stages[_].stage
+    stage.type == "CI"
+    steps := get_all_steps(stage)
+    step_types := [step | step := steps[_].step_type ]
+    contains(step_types, required_step)
+}
+
+incorrect_scan_placement(first_step, second_step) {
+    stage := input.pipeline.stages[_].stage
+    stage.type == "CI"
+    steps := get_all_steps(stage)
+    verify_scan_placement(steps, first_step, second_step)
+}
+
+get_all_steps(stage) = steps {
+    parallel_steps := [{ "step_type": step_type, "step_index": step_index, "sub_index": sub_index,  } |
+        step_type := stage.spec.execution.steps[step_index].parallel[sub_index].step.type
+    ]
+    sequential_steps := [{ "step_type": step_type, "step_index": step_index, "sub_index": 0,  } |
+        step_type := stage.spec.execution.steps[step_index].step.type
+    ]
+    template_steps := [{ "step_type": step_type, "step_index": step_index, "sub_index": 0,  } |
+        step_type := stage.spec.execution.steps[step_index].step.template.templateRef
+    ]
+    temp_steps := array.concat(parallel_steps, sequential_steps)
+    steps := array.concat(temp_steps, template_steps)
+    print("Debug: all_steps ", steps)
+}
+
+get_step_index(steps, step_type) = step_index {
+    some index
+    steps[index].step_type == step_type
+    step_index := steps[index].step_index
+}
+
+verify_scan_placement(steps, first_step, second_step) {
+    first_index := get_step_index(steps, first_step)
+    second_index := get_step_index(steps, second_step)
+    first_index < second_index
+}
+
+create_message(first_step_type, second_step_type) = msg {
+    msg := sprintf("'%s' must occur prior to the '%s' step.", [first_step_type, second_step_type])
+}"""
+policy_url = f"{HARNESS_API}/pm/api/v1/policies/SCA_Scans?accountIdentifier={HARNESS_ACCOUNT_ID}&orgIdentifier={HARNESS_ORG_ID}&projectIdentifier={HARNESS_PROJECT}"
+try:
+    policy_response = requests.patch(policy_url, headers=headers, json={"name": "SCA Scans", "rego": sca_rego}, timeout=30)
+    if 200 <= policy_response.status_code < 300:
+        print("  INFO: Updated 'SCA_Scans' policy to require OsvScanner only.")
+    else:
+        print(f"  ERROR: SCA policy update failed. Status Code: {policy_response.status_code}")
+        print(f"  Response Content: {policy_response.content.decode('utf-8')}")
+except Exception as e:
+    print(f"  ERROR: SCA policy update raised: {e}")
+
+# GSA MCP workshop: make sure devsecops-repo exists. Track setup imports it from GitHub,
+# but Harness's anonymous GitHub import is sometimes refused ("Access denied ... at github"),
+# which is GitHub's anonymous rate limit. If the repo is missing, create it empty and commit
+# the files from a plain git clone instead. No token needed.
+# Never fails the challenge setup; it only logs the result.
+WORKSHOP_GIT_REPO = "harness-community/devsecops-workshop"
+try:
+    code_q = {"accountIdentifier": HARNESS_ACCOUNT_ID, "orgIdentifier": HARNESS_ORG_ID, "projectIdentifier": HARNESS_PROJECT}
+    code_api = f"{HARNESS_API}/code/api/v1/repos"
+    check = requests.get(f"{code_api}/devsecops-repo", params=code_q, headers=headers, timeout=30)
+    if check.status_code == 200:
+        print("  INFO: devsecops-repo already exists.")
+    else:
+        print(f"  INFO: devsecops-repo is missing, creating it from a git clone of {WORKSHOP_GIT_REPO}")
+        src = "/tmp/devsecops-repo-src"
+        shutil.rmtree(src, ignore_errors=True)
+        subprocess.run(["git", "clone", "-q", "--depth", "1", f"https://github.com/{WORKSHOP_GIT_REPO}.git", src], check=True)
+        r = requests.post(code_api, params=code_q, headers=headers, timeout=60,
+                          json={"identifier": "devsecops-repo", "default_branch": "main", "is_public": False, "readme": False,
+                                "parent_ref": f"{HARNESS_ACCOUNT_ID}/{HARNESS_ORG_ID}/{HARNESS_PROJECT}"})
+        print(f"  INFO: create repo: {r.status_code}")
+        files = subprocess.run(["git", "-C", src, "ls-files"], capture_output=True, text=True, check=True).stdout.splitlines()
+        actions = [{"action": "CREATE", "path": f, "encoding": "base64",
+                    "payload": base64.b64encode(open(os.path.join(src, f), "rb").read()).decode()} for f in files]
+        r = requests.post(f"{code_api}/devsecops-repo/commits", params=code_q, headers=headers, timeout=120,
+                          json={"title": f"Import from {WORKSHOP_GIT_REPO}", "branch": "main", "actions": actions})
+        print(f"  INFO: commit {len(files)} files: {r.status_code} {'' if r.ok else r.text[:300]}")
+        shutil.rmtree(src, ignore_errors=True)
+except Exception as e:
+    print(f"  ERROR: devsecops-repo check raised: {e}")

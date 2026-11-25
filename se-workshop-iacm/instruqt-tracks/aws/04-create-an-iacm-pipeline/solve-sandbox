@@ -1,5 +1,157 @@
 #!/usr/bin/env python3
 
-import sys
+# Skip for Lab 4: build the "IaCM Provision" pipeline the way the guide does
+# (init, plan, IACM Approval, apply), run it against demoworkspace, approve the
+# plan, and wait for the apply. Fails if the apply doesn't succeed, so
+# `instruqt track test` exercises the real tofu apply on the workshop VMs.
 
-sys.exit(0)
+import json
+import os
+import sys
+import time
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+# Workshop sandboxes sometimes time out connecting to app.harness.io, so retry
+# connection errors (nothing was sent yet, so this is safe for POSTs too)
+http = requests.Session()
+http.mount("https://", HTTPAdapter(max_retries=Retry(total=5, connect=5, read=0, status=0, backoff_factor=3)))
+from pyharnessworkshop import utils
+
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+
+API = "https://app.harness.io"
+PIPELINE_ID = "IaCM_Provision"
+WORKSPACE_ID = "demoworkspace"
+HEADERS = {"x-api-key": HARNESS_PAT, "Harness-Account": HARNESS_ACCOUNT_ID}
+PARAMS = {"accountIdentifier": HARNESS_ACCOUNT_ID, "orgIdentifier": HARNESS_ORG_ID, "projectIdentifier": HARNESS_PROJECT}
+APPROVALS = f"{API}/iacm/api/orgs/{HARNESS_ORG_ID}/projects/{HARNESS_PROJECT}/approvals"
+
+PIPELINE_YAML = f"""\
+pipeline:
+  name: IaCM Provision
+  identifier: {PIPELINE_ID}
+  projectIdentifier: {HARNESS_PROJECT}
+  orgIdentifier: {HARNESS_ORG_ID}
+  stages:
+    - stage:
+        name: IaCM
+        identifier: IaCM
+        type: IACM
+        spec:
+          workspace: <+input>
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {{}}
+          execution:
+            steps:
+              - step:
+                  type: IACMTerraformPlugin
+                  name: init
+                  identifier: init
+                  timeout: 10m
+                  spec:
+                    command: init
+              - step:
+                  type: IACMTerraformPlugin
+                  name: plan
+                  identifier: plan
+                  timeout: 10m
+                  spec:
+                    command: plan
+              - step:
+                  type: IACMApproval
+                  name: IACM Approval
+                  identifier: IACM_Approval
+                  timeout: 1h
+                  spec:
+                    autoApprove: true
+              - step:
+                  type: IACMTerraformPlugin
+                  name: apply
+                  identifier: apply
+                  timeout: 10m
+                  spec:
+                    command: apply
+"""
+
+RUNTIME_YAML = f"""\
+pipeline:
+  identifier: {PIPELINE_ID}
+  stages:
+    - stage:
+        identifier: IaCM
+        type: IACM
+        spec:
+          workspace: {WORKSPACE_ID}
+"""
+
+# 1. Pipeline
+r = http.get(f"{API}/pipeline/api/pipelines/{PIPELINE_ID}", headers=HEADERS, params=PARAMS, timeout=30)
+if r.status_code == 200:
+    print(f"Pipeline {PIPELINE_ID} already exists")
+else:
+    r = http.post(f"{API}/pipeline/api/pipelines/v2", headers={**HEADERS, "Content-Type": "application/yaml"},
+                      params=PARAMS, data=PIPELINE_YAML, timeout=60)
+    if r.status_code != 200:
+        print(f"Creating pipeline failed: {r.status_code} {r.text[:500]}")
+        sys.exit(1)
+    print(f"Created pipeline {PIPELINE_ID}")
+
+# 2. Run it
+r = http.post(f"{API}/pipeline/api/pipeline/execute/{PIPELINE_ID}", headers={**HEADERS, "Content-Type": "application/yaml"},
+                  params={**PARAMS, "moduleType": "iacm"}, data=RUNTIME_YAML, timeout=60)
+if r.status_code != 200:
+    print(f"Running pipeline failed: {r.status_code} {r.text[:500]}")
+    sys.exit(1)
+execution_id = r.json()["data"]["planExecution"]["uuid"]
+print(f"Started execution {execution_id}")
+
+# 3. Approve the plan and wait for the apply (up to 25 minutes)
+status, summary = "Running", {}
+for _ in range(150):
+    time.sleep(10)
+    try:
+        for approval in http.get(APPROVALS, headers=HEADERS, params={"pipeline_execution_id": execution_id}, timeout=30).json() or []:
+            if approval.get("status") == "pending":
+                a = http.put(f"{APPROVALS}/{approval['id']}", headers={**HEADERS, "Content-Type": "application/json"},
+                                 json={"status": "approved"}, timeout=30)
+                print(f"Approved the plan: {a.status_code}")
+        summary = http.get(f"{API}/pipeline/api/pipelines/execution/v2/{execution_id}", headers=HEADERS,
+                               params=PARAMS, timeout=30).json()["data"]["pipelineExecutionSummary"]
+        status = summary["status"]
+    except Exception as e:
+        print(f"Polling error (will retry): {e}")
+        continue
+    if status in ("Success", "Failed", "Errored", "Aborted", "Expired", "AbortedByFreeze"):
+        break
+
+print(f"Execution {execution_id} finished: {status}")
+if status != "Success":
+    print(f"Failure: {summary.get('failureInfo', {}).get('message', '')[:1000]}")
+    # Print the tail of each failed step's log so track test output shows why
+    try:
+        graph = http.get(f"{API}/pipeline/api/pipelines/execution/v2/{execution_id}", headers=HEADERS,
+                             params={**PARAMS, "renderFullBottomGraph": "true"}, timeout=30).json()["data"]["executionGraph"]
+        for node in (graph.get("nodeMap") or {}).values():
+            if node.get("status") in ("Failed", "Errored") and node.get("logBaseKey"):
+                log = http.get(f"{API}/gateway/log-service/blob", headers=HEADERS, timeout=30,
+                                   params={"accountID": HARNESS_ACCOUNT_ID, "X-Harness-Token": "", "key": node["logBaseKey"]})
+                lines = []
+                for raw in log.text.splitlines():
+                    try:
+                        lines.append(json.loads(raw).get("out", "").rstrip())
+                    except ValueError:
+                        lines.append(raw)
+                print(f"--- {node.get('name')} log (last 40 lines) ---")
+                print("\n".join(lines[-40:]))
+    except Exception as e:
+        print(f"Could not fetch step logs: {e}")
+    sys.exit(1)

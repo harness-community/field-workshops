@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+"""Skip: brand the app on a branch, then open and merge a pull request."""
+import sys
+import time
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+text = sda.code_file("showcase.yaml") or sda.seed_text()
+if text != sda.seed_text() and sda.pull_requests("merged") and not sda.validate_showcase(text):
+    print("Already branded and merged; nothing to do.")
+    sys.exit(0)
+
+branded = (sda.seed_text()
+           .replace('name: "My Trading Desk"', 'name: "Skip Ahead Desk"')
+           .replace("version: 1.0.0", "version: 1.1.0")
+           .replace("emoji: rocket", "emoji: checkered_flag"))
+branch = f"brand-my-app-skip-{int(time.time())}"
+sda.commit_file("showcase.yaml", branded, "Brand the app", new_branch=branch)
+number = sda.open_and_merge_pr(branch, "Brand the app",
+                               "Skipped ahead: renamed the desk and bumped the version to 1.1.0.")
+print(f"Merged pull request #{number}.")

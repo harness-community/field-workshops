@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""Lab 1 passes when showcase.yaml on main is changed, valid, and arrived by a merged PR."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+text = sda.code_file("showcase.yaml")
+if text is None:
+    sda.fail("Couldn't read showcase.yaml from the sda-showcase repo. Click Check again in a few seconds.")
+if text == sda.seed_text():
+    sda.fail("showcase.yaml on the main branch hasn't changed yet. Edit it on a branch, open a pull request, and merge it.")
+
+problem = sda.validate_showcase(text)
+if problem:
+    sda.fail(f"showcase.yaml on main has a problem: {problem}. Fix it with another pull request; "
+             "the build in the next lab would fail on it.")
+
+if not sda.pull_requests("merged"):
+    sda.fail("Your change is on main, but no pull request has been merged yet. "
+             "Make one more change on a new branch and merge it through a pull request.")
+
+print("Lab 1 complete: showcase.yaml was changed through a merged pull request.")

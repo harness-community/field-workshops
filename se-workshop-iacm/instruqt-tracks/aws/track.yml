@@ -1,9 +1,9 @@
-slug: se-workshop-iacm-v2
-id: oyfnyidbl0xu
-title: Harness IaCM Workshop - AWS
+slug: se-workshop-iacm-aws-1-2-aws
+id: sxaxbxl0oi8o
+title: Harness IaCM Workshop 1.2 - AWS
 description: |2-
 
-  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
 
   **This track demonstrates how to:**
     - Lab 1 - Clone the IaC Repo
@@ -14,11 +14,13 @@ description: |2-
     - Lab 6 - Governance w/OPA
     - Lab 7 - Cost Estimation and State
     - Lab 8 - PR Triggers and Validation
-icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/iacm.png
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/iacm.png
 tags: []
-owner: harness
+owner: harness-se
 developers:
-- joseph.titra@harness.io
+- jennifer.flanagan@harness.io
+- john.blessing@harness.io
+- sean.carolan@harness.io
 show_timer: true
 idle_timeout: 3600
 timelimit: 10800
@@ -27,8 +29,9 @@ lab_config:
   feedback_recap_enabled: true
   feedback_tab_enabled: false
   loadingMessages: true
+  override_challenge_layout: false
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "4585992075826050028"
+checksum: "9269237625670448143"
 enhanced_loading: false

@@ -16,7 +16,7 @@ from pyharnessworkshop import harness, keycloak, utils
 WORKSHOP_TYPE = "iacm"
 WORKSHOP_REPO = "harness-community/se-iacm-workshop"
 GENERATOR_URI = os.getenv("SE_WORKSHOP_GKE_GENERATOR")
-GCP_REGION = "us-east1" # Also defined in config.yaml
+GCP_REGION = "us-east1"  # Also defined in config.yaml
 GCP_ZONE = "us-east1-b"
 ################################## START OF DO NOT MODIFY SECTION ##################################
 
@@ -142,6 +142,8 @@ utils.misc.run_command(f"nohup tofu -chdir={harness_path}/terraform apply -auto-
 # Install VS Code
 utils.misc.setup_vs_code(8443, f"{workshop_path}/{code_repo}")
 utils.misc.run_command(f"set-workdir {workshop_path}")
+extensions = ["HashiCorp.terraform"]
+utils.misc.install_vscode_extensions(extensions)
 
 # Export additional variables for later use
 utils.instruqt.set_agent_variable("HARNESS_CODE_REPO", code_repo)

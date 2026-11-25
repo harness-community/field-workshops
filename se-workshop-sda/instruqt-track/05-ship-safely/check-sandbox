@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+"""Lab 4 passes when the pipeline deploys by canary, a canary run went green, another rolled
+back, and the app is healthy."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+pid = sda.find_pipeline()
+if not pid or "K8sCanaryDeploy" not in sda.step_types(sda.pipeline_dict(pid), "Deployment"):
+    sda.fail("Your Deploy stage isn't a canary yet. Ask the agent to change it to a canary deployment.")
+
+green = rolled = False
+for run in (sda.executions(pid, size=10) or []):
+    nodes = sda.stage_nodes(run, "Deployment")
+    if not nodes:
+        continue
+    if run.get("status") in sda.PASSED and not green:
+        green = any(s.get("stepType") == "K8sCanaryDeploy" and s.get("status") == "Success"
+                    for n in nodes for s in sda.step_nodes(run, n))
+    if run.get("status") in sda.FINISHED_BAD and not rolled:
+        rolled = sda.rolled_back(run)
+    if green and rolled:
+        break
+
+if not green:
+    sda.fail("No green canary run yet. Bump the version in showcase.yaml, commit, and run the pipeline.")
+if not rolled:
+    sda.fail("No rollback yet. Ship a bad release: set release.healthy to false in showcase.yaml, bump "
+             "the version, commit, and run the pipeline. The health check should fail and roll back.")
+
+r = sda.app_get("/health")
+if r is None or r.status_code != 200:
+    sda.fail("Your app isn't healthy right now. Set release.healthy back to true, bump the version, and "
+             "run the pipeline again.")
+
+print("Lab 4 complete: a canary shipped, a bad release rolled itself back, and your app is healthy.")

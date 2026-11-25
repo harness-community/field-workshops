@@ -1,7 +1,18 @@
 #!/usr/bin/env python3
 
+import base64
 import os
 import shutil
+import subprocess
+import time
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+# Workshop sandboxes sometimes time out connecting to app.harness.io, so retry
+# connection errors (nothing was sent yet, so this is safe for POSTs too)
+http = requests.Session()
+http.mount("https://", HTTPAdapter(max_retries=Retry(total=5, connect=5, read=0, status=0, backoff_factor=3)))
 from pyharnessworkshop import harness, utils
 
 # REQUIRED VARIABLES LIST
@@ -14,6 +25,41 @@ HARNESS_CODE_REPO = utils.instruqt.get_agent_variable("HARNESS_CODE_REPO")
 
 # Workshop Variables
 workshop_path = "/opt/workshop"
+WORKSHOP_GIT_REPO = "harness-community/se-iacm-workshop"
+
+# Make sure the workshop repo exists. Track setup imports it from GitHub with a
+# background `tofu apply`, but Harness's anonymous GitHub import is often refused
+# ("Access denied ... at github"). If the repo is missing once tofu finishes,
+# create it empty and commit the files from a plain git clone instead.
+code_q = {"accountIdentifier": HARNESS_ACCOUNT_ID, "orgIdentifier": HARNESS_ORG_ID, "projectIdentifier": HARNESS_PROJECT}
+code_headers = {"x-api-key": HARNESS_PAT, "Content-Type": "application/json"}
+code_api = "https://app.harness.io/code/api/v1/repos"
+for _ in range(60):
+    if subprocess.run(["pgrep", "-f", "tofu -chdir=/opt/harness/terraform"], capture_output=True).returncode != 0:
+        break
+    time.sleep(5)
+try:
+    if http.get(f"{code_api}/{HARNESS_CODE_REPO}", params=code_q, headers=code_headers, timeout=30).status_code == 200:
+        print(f"{HARNESS_CODE_REPO} already exists")
+    else:
+        print(f"{HARNESS_CODE_REPO} is missing, creating it from a git clone of {WORKSHOP_GIT_REPO}")
+        src = "/tmp/workshop-repo-src"
+        shutil.rmtree(src, ignore_errors=True)
+        subprocess.run(["git", "clone", "-q", "--depth", "1", f"https://github.com/{WORKSHOP_GIT_REPO}.git", src], check=True)
+        r = http.post(code_api, params=code_q, headers=code_headers, timeout=60,
+                          json={"identifier": HARNESS_CODE_REPO, "default_branch": "main", "is_public": False, "readme": False,
+                                "parent_ref": f"{HARNESS_ACCOUNT_ID}/{HARNESS_ORG_ID}/{HARNESS_PROJECT}"})
+        print(f"  create repo: {r.status_code}")
+        files = subprocess.run(["git", "-C", src, "ls-files"], capture_output=True, text=True, check=True).stdout.split()
+        actions = [{"action": "CREATE", "path": f, "encoding": "base64",
+                    "payload": base64.b64encode(open(os.path.join(src, f), "rb").read()).decode()} for f in files]
+        r = http.post(f"{code_api}/{HARNESS_CODE_REPO}/commits", params=code_q, headers=code_headers, timeout=60,
+                          json={"title": f"Import from {WORKSHOP_GIT_REPO}", "branch": "main", "actions": actions})
+        print(f"  commit {len(files)} files: {r.status_code} {'' if r.ok else r.text[:300]}")
+        shutil.rmtree(src, ignore_errors=True)
+except Exception as e:
+    print(f"ERROR: could not make sure {HARNESS_CODE_REPO} exists: {e}")
+
 
 # Remove terraform files
 shutil.rmtree("/opt/harness/terraform")

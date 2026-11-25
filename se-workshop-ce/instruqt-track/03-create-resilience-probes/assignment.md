@@ -1,6 +1,6 @@
 ---
 slug: create-resilience-probes
-id: g5vsdqunpxzr
+id: 5jskxhyc8wja
 type: challenge
 title: Lab 2 - Create Resilience Probes
 teaser: Creating Resilience Probes for Chaos Experiment Evaluation
@@ -61,7 +61,7 @@ notes:
 
     <div class="container">
       <h1>What is a resilience probe?</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/ce_resilience_probes.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/ce_resilience_probes.png">
       <ul class="features-list">
         <li>Declarative checks that determine the outcome of a fault:
             <ul class="sub-list">
@@ -73,15 +73,15 @@ notes:
       </ul>
     </div>
 tabs:
-- id: rexhcvpkslzm
+- id: paryygzvwgja
   title: Harness Platform
   type: browser
   hostname: harness
-- id: yhdz0gxtv2yl
+- id: 7vos8qbng4kh
   title: Architecture
   type: website
   url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/harness-community/field-workshops/blob/main/se-workshop-ce/assets/misc/diagram.html
-- id: blmi1uerkhzl
+- id: flfs0yeemi8y
   title: Lab Credentials
   type: service
   hostname: sandbox
@@ -99,15 +99,15 @@ h2.cyan { color: cyan; }
 <hr class="cyan">
 <br>
 
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_nav_probes.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_nav_probes.png)
 > ### Click on **Resilience Probes** in the left Nav
 > - Click `+New Probe` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_new_probe.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_new_probe.png)
 
 > **Select your probe type**
 > - Infrastructure Type: `Kubernetes`
 > - Chaos probe: `HTTP` \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-ce/assets/images/ce_probe_k8s_http.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-ce/assets/images/ce_probe_k8s_http.png)
 
 > **HTTP Probe**
 > - **Overview**

@@ -1,5 +1,71 @@
 #!/usr/bin/env python3
+"""Skip: create the demo-workspace exactly as the lab guide describes, so the check passes."""
 
+import os
 import sys
+import time
 
-sys.exit(0)
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+# Workshop sandboxes sometimes time out connecting to app.harness.io, so retry
+# connection errors (nothing was sent yet, so this is safe for POSTs too)
+http = requests.Session()
+http.mount("https://", HTTPAdapter(max_retries=Retry(total=5, connect=5, read=0, status=0, backoff_factor=3)))
+from pyharnessworkshop import utils
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+GCP_PROJECT_ID = utils.instruqt.get_agent_variable("HARNESS_GCP_PROJECT_ID")
+WORKSPACE_ID = "demoworkspace"
+URL = (f"https://app.harness.io/iacm/api/orgs/{HARNESS_ORG_ID}"
+       f"/projects/{HARNESS_PROJECT}/workspaces")
+HEADERS = {"Harness-Account": HARNESS_ACCOUNT_ID, "x-api-key": HARNESS_PAT}
+
+
+def var(key, value):
+    return {"key": key, "value": value, "value_type": "string"}
+
+
+# The student may have started it already: leave an existing workspace alone
+existing = http.get(f"{URL}/{WORKSPACE_ID}", headers=HEADERS, timeout=30)
+if existing.status_code == 200:
+    print(f"Workspace {WORKSPACE_ID} already exists, nothing to do.")
+    sys.exit(0)
+
+workspace = {
+    "identifier": WORKSPACE_ID,
+    "name": "demo-workspace",
+    "provisioner": "opentofu",
+    "provisioner_version": "1.10.6",
+    "provider_connector": "instruqtworkshopconnector",
+    # Harness Code Repository in this project, so no repository connector
+    "repository": "iacm-repo",
+    "repository_branch": "main",
+    "repository_connector": "",
+    "repository_path": "gcp/v1",
+    "cost_estimation_enabled": True,
+    "terraform_variables": {
+        "gcp_project_id": var("gcp_project_id", GCP_PROJECT_ID),
+        "instance_type": var("instance_type", "e2-micro"),
+    },
+    # The API requires this field even when the lab sets no environment variables
+    "environment_variables": {},
+}
+
+# Track setup creates the repo and connector with a background tofu apply, so a quick Skip can
+# get here first. Retry for up to 5 minutes while either one doesn't exist yet.
+for attempt in range(30):
+    response = http.post(URL, headers=HEADERS, json=workspace, timeout=30)
+    if response.status_code in (200, 201) or "does not exist" not in response.text:
+        break
+    print(f"Waiting for the repo and connector from track setup: {response.text}")
+    time.sleep(10)
+if response.status_code not in (200, 201):
+    print(f"Creating workspace failed: HTTP {response.status_code} {response.text}")
+    sys.exit(1)
+print(f"Created workspace {WORKSPACE_ID}.")

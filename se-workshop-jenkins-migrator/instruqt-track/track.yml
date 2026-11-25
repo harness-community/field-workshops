@@ -1,18 +1,19 @@
 slug: se-workshop-jenkins-migrator
-id: kjxnxtl5l2dz
+id: ycjefw2z361t
 title: Harness SE Workshop Jenkins Migrator
 description: |2-
 
-  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_white-logo.png)
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
 
   **This track demonstrates how to:**
     - Lab 1 - Create a Jenkins Pipeline
     - Lab 2 - Migrate to Harness
 icon: https://raw.githubusercontent.com/jtitra/flockjay/refs/heads/main/ProductIcons/light/jenkins.svg
 tags: []
-owner: harness
+owner: harness-se
 developers:
 - joseph.titra@harness.io
+- sean.carolan@harness.io
 show_timer: true
 idle_timeout: 3600
 timelimit: 21600
@@ -24,5 +25,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "11589896411024880731"
+checksum: "10601485873770384697"
 enhanced_loading: false

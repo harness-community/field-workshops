@@ -1,6 +1,6 @@
 ---
 slug: integrating-security
-id: ogacorosvohe
+id: kovtfagsruw4
 type: challenge
 title: Lab 5 - Security Testing Orchestration
 teaser: Orchestrate security tests and remediate vulnerabilities with AI guidance.
@@ -51,7 +51,7 @@ notes:
 
     <div class="container">
       <h1>Comprehensive Built-In Security Testing Orchestration</h1>
-      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sto_pipeline.png">
+      <img class="harness-image" src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/sto_pipeline.png">
       <ul class="features-list">
         <li>Orchestrate Security Scans in the Pipeline</li>
         <li>Rapidly Prioritize Vulnerabilities</li>
@@ -59,20 +59,20 @@ notes:
       </ul>
     </div>
 tabs:
-- id: faerw5irh2oa
+- id: pwatcwukmlt9
   title: Harness Platform
   type: browser
   hostname: harness
-- id: yppyrxwtgxcg
+- id: nd02lek0tada
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: vrm2komkmrvo
+- id: cwecpvqvbryn
   title: Shell
   type: terminal
   hostname: sandbox
-- id: et4leueus0bq
+- id: gsxn2sghcxxc
   title: Lab Credentials
   type: service
   hostname: sandbox
@@ -100,17 +100,17 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 
 > 1) In the existing pipeline, click on the ***IaCM*** stage
 > 1) Click on the **Execution** tab \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_tab_execution.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_tab_execution.png)
 >    1) Hover over the pipeline between `plan` and `IACM Approval` and click `+` \
->        ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_add_sto_step.png)
+>        ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_add_sto_step.png)
 >    1) Select `Add Step`
 >    1) Select `Wiz` \
->       ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_step_wiz.png)
+>       ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_step_wiz.png)
 >    1) Configure with the details below ↓
 
 > **Configure Wiz**
 > - Type: <pre><code>Wiz IaC Scan</pre></code>
-> - Workspace: <pre><code>/harness/aws</pre></code>
+> - Workspace: <pre><code>/harness/azure</pre></code>
 > - **Authentication**
 >   - Access Id: <pre><code><+secrets.getValue("org.wiz_access_id")></pre></code>
 >   - Access Token: <pre><code><+secrets.getValue("org.wiz_access_token")></pre></code>
@@ -120,16 +120,16 @@ Harness offers robust and versatile solutions tailored to meet the stringent dem
 
 ### Execute your updated Pipeline
 > - Click **Save** in the top right to save your new pipeline \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_save.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_save.png)
 > - Now click **Run** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/pipeline_run.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/pipeline_run.png)
 > - Then select your `demoworkspace` **Workspace** to execute the pipeline
 > - Click **Run Pipeline**
 
 ### Security Scan Results
 The Wiz scan takes less than 1 minute to run. <br>
-After the execution is complete, go to the `Security Tests` tab to see the *deduplicated*, *normalized* and *prioritized* list of `vulnerabilities` discovered across your scanners. <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_pipeline_security_tests_tab_aws.png)
+After the execution is complete, go to the `Vulnerabilities` tab to see the *deduplicated*, *normalized* and *prioritized* list of `Security Issues` discovered across your scanners. <br>
+![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_pipeline_security_tests_tab_azure.png)
 
 ===============
 

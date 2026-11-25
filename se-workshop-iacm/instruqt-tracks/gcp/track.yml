@@ -1,9 +1,9 @@
 slug: se-workshop-iacm-gcp
-id: k4jsxzsahxag
+id: afw7gyexpibd
 title: Harness IaCM Workshop - GCP
 description: |2-
 
-  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
 
   **This track demonstrates how to:**
     - Lab 1 - Clone the IaC Repo
@@ -14,11 +14,12 @@ description: |2-
     - Lab 6 - Governance w/OPA
     - Lab 7 - Cost Estimation and State
     - Lab 8 - PR Triggers and Validation
-icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/iacm.png
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/iacm.png
 tags: []
-owner: harness
+owner: harness-se
 developers:
 - joseph.titra@harness.io
+- sean.carolan@harness.io
 show_timer: true
 idle_timeout: 3600
 timelimit: 10800
@@ -30,5 +31,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "3153933190397092987"
+checksum: "9274698227654350408"
 enhanced_loading: false

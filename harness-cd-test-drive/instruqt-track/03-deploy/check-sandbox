@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+
+import os
+import requests
+from pyharnessworkshop import utils
+
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+
+pipeline_id = "CD_Test_Drive"
+HARNESS_API = "https://app.harness.io"
+IN_PROGRESS = {"Running", "AsyncWaiting", "TaskWaiting", "TimedWaiting", "Queued", "NotStarted", "ResourceWaiting", "InterventionWaiting", "ApprovalWaiting", "WaitStepRunning"}
+
+url = f"{HARNESS_API}/pipeline/api/pipelines/execution/summary"
+params = {
+    "accountIdentifier": HARNESS_ACCOUNT_ID,
+    "orgIdentifier": HARNESS_ORG_ID,
+    "projectIdentifier": HARNESS_PROJECT,
+    "pipelineIdentifier": pipeline_id,
+    "page": 0,
+    "size": 1
+}
+headers = {
+    "Content-Type": "application/json",
+    "x-api-key": HARNESS_PAT
+}
+body = {"filterType": "PipelineExecution"}
+response = requests.post(url, params=params, headers=headers, json=body)
+
+if response.status_code != 200:
+    utils.instruqt.raise_lab_failure_message(
+        "Unable to verify pipeline execution. Please try clicking Check again."
+    )
+
+executions = response.json().get("data", {}).get("content", [])
+if not executions:
+    utils.instruqt.raise_lab_failure_message(
+        "No pipeline executions found. Please run the CD Test Drive pipeline "
+        "by clicking Run in the pipeline view."
+    )
+
+status = executions[0].get("status", "")
+if status == "Success":
+    print("Pipeline execution succeeded.")
+elif status in IN_PROGRESS:
+    utils.instruqt.raise_lab_failure_message(
+        "Your deployment is still running. Wait for the green SUCCESS badge, "
+        "then click Check again."
+    )
+else:
+    utils.instruqt.raise_lab_failure_message(
+        f"Your pipeline execution has status '{status}'. "
+        "Please try running the pipeline again."
+    )

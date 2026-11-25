@@ -1,0 +1,45 @@
+slug: harness-cd-test-drive
+id: 2sd5qyt2yu6k
+title: Harness CD Test Drive
+teaser: Tour a real CD pipeline, deploy Captain Canary to Kubernetes, and watch him
+  go live on GKE.
+description: |2-
+
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
+
+  **Experience Harness Continuous Delivery in minutes.**
+
+  See how Harness makes Kubernetes deployments visual, repeatable, and
+  observable — no scripting required.
+
+    - Log in to your personal sandbox
+    - Explore a production-grade CD pipeline
+    - Deploy a live application to Kubernetes
+    - See it running live
+    - Bonus: let Harness AI rework your pipeline
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/cd.png
+tags:
+- gke
+- cd
+- harness
+- continuous-delivery
+- test-drive
+- kubernetes
+owner: harness-se
+developers:
+- joseph.titra@harness.io
+- sean.carolan@harness.io
+show_timer: true
+skipping_enabled: true
+idle_timeout: 600
+timelimit: 1200
+lab_config:
+  sidebar_enabled: true
+  feedback_recap_enabled: true
+  feedback_tab_enabled: false
+  loadingMessages: true
+  override_challenge_layout: false
+  hideStopButton: false
+  default_layout_sidebar_size: 25
+checksum: "15979367862300016887"
+enhanced_loading: false

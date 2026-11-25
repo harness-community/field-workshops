@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+"""Skip: switch to a canary, ship a good release, then a bad one that rolls back.
+
+The fix-forward is left to Lab 5's setup, which keeps Skip to two pipeline runs.
+"""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+sda.upsert_pipeline(sda.render("pipeline.yaml.template", deploy="canary"))
+
+
+def ship(version, healthy):
+    sda.edit_showcase(f"Ship {version}" + ("" if healthy else " (unhealthy on purpose)"),
+                      version=version, healthy=healthy)
+    run = sda.run_pipeline(sda.PIPELINE_ID)
+    return run, sda.wait_for(run, timeout=1200)
+
+
+run, status = ship("1.2.0", True)
+if status not in sda.PASSED:
+    sda.fail(f"The canary release finished with status {status}. Open the pipeline in Harness to see why.")
+print(f"Shipped 1.2.0 by canary ({status}).")
+
+run, status = ship("1.3.0", False)
+if status in sda.PASSED or not sda.rolled_back(sda.execution(run)):
+    sda.fail(f"The bad release finished with status {status} and didn't roll back. "
+             "Open the pipeline in Harness to see why.")
+print(f"Bad release 1.3.0 failed its health check and rolled back ({status}).")
