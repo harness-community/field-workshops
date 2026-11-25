@@ -4,52 +4,107 @@
 
 ## Introduction
 
-These workshops are designed to provide hands-on experience with the various Harness modules. Participants each receive their own dedicated project and any supporting infrastructure that may be required to complete the lab.
+Hands-on Harness workshops that run in a browser on [Instruqt](https://instruqt.com). Each
+participant gets a dedicated Harness project, a login, and any supporting infrastructure the lab
+needs (a Kubernetes namespace, a cloud account, a delegate). All of it is created when the lab
+starts and removed when it ends.
+
+This repo holds the **runtime assets** the workshops pull at launch: Terraform, Kubernetes
+manifests, pipeline YAML templates, shared scripts, and the images used in lab guides. The lab
+guides and lifecycle scripts themselves live in Instruqt, in the `harness-se` organization, and
+Instruqt is the source of truth for them.
 
 ## Workshops
-> ### [CI/CD DevDays](https://github.com/harness-community/field-workshops/tree/main/ci-cd-devdays)
-> #### Lab 1 - Building the Application
-> #### Lab 2 - Continuous Deployment - Frontend
-> #### Lab 3 - Continuous Deployment - Backend
-> #### Lab 4 - Integrating Security
-> #### Lab 5 - Governance and Policy as Code
-> #### Lab 6 - Continuous Verification
 
-> ### [CE Workshop](https://github.com/harness-community/field-workshops/tree/main/se-workshop-ce)
-> #### Lab 1 - Configure Your Chaos Infrastructure
-> #### Lab 2 - Create Resilience Probes
-> #### Lab 3 - Create a Chaos Experiment
-> #### Lab 4 - Execute and Analyze Experiment Results
-> #### Lab 5 - Controlling the Chaos with ChaosGuard
+| Workshop | Folder | Audience | Status |
+|---|---|---|---|
+| DevSecOps | [`se-workshop-devsecops`](se-workshop-devsecops) | CI, CD, STO, OPA, CV | Active, tested nightly |
+| Software Delivery Agent | [`se-workshop-sda`](se-workshop-sda) | AI-driven CI/CD, 2-hour intro | Active, tested nightly |
+| CD Test Drive | [`harness-cd-test-drive`](harness-cd-test-drive) | 20-minute self-serve CD lab | Active, tested nightly |
+| IaCM (AWS, GCP, Azure) | [`se-workshop-iacm`](se-workshop-iacm) | Infrastructure as Code Management | Active; Azure is beta |
+| IDP | [`se-workshop-idp`](se-workshop-idp) | Internal Developer Portal | Active |
+| Chaos Engineering | [`se-workshop-ce`](se-workshop-ce) | Chaos experiments and ChaosGuard | Under maintenance |
+| Jenkins Migrator | [`se-workshop-jenkins-migrator`](se-workshop-jenkins-migrator) | Migrating Jenkins pipelines to Harness | Active |
 
-> ### [DevSecOps Workshop](https://github.com/harness-community/field-workshops/tree/main/se-workshop-devsecops)
-> #### Lab 1 - Building the Application
-> #### Lab 2 - Continuous Deployment - Frontend
-> #### Lab 3 - Continuous Deployment - Backend
-> #### Lab 4 - Integrating Security
-> #### Lab 5 - Governance and Policy as Code
-> #### Lab 6 - ServiceNow RFC Automation
-> #### Lab 7 - Continuous Verification
+"Tested nightly" means an automated `instruqt track test` runs every challenge's setup, solve and
+check each night, and alerts the team if anything fails.
 
-> ### [IaCM Workshop](https://github.com/harness-community/field-workshops/tree/main/se-workshop-iacm)
-> #### Lab 1 - Clone the IaC Repo
-> #### Lab 2 - Creating a Workspace
-> #### Lab 3 - Create a Harness IaCM Pipeline
-> #### Lab 4 - Drift Detection w/Harness IaCM
-> #### Lab 5 - Governance w/OPA
-> #### Lab 6 - Cost Estimation and State
-> #### Lab 7 - PR Triggers and Validation
+Archived, with no live track: [`ci-cd-devdays`](ci-cd-devdays) (superseded by DevSecOps) and
+[`unscripted-workshop-2024`](unscripted-workshop-2024). [`se-workshop-shell`](se-workshop-shell)
+is a template for starting a new workshop.
 
-> ### [IDP Workshop](https://github.com/harness-community/field-workshops/tree/main/se-workshop-idp)
-> #### Lab 1 - Clone the IDP Repo
-> #### Lab 2 - Add a Service Component
-> #### Lab 3 - Create a Scorecard
-> #### Lab 4 - Create a Self-Service Workflow
-> #### Lab 5 - Add Pipeline Relationships
-> #### Lab 6 - Cloud Developer Environments Beta
+### DevSecOps
+1. Building the Application
+2. Continuous Deployment - Frontend
+3. Continuous Deployment - Backend
+4. Security Testing Orchestration
+5. Governance via Policy as Code
+6. ServiceNow RFC Automation
+7. Continuous Verification
+
+### Software Delivery Agent
+1. Brand Your App: a pull request with an AI-written summary
+2. Build with the Agent: the agent writes the CI pipeline; AI helps fix a failing test
+3. Deploy with the Agent: Service, Environment, Infrastructure and a rolling deploy
+4. Ship Safely: a canary with health checks and automatic rollback
+5. Guardrails: a policy blocks the deploy until the agent adds an approval
+
+### CD Test Drive
+1. Explore Your CD Pipeline
+2. Deploy to Kubernetes
+3. See It Live
+4. Bonus: Let AI Build It
+
+### IaCM
+1. Clone the IaC Repo
+2. Creating a Workspace
+3. Create an IaCM Pipeline
+4. Security Testing Orchestration
+5. Drift Detection
+6. Governance
+7. Cost Estimation and State Changes
+8. Pull Request Automation
+
+Each attendee gets their own AWS account, GCP project or Azure subscription.
+
+### IDP
+1. Clone the IDP Repo
+2. Add a Service Component (and a dependent component)
+3. Create a Scorecard
+4. Create a Self-Service Workflow
+5. Add Pipeline Relationships
+6. Cloud Development Environments
+
+### Chaos Engineering
+1. Configuring the Chaos Infrastructure
+2. Create Resilience Probes
+3. Create a Chaos Experiment
+4. Execute and Analyze Experiment Results
+5. Controlling the Chaos with ChaosGuard
+
+### Jenkins Migrator
+1. Create a Jenkins Pipeline
+2. Migrate to Harness
+
+## Repo layout
+
+- `assets/`: shared across workshops: Terraform (`assets/terraform/<workshop>`), Kubernetes
+  manifests (including the delegate template), shared scripts, and common lab images
+- `<workshop>/assets/`: assets for one workshop, such as YAML templates and lab guide images
+- `<workshop>/instruqt-track/`: older snapshots of the track. The live version is in Instruqt.
+
+## Branches
+
+Workshops clone **`main`** when a lab starts, so a merge to `main` reaches every new session right
+away. Many lab guide images are still linked from the **`harness-se`** branch: don't delete that
+branch or move files on it until those links point at `main`.
 
 ## Contributing
-Feel free to fork the repository and submit pull requests. You can also open issues if you find any bugs or have suggestions for improvements.
 
-## Contact Information
-For questions or support regarding this workshop, please contact [jtitra@harness.io](mailto:jtitra@harness.io).
+Pull requests and issues are welcome. Because `main` is live, test a change before merging it:
+run `instruqt track test --skip-fail-check <track>` against the workshops it affects.
+
+## Contact
+
+The Harness Solutions Engineering team maintains these workshops. Open an issue in this repo for
+bugs or questions.
