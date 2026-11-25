@@ -1,6 +1,6 @@
 ---
 slug: create-a-self-service-workflow
-id: ya61nfoj1xhy
+id: f3zshchazju5
 type: challenge
 title: Lab 4 - Create a Self-Service Workflow
 teaser: Standing up a new service often results in tickets flowing back and forth
@@ -10,32 +10,32 @@ notes:
   contents: |-
     <h1>Service Onboarding</h1>
 
-    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_Pipeline.svg" width="500" style="display: inline; vertical-align: left;">
-    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_Serving_Image.svg" width="300" style="display: inline; vertical-align: right;">
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_Pipeline.svg" width="500" style="display: inline; vertical-align: left;">
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_Serving_Image.svg" width="300" style="display: inline; vertical-align: right;">
 
     - **Initiate new projects and services in minutes**
     - **Build Software Templates with best practices baked in**
     - **Create self-service flows and avoid hundreds of tickets**
 tabs:
-- id: kyi862q9cdh0
+- id: sxldfwjtlzde
   title: Harness Platform
   type: browser
   hostname: harness
-- id: ydmdqanzdoow
+- id: rhnp5akwdy9f
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: m452fjjqlo3y
+- id: 8hvmvl8z9t1b
   title: Shell
   type: terminal
   hostname: sandbox
-- id: hx1jdikngbnj
+- id: 1b8whlfg8zyo
   title: GitHub
   type: website
   url: https://github.com/orgs/harnessworkshop/repositories
   new_window: true
-- id: wklfjgzqdu68
+- id: qysxm7vkna6u
   title: Lab Credentials
   type: service
   hostname: sandbox
@@ -71,7 +71,7 @@ h2.cyan { color: cyan; }
 Click on **Workflows** in the left Nav <br>
 
 > **Workflows** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_workflow_provision_new_app_pattern.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_workflow_provision_new_app_pattern.png)
 > - Click `Service Onboarding`
 > - **Provision a New Application Pattern**
 >   - Click `Execute` and provide the details below ↓
@@ -85,7 +85,7 @@ Click on **Workflows** in the left Nav <br>
 > - Click `Create`
 
 > You will be directed to the **Workflow Run** \
->     ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_workflow_run.png)
+>     ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_workflow_run.png)
 > - Click `Show Logs`
 > - Then click on the link in the logs to view the pipeline execution
 > - Once the pipeline is completed, click on the [button label="GitHub" variant="success"](tab-3) tab
@@ -99,7 +99,7 @@ Click on **Workflows** in the left Nav <br>
 
 > In the left Nav <br>
 > Click on project `[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]` \
-   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-idp/assets/images/idp_project_selection.png)
+   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-idp/assets/images/idp_project_selection.png)
 
 ## Head back to the *IDP Module*
 

@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import time
+import requests
+from pyharnessworkshop import harness, utils
+
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+
+pipeline_id = "CD_Test_Drive"
+execution_notes = "Automatically executed via Instruqt Track Skip."
+TIMEOUT_SECONDS = 600
+
+execution_yaml = f"""\
+pipeline:
+  identifier: {pipeline_id}
+"""
+
+# Skip can arrive a minute after track setup, before the delegate is up.
+# A human never hits this, because they spend minutes on login and the pipeline tour.
+from kubernetes import client, config
+contexts, _ = config.list_kube_config_contexts()
+gke_context = next(ctx for ctx in contexts if ctx["name"].startswith("cdtd"))["name"]
+config.load_kube_config(context=gke_context)
+apps = client.AppsV1Api()
+delegate_name = f"{HARNESS_PROJECT}-delegate"
+DELEGATE_TIMEOUT_SECONDS = 300
+delegate_deadline = time.time() + DELEGATE_TIMEOUT_SECONDS
+while True:
+    ready = apps.read_namespaced_deployment_status(delegate_name, HARNESS_PROJECT).status.ready_replicas or 0
+    if ready >= 1:
+        break
+    if time.time() > delegate_deadline:
+        sys.exit(f"Delegate {delegate_name} not ready within {DELEGATE_TIMEOUT_SECONDS} seconds")
+    print(f"Waiting for delegate {delegate_name} to become ready...")
+    time.sleep(10)
+# A delegate passes its readiness probe a little before Harness lists it as connected
+time.sleep(30)
+
+harness.platform.execute_pipeline(
+    HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT,
+    pipeline_id, execution_yaml, execution_notes
+)
+
+# The challenge check requires a successful run, so wait for this one to finish
+url = "https://app.harness.io/pipeline/api/pipelines/execution/summary"
+params = {
+    "accountIdentifier": HARNESS_ACCOUNT_ID,
+    "orgIdentifier": HARNESS_ORG_ID,
+    "projectIdentifier": HARNESS_PROJECT,
+    "pipelineIdentifier": pipeline_id,
+    "page": 0,
+    "size": 1
+}
+headers = {"Content-Type": "application/json", "x-api-key": HARNESS_PAT}
+body = {"filterType": "PipelineExecution"}
+
+deadline = time.time() + TIMEOUT_SECONDS
+while time.time() < deadline:
+    time.sleep(10)
+    response = requests.post(url, params=params, headers=headers, json=body)
+    if response.status_code != 200:
+        continue
+    executions = response.json().get("data", {}).get("content", [])
+    status = executions[0].get("status", "") if executions else ""
+    print(f"Pipeline status: {status or 'not started'}")
+    if status == "Success":
+        sys.exit(0)
+    if status in {"Failed", "Errored", "Aborted", "Expired", "Rejected"}:
+        sys.exit(f"Pipeline execution ended with status '{status}'")
+
+sys.exit(f"Pipeline did not succeed within {TIMEOUT_SECONDS} seconds")

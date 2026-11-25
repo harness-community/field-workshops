@@ -76,7 +76,7 @@ utils.misc.run_command("touch /root/notes/scratch.txt")
 # Get assets for workshop
 print("Cloning field-workshops repo...")
 utils.misc.run_command("git clone https://github.com/harness-community/field-workshops.git")
-shutil.copytree("field-workshops/assets/terraform/gar/", f"{harness_path}/terraform", dirs_exist_ok=True)
+shutil.copytree("field-workshops/assets/terraform/gar/v2/", f"{harness_path}/terraform", dirs_exist_ok=True)
 shutil.copytree("field-workshops/assets/kubernetes-manifests/v2/", f"{harness_path}/misc", dirs_exist_ok=True)
 shutil.copy("field-workshops/assets/scripts/update_netrc.sh", f"{workshop_path}/script.sh")
 shutil.rmtree("field-workshops")

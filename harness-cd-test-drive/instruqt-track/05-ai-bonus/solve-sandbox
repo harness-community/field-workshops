@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+import os
+import yaml
+from pyharnessworkshop import harness, utils
+
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+
+pipeline_id = "CD_Test_Drive"
+
+# Same canary flow Harness AI produces for the prompt in assignment.md
+CANARY_STEPS = [
+    {"step": {"name": "Canary Deployment", "identifier": "canaryDeployment", "type": "K8sCanaryDeploy", "timeout": "10m",
+              "spec": {"instanceSelection": {"type": "Count", "spec": {"count": 1}}, "skipDryRun": False}}},
+    {"step": {"name": "Canary Delete", "identifier": "canaryDelete", "type": "K8sCanaryDelete", "timeout": "10m", "spec": {}}},
+    {"step": {"name": "Rolling Deployment", "identifier": "rollingDeployment", "type": "K8sRollingDeploy", "timeout": "10m",
+              "spec": {"skipDryRun": False, "pruningEnabled": False}}},
+]
+ROLLBACK_STEPS = [
+    {"step": {"name": "Canary Delete", "identifier": "rollbackCanaryDelete", "type": "K8sCanaryDelete", "timeout": "10m", "spec": {}}},
+    {"step": {"name": "Rolling Rollback", "identifier": "rollingRollback", "type": "K8sRollingRollback", "timeout": "10m",
+              "spec": {"pruningEnabled": False}}},
+]
+
+pipeline_yaml = harness.platform.get_pipeline_yaml(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, pipeline_id)
+pipeline = yaml.safe_load(pipeline_yaml)
+
+stage = next(s["stage"] for s in pipeline["pipeline"]["stages"] if s.get("stage", {}).get("identifier") == "Deploy_Frontend")
+stage["spec"]["execution"] = {"steps": CANARY_STEPS, "rollbackSteps": ROLLBACK_STEPS}
+
+harness.platform.update_pipeline(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, pipeline_id,
+                                 yaml.safe_dump(pipeline, sort_keys=False))
+print("Pipeline switched to a canary deployment.")

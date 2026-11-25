@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+
+import os
+from pyharnessworkshop import harness, utils
+
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+
+pipeline_id = "CD_Test_Drive"
+
+json_response = harness.platform.list_pipelines(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT)
+pipeline_data = harness.platform.get_pipeline_by_id(json_response, pipeline_id)
+
+if not pipeline_data:
+    utils.instruqt.raise_lab_failure_message(
+        "The CD Test Drive pipeline was not found. This may indicate a setup issue. "
+        "Please contact your workshop facilitator."
+    )
+
+pipeline_stage_types = pipeline_data.get("filters", {}).get("pms", {}).get("stageTypes", [])
+if "Deployment" not in pipeline_stage_types:
+    utils.instruqt.raise_lab_failure_message(
+        "The pipeline is missing its Deployment stage. This may indicate a setup issue. "
+        "Please contact your workshop facilitator."
+    )

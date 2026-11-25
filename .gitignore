@@ -7,3 +7,7 @@
 
 #Workshops in progress
 **/z_Archive/
+# Instruqt CLI local state
+**/.instruqt/
+**/*.remote
+__pycache__/

@@ -1,0 +1,47 @@
+slug: se-workshop-sda
+id: fr4lrwv9xhlq
+title: 'Harness Software Delivery Agent: Hands-On Workshop'
+teaser: Brand an app, then have the Harness DevOps Agent build, deploy, canary and
+  govern it.
+description: |2-
+
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
+
+  In this workshop you ship a real app to Kubernetes, and the Harness Software
+  Delivery Agent does the building. You describe what you want in plain English,
+  review what the agent proposes, and approve it.
+
+    - Brand your own app: a live trading-desk ticker or an LED billboard
+    - Have the agent build CI: test, build, and push to the Harness Artifact Registry
+    - Use AI to diagnose a failing build, then fix it
+    - Have the agent create your service, environment and deployment
+    - Convert to a canary and watch a bad release roll itself back
+    - Hit a governance policy, and have the agent make the pipeline compliant
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/cd.png
+tags:
+- ai
+- k3s
+- opa
+- cd
+- workshop
+- ci
+- har
+- sda
+- kubernetes
+owner: harness-se
+developers:
+- sean.carolan@harness.io
+show_timer: true
+skipping_enabled: true
+idle_timeout: 1800
+timelimit: 10800
+lab_config:
+  sidebar_enabled: true
+  feedback_recap_enabled: true
+  feedback_tab_enabled: false
+  loadingMessages: true
+  override_challenge_layout: false
+  hideStopButton: false
+  default_layout_sidebar_size: 33
+checksum: "17847065794144624077"
+enhanced_loading: false

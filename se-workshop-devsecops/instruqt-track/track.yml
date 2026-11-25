@@ -1,9 +1,9 @@
-slug: se-workshop-devsecops-v2
-id: wgzi50ohzcqf
+slug: se-workshop-devsecops
+id: djn1cxxblz9s
 title: Harness DevSecOps Workshop
 description: |2-
 
-  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-devsecops/assets/images/harness_devsecops.png)
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
 
   **This track demonstrates how to:**
     - Lab 1 - Building the Application
@@ -13,11 +13,16 @@ description: |2-
     - Lab 5 - Governance and Policy as Code
     - Lab 6 - ServiceNow RFC Automation
     - Lab 7 - Continuous Verification
-icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-devsecops/assets/images/harness_devsecops.svg
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-devsecops/assets/images/harness_devsecops.svg
 tags: []
-owner: harness
+owner: harness-se
 developers:
 - joseph.titra@harness.io
+- george.chapman@harness.io
+- ian.kurtz@harness.io
+- kalyana.venkata@harness.io
+- sean.carolan@harness.io
+- alexander.jaballah@harness.io
 show_timer: true
 skipping_enabled: true
 idle_timeout: 3600
@@ -30,5 +35,5 @@ lab_config:
   override_challenge_layout: false
   hideStopButton: false
   default_layout_sidebar_size: 25
-checksum: "18203169428330124616"
+checksum: "793704494175368911"
 enhanced_loading: false

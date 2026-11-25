@@ -9,10 +9,13 @@ participant gets a dedicated Harness project, a login, and any supporting infras
 needs (a Kubernetes namespace, a cloud account, a delegate). All of it is created when the lab
 starts and removed when it ends.
 
-This repo holds the **runtime assets** the workshops pull at launch: Terraform, Kubernetes
-manifests, pipeline YAML templates, shared scripts, and the images used in lab guides. The lab
-guides and lifecycle scripts themselves live in Instruqt, in the `harness-se` organization, and
-Instruqt is the source of truth for them.
+This repo holds two things:
+
+- The **track source** for every live workshop in the `harness-se` Instruqt organization: lab
+  guides (`assignment.md`), lifecycle scripts (setup, check, solve, cleanup) and track
+  configuration. This is the source of truth. See [Editing a track](#editing-a-track).
+- The **runtime assets** the workshops pull at launch: Terraform, Kubernetes manifests, pipeline
+  YAML templates, shared scripts, and the images used in lab guides.
 
 ## Workshops
 
@@ -21,13 +24,15 @@ Instruqt is the source of truth for them.
 | DevSecOps | [`se-workshop-devsecops`](se-workshop-devsecops) | CI, CD, STO, OPA, CV | Active, tested nightly |
 | Software Delivery Agent | [`se-workshop-sda`](se-workshop-sda) | AI-driven CI/CD, 2-hour intro | Active, tested nightly |
 | CD Test Drive | [`harness-cd-test-drive`](harness-cd-test-drive) | 20-minute self-serve CD lab | Active, tested nightly |
-| IaCM (AWS, GCP, Azure) | [`se-workshop-iacm`](se-workshop-iacm) | Infrastructure as Code Management | Active; Azure is beta |
-| IDP | [`se-workshop-idp`](se-workshop-idp) | Internal Developer Portal | Active |
-| Chaos Engineering | [`se-workshop-ce`](se-workshop-ce) | Chaos experiments and ChaosGuard | Under maintenance |
-| Jenkins Migrator | [`se-workshop-jenkins-migrator`](se-workshop-jenkins-migrator) | Migrating Jenkins pipelines to Harness | Active |
+| IaCM (AWS, GCP, Azure) | [`se-workshop-iacm`](se-workshop-iacm) | Infrastructure as Code Management | Active, tested nightly; Azure is beta |
+| IDP | [`se-workshop-idp`](se-workshop-idp) | Internal Developer Portal | Active, tested nightly (login only) |
+| Chaos Engineering | [`se-workshop-ce`](se-workshop-ce) | Chaos experiments and ChaosGuard | Under maintenance, tested nightly |
+| Jenkins Migrator | [`se-workshop-jenkins-migrator`](se-workshop-jenkins-migrator) | Migrating Jenkins pipelines to Harness | Active, tested nightly (login only) |
+| GSA MCP Server | [`fed-gsa-mcp-server-workshop`](fed-gsa-mcp-server-workshop) | DevSecOps variant built for the GSA event (Nov 2026) | Event track, tested nightly |
 
-"Tested nightly" means an automated `instruqt track test` runs every challenge's setup, solve and
-check each night, and alerts the team if anything fails.
+"Tested nightly" means an automated `instruqt track test` runs each challenge's setup, solve and
+check every night, and alerts the team if anything fails. Where a track's solve scripts are still
+stubs, only the steps they automate are tested.
 
 Archived, with no live track: [`ci-cd-devdays`](ci-cd-devdays) (superseded by DevSecOps) and
 [`unscripted-workshop-2024`](unscripted-workshop-2024). [`se-workshop-shell`](se-workshop-shell)
@@ -91,7 +96,40 @@ Each attendee gets their own AWS account, GCP project or Azure subscription.
 - `assets/`: shared across workshops: Terraform (`assets/terraform/<workshop>`), Kubernetes
   manifests (including the delegate template), shared scripts, and common lab images
 - `<workshop>/assets/`: assets for one workshop, such as YAML templates and lab guide images
-- `<workshop>/instruqt-track/`: older snapshots of the track. The live version is in Instruqt.
+- `<workshop>/instruqt-track/`: the Instruqt track (IaCM has one per cloud under
+  `se-workshop-iacm/instruqt-tracks/`)
+
+## Editing a track
+
+Each track folder maps to one Instruqt track in the `harness-se` organization:
+
+| Instruqt track | Folder |
+|---|---|
+| `se-workshop-devsecops` | `se-workshop-devsecops/instruqt-track` |
+| `se-workshop-sda` | `se-workshop-sda/instruqt-track` |
+| `harness-cd-test-drive` | `harness-cd-test-drive/instruqt-track` |
+| `se-workshop-iacm-aws-1-2-aws` | `se-workshop-iacm/instruqt-tracks/aws` |
+| `se-workshop-iacm-aws-1-1` | `se-workshop-iacm/instruqt-tracks/aws-1-1` |
+| `se-workshop-iacm-gcp` | `se-workshop-iacm/instruqt-tracks/gcp` |
+| `se-workshop-iacm-azure` | `se-workshop-iacm/instruqt-tracks/azure` |
+| `se-workshop-idp` | `se-workshop-idp/instruqt-track` |
+| `se-workshop-ce` | `se-workshop-ce/instruqt-track` |
+| `se-workshop-jenkins-migrator` | `se-workshop-jenkins-migrator/instruqt-track` |
+| `fed-gsa-mcp-server-workshop` | `fed-gsa-mcp-server-workshop/instruqt-track` |
+| `se-workshop-shell` (template) | `se-workshop-shell/instruqt-track` |
+
+To change a track:
+
+1. Edit it here, on a branch.
+2. From the track folder, run `instruqt track validate`, then `instruqt track push`.
+3. Run `instruqt track test --skip-fail-check harness-se/<track>`.
+4. Open a pull request.
+
+If you change a track in the Instruqt web editor instead, run `instruqt track pull` in its folder
+afterwards and commit the result, so this repo doesn't fall behind.
+
+Never put secrets in a track. This repo is public. Use Instruqt team secrets (listed in each
+track's `config.yml`) and read them from the environment.
 
 ## Branches
 

@@ -1,17 +1,20 @@
 slug: se-workshop-shell
-id: zl6yx54s7wrs
-title: Harness SE Workshop Shell
+id: jxke2pgshxz2
+title: '[ARCHIVED] Harness SE Workshop Shell'
 description: |2-
 
-  ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png)
+  ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_white-logo.png)
 
   **This track demonstrates how to:**
     - Lab 1 - TBD
-icon: https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/harness.png
-tags: []
-owner: harness
+icon: https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/harness.png
+tags:
+- archived
+owner: harness-se
 developers:
 - joseph.titra@harness.io
+- sean.carolan@harness.io
+maintenance: true
 show_timer: true
 idle_timeout: 1800
 timelimit: 3600
@@ -23,5 +26,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "5271950227981308006"
+checksum: "2851570656857452388"
 enhanced_loading: false

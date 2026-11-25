@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+
+import os
+from pyharnessworkshop import harness, utils
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+
+# Lab values
+default_pipeline_id = "Workshop_Build_and_Deploy"
+stage_service = "frontend"
+stage_missing_fail_message = f"""\
+Your pipeline is missing the 'Deployment' stage for the '{stage_service}' artifact. Please correct this using the instructions in the lab guide. If you get stuck you can always click 'Skip' and we will complete things for you!
+"""
+
+# Get pipeline data
+json_response = harness.platform.list_pipelines(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT)
+pipeline_data = harness.platform.get_pipeline_by_id(json_response, default_pipeline_id)
+
+# Extract details or use default values
+pipeline_id = pipeline_data.get("identifier", default_pipeline_id) if pipeline_data else default_pipeline_id
+
+# Verify pipeline has expected stage
+pipeline_stage_types = pipeline_data.get("filters", {}).get("pms", {}).get("stageTypes", [])
+pipeline_stage_names = pipeline_data.get("stageNames", [])
+print(f"    DEBUG: Found the following stage type(s): {pipeline_stage_types}")
+print(f"    DEBUG: Found the following stage name(s): {pipeline_stage_names}")
+if "Deployment" in pipeline_stage_types:
+    print("    DEBUG: The pipeline contains a 'Deployment' stage.")
+else:
+    print("    DEBUG: The pipeline is missing the 'Deployment' stage.")
+    utils.instruqt.raise_lab_failure_message(stage_missing_fail_message)
+
+# Get stage id and validate configuration
+pipeline_yaml = harness.platform.get_pipeline_yaml(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, pipeline_id)
+pipeline_dict = utils.misc.parse_pipeline(pipeline_yaml)
+stage_id = utils.misc.get_stage_identifier_from_dict(pipeline_dict, "Deployment", stage_service)
+if stage_id:
+    print(f"    DEBUG: Found 'Deployment' stage with id: {stage_id}.")
+else:
+    print(f"    DEBUG: Pipeline is missing 'Deployment' stage for the '{stage_service}' artifact.")
+    utils.instruqt.raise_lab_failure_message(stage_missing_fail_message)
+stage_context = {
+    "service": {
+        "serviceRef": f"{stage_service}"
+    },
+    "environment": {
+        "environmentRef": "dev",
+        "infrastructureDefinitions": [{"identifier": "k8s_dev"}]
+    }
+}
+pipeline_misconfiguration = utils.misc.validate_stage_configuration(pipeline_dict, stage_id, stage_context)
+if pipeline_misconfiguration:
+    all_messages = ""
+    for item in pipeline_misconfiguration:
+        if "message" in item:
+            all_messages += "ERROR: " + item["message"] + " "
+    utils.instruqt.raise_lab_failure_message(all_messages)
+else:
+    print("No misconfigurations found!")

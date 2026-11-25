@@ -20,7 +20,7 @@ USER_EMAIL = utils.instruqt.get_agent_variable("HARNESS_USER")
 USER_PWD = utils.instruqt.get_agent_variable("HARNESS_PWD")
 DEFAULT_CREDENTIALS = [
     {
-        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/harness_black-logo.png",
+        "logo_url": "https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/harness_black-logo.png",
         "name": "Harness",
         "auth": {
             "Username": f"{USER_EMAIL}",

@@ -1,6 +1,6 @@
 ---
 slug: clone-the-repo
-id: rcm8xcyzgrmf
+id: hal3npukl16o
 type: challenge
 title: Lab 1 - Clone the IaC Repo
 teaser: For this workshop we will be using Harness Code, but this process works the
@@ -33,46 +33,46 @@ notes:
 
     <div class="plugins-grid">
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/svg/code.svg" alt="Harness Code" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/svg/code.svg" alt="Harness Code" width="150">
         <p>Harness Code</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/github.svg" alt="GitHub" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/github.svg" alt="GitHub" width="150">
         <p>GitHub</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/gitlab.svg" alt="GitLab" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/gitlab.svg" alt="GitLab" width="150">
         <p>GitLab</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/bitbucket.svg" alt="BitBucket" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/bitbucket.svg" alt="BitBucket" width="150">
         <p>BitBucket</p>
       </div>
       <div class="plugin-item">
-        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/logos/svg/git_scm.svg" alt="Git" width="150">
+        <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/logos/svg/git_scm.svg" alt="Git" width="150">
         <p>Git</p>
       </div>
     </div>
 tabs:
-- id: rgv6pyldehmq
+- id: hh6aaoh4cz66
   title: Harness Platform
   type: browser
   hostname: harness
-- id: hcun4vnsfhsv
+- id: 9r08ibfli9mr
   title: Code Editor
   type: service
   hostname: sandbox
   port: 8443
-- id: edvxytbqbpac
+- id: jaguibd2ioyc
   title: Shell
   type: terminal
   hostname: sandbox
-- id: iyzrcljtqwt6
+- id: ycsfdtak1zwt
   title: Notes
   type: code
   hostname: sandbox
   path: /root/notes
-- id: rjwzincsxd8a
+- id: ixgp9d4jovno
   title: Lab Credentials
   type: service
   hostname: sandbox
@@ -91,16 +91,16 @@ h2.cyan { color: cyan; }
 <br><br>
 
 ## Let's take a look at our code
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/module_code.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/module_code.png)
 
 Select the **Code Repository** module from the list <br>
 
 Click on the **iacm-repo** that's been setup for you <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/se-workshop-iacm/assets/images/iacm_code_repo.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/se-workshop-iacm/assets/images/iacm_code_repo.png)
 
 Click on **Clone** in the top right <br>
 And then click `+Generate Clone Credential` <br>
-![](https://raw.githubusercontent.com/harness-community/field-workshops/main/unscripted-workshop-2024/assets/images/code_clone.png)
+![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/unscripted/code_clone.png)
 
 Copy the values from here and store them on the `Notes` 📝 tab or locally on your machine.
 

@@ -1,5 +1,45 @@
 #!/usr/bin/env python3
 
-import sys
+# Skip for Lab 2: create the "lab" environment and register the "lab-hce"
+# chaos infrastructure (no delegate, namespace scope, manifest install) in the
+# student's namespace. Lab 3 setup downloads and applies the manifest.
 
-sys.exit(0)
+import os
+import sys
+import requests
+from pyharnessworkshop import harness, utils
+
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+USER_NAMESPACE = utils.instruqt.get_agent_variable("HARNESS_USER_NAME")
+
+ENV_ID = "lab"
+INFRA_NAME = "lab-hce"
+HEADERS = {"x-api-key": HARNESS_PAT, "Harness-Account": HARNESS_ACCOUNT_ID, "Content-Type": "application/json"}
+PARAMS = {"accountIdentifier": HARNESS_ACCOUNT_ID}
+
+# 1. Environment
+r = requests.get(f"https://app.harness.io/ng/api/environmentsV2/{ENV_ID}", headers=HEADERS,
+                 params={**PARAMS, "orgIdentifier": HARNESS_ORG_ID, "projectIdentifier": HARNESS_PROJECT})
+if r.status_code == 200:
+    print(f"Environment '{ENV_ID}' already exists")
+else:
+    r = requests.post("https://app.harness.io/ng/api/environmentsV2", headers=HEADERS, params=PARAMS,
+                      json={"orgIdentifier": HARNESS_ORG_ID, "projectIdentifier": HARNESS_PROJECT,
+                            "identifier": ENV_ID, "name": ENV_ID, "type": "PreProduction"})
+    if r.status_code not in (200, 201):
+        print(f"Creating environment failed: {r.status_code} {r.text}")
+        sys.exit(1)
+    print(f"Created environment '{ENV_ID}'")
+
+# 2. Chaos infrastructure
+infras = harness.chaos.make_api_call(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, "list_infra")
+if any(i["name"] == INFRA_NAME for i in infras["data"]["listInfrasV2"]["infras"]):
+    print(f"Chaos infrastructure '{INFRA_NAME}' already exists")
+    sys.exit(0)
+
+harness.chaos.register_infra(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, INFRA_NAME, ENV_ID,
+                             {"infraNamespace": USER_NAMESPACE, "serviceAccount": "hce"})
+print(f"Registered chaos infrastructure '{INFRA_NAME}' in namespace {USER_NAMESPACE}")

@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import os
+import yaml
+from pyharnessworkshop import harness, utils
+
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_PROJECT = utils.instruqt.get_agent_variable("HARNESS_PRJ_ID")
+
+pipeline_id = "CD_Test_Drive"
+
+
+def step_types(node):
+    if isinstance(node, dict):
+        if "type" in node and "identifier" in node:
+            yield node["type"]
+        for value in node.values():
+            yield from step_types(value)
+    elif isinstance(node, list):
+        for item in node:
+            yield from step_types(item)
+
+
+pipeline_yaml = harness.platform.get_pipeline_yaml(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, HARNESS_PROJECT, pipeline_id)
+types = set(step_types(yaml.safe_load(pipeline_yaml)))
+
+if "K8sCanaryDeploy" in types:
+    print("Pipeline has a canary deployment step.")
+else:
+    utils.instruqt.raise_lab_failure_message(
+        "Your pipeline doesn't have a canary deployment yet. Paste the prompt into Ask AI, "
+        "click Accept, then click Save, and click Check again."
+    )

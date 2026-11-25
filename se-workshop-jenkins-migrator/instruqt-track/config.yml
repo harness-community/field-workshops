@@ -6,7 +6,8 @@ virtualmachines:
 - name: sandbox
   image: sales-209522/harness-se-workshop-v0-0-19
   shell: /bin/bash
-  machine_type: n2-standard-8
+  memory: 32768
+  cpus: 8
   allow_external_ingress:
   - http
   - https

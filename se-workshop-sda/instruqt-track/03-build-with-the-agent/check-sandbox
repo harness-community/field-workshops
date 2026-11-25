@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+"""Lab 2 passes when a CI pipeline tests and pushes to HAR, has a green run, and the image exists."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+pid = sda.find_pipeline()
+if not pid:
+    sda.fail("Couldn't find your pipeline. Ask the agent to create a pipeline named \"showcase\".")
+
+ci_types = sda.step_types(sda.pipeline_dict(pid), "CI")
+if not ci_types:
+    sda.fail(f"Pipeline {pid} has no CI (Build) stage yet. Ask the agent to add one.")
+if "Run" not in ci_types:
+    sda.fail(f"Pipeline {pid} has no Run step for the unit tests. Ask the agent to add a Run step "
+             "that runs `go test ./...` in golang:1.27-alpine.")
+if not any(t.startswith("BuildAndPush") for t in ci_types):
+    sda.fail(f"Pipeline {pid} doesn't build and push an image. Ask the agent to add a "
+             "\"Build and Push to Docker Registry\" step using the \"har\" connector.")
+
+runs = sda.executions(pid) or []
+if not runs:
+    sda.fail(f"Pipeline {pid} hasn't run yet. Click Run.")
+if not any(r.get("status") in sda.PASSED for r in runs):
+    latest = runs[0].get("status")
+    if latest in sda.IN_PROGRESS:
+        sda.fail("Your pipeline is still running. Click Check again when it finishes.")
+    sda.fail("Your pipeline hasn't had a green run yet. Click the failed step and use Analyze Error "
+             "to find the bug, fix it in the sda-showcase repo, and run the pipeline again.")
+
+if not sda.image_tags():
+    sda.fail("Your pipeline ran, but there's no sda-showcase image in your registry. Check that the "
+             "Build and push step uses the \"har\" connector and the repository <+variable.image_repo>.")
+
+print(f"Lab 2 complete: pipeline {pid} tested, built, and pushed sda-showcase to your registry.")

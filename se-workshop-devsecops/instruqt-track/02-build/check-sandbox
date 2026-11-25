@@ -50,7 +50,7 @@ step_context = {
     "Test": {
         "spec": {
             "shell": "Sh",
-            "command": "cd ./python-tests\npytest"
+            "command": "pip install 'pytest<9' pytest-html pytest-cov\nmkdir -p reports\npytest --junitxml=reports/junit.xml"
         }
     },
     "Compile": {

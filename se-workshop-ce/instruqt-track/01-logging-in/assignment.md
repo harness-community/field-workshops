@@ -1,35 +1,35 @@
 ---
 slug: logging-in
-id: ca1uvxqxum18
+id: 1g8waubnfu4h
 type: challenge
 title: Logging into your Harness Sandbox Account
 teaser: Let's log into Harness using your student credentials!
 notes:
 - type: text
   contents: |-
-    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/harness.png" width="35" style="display: inline; vertical-align: middle;"> **harness**<br>
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/harness.png" width="35" style="display: inline; vertical-align: middle;"> **harness**<br>
     ***The AI-Native Software Delivery Platform™***
 
     Today's workshop will provide you with hands-on experience with:<br>
 
-    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/modules/ce.png" width="40" style="display: inline; vertical-align: middle;"> **Chaos Engineering**
+    <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/modules/ce.png" width="40" style="display: inline; vertical-align: middle;"> **Chaos Engineering**
     - Discover how your applications stand up to real-world failure scenarios. Gain insights to construct a resilient system that minimizes downtime and saves on costs.
 
     <br>
 
     **Please wait while we setup your Sandbox environment**
 tabs:
-- id: covkexffx8th
+- id: p6u6uuxn6c1o
   title: Workshop SSO Login
   type: browser
   hostname: harness
-- id: k7mtdhtzjtrk
+- id: c460xv6yk9uy
   title: Lab Credentials
   type: service
   hostname: sandbox
   path: /credential_tab.html
   port: 8000
-- id: 0duikrsleexs
+- id: fub3xbxbogh6
   title: Harness Platform
   type: website
   url: https://app.harness.io/ng/account/UL037itkT6SA3IDdIIXWcQ/main-dashboard
@@ -61,7 +61,7 @@ Login to your **Harness Sandbox** account using the details provided below.👇
 >    1) Mac:`⌘ -`
 >    1) PC: `CTRL -`
 > 1) *If you experience any issues you can access the Harness Platform in your browser tab by clicking: \
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-2) tab*
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/arrow-up-right-from-square.svg" alt="Arrow icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Harness Platform" variant="success"](tab-2) tab*
 
 Harness Account
 ===
@@ -73,7 +73,7 @@ Harness Account
 
 > [!NOTE]
 > *All credentials for this lab can always be found on the: <br>
->  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-1) tab*
+>  <img src="https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/link.svg" alt="Link icon" width="16" height="16" style="display: inline; vertical-align: middle;">[button label="Lab Credentials" variant="success"](tab-1) tab*
 
 ---
 
@@ -82,7 +82,7 @@ Signing In
 
 > 📝 *Click Single sign-on* <br>
 > *Login using the credentials above:* <br>
-> ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/sso_login.png)
+> ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/sso_login.png)
 
 Project Selection
 ===
@@ -90,7 +90,7 @@ Project Selection
 > A **Project** has been created for you and is where you will perform the tasks in the subsequent labs. \
 > Click on `Select a Project` \
 > Click on project `[[ Instruqt-Var key="HARNESS_PRJ_ID" hostname="sandbox" ]]` \
-   ![](https://raw.githubusercontent.com/harness-community/field-workshops/main/assets/images/platform_project_selection.png)
+   ![](https://raw.githubusercontent.com/harness-community/field-workshops/harness-se/assets/images/platform_project_selection.png)
 
 Conclusion
 ===

@@ -6,7 +6,7 @@ import time
 import shutil
 
 # Third-party imports
-from kubernetes import config
+from kubernetes import config, client
 
 # Library-specific imports
 from pyharnessworkshop import harness, keycloak, utils
@@ -88,7 +88,10 @@ os.environ["KUBECONFIG"] = "/root/.kube/config"
 print("Deploying Boutique app...")
 contexts, active_context = config.list_kube_config_contexts()
 gke_context = next(ctx for ctx in contexts if ctx['name'].startswith(f'{WORKSHOP_TYPE}'))['name']
+
+# Switch contexts
 config.load_kube_config(context=gke_context)
+
 
 # Apply manifests
 utils.k8s.create_k8s_secret("grafana-admin", GRAFANA_PW, user_name)
@@ -116,6 +119,8 @@ utils.k8s.apply_k8s_manifests([
 
 # Delete default context (k3s) as it's not necessary for the workshop
 utils.misc.run_command(f"kubectl config use-context {gke_context}")
+
+
 utils.misc.run_command("kubectl config delete-context default")
 
 # Export additional variables for later use

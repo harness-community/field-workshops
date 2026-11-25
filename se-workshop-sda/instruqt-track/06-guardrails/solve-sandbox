@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+"""Skip: add the approval, run, approve, and wait for the release."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+sda.set_policy_set_enabled(True)
+sda.upsert_pipeline(sda.render("pipeline.yaml.template", deploy="canary", approval=True))
+
+run = sda.run_pipeline(sda.PIPELINE_ID)
+status = sda.wait_for(run, timeout=900, until=("ApprovalWaiting",))
+if status == "ApprovalWaiting":
+    if not sda.approve_waiting(run):
+        sda.fail("The run is waiting for approval, but Skip couldn't approve it. Open the run and click Approve.")
+    status = sda.wait_for(run, timeout=1200)
+if status not in sda.PASSED:
+    sda.fail(f"The approved release finished with status {status}. Open the pipeline in Harness to see why.")
+print(f"Approved and released ({status}).")
