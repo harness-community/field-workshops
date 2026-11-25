@@ -96,8 +96,9 @@ Each attendee gets their own AWS account, GCP project or Azure subscription.
 ## Branches
 
 Workshops clone **`main`** when a lab starts, so a merge to `main` reaches every new session right
-away. Many lab guide images are still linked from the **`harness-se`** branch: don't delete that
-branch or move files on it until those links point at `main`.
+away. Many lab guide images are still linked from the **`harness-se`** branch, and the IaCM lab
+images from **`iacm-updates`**. Don't delete either branch, or move files on them, until those
+links point at `main`.
 
 ## Contributing
 
