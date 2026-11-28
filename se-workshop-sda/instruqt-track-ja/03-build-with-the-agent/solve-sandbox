@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+"""Skip: fix the seeded bug, write the CI pipeline, and run it green."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+BUG, FIX = 'strings.HasPrefix(s, "JPY")', 'strings.HasSuffix(s, "JPY")'
+source = sda.code_file("internal/market/market.go")
+if source and BUG in source:
+    sda.commit_file("internal/market/market.go", source.replace(BUG, FIX),
+                    "Quote yen pairs to 2 decimals: they end with JPY")
+    print("Fixed the yen-pair bug in internal/market/market.go.")
+
+sda.upsert_pipeline(sda.render("pipeline.yaml.template", deploy="none"))
+run = sda.run_pipeline(sda.PIPELINE_ID)
+status = sda.wait_for(run, timeout=900)
+if status not in sda.PASSED:
+    sda.fail(f"The showcase pipeline finished with status {status}. Open it in Harness to see why.")
+print(f"Pipeline showcase ran green ({status}).")

@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+"""Pin the student's pipeline to their own delegate before the agent changes it."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+# Health-check steps must run on this sandbox's delegate: no other delegate can reach its k3s.
+# The agent doesn't reliably set step selectors, so set one at pipeline level for it.
+try:
+    sda.pin_delegate()
+except (SystemExit, Exception):
+    print("Couldn't pin the pipeline's delegate; the Health check troubleshooting row covers it.")

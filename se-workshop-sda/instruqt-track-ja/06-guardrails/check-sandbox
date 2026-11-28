@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+"""Lab 5 passes when the policy is on, the pipeline approves before deploying, and a run since
+the policy went on succeeded."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+if not sda.policy_set_enabled():
+    sda.fail("guardrails ポリシーセットが無効になっています。Project Settings → Policies → Policy Sets で "
+             "有効に戻してから、パイプラインをもう一度実行してください。")
+
+pid = sda.find_pipeline()
+if not pid or not sda.has_approval_before_deploy(sda.pipeline_dict(pid)):
+    sda.fail("パイプラインがまだ承認なしでデプロイしています。Deploy ステージの先頭に Harness Approval ステップを "
+             "追加するよう、エージェントに依頼してください。")
+
+try:
+    since = int(open(f"{sda.SDA_DIR}/guardrails_started_ms").read())
+except (OSError, ValueError):
+    since = 0
+runs = [r for r in (sda.executions(pid, size=10) or []) if (r.get("startTs") or 0) >= since]
+if any(r.get("status") in sda.PASSED for r in runs):
+    print("Lab 5 complete: your pipeline passed the policy, and you approved the release.")
+    sys.exit(0)
+if runs and runs[0].get("status") == "ApprovalWaiting":
+    sda.fail("実行があなたの承認を待っています。実行を開いて Approve をクリックし、完了したら Check をクリックしてください。")
+if runs and runs[0].get("status") in sda.IN_PROGRESS:
+    sda.fail("パイプラインはまだ実行中です。完了したら、もう一度 Check をクリックしてください。")
+sda.fail("ポリシーを有効にしてから、成功した実行がありません。パイプラインを実行して承認し、完了するまで待ってください。")

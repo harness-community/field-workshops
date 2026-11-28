@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+"""Skip: create the service, environment and infrastructure, add a rolling deploy, and run it."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+sda.upsert_entity("environment", sda.ENV_ID, sda.render("environment.yaml.template"))
+sda.upsert_entity("infrastructure", sda.INFRA_ID, sda.render("infrastructure.yaml.template"))
+sda.upsert_entity("service", sda.SERVICE_ID, sda.render("service.yaml.template"))
+sda.upsert_pipeline(sda.render("pipeline.yaml.template", deploy="rolling"))
+
+run = sda.run_pipeline(sda.PIPELINE_ID)
+status = sda.wait_for(run, timeout=1200)
+if status not in sda.PASSED:
+    sda.fail(f"The showcase pipeline finished with status {status}. Open it in Harness to see why.")
+print(f"Deployed ({status}).")

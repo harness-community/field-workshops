@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+"""Lab 4 passes when the pipeline deploys by canary, a canary run went green, another rolled
+back, and the app is healthy."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+pid = sda.find_pipeline()
+if not pid or "K8sCanaryDeploy" not in sda.step_types(sda.pipeline_dict(pid), "Deployment"):
+    sda.fail("Deploy ステージはまだカナリアデプロイになっていません。カナリアデプロイに変更するよう、エージェントに依頼してください。")
+
+green = rolled = False
+for run in (sda.executions(pid, size=10) or []):
+    nodes = sda.stage_nodes(run, "Deployment")
+    if not nodes:
+        continue
+    if run.get("status") in sda.PASSED and not green:
+        green = any(s.get("stepType") == "K8sCanaryDeploy" and s.get("status") == "Success"
+                    for n in nodes for s in sda.step_nodes(run, n))
+    if run.get("status") in sda.FINISHED_BAD and not rolled:
+        rolled = sda.rolled_back(run)
+    if green and rolled:
+        break
+
+if not green:
+    sda.fail("カナリアデプロイの成功した実行がまだありません。showcase.yaml の version を上げてコミットし、パイプラインを実行してください。")
+if not rolled:
+    sda.fail("ロールバックがまだ発生していません。問題のあるリリースを出してみましょう。showcase.yaml の release.healthy を false にし、"
+             "version を上げてコミットし、パイプラインを実行します。ヘルスチェックが失敗し、ロールバックされるはずです。")
+
+r = sda.app_get("/health")
+if r is None or r.status_code != 200:
+    sda.fail("アプリが現在正常ではありません。release.healthy を true に戻し、version を上げて、"
+             "パイプラインをもう一度実行してください。")
+
+print("Lab 4 complete: a canary shipped, a bad release rolled itself back, and your app is healthy.")
