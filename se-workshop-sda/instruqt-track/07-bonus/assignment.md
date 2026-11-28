@@ -46,8 +46,8 @@ The sandbox is yours until the timer runs out. Here are a few things to try.
 See the audit trail
 ===
 
-Go to **Project Settings** → **Audit Trail**. Every change the agent made today is there:
-what changed, when, and on whose behalf. Each change is attributed to **you**, because you
+Go to **Account Settings** → **Security and Governance** → **Audit Trail**, and filter by your
+project. Every change the agent made today is there: what changed, when, and on whose behalf. Each change is attributed to **you**, because you
 accepted it.
 
 Ask the agent to explain
