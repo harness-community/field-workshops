@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+"""Lab 2 passes when a CI pipeline tests and pushes to HAR, has a green run, and the image exists."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+pid = sda.find_pipeline()
+if not pid:
+    sda.fail("パイプラインが見つかりません。\"showcase\" という名前のパイプラインを作成するよう、エージェントに依頼してください。")
+
+ci_types = sda.step_types(sda.pipeline_dict(pid), "CI")
+if not ci_types:
+    sda.fail(f"パイプライン {pid} には CI（Build）ステージがまだありません。追加するよう、エージェントに依頼してください。")
+if "Run" not in ci_types:
+    sda.fail(f"パイプライン {pid} にユニットテスト用の Run ステップがありません。golang:1.27-alpine で "
+             "`go test ./...` を実行する Run ステップを追加するよう、エージェントに依頼してください。")
+if not any(t.startswith("BuildAndPush") for t in ci_types):
+    sda.fail(f"パイプライン {pid} はイメージをビルドしてプッシュしていません。\"har\" コネクターを使う "
+             "\"Build and Push to Docker Registry\" ステップを追加するよう、エージェントに依頼してください。")
+
+runs = sda.executions(pid) or []
+if not runs:
+    sda.fail(f"パイプライン {pid} はまだ実行されていません。Run をクリックしてください。")
+if not any(r.get("status") in sda.PASSED for r in runs):
+    latest = runs[0].get("status")
+    if latest in sda.IN_PROGRESS:
+        sda.fail("パイプラインはまだ実行中です。完了したら、もう一度 Check をクリックしてください。")
+    sda.fail("パイプラインの実行がまだ一度も成功していません。失敗したステップをクリックし、Analyze Error でバグを見つけて、"
+             "sda-showcase リポジトリで修正してから、パイプラインをもう一度実行してください。")
+
+if not sda.image_tags():
+    sda.fail("パイプラインは実行されましたが、レジストリに sda-showcase イメージがありません。Build and push ステップが "
+             "\"har\" コネクターとリポジトリ <+variable.image_repo> を使っているか確認してください。")
+
+print(f"Lab 2 complete: pipeline {pid} tested, built, and pushed sda-showcase to your registry.")

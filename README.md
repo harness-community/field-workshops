@@ -23,6 +23,7 @@ This repo holds two things:
 |---|---|---|---|
 | DevSecOps | [`se-workshop-devsecops`](se-workshop-devsecops) | CI, CD, STO, OPA, CV | Active, tested nightly |
 | Software Delivery Agent | [`se-workshop-sda`](se-workshop-sda) | AI-driven CI/CD, 2-hour intro | Active, tested nightly |
+| Software Delivery Agent (日本語) | [`se-workshop-sda`](se-workshop-sda) | Japanese copy of the SDA workshop | Active, tested nightly |
 | CD Test Drive | [`harness-cd-test-drive`](harness-cd-test-drive) | 20-minute self-serve CD lab | Active, tested nightly |
 | IaCM (AWS, GCP, Azure) | [`se-workshop-iacm`](se-workshop-iacm) | Infrastructure as Code Management | Active, tested nightly; Azure is beta |
 | IDP | [`se-workshop-idp`](se-workshop-idp) | Internal Developer Portal | Active, tested nightly (login only) |
@@ -107,6 +108,7 @@ Each track folder maps to one Instruqt track in the `harness-se` organization:
 |---|---|
 | `se-workshop-devsecops` | `se-workshop-devsecops/instruqt-track` |
 | `se-workshop-sda` | `se-workshop-sda/instruqt-track` |
+| `se-workshop-sda-ja` | `se-workshop-sda/instruqt-track-ja` |
 | `harness-cd-test-drive` | `harness-cd-test-drive/instruqt-track` |
 | `se-workshop-iacm-aws-1-2-aws` | `se-workshop-iacm/instruqt-tracks/aws` |
 | `se-workshop-iacm-aws-1-1` | `se-workshop-iacm/instruqt-tracks/aws-1-1` |
@@ -124,6 +126,10 @@ To change a track:
 2. From the track folder, run `instruqt track validate`, then `instruqt track push`.
 3. Run `instruqt track test --skip-fail-check harness-se/<track>`.
 4. Open a pull request.
+
+`se-workshop-sda-ja` is a Japanese translation of `se-workshop-sda` and runs the same scripts.
+When you change the English guides or Check messages, make the same change in the Japanese copy.
+Harness UI labels and the names inside agent prompts stay in English.
 
 If you change a track in the Instruqt web editor instead, run `instruqt track pull` in its folder
 afterwards and commit the result, so this repo doesn't fall behind.

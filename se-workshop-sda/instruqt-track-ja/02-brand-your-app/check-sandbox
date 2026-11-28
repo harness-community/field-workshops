@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""Lab 1 passes when showcase.yaml on main is changed, valid, and arrived by a merged PR."""
+import sys
+sys.path.insert(0, "/opt/harness/sda")
+import sda_checks as sda
+
+text = sda.code_file("showcase.yaml")
+if text is None:
+    sda.fail("sda-showcase リポジトリから showcase.yaml を読み込めませんでした。数秒後にもう一度 Check をクリックしてください。")
+if text == sda.seed_text():
+    sda.fail("main ブランチの showcase.yaml がまだ変更されていません。ブランチで編集し、プルリクエストを作成してマージしてください。")
+
+problem = sda.validate_showcase(text)
+if problem:
+    sda.fail(f"main の showcase.yaml に問題があります: {problem}。このままでは次のラボのビルドが失敗するため、"
+             "もう一度プルリクエストで修正してください。")
+
+if not sda.pull_requests("merged"):
+    sda.fail("変更は main に反映されていますが、マージされたプルリクエストがまだありません。"
+             "新しいブランチでもう一度変更し、プルリクエストでマージしてください。")
+
+print("Lab 1 complete: showcase.yaml was changed through a merged pull request.")

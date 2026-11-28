@@ -1,0 +1,201 @@
+#!/usr/bin/env python3
+
+# Standard imports
+import base64
+import os
+import time
+import shutil
+import subprocess
+import sys
+import tempfile
+
+# Third-party imports
+import jinja2
+from kubernetes import config
+
+# Library-specific imports
+from pyharnessworkshop import harness, keycloak, utils
+
+######################## ADD ANY WORKSHOP SPECIFIC SETUP AT THE VERY BOTTOM ########################
+WORKSHOP_TYPE = "sda"
+################################## START OF DO NOT MODIFY SECTION ##################################
+
+# REQUIRED VARIABLES LIST
+HARNESS_ACCOUNT_ID = os.getenv("SE_WORKSHOP_ACCOUNT_ID")
+HARNESS_ORG_ID = os.getenv("SE_WORKSHOP_ORG_ID")
+HARNESS_PAT = os.getenv("SE_WORKSHOP_PAT")
+HARNESS_USER_GROUP = os.getenv("SE_WORKSHOP_USER_GRP_ID")
+KEYCLOAK_ENDPOINT = os.getenv("SE_WORKSHOP_KEYCLOAK_ENDPOINT")
+KEYCLOAK_REALM = os.getenv("SE_WORKSHOP_KEYCLOAK_REALM")
+KEYCLOAK_ADMIN_USER = os.getenv("SE_WORKSHOP_KEYCLOAK_ADMIN_USER")
+KEYCLOAK_ADMIN_PWD = os.getenv("SE_WORKSHOP_KEYCLOAK_ADMIN_PWD")
+
+print("We've only just begun...")
+
+# Wait for Instruqt bootstrap to complete
+while not os.path.isfile("/opt/instruqt/bootstrap/host-bootstrap-completed"):
+    print("Waiting for Instruqt to finish booting the virtual machine")
+    time.sleep(1)
+
+# Wait for the Kubernetes API server to become available
+utils.k8s.wait_for_kubernetes_api("http://localhost:8001/api")
+
+random_suffix = utils.misc.generate_random_suffix(5)
+harness_project = f"{WORKSHOP_TYPE}{random_suffix}"
+user_name = f"{WORKSHOP_TYPE}{random_suffix}"
+user_email = f"{user_name}@harness.io"
+user_pwd = utils.misc.generate_password()
+
+# Generate Keycloak Bearer Token
+keycloak_token = keycloak.auth.generate_keycloak_token(KEYCLOAK_ENDPOINT, KEYCLOAK_ADMIN_USER, KEYCLOAK_ADMIN_PWD)
+# Create workshop user in Keycloak Realm
+keycloak.user.create_keycloak_user(KEYCLOAK_ENDPOINT, KEYCLOAK_REALM, keycloak_token, user_email, user_name, user_pwd)
+
+# Create a Sandbox Project for the User in Harness
+harness.platform.create_harness_project(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project)
+harness_project_created = "true"
+
+# Add the workshop user to the Harness project as an admin
+harness.platform.invite_user_to_harness_project_loop(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project, user_email)
+
+utils.instruqt.set_agent_variable("HARNESS_USER", user_email)
+utils.instruqt.set_agent_variable("HARNESS_PWD", user_pwd)
+utils.instruqt.set_agent_variable("HARNESS_PRJ_ID", harness_project)
+utils.instruqt.set_agent_variable("HARNESS_PRJ_CREATED", harness_project_created)
+utils.instruqt.set_agent_variable("HARNESS_USER_NAME", user_name)
+################################## END OF DO NOT MODIFY SECTION ##################################
+
+############################# ADD ANY WORKSHOP SPECIFIC SETUP BELOW ##############################
+harness_path = "/opt/harness"
+sda_path = f"{harness_path}/sda"
+for d in (f"{harness_path}/terraform", f"{harness_path}/misc", f"{sda_path}/seed"):
+    os.makedirs(d, exist_ok=True)
+
+# Get assets for workshop
+print("Cloning field-workshops repo...")
+utils.misc.run_command("git clone --depth 1 https://github.com/harness-community/field-workshops.git")
+shutil.copytree("field-workshops/assets/terraform/sda-workshop/", f"{harness_path}/terraform", dirs_exist_ok=True)
+shutil.copytree("field-workshops/assets/kubernetes-manifests/v2/", f"{harness_path}/misc", dirs_exist_ok=True)
+shutil.copytree("field-workshops/se-workshop-sda/assets/app/", f"{sda_path}/app", dirs_exist_ok=True)
+shutil.copytree("field-workshops/se-workshop-sda/assets/yaml_spec/", f"{sda_path}/yaml_spec", dirs_exist_ok=True)
+shutil.copy("field-workshops/se-workshop-sda/assets/lib/sda_checks.py", sda_path)
+shutil.copy(f"{sda_path}/app/showcase.yaml", f"{sda_path}/seed/showcase.yaml")
+shutil.rmtree("field-workshops")
+
+# Everything runs on this VM's own k3s: the student's namespace, their delegate, and the app.
+# The namespace-admin ClusterRole is the one the delegate template binds to (the shared GKE
+# cluster used to provide it); bound by a RoleBinding, it grants nothing outside the namespace.
+k3s_bootstrap = f"""\
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {harness_project}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: namespace-admin
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+"""
+subprocess.run(["kubectl", "apply", "-f", "-"], input=k3s_bootstrap, text=True, check=True)
+
+# Template delegate
+template_file_path = f"{harness_path}/misc/harness-delegate.yaml.template"
+delegate_name = f"{harness_project}-delegate"
+delegate_image = harness.platform.get_latest_delegate_tag(HARNESS_PAT, HARNESS_ACCOUNT_ID)
+delegate_token = harness.platform.generate_delegate_token(HARNESS_PAT, HARNESS_ACCOUNT_ID, HARNESS_ORG_ID, harness_project, f"{delegate_name}-token")
+with open(template_file_path, "r") as file:
+    template = jinja2.Template(file.read())
+rendered_content = template.render(
+    delegate_name=delegate_name,
+    delegate_namespace=harness_project,
+    account_id=HARNESS_ACCOUNT_ID,
+    delegate_token=delegate_token,
+    delegate_image=delegate_image
+)
+with open(f"{harness_path}/misc/harness-delegate.yaml", "w") as file:
+    file.write(rendered_content)
+
+config.load_kube_config()
+
+# Apply manifests
+utils.k8s.apply_k8s_manifests([
+    f"{harness_path}/misc/harness-delegate.yaml"
+], user_name)
+
+# Provision resources via Terraform: Code repo, HAR registry and its token, connectors,
+# project variables, and the (disabled) Guardrails policy set
+instruqt_sandbox_id = os.getenv("INSTRUQT_PARTICIPANT_ID")
+utils.misc.run_command(f"tofu -chdir={harness_path}/terraform init > {harness_path}/misc/tofu_init.log 2>&1")
+tfvars_file_content = f"""\
+account_id          = "{HARNESS_ACCOUNT_ID}"
+org_id              = "{HARNESS_ORG_ID}"
+project_id          = "{harness_project}"
+api_key             = "{HARNESS_PAT}"
+delegate_selector   = "{harness_project}-delegate"
+namespace           = "{harness_project}"
+instruqt_sandbox_id = "{instruqt_sandbox_id}"
+"""
+with open(f"{harness_path}/terraform/terraform.tfvars", "w") as tfvars_file:
+    tfvars_file.write(tfvars_file_content)
+print("Running Terraform apply (synchronous)...")
+tofu_result = subprocess.run(
+    f"tofu -chdir={harness_path}/terraform apply -auto-approve -no-color",
+    shell=True, capture_output=True, text=True
+)
+if tofu_result.returncode != 0:
+    print("Terraform apply FAILED. Output:")
+    print(tofu_result.stdout[-2000:])
+    print(tofu_result.stderr[-2000:])
+    raise RuntimeError("Terraform apply failed — cannot proceed without infrastructure resources")
+outputs = subprocess.run(f"tofu -chdir={harness_path}/terraform output -json",
+                         shell=True, capture_output=True, text=True, check=True).stdout
+with open(f"{sda_path}/tf-outputs.json", "w") as f:
+    f.write(outputs)
+print("Terraform apply complete.")
+
+# Seed the Harness Code repo with the app. The PAT goes in a header for this one command,
+# never into a remote URL or git config on disk.
+sys.path.insert(0, sda_path)
+import sda_checks as sda  # noqa: E402
+
+repo_git_url = sda.tf_output("repo_git_url")
+seed_dir = tempfile.mkdtemp()
+shutil.copytree(f"{sda_path}/app", seed_dir, dirs_exist_ok=True)
+auth = base64.b64encode(f"harness:{HARNESS_PAT}".encode()).decode()
+for cmd in (
+    ["git", "init", "-q", "-b", "main"],
+    ["git", "add", "-A"],
+    ["git", "-c", "user.name=SDA Workshop", "-c", "user.email=workshop@harness.io",
+     "commit", "-q", "-m", "Seed sda-showcase"],
+):
+    subprocess.run(cmd, cwd=seed_dir, check=True)
+for attempt in range(5):
+    push = subprocess.run(["git", "-c", f"http.extraHeader=Authorization: Basic {auth}",
+                           "push", "-q", repo_git_url, "main"],
+                          cwd=seed_dir, capture_output=True, text=True)
+    if push.returncode == 0:
+        break
+    print(f"git push attempt {attempt + 1} failed: {push.stderr.strip()[:300]}")
+    time.sleep(5)
+else:
+    raise RuntimeError("Could not seed the sda-showcase repo")
+shutil.rmtree(seed_dir)
+print("Seeded sda-showcase into Harness Code.")
+
+# Export variables the assignments and scripts use
+image_repo = sda.tf_output("image_repo")
+# Checks reach the app the same way the Your App tab does: the Service's NodePort on this VM
+node_ip = subprocess.run(
+    ["kubectl", "get", "nodes", "-o", "jsonpath={.items[0].status.addresses[?(@.type=='InternalIP')].address}"],
+    capture_output=True, text=True, check=True).stdout.strip()
+utils.instruqt.set_agent_variable("APP_URL", f"http://{node_ip}:30080")
+utils.instruqt.set_agent_variable("IMAGE_REPO", image_repo)
+utils.instruqt.set_agent_variable("IMAGE_PATH", image_repo.split("/", 1)[1])
+# The backup pipeline YAML in each lab fills in the org and project with these
+utils.instruqt.set_agent_variable("HARNESS_ORG_ID", HARNESS_ORG_ID)
+
+print("SDA workshop setup complete!")
