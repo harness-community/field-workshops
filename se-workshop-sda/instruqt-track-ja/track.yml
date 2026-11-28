@@ -40,5 +40,5 @@ lab_config:
   override_challenge_layout: false
   hideStopButton: false
   default_layout_sidebar_size: 33
-checksum: "9430786048568480064"
+checksum: "8662935881376029144"
 enhanced_loading: false
